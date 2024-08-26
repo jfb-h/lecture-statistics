@@ -7,7 +7,6 @@ using DataFrames: DataFrame
 include("components.jl")
 include("theme.jl")
 set_theme!(ThemeClean())
-# browser_display()
 
 const con = SQLite.DB("../survey/interests.db")
 
