@@ -10,7 +10,7 @@
 # end
 
 function makeapp(plotfun, con::SQLite.DB)
-    App() do session
+    App(title="Survey results") do session
         # css = Asset("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css")
         dat = Observable(Point2f[])
         but = Button("Start/Stop")

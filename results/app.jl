@@ -1,4 +1,4 @@
-using Bonito: Observables, App, Server, route!, Asset, browser_display, Button
+using Bonito: Bonito, Observables, App, Server, route!, Asset, browser_display, Button
 using Bonito.DOM: div, h1
 using WGLMakie
 using SQLite, DBInterface
@@ -8,14 +8,7 @@ include("components.jl")
 include("theme.jl")
 set_theme!(ThemeClean())
 
-const con = SQLite.DB("../survey/interests.db")
-
-function plotdata(dat)
-    f, a, p = scatter(dat; SCATTER_ARGS...)
-    xlims!(a, 0, 11)
-    ylims!(a, 0, 11)
-    f
-end
+const con = SQLite.DB("../surveys/interests.db")
 
 function getdata(con)
     res = DBInterface.execute(con, "SELECT interesse, vorkenntnisse FROM items") |> DataFrame
@@ -30,3 +23,7 @@ app = makeapp(con) do dat
 end
 
 server = Server(app, "0.0.0.0", 8080)
+
+#TODO: page_html could be good for sharing slides afterwards
+
+
