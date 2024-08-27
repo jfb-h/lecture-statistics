@@ -9,7 +9,7 @@
 #     div(but, fig)
 # end
 
-function makeapp(plotfun, con::SQLite.DB)
+function makeapp(plotfun, con::SQLite.DB; interval=1)
     App(title="Survey results") do session
         # css = Asset("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css")
         dat = Observable(Point2f[])
@@ -18,10 +18,11 @@ function makeapp(plotfun, con::SQLite.DB)
         function fetch_data()
             while clicked[]
                 dat[] = getdata(con)
-                sleep(1)
+                sleep(interval)
             end
         end
         on(but.value) do _
+            @show clicked[]
             if clicked[]
                 clicked[] = false
             else

@@ -1,7 +1,7 @@
 from fasthtml.common import *
 
-def Items(*args):
-    return Form(Fieldset(*args, Button("Absenden")), hx_post="/")
+def Items(*args, port):
+    return Form(Fieldset(*args, Button("Absenden")), hx_post=port)
     
 def SliderLabel(label):
     return Label(label, style={"margin": "0px 10px"})
