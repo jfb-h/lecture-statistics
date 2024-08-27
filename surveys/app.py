@@ -13,7 +13,7 @@ Answer = interests.dataclass()
 app, rt = fast_app(live=True)
 
 # store posted form in database
-@rt("/statlecture/session-01")
+@rt("/statlecture/session-01") # have to set full path for htmx somehow
 def post(answer: Answer):
     interests.insert(answer)
     return Strong("Danke für deine Antwort!")

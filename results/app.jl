@@ -27,7 +27,7 @@ server = Server("0.0.0.0", 8080;
                 proxy_url="https://surveys.eggroup-lmu.de/statlecture-results/")
 
 route!(server, "/session-01" => app)
-server
+wait(server)
 
 #TODO: page_html could be good for sharing slides afterwards
 
