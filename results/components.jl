@@ -13,23 +13,35 @@ function makeapp(plotfun, con::SQLite.DB; interval=1)
     App(title="Survey results") do session
         # css = Asset("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css")
         dat = Observable(Point2f[])
-        but = Button("Start/Stop")
-        clicked = Observable(false)
-        function fetch_data()
-            while clicked[]
-                dat[] = getdata(con)
-                sleep(interval)
-            end
+        @async while true
+            dat[] = getdata(con)
+            sleep(interval)
         end
-        on(but.value) do _
-            @show clicked[]
-            if clicked[]
-                clicked[] = false
-            else
-                clicked[] = true
-                @async fetch_data()
-            end
-        end
-        div(but, plotfun(dat))
+        div(plotfun(dat), style=Styles("flex" => "auto", "width" => "100vw", "height" => "100vh"))
     end
 end
+
+# function makeapp(plotfun, con::SQLite.DB; interval=1)
+#     App(title="Survey results") do session
+#         # css = Asset("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css")
+#         dat = Observable(Point2f[])
+#         but = Button("Start/Stop")
+#         clicked = Observable(false)
+#         function fetch_data()
+#             while clicked[]
+#                 dat[] = getdata(con)
+#                 sleep(interval)
+#             end
+#         end
+#         on(but.value) do _
+#             @show clicked[]
+#             if clicked[]
+#                 clicked[] = false
+#             else
+#                 clicked[] = true
+#                 @async fetch_data()
+#             end
+#         end
+#         div(but, plotfun(dat))
+#     end
+# end

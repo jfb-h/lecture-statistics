@@ -1,5 +1,5 @@
 from fasthtml.common import *
-from components import Slider, Items
+from components import Slider, Items, QRCode
 
 # connect to database
 db = database("surveys.db")
@@ -29,9 +29,13 @@ def get():
                 "2. Wie würdest du deine Vorkenntnisse in Statistik einschätzen?",
                 "sehr schlecht", "sehr gut")
 
-    return Titled("Survey | Einführung in die Statistik",
+    return Titled("Kurzumfrage",
                   Hr(), Items(q1, q2, port="statlecture/session-01"),
                   style={"max-width": "600px"})
+
+
+@rt("/session-01/qr")
+def get(): return QRCode("session-01")
 
 serve(port=8081)
 

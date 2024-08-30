@@ -1,8 +1,9 @@
-const SCATTER_ARGS = (color=(:black, 0.0), strokewidth=4, strokecolor=(:crimson, .5))  
+WGLMakie.activate!(; resize_to=:parent)
+
+const SCATTER_ARGS = (color=(:black, 0.0), strokewidth=4, strokecolor=(:crimson, .8))  
 
 function ThemeClean()
     Theme(
-        size=(1450, 750),
         fontsize=24,
         figure_padding=(60, 100, 30, 30),
         justification=:left,

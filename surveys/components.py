@@ -1,4 +1,6 @@
 from fasthtml.common import *
+import qrcode
+import qrcode.image.svg
 
 def Items(*args, port):
     return Form(Fieldset(*args, Button("Absenden")), hx_post=port)
@@ -14,3 +16,10 @@ def Slider(name, title, left, right):
         Legend(Strong(title)),
         Group(SliderLabel(left), LikertSlider(name), SliderLabel(right))
     )
+
+def QRCode(session):
+    qr = qrcode.QRCode(version=2, box_size=30, border=2,
+                       image_factory=qrcode.image.svg.SvgPathImage)
+    qr.add_data(f'https://surveys.eggroup-lmu.de/statlecture/{session}')
+    img = qr.make_image()
+    return NotStr(img.to_string().decode())
