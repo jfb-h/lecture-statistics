@@ -12,9 +12,9 @@
 function makeapp(plotfun, con::SQLite.DB; interval=1)
     App(title="Survey results") do session
         # css = Asset("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css")
-        dat = Observable(Point2f[])
+        dat = Observable(initdata(con))
         @async while true
-            dat[] = getdata(con)
+            dat[] = updatedata(con)
             sleep(interval)
         end
         div(plotfun(dat), style=Styles("flex" => "auto", "width" => "100vw", "height" => "100vh"))

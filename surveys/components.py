@@ -17,10 +17,10 @@ def Slider(name, title, left, right):
         Group(SliderLabel(left), LikertSlider(name), SliderLabel(right))
     )
 
-def Check(label, desc):
-    return Label(Input(type="Checkbox", name=label), desc)
+def Choice(label, desc):
+    return Label(Input(type="Checkbox", name=label, value="1"), desc)
 
-def MultiCheck(*options, title):
+def MultiChoice(*options, title):
     return Card(Fieldset(Legend(Strong(title)), *options))
 
 def QRCode(session):
