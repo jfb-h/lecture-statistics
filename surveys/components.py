@@ -2,8 +2,8 @@ from fasthtml.common import *
 import qrcode
 import qrcode.image.svg
 
-def Items(*args, port):
-    return Form(Fieldset(*args, Button("Absenden")), hx_post=port)
+def Items(*args, hx_post):
+    return Form(Fieldset(*args, Button("Absenden")), hx_post=hx_post)
     
 def SliderLabel(label):
     return Label(label, style={"margin": "0px 10px"})
@@ -16,6 +16,12 @@ def Slider(name, title, left, right):
         Legend(Strong(title)),
         Group(SliderLabel(left), LikertSlider(name), SliderLabel(right))
     )
+
+def Check(label, desc):
+    return Label(Input(type="Checkbox", name=label), desc)
+
+def MultiCheck(*options, title):
+    return Card(Fieldset(Legend(Strong(title)), *options))
 
 def QRCode(session):
     qr = qrcode.QRCode(version=2, box_size=30, border=2,

@@ -1,40 +1,34 @@
 from fasthtml.common import *
-from components import Slider, Items, QRCode
+from components import Slider, Items, QRCode, Check, MultiCheck
 
-# connect to database
 db = database("surveys.db")
 
-# new database table for survey
-interests = db.t.interests
-if interests not in db.t: interests.create(id=int, interesse=int, vorkenntnisse=int, pk="id")
-Answer = interests.dataclass()
-
-# app and routing definition
 app, rt = fast_app(live=True)
 
-# store posted form in database
-@rt("/statlecture/session-01") # have to set full path for htmx somehow
-def post(answer: Answer):
-    interests.insert(answer)
-    return Strong("Danke für deine Antwort!")
+news = db.t.news
+if news not in db.t: news.create(id=int, social_media=str, zeitungen_de=str, zeitungen_int=str, andere=str, pk="id")
+News = news.dataclass()
 
-# form with survey items
-@rt("/session-01")
+@rt("/session-01/news")
 def get():
-    q1 = Slider("interesse",
-                "1. Wie groß ist dein Interesse an Statistik?",
-                "sehr niedrig", "sehr hoch")
-
-    q2 = Slider("vorkenntnisse",
-                "2. Wie würdest du deine Vorkenntnisse in Statistik einschätzen?",
-                "sehr schlecht", "sehr gut")
-
+    mult = MultiCheck(
+        Check("social_media", "Social Media (z.B. Instagram, TikTok, Facebook)"),
+        Check("zeitung_de", "Deutschsprachige Zeitungen (z.B. FAZ, Zeit, Sueddeutsche, TAZ, NZZ)"),
+        Check("zeitung_int", "Internationale Zeitungen (z.B. Guardian, NYT, Economist, LeMonde)"),
+        Check("tv_radio", "TV oder Radio"),
+        Check("andere", "Andere"),
+        title="Welche Quellen nutzt du primär, um dich über aktuelle Ereignisse zu informieren?",
+    )
     return Titled("Kurzumfrage",
-                  Hr(), Items(q1, q2, port="statlecture/session-01"),
+                  Hr(), Items(mult, hx_post="/statlecture/session-01/news"), # have to set full path for htmx somehow
                   style={"max-width": "600px"})
 
+@rt("/session-01/news")
+def post(newsitem: News):
+    news.insert(newsitem)
+    return Strong("Danke für deine Antwort!")
 
-@rt("/session-01/qr")
+@rt("/session-01/news/qr")
 def get(): return QRCode("session-01")
 
 serve(port=8081)
