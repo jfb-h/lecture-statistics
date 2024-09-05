@@ -1,0 +1,126 @@
+---
+title: Einführung in die Statistik
+subtitle: Sitzung 1 - Einführung
+author: Dr. Jakob Hoffmann, Economic Geography Group
+execute:
+    keep-ipynb: false
+    keep-md: false
+format:
+    revealjs:
+        # embed-resources: true
+        chalkboard:
+            theme: whiteboard
+            boardmarker-width: 2
+---
+
+## TODO
+
+- justfile for sessions
+- survey with interests
+- survey with data type examples
+- voting case
+- sessions
+- organization + uebung
+
+# Warum Statistik?
+
+## I. Vorhersagen - How not to
+:::: {.columns}
+::: {.column width="30%"}
+```{=html}
+<img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&h=546" title="Literary digest cover"></iframe>
+```
+:::
+::: {.column width="70%"}
+- US-Wahl 1936, Roosevelt vs. Landon
+- **10 mio.** Befragte (Leser, Telefonbuch, Automobilregister), **2.4 mio.** Antworten
+- Vorhersage **43 - 57**
+- Ergebnis **62 - 38**
+- **Wie kam es zum Fehler von 38 pp?**
+:::
+::::
+
+## I. Vorhersagen - How not to
+:::: {.columns}
+::: {.column width="30%"}
+```{=html}
+<img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&h=546" title="Literary digest cover"></iframe>
+```
+:::
+::: {.column width="70%"}
+* **Sampling bias** : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung
+- **Non-response bias**: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter
+:::
+::::
+
+## I. Vorhersagen - How to
+
+```{=html}
+<iframe width="980" height="550" src="https://www.economist.com/interactive/us-2024-election/prediction-model/president/how-this-works"></iframe>
+```
+
+## II. Populationseigenschaften
+
+Wie informieren Studierende sich über aktuelle Ereignisse?
+
+:::: {.columns}
+::: {.column width="50%"}
+```{=html}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/session-01/news" title="Survey preview"></iframe>
+```
+:::
+::: {.column width="50%"}
+```{=html}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/session-01/news/qr" title="Survey link"></iframe>
+```
+:::
+::::
+
+## {background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/session-01" data-preload=true}
+
+## II. Populationseigenschaften
+
+TV
+
+Sport, Wirtschaft, Internationale Politik, Lokales
+Weihnachten in Venezuela
+
+
+## III. Zusammenhänge erklären
+
+- Brexit Effekt auf Wirtschaftswachstum
+
+
+## Grenzen der Statistik
+
+- Qualitative Forschung
+
+# Lernziele & Inhalte
+
+## Lernziele
+- Möglichkeiten, Ziele und Grenzen statistischer Analyse
+- Interpretation statistischer Ergebnisse und Visualisierungen
+- Überblick über Verfahren und deren Anwendungsgebiete
+
+## Inhalte
+
+- Statistische Forschungsdesigns
+- Daten beschreiben und visualisieren
+- Statistische Modelle
+- Quantifizierung von Unsicherheit
+
+
+# Organisatorisches
+
+## Diese Vorlesung
+
+- Angewandte (nicht theoretische) Statistik
+- Grundlagen deskriptiver und inferentieller Statistik
+- Praktische Anwendung mit SPSS in der Übung
+
+
+## Prüfungsfragen
+
+- Was sind mögliche Fehlerquellen bei der Wahlvorhersage auf Basis von Meinungsumfragen?
+- Was sind neben Meinungsumfragen alternative/ergänzende Verfahren zur Vorhersage von Wahlergebnissen?
+
