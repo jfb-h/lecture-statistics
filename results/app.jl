@@ -1,8 +1,6 @@
-using Bonito: Bonito, Observables, App, Server, route!, Asset, Styles, browser_display, Button
-using Bonito.DOM: div, h1
+using Bonito: DOM, Bonito, Observables, App, Server, route!, Asset, Styles
 using WGLMakie
-using SQLite, DBInterface
-using TidierDB
+using TidierDB, SQLite
 import TidierData as TD
 
 include("components.jl")
@@ -11,33 +9,35 @@ set_theme!(ThemeClean())
 
 con = connect(sqlite(), db="../surveys/surveys.db")
 
-initdata(con) = @collect(db_table(con, "news"))
-
 function updatedata(con)
     @chain db_table(con, "news") begin
         @select(!id)
         @collect
         TD.@pivot_longer(TD.everything())
         TD.@group_by(variable)
-        TD.@summarize(count=sum(!ismissing(value)))
+        TD.@summarize(count = sum(!ismissing(value)))
         TD.@arrange(variable)
     end
 end
 
-function plotdata(dat)
-    y = @lift($dat.variable)
-    x = @lift($dat.count)
-    barplot(Categorical(y), y)
+app = App(title="Survey results") do session
+    xy = Observable(Point2f[Point2f(0)])
+    fig = Figure()
+    ax = Axis(fig[1, 1])
+    Base.errormonitor(@async while true
+        dat = updatedata(nothing)
+        xy[] = Point2f.(dat.variable, dat.count)
+        autolimits!(ax) # or just set fixed limits
+        sleep(1)
+        isopen(session) || break
+    end)
+    barplot!(ax, xy; color=:tomato)
+    DOM.div(fig, style=Styles("flex" => "auto", "width" => "100vw", "height" => "100vh"))
 end
 
-app = makeapp(plotdata, con; interval=1)
-
-# server = Server("0.0.0.0", 8080;
-#                 proxy_url="https://surveys.eggroup-lmu.de/statlecture-results/")
-#
-# route!(server, "/session-01" => app)
-# # wait(server)
-# server
+server = Server("0.0.0.0", 8080; proxy_url="https://surveys.eggroup-lmu.de/statlecture-results/")
+route!(server, "/session-01" => app)
+server
 
 #TODO: page_html could be good for sharing slides afterwards
 
