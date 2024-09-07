@@ -2,12 +2,21 @@ using Bonito: DOM, Bonito, Observables, App, Server, route!, Asset, Styles
 using WGLMakie
 using TidierDB, SQLite
 import TidierData as TD
+using TidierData: across, everything
 
 include("components.jl")
 include("theme.jl")
 set_theme!(ThemeClean())
 
 con = connect(sqlite(), db="../surveys/surveys.db")
+
+function updatedata(con)
+    @chain db_table(con, "news") begin
+        @select(!id)
+        @summarize(across(sum))
+        @collect
+    end
+end
 
 function updatedata(con)
     @chain db_table(con, "news") begin
