@@ -1,6 +1,5 @@
 .venv
 __pycache__
 .sesskey
-surveys/interests.db*
-surveys/surveys.db*
+lecture-surveys/surveys.db*
 
