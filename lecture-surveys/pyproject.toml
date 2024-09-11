@@ -8,3 +8,7 @@ dependencies = [
     "python-fasthtml>=0.5.1",
     "qrcode>=7.4.2",
 ]
+
+[tool.ruff]
+line-length = 180
+
