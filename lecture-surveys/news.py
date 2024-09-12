@@ -7,8 +7,7 @@ def survey_news(db, rt, route):
           zeitung_de=int,
           zeitung_int=int,
           tv_radio=int,
-          andere=int,
-    )
+          andere=int,)
 
     @rt(f"/{route}")
     def get():
