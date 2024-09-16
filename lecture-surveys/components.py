@@ -47,12 +47,15 @@ def Slider(name, title, left, right):
     )
 
 
-# Multiple choice items
+# Choice items
 
-def Choice(label, desc):
-    return Label(Input(type="Checkbox", name=label, value="1"), desc)
+def Check(name, desc):
+    return Label(Input(type="checkbox", name=name, value="1"), desc)
 
-def MultiChoice(*options, title):
+def Radio(name, value, desc):
+    return Label(Input(type="radio", name=name, value=value), desc)
+
+def Choice(*options, title):
     return Card(Fieldset(Legend(Strong(title)), *options))
 
 

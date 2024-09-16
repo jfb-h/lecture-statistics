@@ -1,22 +1,22 @@
-livingcost(con) = App(title="Wohnen") do session
+earnings(con) = App() do session
     xy = Observable(Float64[900])
     n = lift(length, xy)
     s = lift(r(2) ∘ sum, xy)
     m = lift(r(2) ∘ mean, xy)
 
     fig = Figure()
-    ax = Axis(fig[1, 1]; xlabel="Wohnkosten (Euro)", ylabel="Häufigkeit")
+    ax = Axis(fig[1, 1]; xlabel="Einkommen (Euro)", ylabel="Häufigkeit")
 
     Base.errormonitor(@async while true
         # update data
-        table = db_table(con, "wohnen")
+        table = db_table(con, "einkommen")
         dat = @chain table begin
-            @select(kosten)
+            @select(einkommen)
             @collect
         end
         # update observable
-        if length(dat.kosten) > 0
-            xy[] = dat.kosten
+        if length(dat.einkommen) > 0
+            xy[] = dat.einkommen
         end
 
         autolimits!(ax)
@@ -39,4 +39,3 @@ livingcost(con) = App(title="Wohnen") do session
 
     titled("Ergebnisse", grd)
 end
-
