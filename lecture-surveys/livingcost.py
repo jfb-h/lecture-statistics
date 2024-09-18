@@ -10,8 +10,8 @@ def survey_livingcost(db, rt, route):
 
         choice = Choice(
             Radio("wohnsituation", "eltern", "Ich wohne bei meinen Eltern / meiner Familie"),
-            Radio("wohnsituation", "eltern", "Ich wohne alleine"),
-            Radio("wohnsituation", "eltern", "Ich wohne in einer WG"),
+            Radio("wohnsituation", "alleine", "Ich wohne alleine"),
+            Radio("wohnsituation", "wg", "Ich wohne in einer WG"),
             Radio("wohnsituation", "andere", "Andere"),
             title="Was trifft auf deine Wohnsituation zu?",
         )
