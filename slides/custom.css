@@ -1,0 +1,23 @@
+.sq {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1;
+  background-color: black;
+  padding: 0 0.2em;
+  border-radius: 20%;
+}
+
+.blue {
+  color: #7fd2e2
+}
+.yellow {
+  color: yellow
+}
+.red {
+  color: red
+}
+.green {
+  color: #36f251
+
+}
