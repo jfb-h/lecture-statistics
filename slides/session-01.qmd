@@ -18,6 +18,15 @@ format:
 
 - sessions
 - organisation - übung
+- Beispiel Wohnort
+    - Distanz zur Uni
+    - Umzugsdistanz
+    - Korrelation der beiden
+    - Histogramme
+    - Wahrscheinlichkeiten
+    - Barplot Orte
+    - Simulation nächster Jahrgang (Kriging?)
+
 
 # Warum Statistik?
 
