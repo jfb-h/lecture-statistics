@@ -15,13 +15,7 @@ function livingcost(con)
         ax2 = Axis(fig[2, 1]; title="Eltern", ylabel="Häufigkeit")
         ax3 = Axis(fig[3, 1]; title="WG", xlabel="Wohnkosten (Euro)")
 
-        xlims!(ax1, 0, nothing)
-        xlims!(ax2, 0, nothing)
-        xlims!(ax3, 0, nothing)
-
-        ylims!(ax1, 0, nothing)
-        ylims!(ax2, 0, nothing)
-        ylims!(ax3, 0, nothing)
+        foreach(ax -> (xlims!(ax, 0, nothing); ylims!(ax, 0, nothing)), [ax1, ax2, ax3])
 
         linkxaxes!(ax1, ax2, ax3)
 

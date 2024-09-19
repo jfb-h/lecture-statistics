@@ -5,6 +5,7 @@ description = "Surveys using FastHTML for the 2024 statistics lecture"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "pgeocode>=0.5.0",
     "python-fasthtml>=0.5.1",
     "qrcode>=7.4.2",
 ]
