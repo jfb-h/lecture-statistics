@@ -13,6 +13,25 @@ format:
             boardmarker-width: 2
 ---
 
+```{r}
+library(ggplot2)
+library(ggthemes)
+
+theme_set(theme_tufte(base_family = "GillSans"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+
+```
+
 ## Sessions
 
 - Daten und Messung (S2)
@@ -50,183 +69,4 @@ format:
 
 <span class="sq blue">D</span> **Definition** des Konzepts
 
-
-# Mittelwerte
-
-## <span class="sq green">E</span> Das arithmetische Mittel
-
-- Das *arithmetische Mittel* fasst eine Datenreihe in einer Zahl zusammen, die deren "Mitte" bzw. "zentrale Tendenz" darstellen soll.
-- Das arithmetische Mittel ist damit ein Beispiel für ein *Lagemaß* (worauf wir später zurückkommen werden).
-- Das arithmetische Mittel ist der geläufigste Mittelwert, aber nicht der einzige.
-
-## <span class="sq yellow">B</span> Das arithmetische Mittel
-
-Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte. Für die folgende Datenreihe $x$ mit $N=4$ Werten:
-
-$$x = {179, 163, 180, 192}$$
-
-gilt also:
-
-$$\textrm{Arith. Mittel} = \bar{x} = \frac{179 + 163 + 180 + 192}{4} = 178,5$$
-
-## <span class="sq blue">D</span> Das arithmetische Mittel
-
-Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte.
-
-Etwas genereller können wir diese Definition mit Summennotation formalisieren:
-
-$$\bar{x} = \frac{\sum_{i=1}^N{x_i}}{N} = \frac{1}{N} \sum_{i=1}^N{x_i}$$
-
-## Exkurs: Summen
-
-$$\bar{x} = \frac{1}{N} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{N}{x_\color{green}{i}}$$
-
-::: {.incremental}
-- Das große Sigma $\color{red}{\Sigma}$ zeigt eine Summation über die Werte der Datenreihe $x$ an.
-- Der Laufindex $\color{green}{i}$ indiziert die Werte in $x$, startet bei $\color{green}{i=1}$ und läuft bis $\color{blue}{N}$ (in Schritten von 1).
-
-- Im Beispiel von vorher:
-$$\bar{x} = \frac{1}{4} (
-    \overset{\color{lightgrey}{179}}{x_{\color{green}{1}}} \color{red}{+}
-    \overset{\color{lightgrey}{163}}{x_{\color{green}{2}}} \color{red}{+}
-    \overset{\color{lightgrey}{180}}{x_{\color{green}{3}}} \color{red}{+}
-    \overset{\color{lightgrey}{192}}{x_{\color{blue}{4}}})$$
-:::
-
-## <span class="sq green">E</span> Dummyvariablen {.smaller}
-
-Im Fall einer Dummyvariable (die die Werte 0 oder 1 annehmen kann), gibt das arithmetische Mittel eine Proportion an:
-
-$$x = 
-    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}},
-    \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
-    \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
-    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}}$$
-
-$$\bar{x} = \frac{1}{N} (
-    \overset{\color{lightgrey}{0}}{x_{\color{green}{1}}} \color{red}{+}
-    \overset{\color{lightgrey}{1}}{x_{\color{green}{2}}} \color{red}{+}
-    \overset{\color{lightgrey}{1}}{x_{\color{green}{3}}} \color{red}{+}
-    \overset{\color{lightgrey}{0}}{x_{\color{blue}{4}}}) = \frac{\textrm{# bestanden}}{\textrm{# gesamt}} = \frac{1}{2}$$
-
-## Umfrage
-
-Wie viel geben Studierende in München für das Wohnen aus?
-
-:::: {.columns}
-::: {.column width="50%"}
-```{=html}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview"></iframe>
-```
-:::
-::: {.column width="50%"}
-```{=html}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link"></iframe>
-```
-:::
-::::
-
-## {background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload=true}
-
-## <span class="sq green">E</span> Das geometrische Mittel
-
-- Bei Verhältnisskalen (Zahlen, die Im Verhältnis zu einem Referenzwert stehen), sollte das *geometrische* und nicht das *arithmetische* Mittel eingesetzt werden.
-- Ein typischer Fall sind *Wachstumsraten* 
-- z.B. Bevölkerung, Investments, BIP, ...
-
-## <span class="sq yellow">B</span> BIP-Wachstum in Deutschland {.smaller}
-
-:::: {.columns}
-::: {.column width="65%"}
-```{=html}
-<img width="700" src="https://de.statista.com/graphic/1/2112/veraenderung-des-bruttoinlandprodukts-im-vergleich-zum-vorjahr.jpg" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png"></img>
-```
-:::
-::: {.column width="35%"}
-
-Die Werte zeigen das *Verhältnis* des diesjährigen BIP zum Vorjahreswert an, d.h. eine Wachstumsrate.
-
-- BIP 2021: **3.673,8 Mrd.**
-- Wachstumsrate 2022: **1,7%**
-- BIP 2022: \
-**3.673,8 $\times$  (1 + 0,017) = 3.736,3**
-:::
-::::
-
-## <span class="sq blue">D</span> Das geometrische Mittel
-
-Das geometrische Mittel ist definiert als die $N$-te Wurzel des Produkts der Werte.
-
-Analog zur Summe im arithm. Mittel können wir das geom. Mittel mit der Produktnotation ($\Pi$, groß Pi) definieren:
-
-$$\textrm{geom. Mittel} = \sqrt[N]{x_1 \times x_2 \times ... \times x_N} = \left( \prod_{i=1}^N x_i \right)^\frac{1}{N}$$
-
-## <span class="sq yellow">B</span> Das geometrische Mittel
-
-:::: {.incremental}
-
-Beispiel: mittleres BIP-Wachstum (in %), 2019-2023
-$$
-    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{1,0 \%} \ 
-    \overset{\color{lightgrey}{2020}}{-4,1 \%} \ 
-    \overset{\color{lightgrey}{2021}}{3,6\%} \ 
-    \overset{\color{lightgrey}{2022}}{1,7\%} \ 
-    \overset{\color{lightgrey}{2023}}{-0,3\%}
-$$
-
-- BIP 2023: **3491 Mrd.** | AM: **0.38%** | GM: **0.347%**
-- Das arithm. Mittel produziert falsche Ergebnisse:
-    - $3.431,1 \times 1.038^5 = 3.496,8 \textrm{ Mrd.}$
-    - $3.431,1 \times 1.0347^5 = 3.491 \textrm{ Mrd.}$
-
-::::
-
-## Umfrage
-
-Wie viel Geld haben Studierende in München zur Verfügung?
-
-:::: {.columns}
-::: {.column width="50%"}
-```{=html}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen" title="Survey preview"></iframe>
-```
-:::
-::: {.column width="50%"}
-```{=html}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen/qr" title="Survey link"></iframe>
-```
-:::
-::::
-
-## {background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/einkommen" data-preload=true}
-
-## <span class="sq green">E</span> Der Median
-
-- Das arithmetische Mittel ist empfindlich gegenüber Ausreißern bzw. Extremwerten.
-
-- Der Median ist definiert als der Wert in der Mitte einer sortierten Datenreihe.
-
-- Der Median ist robuster, tauscht dafür aber Informationsgehalt ein.
-
-
-
-## <span class="sq blue">D</span> Der Median
-
-## <span class="sq yellow">B</span> Der Median
-
-## Perzentile
-
-- Der Median ist das 50-% Perzentil
-
-## Quantile
-
-- Quartile, Dezile, etc.
-
-
-## Unschlüssig? ;)
-
-```{=html}
-<img height="500" src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png"></img>
-```
 

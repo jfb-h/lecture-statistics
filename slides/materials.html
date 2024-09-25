@@ -380,173 +380,12 @@
 <p><span class="sq green">E</span> <strong>Einordnung</strong> in den statistischen Methodenkomplex</p>
 <p><span class="sq yellow">B</span> <strong>Beispiel</strong> bzw. Anwendung des Konzepts</p>
 <p><span class="sq blue">D</span> <strong>Definition</strong> des Konzepts</p>
-</section>
-<section>
-<section id="mittelwerte" class="title-slide slide level1 center">
-<h1>Mittelwerte</h1>
-
-</section>
-<section id="e-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq green">E</span> Das arithmetische Mittel</h2>
-<ul>
-<li>Das <em>arithmetische Mittel</em> fasst eine Datenreihe in einer Zahl zusammen, die deren “Mitte” bzw. “zentrale Tendenz” darstellen soll.</li>
-<li>Das arithmetische Mittel ist damit ein Beispiel für ein <em>Lagemaß</em> (worauf wir später zurückkommen werden).</li>
-<li>Das arithmetische Mittel ist der geläufigste Mittelwert, aber nicht der einzige.</li>
-</ul>
-</section>
-<section id="b-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Das arithmetische Mittel</h2>
-<p>Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte. Für die folgende Datenreihe <span class="math inline">\(x\)</span> mit <span class="math inline">\(N=4\)</span> Werten:</p>
-<p><span class="math display">\[x = {179, 163, 180, 192}\]</span></p>
-<p>gilt also:</p>
-<p><span class="math display">\[\textrm{Arith. Mittel} = \bar{x} = \frac{179 + 163 + 180 + 192}{4} = 178,5\]</span></p>
-</section>
-<section id="d-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Das arithmetische Mittel</h2>
-<p>Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte.</p>
-<p>Etwas genereller können wir diese Definition mit Summennotation formalisieren:</p>
-<p><span class="math display">\[\bar{x} = \frac{\sum_{i=1}^N{x_i}}{N} = \frac{1}{N} \sum_{i=1}^N{x_i}\]</span></p>
-</section>
-<section id="exkurs-summen" class="slide level2">
-<h2>Exkurs: Summen</h2>
-<p><span class="math display">\[\bar{x} = \frac{1}{N} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{N}{x_\color{green}{i}}\]</span></p>
-<div>
-<ul>
-<li class="fragment"><p>Das große Sigma <span class="math inline">\(\color{red}{\Sigma}\)</span> zeigt eine Summation über die Werte der Datenreihe <span class="math inline">\(x\)</span> an.</p></li>
-<li class="fragment"><p>Der Laufindex <span class="math inline">\(\color{green}{i}\)</span> indiziert die Werte in <span class="math inline">\(x\)</span>, startet bei <span class="math inline">\(\color{green}{i=1}\)</span> und läuft bis <span class="math inline">\(\color{blue}{N}\)</span> (in Schritten von 1).</p></li>
-<li class="fragment"><p>Im Beispiel von vorher: <span class="math display">\[\bar{x} = \frac{1}{4} (
-  \overset{\color{lightgrey}{179}}{x_{\color{green}{1}}} \color{red}{+}
-  \overset{\color{lightgrey}{163}}{x_{\color{green}{2}}} \color{red}{+}
-  \overset{\color{lightgrey}{180}}{x_{\color{green}{3}}} \color{red}{+}
-  \overset{\color{lightgrey}{192}}{x_{\color{blue}{4}}})\]</span></p></li>
-</ul>
-</div>
-</section>
-<section id="e-dummyvariablen" class="slide level2 smaller">
-<h2><span class="sq green">E</span> Dummyvariablen</h2>
-<p>Im Fall einer Dummyvariable (die die Werte 0 oder 1 annehmen kann), gibt das arithmetische Mittel eine Proportion an:</p>
-<p><span class="math display">\[x =
-    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}},
-    \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
-    \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
-    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}}\]</span></p>
-<p><span class="math display">\[\bar{x} = \frac{1}{N} (
-    \overset{\color{lightgrey}{0}}{x_{\color{green}{1}}} \color{red}{+}
-    \overset{\color{lightgrey}{1}}{x_{\color{green}{2}}} \color{red}{+}
-    \overset{\color{lightgrey}{1}}{x_{\color{green}{3}}} \color{red}{+}
-    \overset{\color{lightgrey}{0}}{x_{\color{blue}{4}}}) = \frac{\textrm{# bestanden}}{\textrm{# gesamt}} = \frac{1}{2}\]</span></p>
-</section>
-<section id="umfrage" class="slide level2">
-<h2>Umfrage</h2>
-<p>Wie viel geben Studierende in München für das Wohnen aus?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview"></iframe>
-</div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link"></iframe>
-</div></div>
-</section>
-<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload="true">
-<h2></h2>
-</section>
-<section id="e-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq green">E</span> Das geometrische Mittel</h2>
-<ul>
-<li>Bei Verhältnisskalen (Zahlen, die Im Verhältnis zu einem Referenzwert stehen), sollte das <em>geometrische</em> und nicht das <em>arithmetische</em> Mittel eingesetzt werden.</li>
-<li>Ein typischer Fall sind <em>Wachstumsraten</em></li>
-<li>z.B. Bevölkerung, Investments, BIP, …</li>
-</ul>
-</section>
-<section id="b-bip-wachstum-in-deutschland" class="slide level2 smaller">
-<h2><span class="sq yellow">B</span> BIP-Wachstum in Deutschland</h2>
-<div class="columns">
-<div class="column" style="width:65%;">
-<img width="700" src="https://de.statista.com/graphic/1/2112/veraenderung-des-bruttoinlandprodukts-im-vergleich-zum-vorjahr.jpg" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png">
-</div><div class="column" style="width:35%;">
-<p>Die Werte zeigen das <em>Verhältnis</em> des diesjährigen BIP zum Vorjahreswert an, d.h. eine Wachstumsrate.</p>
-<ul>
-<li>BIP 2021: <strong>3.673,8 Mrd.</strong></li>
-<li>Wachstumsrate 2022: <strong>1,7%</strong></li>
-<li>BIP 2022:<br>
-<strong>3.673,8 <span class="math inline">\(\times\)</span> (1 + 0,017) = 3.736,3</strong></li>
-</ul>
-</div></div>
-</section>
-<section id="d-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Das geometrische Mittel</h2>
-<p>Das geometrische Mittel ist definiert als die <span class="math inline">\(N\)</span>-te Wurzel des Produkts der Werte.</p>
-<p>Analog zur Summe im arithm. Mittel können wir das geom. Mittel mit der Produktnotation (<span class="math inline">\(\Pi\)</span>, groß Pi) definieren:</p>
-<p><span class="math display">\[\textrm{geom. Mittel} = \sqrt[N]{x_1 \times x_2 \times ... \times x_N} = \left( \prod_{i=1}^N x_i \right)^\frac{1}{N}\]</span></p>
-</section>
-<section id="b-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Das geometrische Mittel</h2>
-<div>
-<p>Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 <span class="math display">\[
-    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{1,0 \%} \
-    \overset{\color{lightgrey}{2020}}{-4,1 \%} \
-    \overset{\color{lightgrey}{2021}}{3,6\%} \
-    \overset{\color{lightgrey}{2022}}{1,7\%} \
-    \overset{\color{lightgrey}{2023}}{-0,3\%}
-\]</span></p>
-<ul>
-<li class="fragment">BIP 2023: <strong>3491 Mrd.</strong> | AM: <strong>0.38%</strong> | GM: <strong>0.347%</strong></li>
-<li class="fragment">Das arithm. Mittel produziert falsche Ergebnisse:
-<ul>
-<li class="fragment"><span class="math inline">\(3.431,1 \times 1.038^5 = 3.496,8 \textrm{ Mrd.}\)</span></li>
-<li class="fragment"><span class="math inline">\(3.431,1 \times 1.0347^5 = 3.491 \textrm{ Mrd.}\)</span></li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="umfrage-1" class="slide level2">
-<h2>Umfrage</h2>
-<p>Wie viel Geld haben Studierende in München zur Verfügung?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen" title="Survey preview"></iframe>
-</div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen/qr" title="Survey link"></iframe>
-</div></div>
-</section>
-<section id="section-1" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/einkommen" data-preload="true">
-<h2></h2>
-</section>
-<section id="e-der-median" class="slide level2">
-<h2><span class="sq green">E</span> Der Median</h2>
-<ul>
-<li><p>Das arithmetische Mittel ist empfindlich gegenüber Ausreißern bzw. Extremwerten.</p></li>
-<li><p>Der Median ist definiert als der Wert in der Mitte einer sortierten Datenreihe.</p></li>
-<li><p>Der Median ist robuster, tauscht dafür aber Informationsgehalt ein.</p></li>
-</ul>
-</section>
-<section id="d-der-median" class="slide level2">
-<h2><span class="sq blue">D</span> Der Median</h2>
-</section>
-<section id="b-der-median" class="slide level2">
-<h2><span class="sq yellow">B</span> Der Median</h2>
-</section>
-<section id="perzentile" class="slide level2">
-<h2>Perzentile</h2>
-<ul>
-<li>Der Median ist das 50-% Perzentil</li>
-</ul>
-</section>
-<section id="quantile" class="slide level2">
-<h2>Quantile</h2>
-<ul>
-<li>Quartile, Dezile, etc.</li>
-</ul>
-</section>
-<section id="unschlüssig" class="slide level2">
-<h2>Unschlüssig? ;)</h2>
-<img height="500" src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png">
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -759,6 +598,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
