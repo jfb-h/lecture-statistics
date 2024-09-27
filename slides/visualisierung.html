@@ -354,7 +354,10 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </section></section>
 <section id="datentypen-und-skalenniveaus" class="title-slide slide level1 center">
 <h1>Datentypen und Skalenniveaus</h1>
-
+<ul>
+<li>Numerisch: kontinuierlich, diskret</li>
+<li>Kategorisch: nominal, ordinal</li>
+</ul>
 </section>
 
 <section>
@@ -380,8 +383,8 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h1>Visualisierungstypen</h1>
 
 </section>
-<section id="nominale-daten" class="slide level2">
-<h2>Nominale Daten</h2>
+<section id="kategorische-daten" class="slide level2">
+<h2>Kategorische Daten</h2>
 
 <img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="ordinale-daten" class="slide level2 smaller">
@@ -405,8 +408,8 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div></div>
 </section>
-<section id="metrische-daten" class="slide level2">
-<h2>Metrische Daten</h2>
+<section id="numerische-daten" class="slide level2">
+<h2>Numerische Daten</h2>
 
 <img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="zusammenhänge-visualisieren" class="slide level2">
@@ -574,11 +577,9 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <li><code>pop</code>: Bevöklerung</li>
 <li><code>gdpPercap</code>: Pro-Kopf-BIP (in US-$, inflationsangepasst)</li>
 </ul>
-</section></section>
-<section>
-<section id="welcher-kontinent-hat-die-meisten-länder" class="title-slide slide level1 center">
-<h1>Welcher Kontinent hat die meisten Länder?</h1>
-
+</section>
+<section id="welcher-kontinent-hat-die-meisten-länder" class="slide level2">
+<h2><span class="smallheader">Welcher Kontinent hat die meisten Länder?</span></h2>
 </section>
 <section id="säulendiagramm" class="slide level2 smaller">
 <h2>Säulendiagramm</h2>
@@ -632,38 +633,15 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 <p><strong>I.d.R. Säulendiagramm bevorzugen</strong></p>
 </div></div>
-</section></section>
-<section>
-<section id="question-2" class="title-slide slide level1 center" data-menu-title="Wie groß sind wirtschaftliche Entwicklungsunterschiede?">
-<h1></h1>
-<h1 style="font-size:2em">
-Wie groß sind wirtschaftliche Entwicklungsunterschiede?
-</h1>
+</section>
+<section id="kacheldiagramm-treemap" class="slide level2">
+<h2>Kacheldiagramm (Treemap)</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<section id="wie-groß-sind-wirtschaftliche-entwicklungsunterschiede" class="slide level2">
+<h2><span class="smallheader">Wie groß sind wirtschaftliche Entwicklungsunterschiede?</span></h2>
 </section>
 <section id="histogramm" class="slide level2 smaller">
-<h2>Histogramm</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-20-1.png" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<ul>
-<li>Eine numerische Datenreihe wird auf diskrete ‘Eimer’ mit fixer Größe aufgeteilt.</li>
-</ul>
-<p><strong>0 | 2000 | 4000 | 6000 | …</strong></p>
-<ul>
-<li>Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.</li>
-</ul>
-</div></div>
-</section>
-<section id="histogramm-1" class="slide level2 smaller">
 <h2>Histogramm</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
@@ -686,7 +664,7 @@ Wie groß sind wirtschaftliche Entwicklungsunterschiede?
 </ul>
 </div></div>
 </section>
-<section id="histogramm-2" class="slide level2 smaller">
+<section id="histogramm-1" class="slide level2 smaller">
 <h2>Histogramm</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
@@ -709,6 +687,29 @@ Wie groß sind wirtschaftliche Entwicklungsunterschiede?
 </ul>
 </div></div>
 </section>
+<section id="histogramm-2" class="slide level2 smaller">
+<h2>Histogramm</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-23-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<ul>
+<li>Eine numerische Datenreihe wird auf diskrete ‘Eimer’ mit fixer Größe aufgeteilt.</li>
+</ul>
+<p><strong>0 | 2000 | 4000 | 6000 | …</strong></p>
+<ul>
+<li>Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.</li>
+</ul>
+</div></div>
+</section>
 <section id="kerndichtediagramm" class="slide level2 smaller">
 <h2>Kerndichtediagramm</h2>
 <div class="columns">
@@ -717,7 +718,7 @@ Wie groß sind wirtschaftliche Entwicklungsunterschiede?
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-23-1.png" width="672"></p>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-24-1.png" width="672"></p>
 </figure>
 </div>
 </div>
@@ -738,7 +739,7 @@ Wie groß sind wirtschaftliche Entwicklungsunterschiede?
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-24-1.png" width="672"></p>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-25-1.png" width="672"></p>
 </figure>
 </div>
 </div>
@@ -750,11 +751,7 @@ Wie groß sind wirtschaftliche Entwicklungsunterschiede?
 <li>Ungeeignet für große Anzahl Beobachtungen</li>
 </ul>
 </div></div>
-</section>
-<section id="kacheldiagramm-treemap" class="slide level2">
-<h2>Kacheldiagramm (Treemap)</h2>
-
-<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section></section>
+</section></section>
 <section>
 <section id="beispiel-2-umfrage" class="title-slide slide level1 center">
 <h1>Beispiel 2: Umfrage</h1>

@@ -16,6 +16,7 @@ format:
 ---
 
 ```{r}
+library(dplyr)
 library(ggplot2)
 library(ggthemes)
 library(patchwork)
@@ -53,7 +54,7 @@ ggplot(d, aes(x, fill=g)) +
 ## <span class="sq green">E</span> Das arithmetische Mittel
 
 - Das *arithmetische Mittel* fasst eine Datenreihe in einer Zahl zusammen, die deren "Mitte" bzw. "zentrale Tendenz" darstellen soll.
-- Das arithmetische Mittel ist damit ein Beispiel für ein *Lagemaß* (worauf wir später zurückkommen werden).
+- Das arithmetische Mittel ist damit ein Beispiel für ein *Lagemaß*.
 - Das arithmetische Mittel ist der geläufigste Mittelwert, aber nicht der einzige.
 
 ## <span class="sq yellow">B</span> Das arithmetische Mittel
@@ -143,9 +144,9 @@ Wie viel geben Studierende in München für das Wohnen aus?
 - Reihe = eine **Beobachtung**
 - Spalte = eine **Variable**
 
-- Datentypen:
-    - ausgaben: **kontinuierlich**
-    - wohnart: **diskret, ungeordnet**
+- Variablentypen:
+    - ausgaben: **numerisch**
+    - wohnart: **kategorisch, nominal**
 :::
 ::::
 
@@ -233,8 +234,41 @@ $$ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 
 
 ## <span class="sq yellow">B</span> Regionale Einkommensverteilung
 
-- TODO
+```{r}
+library(eurostat)
+library(sf)
 
+incomedata <- get_eurostat("nama_10r_3gdp", filters = list(time = 2020, UNIT = "EUR_HAB")) |> 
+  mutate(NUTS_ID=geo) |> 
+  filter(str_starts(geo, "DE2")) |>
+  select(values, NUTS_ID)
+
+populationdata <- get_eurostat("demo_r_pjangrp3", filters = list(time = 2020, sex = "T", age = "TOTAL")) |> 
+  mutate(NUTS_ID=geo, bev = values) |> 
+  filter(str_starts(geo, "DE2")) |> 
+  select(NUTS_ID, bev)
+
+map <- get_eurostat_geospatial(
+  output_class = "sf",
+  resolution = "10",
+  nuts_level = "3",
+  year = "2016",
+  cache = TRUE,
+  update_cache = FALSE,
+  cache_dir = NULL,
+  crs = "4326",
+  make_valid = "DEPRECATED") |> filter(str_starts(NUTS_ID, "DE2"))
+
+mergedata <- merge(populationdata, incomedata, by="NUTS_ID")
+mapdata <- st_as_sf(merge(mergedata, map, by="NUTS_ID"))
+
+ggplot(mapdata) +
+    geom_sf( aes(fill = values),color = "dim grey", linewidth = .1) +
+    scale_fill_viridis(name = "Pro-Kopf-BIP") +
+    labs(title = "BIP pro Kopf",fill = NULL, ) +
+    theme_light() +
+    theme(legend.position = "right")
+```
 
 ## <span class="sq blue">D</span> Gewichtetes geometrisches Mittel
 
@@ -244,7 +278,7 @@ Die Anzahl der Werte $n$ wird wie beim gewichteten arithm. Mittel durch die Summ
 
 Für eine Datenreihe $x$ mit zugehörigen Gewichten $w$ gilt:
 
-$$ \textrm{gew. arithm. Mittel} = \left( \prod_{i=1}^n x_i^{w_i} \right)^{1 / \sum_{i=1}^n w_i} $$
+$$ \textrm{gew. geom. Mittel} = \left( \prod_{i=1}^n x_i^{w_i} \right)^{1 / \sum_{i=1}^n w_i} $$
 
 
 ## <span class="sq yellow">B</span> Gewichtetes geometrisches Mittel
