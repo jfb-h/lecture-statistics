@@ -37,7 +37,7 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
     def get(): return QRCode(f"{route}")
 
 def survey_place(db, rt, route):
-    setup_postalcodes(db, rt, route, "place",
+    setup_postalcodes(db, rt, route, "wohnort",
           lat_current=float, lon_current=float,
           lat_before=float, lon_before=float,
           place_current=str, place_before=str)
