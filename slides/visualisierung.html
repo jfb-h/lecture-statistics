@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="session-01_files/libs/clipboard/clipboard.min.js"></script>
-<script src="session-01_files/libs/quarto-html/tabby.min.js"></script>
-<script src="session-01_files/libs/quarto-html/popper.min.js"></script>
-<script src="session-01_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="session-01_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="session-01_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="session-01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="session-01_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="visualisierung_files/libs/clipboard/clipboard.min.js"></script>
+<script src="visualisierung_files/libs/quarto-html/tabby.min.js"></script>
+<script src="visualisierung_files/libs/quarto-html/popper.min.js"></script>
+<script src="visualisierung_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="visualisierung_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="visualisierung_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="visualisierung_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="visualisierung_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
@@ -15,8 +15,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="session-01_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="session-01_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="visualisierung_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="visualisierung_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,13 +30,14 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="session-01_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="session-01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="session-01_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="session-01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="session-01_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="session-01_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="session-01_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="visualisierung_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="visualisierung_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="visualisierung_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="visualisierung_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="visualisierung_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="visualisierung_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="visualisierung_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -329,7 +330,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Sitzung 1 - Einführung</p>
+  <p class="subtitle">Visualisierung</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -340,211 +341,435 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
-<section id="todo" class="slide level2">
-<h2>TODO</h2>
-<ul>
-<li>sessions</li>
-<li>organisation - übung</li>
-<li>Beispiel Wohnort
-<ul>
-<li>Distanz zur Uni</li>
-<li>Umzugsdistanz</li>
-<li>Korrelation der beiden</li>
-<li>Histogramme</li>
-<li>Wahrscheinlichkeiten</li>
-<li>Barplot Orte</li>
-<li>Simulation nächster Jahrgang (Kriging?)</li>
-</ul></li>
-</ul>
+<section>
+<section id="warum-visualisieren" class="title-slide slide level1 center">
+<h1>Warum Visualisieren?</h1>
+
 </section>
-<section id="warum-statistik" class="title-slide slide level1 center">
-<h1>Warum Statistik?</h1>
+<section id="warum-visualisieren-1" class="slide level2">
+<h2>Warum Visualisieren?</h2>
+</section>
+<section id="the-good-the-bad-and-the-ugly" class="slide level2">
+<h2>The good, the bad, and the ugly</h2>
+</section></section>
+<section id="datentypen-und-skalenniveaus" class="title-slide slide level1 center">
+<h1>Datentypen und Skalenniveaus</h1>
 
 </section>
 
 <section>
-<section id="wahlen" class="title-slide slide level1 center">
-<h1>Wahlen</h1>
+<section id="grundprinzipien-der-visualisierung" class="title-slide slide level1 center">
+<h1>Grundprinzipien der Visualisierung</h1>
 
 </section>
-<section id="deutschland" class="slide level2">
-<h2>Deutschland</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><a href="https://www.zeit.de/politik/deutschland/2021-09/ergebnisse-bundestagswahl-gemeinde-karte" target="_blank"> <img height="500" src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png" title="Ergebnisse der Bundestagswahl 2021 (Zeit.de)" alt="Ergebnisse der Bundestagswahl 2021 (Zeit.de)"> </a></p>
-</div><div class="column" style="width:60%;">
+<section id="visuelle-informationsträger" class="slide level2">
+<h2>Visuelle Informationsträger</h2>
 <ul>
-<li>In Thüringen hat mit der AfD eine vom Verfassungsschutz als rechtsextrem eingestufte Partei die meisten Stimmen erlangt.</li>
-<li>Der Blick auf die Karte suggeriert, dass ein erheblicher Anteil Deutschlands AfD wählt.</li>
-<li>Thüringen beheimatet <strong>2,5%</strong> der deutschen Bevölkerung.</li>
+<li>Winkel, Fläche, Höhe</li>
+<li>Pie, Donut, Tabelle, Bar</li>
+</ul>
+</section>
+<section id="trägerkombinationen-und-effizienz" class="slide level2">
+<h2>Trägerkombinationen und Effizienz</h2>
+</section>
+<section id="experiment" class="slide level2">
+<h2>Experiment</h2>
+</section></section>
+<section>
+<section id="visualisierungstypen" class="title-slide slide level1 center">
+<h1>Visualisierungstypen</h1>
+
+</section>
+<section id="nominale-daten" class="slide level2">
+<h2>Nominale Daten</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="ordinale-daten" class="slide level2 smaller">
+<h2>Ordinale Daten</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-3-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<ul>
+<li>Visualisierung von Likert-Items (psychologische Messskala)</li>
+<li>Balken zeigen den Anteil positiver (rechts) und negativer (links) Antworten</li>
+<li>Gewöhnungsbefürftig aber informativ</li>
 </ul>
 </div></div>
 </section>
-<section id="frankreich" class="slide level2">
-<h2>Frankreich</h2>
+<section id="metrische-daten" class="slide level2">
+<h2>Metrische Daten</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section id="zusammenhänge-visualisieren" class="slide level2">
+<h2>Zusammenhänge visualisieren</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="zusammenhänge-visualisieren-1" class="slide level2">
+<h2>Zusammenhänge visualisieren</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="boxplot" class="slide level2">
+<h2>Boxplot</h2>
+</section>
+<section id="ridgeplot" class="slide level2">
+<h2>Ridgeplot</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="zusammenhänge-visualisieren-2" class="slide level2">
+<h2>Zusammenhänge visualisieren</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="mehrpanelanordnungen" class="slide level2">
+<h2>Mehrpanelanordnungen</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="zeitreihen" class="slide level2">
+<h2>Zeitreihen</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="choroplethen" class="slide level2">
+<h2>Choroplethen</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="choroplethen-1" class="slide level2">
+<h2>Choroplethen?</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="netzwerke" class="slide level2">
+<h2>Netzwerke</h2>
+</section>
+<section id="flussdiagramme" class="slide level2">
+<h2>Flussdiagramme</h2>
+</section>
+<section id="animationen" class="slide level2">
+<h2>Animationen</h2>
+</section></section>
+<section>
+<section id="beispiel-1-gapminder" class="title-slide slide level1 center">
+<h1>Beispiel 1: Gapminder</h1>
+<p>Globale Entwicklung, 1952 - 2007</p>
+</section>
+<section id="die-daten" class="slide level2 smaller">
+<h2>Die Daten</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
-<p><a href="https://de.wikipedia.org/wiki/Parlamentswahl_in_Frankreich_2024" target="_blank"> <img height="250" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/1T_L%C3%A9gislatives_2024_-_France.svg/1280px-1T_L%C3%A9gislatives_2024_-_France.svg.png" title="Ergebnisse des ersten Wahlgangs, 2024" alt="Ergebnisse des ersten Wahlgangs, 2024"> </a></p>
-<p><a href="https://de.wikipedia.org/wiki/Parlamentswahl_in_Frankreich_2024" target="_blank"> <img height="250" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/R%C3%A9sultats_l%C3%A9gislatives_fran%C3%A7aises_2024.svg/1280px-R%C3%A9sultats_l%C3%A9gislatives_fran%C3%A7aises_2024.svg.png" title="Ergebnisse des zweiten Wahlgangs, 2024" alt="Ergebnisse des zweiten Wahlgangs, 2024"> </a></p>
-</div><div class="column" style="width:60%;">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: left;">continent</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">lifeExp</th>
+<th style="text-align: right;">pop</th>
+<th style="text-align: right;">gdpPercap</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1952</td>
+<td style="text-align: right;">28.801</td>
+<td style="text-align: right;">8425333</td>
+<td style="text-align: right;">779.4453</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1957</td>
+<td style="text-align: right;">30.332</td>
+<td style="text-align: right;">9240934</td>
+<td style="text-align: right;">820.8530</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1962</td>
+<td style="text-align: right;">31.997</td>
+<td style="text-align: right;">10267083</td>
+<td style="text-align: right;">853.1007</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1967</td>
+<td style="text-align: right;">34.020</td>
+<td style="text-align: right;">11537966</td>
+<td style="text-align: right;">836.1971</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1972</td>
+<td style="text-align: right;">36.088</td>
+<td style="text-align: right;">13079460</td>
+<td style="text-align: right;">739.9811</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1977</td>
+<td style="text-align: right;">38.438</td>
+<td style="text-align: right;">14880372</td>
+<td style="text-align: right;">786.1134</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1982</td>
+<td style="text-align: right;">39.854</td>
+<td style="text-align: right;">12881816</td>
+<td style="text-align: right;">978.0114</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1987</td>
+<td style="text-align: right;">40.822</td>
+<td style="text-align: right;">13867957</td>
+<td style="text-align: right;">852.3959</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1992</td>
+<td style="text-align: right;">41.674</td>
+<td style="text-align: right;">16317921</td>
+<td style="text-align: right;">649.3414</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">Asia</td>
+<td style="text-align: right;">1997</td>
+<td style="text-align: right;">41.763</td>
+<td style="text-align: right;">22227415</td>
+<td style="text-align: right;">635.3414</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><a href="https://www.gapminder.org/">Gapminder</a> (eine schwedische Stiftung) aggregiert Daten zur weltweiten wirtschaftlichen Entwicklung, Bevölkerung und Lebenserwartung über einen Zeitraum von &gt; 50 Jahren.</p>
+</div></div>
+</section>
+<section id="variablen" class="slide level2">
+<h2>Variablen</h2>
 <ul>
-<li>Im ersten Wahlgang der französischen Parlamentswahlen ging der rechtspopulistische Rassemblement National als Sieger hervor.</li>
-<li>Im zweiten Wahlgang gewann entgegen der Prognosen ein Linksbündnis, während der RN abgeschlagen auf Platz 3 landete.</li>
+<li><code>country</code>: Land (insgesamt 142 Länder)</li>
+<li><code>continent</code>: Africa, Americas, Asia, Europe, Oceania</li>
+<li><code>year</code>: Beobachtungsjahr (1952-2007, in 5-Jahre Schritten)</li>
+<li><code>lifeExp</code>: Mittlere Lebenserwartung bei Geburt (in Jahren)</li>
+<li><code>pop</code>: Bevöklerung</li>
+<li><code>gdpPercap</code>: Pro-Kopf-BIP (in US-$, inflationsangepasst)</li>
+</ul>
+</section></section>
+<section>
+<section id="welcher-kontinent-hat-die-meisten-länder" class="title-slide slide level1 center">
+<h1>Welcher Kontinent hat die meisten Länder?</h1>
+
+</section>
+<section id="säulendiagramm" class="slide level2 smaller">
+<h2>Säulendiagramm</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-18-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><strong>Vorteile</strong></p>
+<ul>
+<li>Einfach zu interpretieren</li>
+<li>Einfache Vergleiche</li>
+<li>Werte leicht ablesbar</li>
+<li>Robust und flexibel</li>
+</ul>
+<p><strong>Nachteile</strong></p>
+<ul>
+<li>langweilig (?)</li>
 </ul>
 </div></div>
 </section>
-<section id="usa" class="slide level2 smaller">
-<h2>USA</h2>
+<section id="kreisdiagramm" class="slide level2 smaller">
+<h2>Kreisdiagramm</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<p><a href="https://www.economist.com/interactive/us-2024-election/prediction-model/president" target="_blank"> <img src="/images/us-economist-prediction.png" title="Economist Vorhersage US Wahl" alt="Economist Vorhersage US Wahl"> </a></p>
-</div><div class="column" style="width:50%;">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-19-1.png" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><strong>Vorteile</strong></p>
 <ul>
-<li><p>Der Economist prognostiziert eine knappe Wahl in den USA.</p></li>
-<li><p>Aktuell besteht noch große Unsicherheit in der Vorhersage.</p></li>
-<li><p>Ergebnisse von 191 Sitzen (verheerende Niederlage) bis 377 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.</p></li>
+<li>Hübsch (?)</li>
 </ul>
-</div></div>
-</section>
-<section id="usa-1" class="slide level2 smaller">
-<h2>USA</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/5/55/How_to_Steal_an_Election_-_Gerrymandering.svg" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/How_to_Steal_an_Election_-_Gerrymandering.svg" title="Gerrymandering" alt="Gerrymandering"> </a></p>
-</div><div class="column" style="width:50%;">
+<p><strong>Nachteile</strong></p>
 <ul>
-<li>Gerrymandering bezeichnet das Umedfinieren von Wahlkreisen, mit dem Ziel, möglichst viele Wahlkreise zu gewinnen.</li>
+<li>Vergleiche zwischen Kategorien schwierig, Werte schwer ablesbar</li>
+<li>Mehrere Informationsträger (Winkel, Fläche)</li>
 </ul>
+<p><strong>I.d.R. Säulendiagramm bevorzugen</strong></p>
 </div></div>
 </section></section>
 <section>
-<section id="chatgpt" class="title-slide slide level1 center">
-<h1>ChatGPT</h1>
-
+<section id="question-2" class="title-slide slide level1 center" data-menu-title="Wie groß sind wirtschaftliche Entwicklungsunterschiede?">
+<h1></h1>
+<h1 style="font-size:2em">
+Wie groß sind wirtschaftliche Entwicklungsunterschiede?
+</h1>
 </section>
-<section id="machine-learning-und-statistik" class="slide level2">
-<h2>Machine Learning und Statistik</h2>
-</section></section>
-<section>
-<section id="wirtschaft-covid" class="title-slide slide level1 center">
-<h1>Wirtschaft / Covid / …</h1>
-
-</section>
-<section id="interpretation-von-trends" class="slide level2">
-<h2>Interpretation von Trends</h2>
-</section></section>
-<section>
-<section id="ziele-der-statistik" class="title-slide slide level1 center">
-<h1>Ziele der Statistik</h1>
-
-</section>
-<section id="vorhersagen" class="slide level2">
-<h2>Vorhersagen</h2>
+<section id="histogramm" class="slide level2 smaller">
+<h2>Histogramm</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
-<img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover">
-</div><div class="column" style="width:70%;">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-20-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
 <ul>
-<li>US-Wahl 1936, Roosevelt vs.&nbsp;Landon</li>
-<li><strong>10 mio.</strong> Befragte (Leser, Telefonbuch, Automobilregister), <strong>2.4 mio.</strong> Antworten</li>
-<li>Vorhersage <strong>43 - 57</strong></li>
-<li>Ergebnis <strong>62 - 38</strong></li>
-<li><strong>Wie kam es zum Fehler von 38 pp?</strong></li>
+<li>Eine numerische Datenreihe wird auf diskrete ‘Eimer’ mit fixer Größe aufgeteilt.</li>
+</ul>
+<p><strong>0 | 2000 | 4000 | 6000 | …</strong></p>
+<ul>
+<li>Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.</li>
 </ul>
 </div></div>
 </section>
-<section id="vorhersagen-1" class="slide level2">
-<h2>Vorhersagen</h2>
+<section id="histogramm-1" class="slide level2 smaller">
+<h2>Histogramm</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
-<img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover">
-</div><div class="column" style="width:70%;">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-21-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
 <ul>
-<li><strong>Sampling bias</strong> : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung</li>
-<li><strong>Non-response bias</strong>: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter</li>
+<li>Eine numerische Datenreihe wird auf diskrete ‘Eimer’ mit fixer Größe aufgeteilt.</li>
+</ul>
+<p><strong>0 | 2000 | 4000 | 6000 | …</strong></p>
+<ul>
+<li>Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.</li>
 </ul>
 </div></div>
 </section>
-<section id="vorhersagen-2" class="slide level2">
-<h2>Vorhersagen</h2>
-<iframe width="980" height="550" src="https://www.economist.com/interactive/us-2024-election/prediction-model/president/how-this-works"></iframe>
-</section>
-<section id="populationen-beschreiben" class="slide level2">
-<h2>Populationen beschreiben</h2>
-<p>Wie informieren Studierende sich über aktuelle Ereignisse?</p>
+<section id="histogramm-2" class="slide level2 smaller">
+<h2>Histogramm</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/session-01/news" title="Survey preview"></iframe>
-</div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/session-01/news/qr" title="Survey link"></iframe>
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-22-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<ul>
+<li>Eine numerische Datenreihe wird auf diskrete ‘Eimer’ mit fixer Größe aufgeteilt.</li>
+</ul>
+<p><strong>0 | 2000 | 4000 | 6000 | …</strong></p>
+<ul>
+<li>Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.</li>
+</ul>
 </div></div>
 </section>
-<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/session-01" data-preload="true">
-<h2></h2>
-</section>
-<section id="populationen-beschreiben-1" class="slide level2">
-<h2>Populationen beschreiben</h2>
-<p>TV</p>
-<p>Sport, Wirtschaft, Internationale Politik, Lokales Weihnachten in Venezuela</p>
-</section>
-<section id="zusammenhänge-erklären" class="slide level2">
-<h2>Zusammenhänge erklären</h2>
+<section id="kerndichtediagramm" class="slide level2 smaller">
+<h2>Kerndichtediagramm</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-23-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
 <ul>
-<li>Brexit Effekt auf Wirtschaftswachstum</li>
+<li>Fläche ist proportional zu Häufigkeit.</li>
+<li>Prinzipiell ähnliches Interpretationsschema wie beim Histogram.</li>
+<li>Achtung: y-Achse zeigt keine Häufigkeiten mehr, sondern die Wahrscheinlichkeits-dichte.</li>
 </ul>
-</section></section>
+</div></div>
+</section>
+<section id="schwarmdiagramm" class="slide level2 smaller">
+<h2>Schwarmdiagramm</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-24-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<ul>
+<li>Ähnliche Logik wie beim Histogram</li>
+<li>Schwierigerer Vergleich von Häufigkeiten</li>
+<li>Ungeeignet für große Anzahl Beobachtungen</li>
+</ul>
+</div></div>
+</section>
+<section id="kacheldiagramm-treemap" class="slide level2">
+<h2>Kacheldiagramm (Treemap)</h2>
+
+<img data-src="visualisierung_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section></section>
 <section>
-<section id="statistik-und-geographie" class="title-slide slide level1 center">
-<h1>Statistik und Geographie</h1>
+<section id="beispiel-2-umfrage" class="title-slide slide level1 center">
+<h1>Beispiel 2: Umfrage</h1>
 
 </section>
-<section id="grenzen-der-statistik" class="slide level2">
-<h2>Grenzen der Statistik</h2>
-<ul>
-<li>Qualitative Forschung</li>
-</ul>
+<section id="befragung" class="slide level2">
+<h2>Befragung</h2>
 </section></section>
 <section>
-<section id="lernziele-inhalte" class="title-slide slide level1 center">
-<h1>Lernziele &amp; Inhalte</h1>
+<section id="zusammenfassung" class="title-slide slide level1 center">
+<h1>Zusammenfassung</h1>
 
 </section>
-<section id="lernziele" class="slide level2">
-<h2>Lernziele</h2>
-<ul>
-<li>Möglichkeiten, Ziele und Grenzen statistischer Analyse</li>
-<li>Interpretation statistischer Ergebnisse und Visualisierungen</li>
-<li>Überblick über Verfahren und deren Anwendungsgebiete</li>
-</ul>
-</section>
-<section id="inhalte" class="slide level2">
-<h2>Inhalte</h2>
-<ul>
-<li>Statistische Forschungsdesigns</li>
-<li>Daten beschreiben und visualisieren</li>
-<li>Statistische Modelle</li>
-<li>Quantifizierung von Unsicherheit</li>
-</ul>
-</section></section>
-<section>
-<section id="organisatorisches" class="title-slide slide level1 center">
-<h1>Organisatorisches</h1>
-
-</section>
-<section id="diese-vorlesung" class="slide level2">
-<h2>Diese Vorlesung</h2>
-<ul>
-<li>Angewandte (nicht theoretische) Statistik</li>
-<li>Grundlagen deskriptiver und inferentieller Statistik</li>
-<li>Praktische Anwendung mit SPSS in der Übung</li>
-</ul>
-</section>
-<section id="prüfungsfragen" class="slide level2">
-<h2>Prüfungsfragen</h2>
-<ul>
-<li>Was sind mögliche Fehlerquellen bei der Wahlvorhersage auf Basis von Meinungsumfragen?</li>
-<li>Was sind neben Meinungsumfragen alternative/ergänzende Verfahren zur Vorhersage von Wahlergebnissen?</li>
-</ul>
+<section id="welcher-plot-für-welche-daten" class="slide level2">
+<h2>Welcher Plot für welche Daten?</h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -555,20 +780,20 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="session-01_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="visualisierung_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="session-01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="session-01_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="session-01_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="visualisierung_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -763,6 +988,44 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

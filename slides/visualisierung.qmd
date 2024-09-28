@@ -1,0 +1,734 @@
+---
+title: "Einführung in die Statistik"
+subtitle: Visualisierung
+author: Dr. Jakob Hoffmann, Economic Geography Group
+execute:
+    keep-ipynb: false
+    keep-md: false
+css: custom.css
+format:
+    revealjs:
+        slide-number: true
+        # embed-resources: true
+        chalkboard:
+            theme: whiteboard
+            boardmarker-width: 2
+---
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+library(knitr)
+library(gapminder)
+library(dplyr)
+library(tidyr)
+library(forcats)
+library(patchwork)
+library(scales)
+library(treemapify)
+library(beeswarm)
+library(stringr)
+library(lubridate)
+
+theme_set(theme_tufte(base_family = "GillSans"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+
+```
+
+# Warum Visualisieren?
+## Warum Visualisieren?
+## The good, the bad, and the ugly
+
+# Datentypen und Skalenniveaus
+
+# Grundprinzipien der Visualisierung
+
+## Visuelle Informationsträger
+- Winkel, Fläche, Höhe
+- Pie, Donut, Tabelle, Bar
+
+## Trägerkombinationen und Effizienz
+
+## Experiment
+
+# Visualisierungstypen
+
+## Nominale Daten
+
+```{r, fig.width=10, fig.height=5.625}
+data <- tibble(x=LETTERS[1:5], y=sample(1:10, 5, replace=T))
+
+data <- data |> 
+  arrange(y) |>
+  mutate(x=factor(x, levels=rev(x)))
+
+p1 <- data |> 
+  ggplot(aes(x=x, y=y)) + 
+  geom_bar(fill="tomato", stat="identity") +
+  labs(x=NULL, y=NULL) +
+  scale_y_continuous(breaks=c(0:10))
+
+p2 <- data |> 
+  ggplot(aes(y=rep(1, 5), x=y/sum(y), fill=x)) + 
+  geom_bar(
+    color="white",
+    stat="identity", 
+    position=position_stack(reverse=T), 
+    orientation="y", show.legend=F) +
+  scale_x_continuous(labels = scales::percent) +
+    scale_fill_tableau() +
+  theme(
+    axis.text.y=element_blank(),
+    panel.grid.minor=element_blank(),
+    panel.grid.major=element_blank(),
+    legend.position="bottom") +
+  labs(x=NULL, y=NULL, fill=NULL)
+
+hsize <- 2.5
+
+p3 <- data |>
+  ggplot(aes(x=hsize, y=y/sum(y), fill=x)) +
+  geom_col(color="white") +
+  coord_polar(theta="y") +
+  geom_text(
+    aes(label = percent(y/sum(y))),
+    position = position_stack(vjust = 0.5), 
+    size=2.5, color="white") +
+  xlim(c(0.2, hsize + 0.5)) +
+    scale_fill_tableau() +
+  theme_void() +
+  labs(fill=NULL)
+
+combined <- p1 + (p2 + p3 + plot_layout(nrow=2, heights=c(0.1, 0.9)))
+
+combined + plot_annotation( tag_levels="A",
+    title="Absolute und relative Häufigkeiten",
+    subtitle=str_wrap("Säulendiagramm mit absoluten Häufigkeiten (A), gestapeltes Säulendiagramm
+        mit relativen Häufigkeiten (B), Donut-Diagramm mit relativen Häufigkeiten (C).", 100)
+)
+```
+
+## Ordinale Daten {.smaller}
+
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+
+library(likert)
+data(pisaitems)
+
+items28 = pisaitems[, substr(names(pisaitems), 1, 5) == "ST24Q"]
+p = likert(items28)
+plot(p) +
+    labs(title="Pisa-Umfrage zum Leseverhalten", 
+        subtitle="z.B. ST24Q01 = 'Ich lese nur wenn ich muss'"
+    )
+```
+:::
+::: {.column width="30%"}
+
+- Visualisierung von Likert-Items (psychologische Messskala)
+- Balken zeigen den Anteil positiver (rechts) und negativer (links) Antworten
+- Gewöhnungsbefürftig aber informativ
+
+:::
+::::
+
+## Metrische Daten
+```{r, fig.width=10, fig.height=5.625}
+data <- tibble(
+    x = rnorm(1000),
+    xexp = rexp(1000),
+    xmix = c(rnorm(500, 0), rnorm(500, 4))
+)
+
+p4 <- data |>
+    ggplot(aes(x = x)) +
+    geom_histogram(bins = 30, color = "white", fill = "tomato") +
+    labs(x = NULL, y = "Häufigkeit")
+
+p5 <- data |>
+    ggplot(aes(x = x)) +
+    geom_density(lwd = 0.8, color = "white", fill = "tomato") +
+    labs(x = NULL, y = "Dichte")
+
+p6 <- data |>
+    ggplot(aes(x = xexp)) +
+    geom_histogram(bins = 30, color = "white", fill = "tomato") +
+    labs(x = NULL, y = "Häufigkeit")
+
+p7 <- data |>
+    ggplot(aes(x = xexp)) +
+    geom_density(lwd = 0.8, color = "white", fill = "tomato") +
+    labs(x = NULL, y = "Dichte")
+
+p8 <- data |>
+    ggplot(aes(x = xmix)) +
+    geom_histogram(bins = 30, color = "white", fill = "tomato") +
+    labs(x = NULL, y = "Häufigkeit")
+
+p9 <- data |>
+    ggplot(aes(x = xmix)) +
+    geom_density(lwd = 0.8, color = "white", fill = "tomato") +
+    labs(x = NULL, y = "Dichte")
+
+combined <- p4 + p5 + p6 + p7 + p8 + p9 + plot_layout(byrow = F)
+
+combined + plot_annotation(
+    tag_levels = "A",
+    title = "Diskretisierte und stetige Häufigkeitsverteilungen",
+    subtitle = str_wrap("Histogramme und Kerndichtediagramme für Daten mit unterschiedlichen
+        Verteilungseigenschaften: Normalverteilt (A,B), rechtsschief (C,D), und bimodal (E,F).", 120)
+)
+
+```
+
+## Zusammenhänge visualisieren
+```{r, fig.width=10, fig.height=5.625}
+data <- tibble(x=sample(LETTERS[1:5], 100, replace=T), y=sample(LETTERS[24:26], 100, replace=T))
+
+p1 <- ggplot(data, aes(x=x, fill=y)) +
+  geom_bar() +
+  labs(x=NULL, y="Häufigkeit", fill=NULL) +
+    scale_fill_tableau() +
+  theme(legend.position="bottom") 
+
+p2 <- ggplot(data, aes(x=x, fill=y)) +
+  geom_bar(position="dodge") +
+  labs(x=NULL, y="Häufigkeit", fill=NULL) +
+    scale_fill_tableau() +
+  theme(legend.position="bottom")
+
+p3 <- ggplot(data, aes(x=x, fill=y)) +
+  geom_bar(position="fill") +
+  labs(x=NULL, y="Anteil", fill=NULL) +
+    scale_fill_tableau() +
+  theme(legend.position="bottom")
+
+combined <- p1 + p2 + p3
+combined + plot_annotation(
+  tag_levels="A",
+  title="Bivariate absolute und relative kategorische Häufigkeiten",
+  subtitle=str_wrap("Gestapeltes Säulendiagramm mit Häufigkeiten (A), gruppiertes
+        Säulendiagramm mit Häufigkeiten (B), normalisiertes Säulendiagramm mit relativen Häufigkeiten (C).", 100))
+```
+
+## Zusammenhänge visualisieren
+```{r, fig.width=10, fig.height=5.625}
+set.seed(123)
+n = 200
+data <- tibble(x=rnorm(n), y=sample(LETTERS[1:4], n, replace=T))
+data <- data |> group_by(y) |> mutate(x = x + cur_group_id())
+
+p1 <- data |>
+  ggplot(aes(x=y, y=x)) +
+  geom_boxplot(orientation = "x", fill="tomato") +
+  labs(x=NULL, y=NULL)
+
+p2 <- data |>
+  ggplot(aes(x=x, fill=y)) + 
+  geom_histogram(alpha=0.6, color="white") + 
+    scale_fill_tableau() +
+  labs(fill=NULL, x=NULL, y=NULL)
+
+p3 <- data |>
+  ggplot(aes(x=x, fill=y)) + 
+  geom_density(alpha=0.6, color="white") + 
+    scale_fill_tableau() +
+  labs(fill=NULL, x=NULL, y=NULL)
+
+p4 <- data |>
+  ggplot(aes(x=y, y=x)) + 
+  geom_dotplot(binaxis="y", stackdir="center", color="white", fill="tomato") + 
+    scale_fill_tableau() +
+  labs(fill=NULL, x=NULL, y=NULL) + 
+  theme(legend.position="bottom")
+
+
+combined <- p1 + p4 + (p2 / p3)
+
+combined + 
+  plot_layout(widths=c(0.2, 0.5, 0.3)) +
+  plot_annotation(
+      tag_levels="A",
+      title="Vergleiche metrischer Variablen über Gruppen",
+      subtitle=str_wrap("Boxplot (A)  und Punktdiagramm (b), Histogramm (C) und Kerndichtediagramm (D).", 150)
+  )
+
+```
+
+## Boxplot
+```{r, fig.width=10, fig.height=5.625}
+```
+
+## Ridgeplot
+```{r, fig.width=10, fig.height=5.625}
+library(ggridges)
+
+# library(GSODR)
+# data = get_GSOD(years=2013:2023, station="108660-99999") |> select(YEAR, MONTH, DAY, TEMP)
+# data$MONTH = lubridate::month(data$MONTH, label=T, abbr=T)
+# arrow::write_parquet(data, "data/temp_munich.parquet")
+
+data = arrow::read_parquet("data/temp_munich.parquet")
+
+ggplot(data, aes(x = TEMP, y = fct_rev(MONTH), fill=stat(x))) +
+  geom_density_ridges_gradient(scale=4, rel_min_height=0.01, gradient_lwd = 1.0) +
+  scale_y_discrete(expand=c(0,0)) +
+  scale_x_continuous(expand=c(0,0)) +
+  scale_fill_viridis_c(name="Temp. (C)") +
+  coord_cartesian(clip="off") +
+  labs(title="Monatsweise Temperaturen in München",
+       subtitle="Aggregierte Tagesdurchschnittstemperaturen, 2013 - 2023",
+       y="", x="Temperatur (C)") +
+  theme_ridges()
+```
+
+## Zusammenhänge visualisieren
+```{r, fig.width=10, fig.height=5.625}
+n = 1000
+data <- tibble(x=rnorm(n), 
+               y_lin=2*x + rnorm(n, sd=3),
+               y_sqr=2*x + x^2 + rnorm(n, sd=3))
+
+p1 <- data |>
+  ggplot(aes(x, y_lin)) +
+  geom_point(alpha=0.5, color="tomato") +
+  geom_smooth(method="lm", color="black") +
+  labs(x="", y="")
+
+p2 <- data |>
+  ggplot(aes(x, y_lin)) + 
+  geom_bin2d() +
+  labs(x="", y="", fill="Häufigkeit") +
+  theme(legend.position="right")
+
+p3 <- data |>
+  ggplot(aes(x, y_sqr)) +
+  geom_point(alpha=0.5, color="tomato") +
+  geom_smooth(method="gam", color="black") +
+  labs(x="", y="")
+
+p4 <- data |>
+  ggplot(aes(x, y_sqr)) + 
+  geom_bin2d() +
+  labs(x="", y="", fill="Häufigkeit") +
+  theme(legend.position="right")
+
+combined <- p1 + p2 + p3 + p4
+
+combined + plot_annotation(
+  tag_levels="A",
+  title="Bivariate metrische Darstellungen",
+  subtitle=str_wrap("Streudiagramme (A, C) und 2D-Histogramme (B,D) für lineare und nichtlineare Zusammenhänge metrischer Variablen", 120)
+)
+```
+
+## Mehrpanelanordnungen
+```{r, fig.width=10, fig.height=5.625}
+N <- 2000
+k <- 6
+
+g <- factor(sample(1:k, N, replace=T), labels=LETTERS[1:k])
+z <- factor(sample(1:2, N, replace=T), labels=LETTERS[25:26])
+x <- rnorm(N) + ifelse(z == "Z", rnorm(N, -1), rnorm(N, 1))
+
+a <- rnorm(k)
+b <- rnorm(k)
+d <- c(1,2)
+
+y <- a[g] + b[g]*x + d[z] + rnorm(N, sd=2)
+
+data <- tibble(y, x, g, z)
+
+data |>
+  ggplot(aes(x=x, y=y)) + 
+  geom_point(aes(color=z), shape=1) +
+  scale_fill_tableau() +
+  geom_smooth(method="lm", color="black") +
+  facet_wrap(~g) +
+  labs(color=NULL, x="", y="")
+```
+
+## Zeitreihen
+```{r, fig.width=10, fig.height=5.625}
+start <- as.Date("2010-01-01")
+end <- as.Date("2023-12-31")
+
+time_series <- seq(start, end, by = "month")
+
+data <- data.frame(
+  date = time_series,
+  x = cumsum(rnorm(length(time_series))),
+  y = (cumsum(rnorm(length(time_series))))
+)
+
+data_yearly <- data |>
+  transform(year = year(date)) |>
+  group_by(year) |>
+  summarize(y=mean(y), x=mean(x))
+
+
+p1 <- data |> 
+  ggplot(aes(x=date, y=y)) + 
+  geom_line() +
+  labs(x=NULL, y=NULL)
+
+p2 <- data |>
+  pivot_longer(c(x,y)) |>
+  ggplot(aes(date, value, color=name)) +
+  geom_line() +
+  labs(x=NULL, y=NULL, color=NULL) +
+  theme(legend.position="bottom")
+
+p3 <- data_yearly |>
+  ggplot(aes(x=x, y=y, label=year)) +
+  geom_path() + 
+  labs(x=NULL, y=NULL) +
+  geom_text()
+
+combined <- (p1 / p2) | p3
+
+combined + plot_annotation(
+  tag_levels="A",
+  title="Zeitlich indizierte metrische Daten",
+  subtitle=str_wrap("Zeitreihen (A, B) und Pfaddiagramm (C).", 150))
+```
+
+## Choroplethen
+```{r, fig.width=10, fig.height=5.625}
+library(socviz)
+library(maps)
+
+data(opiates)
+us_states = map_data("state")
+
+opiates$region = tolower(opiates$state)
+opiates_map = left_join(us_states, opiates)
+
+ggplot(subset(opiates_map, year > 2002), aes(long, lat, group=group, fill=adjusted)) +
+    geom_polygon(color="white", size=0.05) +
+    coord_map(projection="albers", lat0=39, lat1=45) +
+    scale_fill_viridis_c() +
+    theme_map() +
+    theme(legend.position="bottom", strip.background=element_blank()) +
+    labs(fill="Todesfälle pro\n100 000 Einwohner", title="Todesfälle durch Opioide in US-Staaten, 2003 - 2024") +
+    facet_wrap(~year, nrow=3)
+```
+
+## Choroplethen?
+```{r, fig.width=10, fig.height=5.625}
+library(ggrepel)
+
+data(opiates)
+us_states = map_data("state")
+
+opiates$region = tolower(opiates$state)
+opiates_map = left_join(us_states, opiates)
+
+ggplot(drop_na(opiates, division_name), aes(year, adjusted)) +
+    geom_line(aes(group=state), color="gray70") +
+    geom_smooth(aes(group=division_name), se=F) +
+    geom_text_repel(
+        data=subset(opiates, year == max(year) & abbr != "DC"),
+        mapping=aes(year, adjusted, label=abbr),
+        size = 2.2, segment.color = NA, nudge_x = 30) +
+    coord_cartesian(c(min(opiates$year), max(opiates$year))) +
+    facet_wrap(~reorder(division_name, -adjusted, na.rm=T), nrow = 2) +
+    labs(x="", y="Todesfälle pro 100 000 Einwohner", title="Todesfälle durch Opioide in US-Staaten, 2003 - 2024")
+```
+
+## Netzwerke
+```{r, fig.width=10, fig.height=5.625}
+```
+
+## Flussdiagramme
+```{r, fig.width=10, fig.height=5.625}
+```
+
+## Animationen
+```{r, fig.width=10, fig.height=5.625}
+```
+
+# Beispiel 1: Gapminder
+Globale Entwicklung, 1952 - 2007
+
+## Die Daten {.smaller}
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+kable(head(gapminder, 10))
+```
+:::
+::: {.column width="30%"}
+[Gapminder](https://www.gapminder.org/) (eine schwedische Stiftung) aggregiert Daten zur weltweiten wirtschaftlichen Entwicklung, Bevölkerung und Lebenserwartung über einen Zeitraum von > 50 Jahren.
+:::
+::::
+
+## Variablen
+ 
+- `country`: Land (insgesamt 142 Länder)
+- `continent`: Africa, Americas, Asia, Europe, Oceania
+- `year`: Beobachtungsjahr (1952-2007, in 5-Jahre Schritten)
+- `lifeExp`: Mittlere Lebenserwartung bei Geburt (in Jahren)
+- `pop`: Bevöklerung
+- `gdpPercap`: Pro-Kopf-BIP (in US-$, inflationsangepasst)
+
+# Welcher Kontinent hat die meisten Länder?
+
+## Säulendiagramm {.smaller}
+
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+
+df = distinct(gapminder, country, continent)
+ggplot(df, aes(fct_infreq(continent))) +
+    geom_bar(fill="tomato") +
+    labs(x="Kontinent",
+        y="# Länder",
+        title="Welcher Kontinent hat die meisten Länder?",
+        caption="Quelle: gapminder.org")
+```
+:::
+::: {.column width="30%"}
+**Vorteile**
+
+- Einfach zu interpretieren
+- Einfache Vergleiche
+- Werte leicht ablesbar
+- Robust und flexibel
+
+**Nachteile**
+
+- langweilig (?)
+:::
+::::
+
+## Kreisdiagramm {.smaller}
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 8
+#| fig-height: 6
+
+df = distinct(gapminder, country, continent)
+df = df |> group_by(continent) |> summarize(count=n(), share=n() / nrow(df))
+
+hsize = 2.5
+
+p1 = ggplot(df, aes(x=hsize, y=count, fill=continent)) +
+    geom_col(color="white") +
+    coord_polar(theta="y") +
+    theme_void() +
+    scale_fill_tableau() +
+    labs(fill=NULL) +
+    theme(legend.position="top")
+
+p2 = ggplot(df, aes(x=hsize, y=count, fill=continent)) +
+    geom_col(color="white", show.legend=FALSE) +
+    coord_polar(theta="y") +
+    xlim(c(0.2, hsize + 0.5)) +
+    theme_void() +
+    scale_fill_tableau()
+
+p1 + p2 + plot_annotation(title="Welcher Kontinent hat die meisten Länder?")
+```
+:::
+::: {.column width="30%"}
+**Vorteile**
+
+- Hübsch (?)
+
+**Nachteile**
+
+- Vergleiche zwischen Kategorien schwierig, Werte schwer ablesbar
+- Mehrere Informationsträger (Winkel, Fläche)
+
+**I.d.R. Säulendiagramm bevorzugen**
+
+:::
+::::
+
+# {#question-2 data-menu-title="Wie groß sind wirtschaftliche Entwicklungsunterschiede?"}
+<h1 style="font-size:2em"> Wie groß sind wirtschaftliche Entwicklungsunterschiede? </h1>
+
+## Histogramm {.smaller}
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+
+df = filter(gapminder, year == 2007)
+ggplot(df, aes(x=gdpPercap)) +
+    geom_histogram(color="white", fill="tomato", binwidth=2000) +
+    scale_x_continuous(labels=label_currency(big.mark=" ")) +
+    labs(title="Pro-Kopf-BIP (Landesdurchschnitt)", x="Pro-Kopf-BIP (USD)", y="# Länder")
+```
+:::
+::: {.column width="30%"}
+
+- Eine numerische Datenreihe wird auf diskrete 'Eimer' mit fixer Größe aufgeteilt.
+
+**0 | 2000 | 4000 | 6000 | ...**
+
+- Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.
+
+:::
+::::
+
+## Histogramm {.smaller}
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+
+df = filter(gapminder, year == 2007)
+ggplot(df, aes(x=gdpPercap)) +
+    geom_dotplot(color="white", fill="tomato", dotsize=0.5, binwidth=2000, method="histodot") +
+    scale_x_continuous(labels=label_currency(big.mark=" ")) +
+    theme(axis.ticks.y=element_blank(), axis.text.y=element_blank()) +
+    labs(title="Pro-Kopf-BIP (Landesdurchschnitt)", x="Pro-Kopf-BIP (USD)", y="")
+```
+:::
+::: {.column width="30%"}
+
+- Eine numerische Datenreihe wird auf diskrete 'Eimer' mit fixer Größe aufgeteilt.
+
+**0 | 2000 | 4000 | 6000 | ...**
+
+- Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.
+
+:::
+::::
+
+## Histogramm {.smaller}
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+
+df = filter(gapminder, year == 2007)
+
+p1 = ggplot(df, aes(x=gdpPercap)) +
+    geom_histogram(color="white", fill="tomato", binwidth=2000) +
+    scale_x_continuous(labels=label_currency(big.mark=" ")) +
+    scale_y_continuous(labels=label_number(scale_cut=cut_short_scale())) +
+    labs(title="Pro-Kopf-BIP (Landesdurchschnitt)", x="Pro-Kopf-BIP (USD)", y="# Länder")
+
+p2 = ggplot(df, aes(x=gdpPercap, weight=pop)) +
+    geom_histogram(color="white", fill="tomato", binwidth=2000) +
+    geom_density(color="white", fill="tomato") +
+    scale_x_continuous(labels=label_currency(big.mark=" ")) +
+    scale_y_continuous(labels=label_number(scale_cut=cut_short_scale())) +
+    labs(title="Pro-Kopf-BIP (Einwohnergewichtet)", x="Pro-Kopf-BIP (USD)", y="# Personen")
+
+p1 / p2
+```
+:::
+::: {.column width="30%"}
+
+- Eine numerische Datenreihe wird auf diskrete 'Eimer' mit fixer Größe aufgeteilt.
+
+**0 | 2000 | 4000 | 6000 | ...**
+
+- Für jeden Eimer zeigt der zugehörige Balken die # Beobachtungen, die in die jeweilige Spanne fallen.
+
+:::
+::::
+
+## Kerndichtediagramm {.smaller}
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+
+p1 = ggplot(df, aes(x=gdpPercap)) +
+    geom_density(color="white", fill="tomato") +
+    scale_x_continuous(labels=label_currency(big.mark=" ")) +
+    scale_y_continuous(labels=label_scientific()) +
+    labs(title="Pro-Kopf-BIP (Landesdurchschnitt)", x="Pro-Kopf-BIP (USD)", y="Dichte")
+
+p2 = ggplot(df, aes(x=gdpPercap, weight=pop)) +
+    geom_density(color="white", fill="tomato") +
+    scale_x_continuous(labels=label_currency(big.mark=" ")) +
+    scale_y_continuous(labels=label_scientific()) +
+    labs(title="Pro-Kopf-BIP (Einwohnergewichtet)", x="Pro-Kopf-BIP (USD)", y="Dichte")
+
+p1 / p2
+```
+:::
+::: {.column width="30%"}
+
+- Fläche ist proportional zu Häufigkeit.
+- Prinzipiell ähnliches Interpretationsschema wie beim Histogram.
+- Achtung: y-Achse zeigt keine Häufigkeiten mehr, sondern die Wahrscheinlichkeits-dichte.
+
+:::
+::::
+
+## Schwarmdiagramm {.smaller}
+:::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+
+library(ggbeeswarm)
+
+ggplot(df, aes(x=gdpPercap, y="")) +
+    scale_x_continuous(labels=label_currency(big.mark=" ")) +
+    geom_beeswarm(method="center", color = "tomato", cex=2) + 
+    labs(title="Pro-Kopf-BIP (Einwohnergewichtet)", x="Pro-Kopf-BIP (USD)", y="")
+```
+:::
+::: {.column width="30%"}
+
+- Ähnliche Logik wie beim Histogram
+- Schwierigerer Vergleich von Häufigkeiten
+- Ungeeignet für große Anzahl Beobachtungen
+
+:::
+::::
+
+## Kacheldiagramm (Treemap)
+```{r}
+#| fig-width: 10
+#| fig-height: 6.25
+
+df = filter(gapminder, year == 2007)
+ggplot(df, aes(area=pop, fill=continent, label=country, subgroup=continent)) +
+    geom_treemap(color="white") +
+    geom_treemap_text(place="topleft", colour="white", reflow=TRUE) +
+    geom_treemap_subgroup_border(color="white") +
+    geom_treemap_subgroup_text(place="center", grow=TRUE, fontface="italic", colour="black", alpha=0.1, min.size = 0) +
+    scale_fill_tableau() +
+    theme(legend.position="")
+```
+
+# Beispiel 2: Umfrage
+
+## Befragung
+
+# Zusammenfassung
+
+## Welcher Plot für welche Daten?
+
