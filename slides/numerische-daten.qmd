@@ -1,0 +1,497 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Deskriptive Statistik I: Numerische Daten"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+execute:
+    # cache: true
+    keep-ipynb: false
+    keep-md: false
+css: custom.css
+format:
+    revealjs:
+        slide-number: true
+        # embed-resources: true
+        chalkboard:
+            theme: whiteboard
+            boardmarker-width: 2
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(viridis)
+library(patchwork)
+library(stringr)
+
+theme_set(theme_tufte(base_family = "Arial"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+```
+
+# Daten beschreiben
+
+## Bilder vs. Zahlen
+
+-   Bilder sind oft effektiver (ein Unterschied oder Trend wird
+    offensichtlicher)
+
+-   Bilder sind oft effizienter (ein Unterschied oder Trend wird
+    schneller erfasst)
+
+-   Aber: Bilder können existierende Zusammenhänge verschleiern oder
+    nicht existente suggerieren
+
+## Bilder vs. Zahlen
+
+```{r}
+set.seed(123)
+data <- data.frame(x=2001:2012, y=cumsum(rnorm(12)))
+
+s = data$y
+names(s) = data$x
+print(round(s, 2))
+
+ggplot(data, aes(lubridate::make_date(x,1, 1), y)) + geom_line() + labs(x="", y="")
+```
+
+## Warum Visualisieren?
+
+## The good, the bad, and the ugly
+
+# Grundprinzipien der Visualisierung
+
+## Visuelle Informationsträger
+
+-   Winkel, Fläche, Höhe
+-   Pie, Donut, Tabelle, Bar
+
+## Trägerkombinationen und Effizienz
+
+## Experiment
+
+# Datentypen und Skalenniveaus
+
+## Numerische und kategorische Daten
+
+-   **Numerisch**: kontinuierlich, diskret (zählbar)
+-   **Kategorisch**: nominal (ungeordnet), ordinal (geordnet)
+
+# Numerische Daten beschreiben
+
+## Entfernung zur Uni
+
+## Lagemaße
+
+```{r}
+set.seed(123)
+x = rnorm(5000, mean=165, sd=6)
+y = rnorm(5000, mean=180, sd=6)
+d = data.frame(x=c(x, y), g=factor(rep(c(1,2), each=5000)))
+ggplot(d, aes(x, fill=g)) +
+    geom_histogram(color="white", alpha=0.7, position="identity", show.legend=FALSE) +
+    geom_segment(aes(x = 165, y = 0, xend = 180, yend = 0), arrow = arrow(ends = "both", type = "closed")) +
+    labs(x="", y="") + scale_fill_tableau()
+```
+
+## [E]{.sq .green} Das arithmetische Mittel
+
+-   Das *arithmetische Mittel* fasst eine Datenreihe in einer Zahl
+    zusammen, die deren "Mitte" bzw. "zentrale Tendenz" darstellen soll.
+-   Das arithmetische Mittel ist damit ein Beispiel für ein *Lagemaß*.
+-   Das arithmetische Mittel ist der geläufigste Mittelwert, aber nicht
+    der einzige.
+
+## [B]{.sq .yellow} Das arithmetische Mittel
+
+Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch
+die Anzahl der Werte. Für die folgende Datenreihe $x$ mit $n=4$ Werten:
+
+$$x = {179, 163, 180, 192}$$
+
+gilt also:
+
+$$\textrm{Arith. Mittel} = \bar{x} = \frac{179 + 163 + 180 + 192}{4} = 178,5$$
+
+## [D]{.sq .blue} Das arithmetische Mittel
+
+Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch
+die Anzahl der Werte.
+
+Etwas genereller können wir diese Definition mit Summennotation
+formalisieren:
+
+$$\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n} = \frac{1}{n} \sum_{i=1}^n{x_i}$$
+
+## Exkurs: Summen
+
+$$\bar{x} = \frac{1}{n} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{n}{x_\color{green}{i}}$$
+
+::: incremental
+-   Das große Sigma $\color{red}{\Sigma}$ zeigt eine Summation über die
+    Werte der Datenreihe $x$ an.
+
+-   Der Laufindex $\color{green}{i}$ indiziert die Werte in $x$, startet
+    bei $\color{green}{i=1}$ und läuft bis $\color{blue}{n}$ (in
+    Schritten von 1).
+
+-   Im Beispiel von vorher: $$\bar{x} = \frac{1}{4} (
+      \overset{\color{lightgrey}{179}}{x_{\color{green}{1}}} \color{red}{+}
+      \overset{\color{lightgrey}{163}}{x_{\color{green}{2}}} \color{red}{+}
+      \overset{\color{lightgrey}{180}}{x_{\color{green}{3}}} \color{red}{+}
+      \overset{\color{lightgrey}{192}}{x_{\color{blue}{4}}})$$
+:::
+
+## [E]{.sq .green} Dummyvariablen
+
+Im Fall einer Dummyvariable (die die Werte 0 oder 1 annehmen kann), gibt
+das arithmetische Mittel eine Proportion an:
+
+$$x = 
+    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}},
+    \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
+    \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
+    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}}$$
+
+$$\bar{x} = \frac{1}{n} (
+    \overset{\color{lightgrey}{0}}{x_{\color{green}{1}}} \color{red}{+}
+    \overset{\color{lightgrey}{1}}{x_{\color{green}{2}}} \color{red}{+}
+    \overset{\color{lightgrey}{1}}{x_{\color{green}{3}}} \color{red}{+}
+    \overset{\color{lightgrey}{0}}{x_{\color{blue}{4}}}) = \frac{\textrm{# bestanden}}{\textrm{# gesamt}} = \frac{1}{2}$$
+
+## Umfrage
+
+Wie viel geben Studierende in München für das Wohnen aus?
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview">
+
+</iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link">
+
+</iframe>
+:::
+:::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload="true"}
+
+## Wie sehen die Umfragedaten aus?
+
+::::: columns
+::: {.column width="50%"}
+| id  | ausgaben | wohnart |
+|-----|----------|---------|
+| 1   | 700      | WG      |
+| 2   | 640      | WG      |
+| 3   | 0        | Eltern  |
+| 4   | 900      | WG      |
+| 5   | 1100     | Alleine |
+| 6   | 950      | Alleine |
+:::
+
+::: {.column width="50%"}
+-   Reihe = eine **Beobachtung**
+
+-   Spalte = eine **Variable**
+
+-   Variablentypen:
+
+    -   ausgaben: **numerisch**
+    -   wohnart: **kategorisch, nominal**
+:::
+:::::
+
+## [E]{.sq .green} Das geometrische Mittel
+
+-   Bei Verhältnisskalen (Zahlen, die in einem multiplikativen
+    Verhältnis zueinander stehen), sollte das *geometrische* und nicht
+    das *arithmetische* Mittel eingesetzt werden.
+-   Ein typischer Fall sind *Wachstumsraten*
+-   z.B. Bevölkerungsentwicklung, Investments, BIP-Wachstum
+
+## [B]{.sq .yellow} BIP-Wachstum in Deutschland {.smaller}
+
+::::: columns
+::: {.column width="65%"}
+<img src="https://de.statista.com/graphic/1/2112/veraenderung-des-bruttoinlandprodukts-im-vergleich-zum-vorjahr.jpg" title="BIP Veränderung (Statista)" width="700"/></img>
+:::
+
+::: {.column width="35%"}
+Die Werte zeigen das *Verhältnis* des diesjährigen BIP zum Vorjahreswert
+an, d.h. eine Wachstumsrate.
+
+-   BIP 2021: **3.673,8 Mrd.**
+-   Wachstumsrate 2022: **1,7%**
+-   BIP 2022:\
+    **3.673,8** $\times$ (1 + 0,017) = 3.736,3
+:::
+:::::
+
+## [D]{.sq .blue} Das geometrische Mittel
+
+Das geometrische Mittel ist definiert als die $n$-te Wurzel des Produkts
+der Werte.
+
+Analog zur Summe im arithm. Mittel können wir das geom. Mittel mit der
+Produktnotation ($\Pi$, groß Pi) definieren:
+
+$$\textrm{geom. Mittel} = \sqrt[n]{x_1 \times x_2 \times ... \times x_n} = \left( \prod_{i=1}^n x_i \right)^\frac{1}{n}$$
+
+## [B]{.sq .yellow} Das geometrische Mittel
+
+::: incremental
+Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 $$
+    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
+    \overset{\color{lightgrey}{2019}}{1,0 \%} \ 
+    \overset{\color{lightgrey}{2020}}{-4,1 \%} \ 
+    \overset{\color{lightgrey}{2021}}{3,6\%} \ 
+    \overset{\color{lightgrey}{2022}}{1,7\%} \ 
+    \overset{\color{lightgrey}{2023}}{-0,3\%}
+$$
+
+-   BIP 2023: **3491 Mrd.** \| AM: **0.38%** \| GM: **0.347%**
+-   Das arithm. Mittel produziert falsche Ergebnisse:
+    -   $3.431,1 \times 1.038^5 = 3.496,8 \textrm{ Mrd.}$
+    -   $3.431,1 \times 1.0347^5 = 3.491 \textrm{ Mrd.}$
+:::
+
+## [E]{.sq .green} Gewichtete Mittelwerte
+
+-   Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich
+    gewichtet.
+-   In vielen Situationen muss z.B. für Größenunterschiede der
+    Beobachtungseinheiten korrigiert werden.
+-   In solchen Fällen können Werte für das geometrische oder
+    arithmetische Mittel individuell gewichtet werden.
+
+## [D]{.sq .blue} Gewichtetes arithmetisches Mittel
+
+Das gewichtete arithmetische Mittel ist die Summe der gewichteten Werte
+geteilt durch die Summe der Gewichte.
+
+Für eine Datenreihe $x$ mit zugehörigen Gewichten $w$ gilt:
+
+$$\begin{align}
+\textrm{gew. arithm. Mittel} &= \frac{w_1 x_1 + w_2 x_2 + \cdots + w_n x_n}{w_1 + w_2 + \cdots + w_n} \\[0.8em]
+&= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i 
+\end{align}$$
+
+## [B]{.sq .yellow} Gewichtetes arithmetisches Mittel
+
+Für die Folgenden Werte $x$ (z.B. Körpergrößen) und Gewichte $w$ (z.B.
+Anzahl Beobachtungen):
+
+$$x = {163, 179, 180, 192} \ \ \ w = {3, 11, 4, 7}$$
+
+ergibt sich ein gewichtetes arithmetisches Mittel von:
+
+$$ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 $$
+
+## [B]{.sq .yellow} Regionale Einkommensverteilung {.smaller}
+
+```{r}
+library(eurostat)
+library(sf)
+
+incomedata <- get_eurostat("nama_10r_3gdp", 
+  filters = list(time = 2020, UNIT = "EUR_HAB")
+  ) |> 
+  mutate(NUTS_ID=geo) |> 
+  filter(str_starts(geo, "DE2")) |>
+  select(values, NUTS_ID)
+
+populationdata <- get_eurostat("demo_r_pjangrp3", 
+  filters = list(time = 2020, sex = "T", age = "TOTAL")
+  ) |> 
+  mutate(NUTS_ID=geo, bev = values) |> 
+  filter(str_starts(geo, "DE2")) |> 
+  select(NUTS_ID, bev)
+
+map <- get_eurostat_geospatial(
+  output_class = "sf",
+  resolution = "10",
+  nuts_level = "3",
+  year = "2016",
+  cache = TRUE,
+  update_cache = FALSE,
+  cache_dir = NULL,
+  crs = "4326",
+  make_valid = "DEPRECATED") |> filter(str_starts(NUTS_ID, "DE2"))
+
+mergedata <- merge(populationdata, incomedata, by="NUTS_ID")
+mapdata <- st_as_sf(merge(mergedata, map, by="NUTS_ID"))
+```
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+#| fig-width: 7
+#| fig-height: 5.625
+
+ggplot(mapdata) +
+    geom_sf( aes(fill = values),color = "dim grey") +
+    scale_fill_viridis() +
+    theme_void() +
+    labs(title = "Pro-Kopf-BIP",fill = "Euro")
+```
+:::
+
+::: {.column width="30%"}
+Ungewichtetes arithm. Mittel:
+
+Gewichtetes arithm. Mittel:
+:::
+:::::
+
+## [D]{.sq .blue} Gewichtetes geometrisches Mittel
+
+Im gewichteten geometrischen Mittel werden die Werte mit ihren
+zugehörigen Gewichten exponiert.
+
+Die Anzahl der Werte $n$ wird wie beim gewichteten arithm. Mittel durch
+die Summe der Gewichte ersetzt.
+
+Für eine Datenreihe $x$ mit zugehörigen Gewichten $w$ gilt:
+
+$$ \textrm{gew. geom. Mittel} = \left( \prod_{i=1}^n x_i^{w_i} \right)^{1 / \sum_{i=1}^n w_i} $$
+
+## [B]{.sq .yellow} Gewichtetes geometrisches Mittel
+
+Für die Folgenden Werte $x$ (z.B. Renditen) und Gewichte $w$ (z.B.
+Anzahl Anleihen):
+
+$$x = {-2\%, 10\%, 1\%, 5\%} \ \ \ w = {3, 1, 4, 2}$$
+
+ergibt sich ein gewichtetes geometrisches Mittel von:
+
+$$ (0.02^3 \times 0.1^1 \times 0.01^4 \times 0.05^2)^{1 / (3 + 1 + 4 + 2)} = 2.14\%$$
+
+## [B]{.sq .yellow} Inflation und Warenkorb
+
+-   [Beispiel
+    Warenkorb](https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html)
+
+## [E]{.sq .green} Der Median
+
+-   Das arithmetische Mittel ist empfindlich gegenüber Ausreißern bzw.
+    Extremwerten.
+-   Der Median berücksichtigt ausschließlich die Reihenfolge (den Rang)
+    der Werte zur Identifikation der 'Mitte'.
+-   Der Median ist robuster, tauscht dafür aber Informationsgehalt ein.
+
+## [D]{.sq .blue} Der Median
+
+-   Der Median ist der Wert in der Mitte einer größensortierten
+    Datenreihe. Bei einer geraden Anzahl an Werten $n$ ist der Median
+    das arithmetische Mittel der beiden mittleren Werte.
+
+-   Für eine sortierte Datenreihe $s$ gilt also:
+
+$$\textrm{Median} = \begin{cases} 
+s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
+\frac{s_{\frac{n}{2}} + s_{\frac{n}{2} + 1}}{2}, \textrm{wenn \(n\) gerade}
+\end{cases}$$
+
+## [B]{.sq .yellow} Der Median
+
+Beispiel mit $n$ ungerade:
+$$s = {163, 177, \color{orange}{179}, 180, 192}$$
+$$s_\color{orange}{\frac{n + 1}{2}} = 179$$
+
+Beispiel mit $n$ gerade:
+$$s = {163, \color{orange}{179}, \color{orange}{180}, 192}$$
+$$\frac{s_\color{orange}{{\frac{n}{2}}} + s_\color{orange}{{\frac{n}{2} + 1}}}{2} = \frac{179 + 180}{2} = 179.5$$
+
+## Umfrage
+
+Was ist euer monatliches Einkommen?
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen" title="Survey preview">
+
+</iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen/qr" title="Survey link">
+
+</iframe>
+:::
+:::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/einkommen" data-preload="true"}
+
+##  {background-image="images/einkommen-de.svg" background-size="contain"}
+
+## [E]{.sq .green} Quantile und Perzentile
+
+-   Der Median ist das 0,5-Quantil bzw. das 50%-Perzentil, d.h. 50% der
+    Werte sind kleiner als der Median.
+-   Wir können andere Quantile berechnen, z.B. um eine Aussage über
+    einen "Großteil" (z.B. 90%-Perzentil) zu treffen.
+
+```{r fig.height=3.5, fig.width=12}
+set.seed(123)
+data <- data.frame(x=rlnorm(10000, meanlog = 8, sdlog = 0.3))
+p <- c(0.01, 0.25, 0.5, 0.75, 0.99)
+q <- quantile(data$x, probs = p)
+percentiles <- data.frame(x = q, y = 0, xend = q, 
+                          yend = 1400, label = paste0(p, "%"))
+
+ggplot(data, aes(x)) +
+    geom_histogram(fill="tomato", color="white") +
+    geom_segment(data=percentiles, 
+                 aes(x, y, xend=xend, yend=yend), 
+                 linewidth=1.2, linetype=2) +
+    geom_text(data=percentiles, aes(x, yend, label=label), nudge_y = 150) + 
+    xlab("Einkommen") + ylab("Häufigkeit") +
+    geom_rangeframe()
+```
+
+## [E]{.sq .green} Quantile und Boxplots
+
+```{r fig.height=5.625, fig.width=10}
+set.seed(123)
+data <- data.frame(x=rlnorm(10000, meanlog = 8, sdlog = 0.3))
+p <- c(0.25, 0.5, 0.75)
+q <- quantile(data$x, probs = p)
+percentiles <- data.frame(x = q, y = 0, xend = q, 
+                          yend = 1400, label = paste0(p, "%"))
+
+library(ggside)
+
+ggplot(data, aes(x = x)) +
+    geom_histogram(fill = "tomato", color = "white") +
+    geom_xsideboxplot(orientation="y", 
+                      fill="tomato", outlier.shape=1, outlier.alpha=0.2) +
+    geom_segment(data=percentiles, 
+                 aes(x, y, xend=xend, yend=yend), 
+                 linewidth=1.2, linetype=2) +
+    geom_text(data=percentiles, aes(x, yend, label=label), nudge_y = 50) + 
+    xlab("Einkommen") + ylab("") +
+    geom_rangeframe() +
+    theme(ggside.axis.text.y = element_blank(), 
+          ggside.axis.ticks.y = element_blank())
+
+```
+
+## Unschlüssig? ;)
+
+<img src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" height="500"/>

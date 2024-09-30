@@ -3,6 +3,7 @@ title: "Einführung in die Statistik"
 subtitle: Visualisierung
 author: Dr. Jakob Hoffmann, Economic Geography Group
 execute:
+    cache: true
     keep-ipynb: false
     keep-md: false
 css: custom.css
@@ -45,11 +46,14 @@ theme_update(
 
 ```
 
+# Datentypen und Skalenniveaus
+
+- Numerisch: kontinuierlich, diskret
+- Kategorisch: nominal, ordinal
+
 # Warum Visualisieren?
 ## Warum Visualisieren?
 ## The good, the bad, and the ugly
-
-# Datentypen und Skalenniveaus
 
 # Grundprinzipien der Visualisierung
 
@@ -63,7 +67,7 @@ theme_update(
 
 # Visualisierungstypen
 
-## Nominale Daten
+## Kategorische Daten
 
 ```{r, fig.width=10, fig.height=5.625}
 data <- tibble(x=LETTERS[1:5], y=sample(1:10, 5, replace=T))
@@ -146,7 +150,7 @@ plot(p) +
 :::
 ::::
 
-## Metrische Daten
+## Numerische Daten
 ```{r, fig.width=10, fig.height=5.625}
 data <- tibble(
     x = rnorm(1000),
@@ -263,7 +267,7 @@ combined +
   plot_layout(widths=c(0.2, 0.5, 0.3)) +
   plot_annotation(
       tag_levels="A",
-      title="Vergleiche metrischer Variablen über Gruppen",
+      title="Vergleiche numerischer Variablen über Gruppen",
       subtitle=str_wrap("Boxplot (A)  und Punktdiagramm (b), Histogramm (C) und Kerndichtediagramm (D).", 150)
   )
 
@@ -331,8 +335,8 @@ combined <- p1 + p2 + p3 + p4
 
 combined + plot_annotation(
   tag_levels="A",
-  title="Bivariate metrische Darstellungen",
-  subtitle=str_wrap("Streudiagramme (A, C) und 2D-Histogramme (B,D) für lineare und nichtlineare Zusammenhänge metrischer Variablen", 120)
+  title="Bivariate numerische Darstellungen",
+  subtitle=str_wrap("Streudiagramme (A, C) und 2D-Histogramme (B,D) für lineare und nichtlineare Zusammenhänge numerischer Variablen", 120)
 )
 ```
 
@@ -403,7 +407,7 @@ combined <- (p1 / p2) | p3
 
 combined + plot_annotation(
   tag_levels="A",
-  title="Zeitlich indizierte metrische Daten",
+  title="Zeitlich indizierte numerische Daten",
   subtitle=str_wrap("Zeitreihen (A, B) und Pfaddiagramm (C).", 150))
 ```
 
@@ -486,7 +490,7 @@ kable(head(gapminder, 10))
 - `pop`: Bevöklerung
 - `gdpPercap`: Pro-Kopf-BIP (in US-$, inflationsangepasst)
 
-# Welcher Kontinent hat die meisten Länder?
+## <span class="smallheader">Welcher Kontinent hat die meisten Länder?</span>
 
 ## Säulendiagramm {.smaller}
 
@@ -564,8 +568,21 @@ p1 + p2 + plot_annotation(title="Welcher Kontinent hat die meisten Länder?")
 :::
 ::::
 
-# {#question-2 data-menu-title="Wie groß sind wirtschaftliche Entwicklungsunterschiede?"}
-<h1 style="font-size:2em"> Wie groß sind wirtschaftliche Entwicklungsunterschiede? </h1>
+## Kacheldiagramm (Treemap)
+```{r}
+#| fig-width: 10
+#| fig-height: 6.25
+
+df = filter(gapminder, year == 2007)
+ggplot(df, aes(area=pop, fill=continent, label=country, subgroup=continent)) +
+    geom_treemap(color="white") +
+    geom_treemap_text(place="topleft", colour="white", reflow=TRUE) +
+    geom_treemap_subgroup_border(color="white") +
+    geom_treemap_subgroup_text(place="center", grow=TRUE, fontface="italic", colour="black", alpha=0.1, min.size = 0) +
+    scale_fill_tableau() +
+    theme(legend.position="")
+```
+## <span class="smallheader">Wie groß sind wirtschaftliche Entwicklungsunterschiede?</span>
 
 ## Histogramm {.smaller}
 :::: {.columns}
@@ -708,21 +725,6 @@ ggplot(df, aes(x=gdpPercap, y="")) +
 
 :::
 ::::
-
-## Kacheldiagramm (Treemap)
-```{r}
-#| fig-width: 10
-#| fig-height: 6.25
-
-df = filter(gapminder, year == 2007)
-ggplot(df, aes(area=pop, fill=continent, label=country, subgroup=continent)) +
-    geom_treemap(color="white") +
-    geom_treemap_text(place="topleft", colour="white", reflow=TRUE) +
-    geom_treemap_subgroup_border(color="white") +
-    geom_treemap_subgroup_text(place="center", grow=TRUE, fontface="italic", colour="black", alpha=0.1, min.size = 0) +
-    scale_fill_tableau() +
-    theme(legend.position="")
-```
 
 # Beispiel 2: Umfrage
 
