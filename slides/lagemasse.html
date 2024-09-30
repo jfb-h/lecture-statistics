@@ -8,7 +8,7 @@
 <link href="lagemasse_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lagemasse_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lagemasse_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.4">
+  <meta name="generator" content="quarto-1.5.29">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
   <title>Einführung in die Statistik</title>
@@ -330,7 +330,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Lagemaße</p>
+  <p class="subtitle">Deskriptive Statistik I: Numerische Daten</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -405,10 +405,13 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <p>Wie viel geben Studierende in München für das Wohnen aus?</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview"></iframe>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview">
+</iframe>
 </div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link"></iframe>
-</div></div>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link">
+</iframe>
+</div>
+</div>
 </section>
 <section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload="true">
 <h2></h2>
@@ -417,7 +420,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Wie sehen die Umfragedaten aus?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<table class="caption-top">
+<table>
 <thead>
 <tr class="header">
 <th>id</th>
@@ -468,7 +471,8 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <li>wohnart: <strong>kategorisch, nominal</strong></li>
 </ul></li>
 </ul>
-</div></div>
+</div>
+</div>
 </section>
 <section id="e-das-geometrische-mittel" class="slide level2">
 <h2><span class="sq green">E</span> Das geometrische Mittel</h2>
@@ -482,16 +486,17 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2><span class="sq yellow">B</span> BIP-Wachstum in Deutschland</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<p><img width="700" src="https://de.statista.com/graphic/1/2112/veraenderung-des-bruttoinlandprodukts-im-vergleich-zum-vorjahr.jpg" title="BIP Veränderung (Statista)"></p>
+<p><img src="https://de.statista.com/graphic/1/2112/veraenderung-des-bruttoinlandprodukts-im-vergleich-zum-vorjahr.jpg" title="BIP Veränderung (Statista)" width="700"></p>
 </div><div class="column" style="width:35%;">
 <p>Die Werte zeigen das <em>Verhältnis</em> des diesjährigen BIP zum Vorjahreswert an, d.h. eine Wachstumsrate.</p>
 <ul>
 <li>BIP 2021: <strong>3.673,8 Mrd.</strong></li>
 <li>Wachstumsrate 2022: <strong>1,7%</strong></li>
 <li>BIP 2022:<br>
-<strong>3.673,8 <span class="math inline">\(\times\)</span> (1 + 0,017) = 3.736,3</strong></li>
+<strong>3.673,8</strong> <span class="math inline">\(\times\)</span> (1 + 0,017) = 3.736,3</li>
 </ul>
-</div></div>
+</div>
+</div>
 </section>
 <section id="d-das-geometrische-mittel" class="slide level2">
 <h2><span class="sq blue">D</span> Das geometrische Mittel</h2>
@@ -544,11 +549,24 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <p>ergibt sich ein gewichtetes arithmetisches Mittel von:</p>
 <p><span class="math display">\[ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 \]</span></p>
 </section>
-<section id="b-regionale-einkommensverteilung" class="slide level2">
+<section id="b-regionale-einkommensverteilung" class="slide level2 smaller">
 <h2><span class="sq yellow">B</span> Regionale Einkommensverteilung</h2>
-<ul>
-<li>TODO</li>
-</ul>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-4-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p>Ungewichtetes arithm. Mittel:</p>
+<p>Gewichtetes arithm. Mittel:</p>
+</div>
+</div>
 </section>
 <section id="d-gewichtetes-geometrisches-mittel" class="slide level2">
 <h2><span class="sq blue">D</span> Gewichtetes geometrisches Mittel</h2>
@@ -567,7 +585,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="b-inflation-und-warenkorb" class="slide level2">
 <h2><span class="sq yellow">B</span> Inflation und Warenkorb</h2>
 <ul>
-<li>https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html</li>
+<li><a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html">Beispiel Warenkorb</a></li>
 </ul>
 </section>
 <section id="e-der-median" class="slide level2">
@@ -599,10 +617,13 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 <p>Was ist euer monatliches Einkommen?</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen" title="Survey preview"></iframe>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen" title="Survey preview">
+</iframe>
 </div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen/qr" title="Survey link"></iframe>
-</div></div>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen/qr" title="Survey link">
+</iframe>
+</div>
+</div>
 </section>
 <section id="section-1" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/einkommen" data-preload="true">
 <h2></h2>
@@ -617,14 +638,14 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 <li>Wir können andere Quantile berechnen, z.B. um eine Aussage über einen “Großteil” (z.B. 90%-Perzentil) zu treffen.</li>
 </ul>
 
-<img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-3-1.png" width="1152" class="r-stretch"></section>
+<img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-5-1.png" width="1152" class="r-stretch"></section>
 <section id="e-quantile-und-boxplots" class="slide level2">
 <h2><span class="sq green">E</span> Quantile und Boxplots</h2>
 
-<img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="unschlüssig" class="slide level2">
 <h2>Unschlüssig? ;)</h2>
-<img height="500" src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png">
+<p><img src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" height="500"></p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -844,42 +865,80 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {

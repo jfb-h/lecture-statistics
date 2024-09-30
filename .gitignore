@@ -5,3 +5,4 @@ lecture-surveys/surveys.db*
 slides/slides.Rproj
 slides/.Rproj.user/
 slides/*_cache/
+slides/.quarto

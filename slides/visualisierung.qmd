@@ -46,14 +46,14 @@ theme_update(
 
 ```
 
-# Warum Visualisieren?
-## Warum Visualisieren?
-## The good, the bad, and the ugly
-
 # Datentypen und Skalenniveaus
 
 - Numerisch: kontinuierlich, diskret
 - Kategorisch: nominal, ordinal
+
+# Warum Visualisieren?
+## Warum Visualisieren?
+## The good, the bad, and the ugly
 
 # Grundprinzipien der Visualisierung
 
