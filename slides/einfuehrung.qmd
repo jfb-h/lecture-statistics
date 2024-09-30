@@ -11,266 +11,228 @@ format:
         chalkboard:
             theme: whiteboard
             boardmarker-width: 2
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-## TODO
+# Ankündigung: Skilager
 
-- Beispiel Wohnort
-    - 1 Distanz zur Uni, 2 Umzugsdistanz
-    - Korrelation der beiden
-    - Histogramme, Barplot Orte
-    - Wahrscheinlichkeiten, Simulation, Kriging
-
-
-# Warum Statistik?
+# Kennenlernen
 
 ## Kennenlernen
 
-Wo kommt ihr her?
-
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-```{=html}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort" title="Survey preview"></iframe>
-```
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort" title="Survey preview"> </iframe>
 :::
+
 ::: {.column width="50%"}
-```{=html}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort/qr" title="Survey link"></iframe>
-```
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort/qr" title="Survey link"> </iframe>
 :::
-::::
+:::::
 
-## {background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnort" background-interactive=true data-preload=true}
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/map" background-interactive="true" data-preload="true"}
 
-## Wahlen in Deutschland 
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/hist" background-interactive="true" data-preload="true"}
 
-:::: {.columns}
-::: {.column width="40%"}
-<a href="https://www.zeit.de/politik/deutschland/2021-09/ergebnisse-bundestagswahl-gemeinde-karte" target="_blank">
-  <img height="500" src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png" title="Ergebnisse der Bundestagswahl 2021 (Zeit.de)" alt="Ergebnisse der Bundestagswahl 2021 (Zeit.de)">
-</a>
-:::
-::: {.column width="60%"}
-- In Thüringen hat mit der AfD eine vom Verfassungsschutz als rechtsextrem eingestufte Partei die meisten Stimmen erlangt.
-- Der Blick auf die Karte suggeriert, dass ein erheblicher Anteil Deutschlands AfD wählt.
-- Thüringen beheimatet **2,5%** der deutschen Bevölkerung.
-:::
-::::
+# Ziele der Statistik
 
-## Wahlen in Frankreich
+## Datenbasierte Kristallkugeln?
 
-:::: {.columns}
-::: {.column width="40%"}
-<a href="https://de.wikipedia.org/wiki/Parlamentswahl_in_Frankreich_2024" target="_blank">
-  <img height="250" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/1T_L%C3%A9gislatives_2024_-_France.svg/1280px-1T_L%C3%A9gislatives_2024_-_France.svg.png" title="Ergebnisse des ersten Wahlgangs, 2024" alt="Ergebnisse des ersten Wahlgangs, 2024">
-</a>
-
-<a href="https://de.wikipedia.org/wiki/Parlamentswahl_in_Frankreich_2024" target="_blank">
-  <img height="250" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/R%C3%A9sultats_l%C3%A9gislatives_fran%C3%A7aises_2024.svg/1280px-R%C3%A9sultats_l%C3%A9gislatives_fran%C3%A7aises_2024.svg.png" title="Ergebnisse des zweiten Wahlgangs, 2024" alt="Ergebnisse des zweiten Wahlgangs, 2024">
-</a>
-:::
-::: {.column width="60%"}
-- Im ersten Wahlgang der französischen Parlamentswahlen ging der rechtspopulistische Rassemblement National als Sieger hervor.
-- Im zweiten Wahlgang gewann entgegen der Prognosen ein Linksbündnis, während der RN abgeschlagen auf Platz 3 landete.
-:::
-::::
-
-## Wahlen in den USA {.smaller}
-:::: {.columns}
-::: {.column width="50%"}
-<a href="https://www.economist.com/interactive/us-2024-election/prediction-model/president" target="_blank">
-  <img src="/images/us-economist-prediction.png" title="Economist Vorhersage US Wahl" alt="Economist Vorhersage US Wahl">
-</a>
-:::
-::: {.column width="50%"}
-- Der Economist prognostiziert eine knappe Wahl in den USA.
-
-- Aktuell besteht noch große Unsicherheit in der Vorhersage.
-
-- Ergebnisse von 191 Sitzen (verheerende Niederlage) bis 377 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.
-:::
-::::
-
-
-## Wahlvorhersagen
-:::: {.columns}
+::::: columns
 ::: {.column width="30%"}
-<img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&h=546" title="Literary digest cover"></iframe>
+<img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"/>
 :::
-::: {.column width="70%"}
-- US-Wahl 1936, Roosevelt vs. Landon
-- **10 mio.** Befragte (Leser, Telefonbuch, Automobilregister), **2.4 mio.** Antworten
-- Vorhersage **43 - 57**
-- Ergebnis **62 - 38**
-- **Wie kam es zum Fehler von 38 pp?**
-:::
-::::
 
-## Wahlvorhersagen
-:::: {.columns}
+::: {.column width="70%"}
+-   US-Wahl 1936, Roosevelt vs. Landon
+-   **10 mio.** Befragte (Leser, Telefonbuch, Automobilregister), **2.4
+    mio.** Antworten
+-   Vorhersage **43 - 57**
+-   Ergebnis **62 - 38**
+-   **Wie kam es zum Fehler von 38 pp?**
+:::
+:::::
+
+## Datenbasierte Kristallkugeln?
+
+::::: columns
 ::: {.column width="30%"}
-<img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&h=546" title="Literary digest cover"></iframe>
+<img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"/>
 :::
+
 ::: {.column width="70%"}
-* **Sampling bias** : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung
-- **Non-response bias**: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter
+-   **Sampling bias** : Leser des Literary Digest, Automobilbesitzer und
+    Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung
+-   **Non-response bias**: Gegner Roosevelts haben häufiger an der
+    Befragung teilgenommen als seine Befürworter
 :::
-::::
+:::::
 
-## Wahlvorhersagen
+## Quantifizierung von Unsicherheit {.smaller}
 
-```{=html}
-<iframe width="980" height="550" src="https://www.economist.com/interactive/us-2024-election/prediction-model/president/how-this-works"></iframe>
-```
-
-## USA {.smaller}
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-<a href="https://upload.wikimedia.org/wikipedia/commons/5/55/How_to_Steal_an_Election_-_Gerrymandering.svg" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/How_to_Steal_an_Election_-_Gerrymandering.svg" title="Gerrymandering" alt="Gerrymandering">
-</a>
+<img src="/images/us-economist-prediction.png" title="Economist Vorhersage US Wahl" alt="Economist Vorhersage US Wahl"/>
 :::
+
 ::: {.column width="50%"}
-- Gerrymandering bezeichnet das Umedfinieren von Wahlkreisen, mit dem Ziel, möglichst viele Wahlkreise zu gewinnen.
+-   Der Economist prognostiziert eine knappe Wahl in den USA.
+
+-   Aktuell besteht noch große Unsicherheit in der Vorhersage.
+
+-   Ergebnisse von 191 Sitzen (verheerende Niederlage) bis 377 Sitzen
+    (überwältigender Erfolg) für Kamala Harris sind statistisch
+    glaubhaft.
 :::
-::::
+:::::
 
+## Was wäre wenn...? {.smaller}
 
-## Machine Learning und Statistik
-
-- ChatGPT ist ein statistisches Modell:
-
-
-## Brexit und Wirtschaft {.smaller}
-
-:::: {.columns}
+::::: columns
 ::: {.column width="60%"}
-<a href="https://academic.oup.com/ej/article/129/623/2722/5506774?login=true" target="_blank">
-  <img src="images/brexit.png" title="Brexit synthetic control" alt="Brexit synthetic control">
-</a>
+<img src="images/brexit.png" title="Brexit synthetic control" alt="Brexit synthetic control"/>
+
 Quelle: Born et al. 2019
 :::
+
 ::: {.column width="40%"}
-- Frage: Hat der Brexit der britischen Wirtschaft geschadet?
-- Synthetic control: Tatsächliche Entwicklung der Wirtschaft <span style="color: blue">(blau)</span> vs. hypothetische Entwicklung ohne Brexit <span style="color: red">(blau)</span>
-- Bis Ende 2018 ist ein geschätzter Outputverlust von 1.7 pp bis 2.5 pp entstanden.
+-   Frage: Hat der Brexit der britischen Wirtschaft geschadet?
+-   Synthetic control: Tatsächliche Entwicklung der Wirtschaft
+    [(blau)]{style="color: blue"} vs. hypothetische Entwicklung ohne
+    Brexit [(blau)]{style="color: red"}
+-   Bis Ende 2018 ist ein geschätzter Outputverlust von 1.7 pp bis 2.5
+    pp entstanden.
 :::
-::::
+:::::
 
 # Statistik und Geographie
 
-## Grenzen der Statistik
+## Die Politische Karte Deutschlands
 
-- Qualitative Forschung
+::::: columns
+::: {.column width="40%"}
+<a href="https://www.zeit.de/politik/deutschland/2021-09/ergebnisse-bundestagswahl-gemeinde-karte" target="_blank">
+<img src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png" title="Ergebnisse der Bundestagswahl 2021 (Zeit.de)" alt="Ergebnisse der Bundestagswahl 2021 (Zeit.de)" height="500"/>
+</a>
+:::
 
-# Pause (5 min)
-
-# Lernziele & Inhalte
-
-## Lernziele
-- Möglichkeiten, Ziele und Grenzen statistischer Analyse
-- Interpretation statistischer Ergebnisse und Visualisierungen
-- Überblick über Verfahren und deren Anwendungsgebiete
-
-## Inhalte
-
-- Statistische Forschungsdesigns
-- Daten beschreiben und visualisieren
-- Statistische Modelle
-- Quantifizierung von Unsicherheit
+::: {.column width="60%"}
+-   In Thüringen hat mit der AfD eine vom Verfassungsschutz als
+    rechtsextrem eingestufte Partei die meisten Stimmen erlangt.
+-   Der Blick auf die Karte suggeriert, dass ein erheblicher Anteil
+    Deutschlands AfD wählt.
+-   Thüringen beheimatet **2,5%** der deutschen Bevölkerung.
+:::
+:::::
 
 # Organisatorisches
 
+## Lernziele
+
+-   Möglichkeiten, Ziele und Grenzen statistischer Analyse
+-   Interpretation statistischer Ergebnisse und Visualisierungen
+-   Überblick über Verfahren und deren Anwendungsgebiete
+
+## Inhalte
+
+-   Statistische Forschungsdesigns
+-   Daten beschreiben und visualisieren
+-   Statistische Modelle
+-   Quantifizierung von Unsicherheit
+
 ## Diese Vorlesung
 
-- Angewandte (nicht theoretische) Statistik
-- Grundlagen deskriptiver und inferentieller Statistik
-- Praktische Anwendung mit SPSS in der Übung
-- Pause (2 x 40 min)
+-   Angewandte (nicht theoretische) Statistik
+-   Grundlagen deskriptiver und inferentieller Statistik
+-   Praktische Anwendung mit SPSS in der Übung
+-   Pause (2 x 40 min)
 
 ## Übung zur Vorlesung
 
-- Hört nicht auf ältere Studierende; der Besuch der Übung ist nicht optional
+-   Hört nicht auf ältere Studierende; der Besuch der Übung ist nicht
+    optional
 
 ## Überblick
 
-- Sitzungen / Blöcke
+-   Sitzungen / Blöcke
 
 # Lernmaterialien
 
 ## Lehrbücher
-:::: {.columns}
-::: {.column width="50%"}
-<a href="https://socviz.co/" target="_blank">
-    <img src="https://socviz.co/assets/dv-cover-pupress.jpg" style="border: 1px solid black; height: 550px" title="Brexit synthetic control" alt="Brexit synthetic control">
-</a>
-:::
-::: {.column width="50%"}
-- Einführung in die statistische Visualisierung mit R
-- Viele sozialwissenschaftliche Beispiele
-- Online verfügbar unter: [https://socviz.co/](https://socviz.co/)
-:::
-::::
 
 ## Datenvisualisierung
-:::: {.columns}
+
+::::: columns
 ::: {.column width="50%"}
 <a href="https://socviz.co/" target="_blank">
-    <img src="https://socviz.co/assets/dv-cover-pupress.jpg" style="border: 1px solid black; height: 550px" title="Brexit synthetic control" alt="Brexit synthetic control">
+<img src="https://socviz.co/assets/dv-cover-pupress.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"/>
 </a>
 :::
+
 ::: {.column width="50%"}
-- Einführung in die statistische Visualisierung mit R
-- Viele sozialwissenschaftliche Beispiele
-- Online verfügbar unter: [https://socviz.co/](https://socviz.co/)
+-   Einführung in die statistische Visualisierung mit R
+-   Viele sozialwissenschaftliche Beispiele
+-   Online verfügbar unter: <https://socviz.co/>
 :::
-::::
+:::::
 
 ## Regressionsanalyse
-:::: {.columns}
+
+::::: columns
 ::: {.column width="50%"}
 <a href="https://avehtari.github.io/ROS-Examples/" target="_blank">
-    <img src="https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp" style="border: 1px solid black; height: 550px" title="Brexit synthetic control" alt="Brexit synthetic control">
+<img src="https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"/>
 </a>
 :::
+
 ::: {.column width="50%"}
-- Umfassende und moderne Einführung in die Regressionsanalyse
-- Viele sozial- und politikwissenschaftliche Anwendungsbeispiele in R
-- Online verfügbar unter: [https://avehtari.github.io/ROS-Examples/](https://avehtari.github.io/ROS-Examples/)
+-   Umfassende und moderne Einführung in die Regressionsanalyse
+-   Viele sozial- und politikwissenschaftliche Anwendungsbeispiele in R
+-   Online verfügbar unter: <https://avehtari.github.io/ROS-Examples/>
 :::
-::::
+:::::
 
 ## Statistische Modellierung
-:::: {.columns}
+
+::::: columns
 ::: {.column width="50%"}
 <a href="https://xcelab.net/rm/" target="_blank">
-    <img src="https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg" style="border: 1px solid black; height: 500px" title="Brexit synthetic control" alt="Brexit synthetic control">
+<img src="https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"/>
 </a>
 :::
+
 ::: {.column width="50%"}
-- Moderne perspektive auf statistische Modellierung
-- Bayesianische Statistik, Anwendung in R
-- Online verfügbar unter: [https://xcelab.net/rm/](https://xcelab.net/rm/)
+-   Moderne perspektive auf statistische Modellierung
+-   Bayesianische Statistik, Anwendung in R
+-   Online verfügbar unter: <https://xcelab.net/rm/>
 :::
-::::
+:::::
 
 ## Wahrscheinlichkeitstheorie
-:::: {.columns}
+
+::::: columns
 ::: {.column width="50%"}
 <a href="https://projects.iq.harvard.edu/stat110/home" target="_blank">
-    <img src="https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg" style="border: 1px solid black; height: 500px" title="Brexit synthetic control" alt="Brexit synthetic control">
+<img src="https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"/>
 </a>
 :::
+
 ::: {.column width="50%"}
-- Umfassende aber zugängliche Einführung in die Wahrscheinlichkeitstheorie
-- Anwendungsbeispiele in R
-- Online verfügbar unter: [https://projects.iq.harvard.edu /stat110/home](https://projects.iq.harvard.edu/stat110/home)
+-   Umfassende aber zugängliche Einführung in die
+    Wahrscheinlichkeitstheorie
+-   Anwendungsbeispiele in R
+-   Online verfügbar unter: [https://projects.iq.harvard.edu
+    /stat110/home](https://projects.iq.harvard.edu/stat110/home)
 :::
-::::
+:::::
+
+# Prüfungsfragen
 
 ## Prüfungsfragen
 
-- Was sind mögliche Fehlerquellen bei der Wahlvorhersage auf Basis von Meinungsumfragen?
-- Was sind neben Meinungsumfragen alternative/ergänzende Verfahren zur Vorhersage von Wahlergebnissen?
-
+-   Was sind mögliche Fehlerquellen bei der Wahlvorhersage auf Basis von
+    Meinungsumfragen?
+-   Was sind neben Meinungsumfragen alternative/ergänzende Verfahren zur
+    Vorhersage von Wahlergebnissen?
