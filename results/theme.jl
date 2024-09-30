@@ -1,5 +1,3 @@
-WGLMakie.activate!(; resize_to=:parent)
-
 const SCATTER_ARGS = (color=(:black, 0.0), strokewidth=4, strokecolor=(:crimson, 0.8))
 
 function ThemeClean()

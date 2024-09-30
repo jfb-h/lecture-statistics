@@ -11,17 +11,13 @@ earnings(con) =
 
         Base.errormonitor(@async while true
             # update data
-            table = db_table(con, "einkommen")
-            dat = @chain table begin
-                @select(einkommen)
-                @collect
-            end
+            dat = DBInterface.execute(con, "select einkommen from einkommen;") |> DataFrame
             # update observable
             if length(dat.einkommen) > 0
                 xy[] = dat.einkommen
             end
 
-            # autolimits!(ax)
+            autolimits!(ax)
             sleep(1)
             isopen(session) || break
         end)
@@ -33,8 +29,8 @@ earnings(con) =
         cards = D.div(
             D.h3("Berechnung des Mittelwerts"),
             bignum(n; header=D.i("Anzahl"), footer=L(raw"N")),
-            bignum(s; header=D.i("Summe"), footer=L(raw"\Sigma_{i=1}^N x_i")),
-            bignum(m; header=D.i("Mittelwert"), footer=L(raw"\bar{x} = \frac{1}{N}\Sigma_{i=1}^N x_i"))
+            bignum(m; header=D.i("Mittelwert"), footer=L(raw"\bar{x} = \frac{1}{N}\Sigma_{i=1}^N x_i")),
+            bignum(m; header=D.i("Median"))
         )
 
         grd = grid(cards, card(fig); columns="1fr 3fr")

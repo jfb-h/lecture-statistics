@@ -1,0 +1,18 @@
+.leaflet-container .custom-marker {
+    background: none !important;    /* Remove any background added by Pico.css */
+    border: none !important;        /* Remove borders from Pico.css */
+    box-shadow: none !important;    /* Remove any box shadow */
+    padding: 0 !important;          /* Remove any padding */
+    margin: 0 !important;           /* Remove any margin */
+}
+
+.leaflet-control-zoom a {
+    background: none !important;    /* Remove background applied by Pico.css */
+    border: none !important;        /* Remove any border */
+    box-shadow: none !important;    /* Remove any box-shadow */
+    color: black !important;        /* Set a default color if Pico changes it */
+    padding: 0 !important;          /* Remove any padding */
+    margin: 0 !important;           /* Remove any margin */
+    font-size: 16px !important;     /* Ensure the default font size */
+    line-height: normal !important; /* Reset line height */
+}

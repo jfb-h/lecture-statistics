@@ -13,7 +13,7 @@ function titled(title, components...)
     l = D.link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css")
     m = D.script(id="MathJax-script", src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js", async=true)
     t = D.title(title)
-    head = D.head(l, t, m)
+    head = D.head(l, t, m, D.meta(charset="UTF-8"))
     body = D.body(D.main(components...; class="container"))
     D.html(head, body)
 end
