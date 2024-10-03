@@ -4,7 +4,7 @@ import pgeocode
 import json
 import random
 
-from components import setup, Survey, Items, QRCode, TextInput, TimeInput
+from components import setup, Survey, Items, QRCode, TextInput, TimeInput, NumericInput, SelectInput, PlotContainer
 
 nomi = pgeocode.Nominatim('de')
 
@@ -63,8 +63,24 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
     def get():
         pc = TextInput("pc_current", "Was ist die PLZ deines aktuellen Wohnortes?", "z.B. 80333")
         pb = TextInput("pc_before", "Was ist die PLZ deines Wohnortes während des Abiturs?", "z.B. 40229")
-        pt = TimeInput("time", "Wann bist du heute morgen aufgestanden?", "z.B. 06:30")
-        return Survey("Kurzumfrage", Items(pc, pb, pt, hx_post=f"/statlecture/{route}"))
+        ti = TimeInput("time", "Wann bist du heute morgen aufgestanden?", "z.B. 06:30")
+        gr = NumericInput("note", "Wie viele Punkte hattest du im Abitur in Mathe?", 0, 15)
+
+        nf = SelectInput("nebenfach",
+            Option("Biologie", value="Biologie"),
+            Option("Experimentalphysik", value="Experimentalphysik"),
+            Option("Geophysik", value="Geophysik"),
+            Option("Künstliche Intelligenz", value="KI"),
+            Option("Informatik", value="Informatik"),
+            Option("Meteorologie", value="Meteorologie"),
+            Option("Politikwissenschaften", value="Politik"),
+            Option("Soziologie", value="Soziologie"),
+            Option("Statistik", value="Statistik"),
+            Option("Volkswirtschaftslehre", value="VWL"),
+            Option("Betriebswirtschaftslehre", value="BWL"),
+        )
+
+        return Survey("Kurzumfrage", Items(pc, pb, ti, gr, nf, hx_post=f"/statlecture/{route}"))
 
 
     @rt(f"/{route}")
@@ -110,13 +126,13 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
     @rt(f"/{route}/map")
     async def get():
         map_current = Card(
-            Div(id="map-current", style="flex-grow: 1; height: 0;"),
+            PlotContainer(id="map-current"),
             header=H2(Span("Wohnort aktuell"), Span(id="n-map-current")),
             style="display: flex; flex-direction: column; height: 95%; width: 100%;",
         )
 
         map_before  = Card(
-            Div(id="map-before", style="flex-grow: 1; height: 0;"),
+            PlotContainer("map-before"),
             header=H2(Span("Wohnort während des Abiturs"), Span(id="n-map-before")),
             style="display: flex; flex-direction: column; height: 95%; width: 100%;",
         )
@@ -129,13 +145,13 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
     @rt(f"/{route}/hist")
     async def get():
         hist_current = Card(
-            Div(id="hist-current", style="flex-grow: 1; height: 0;"),
+            PlotContainer("hist-current"),
             header=H2(Span("Weg zur Uni"), Span(id="n-hist-current")),
             style="display: flex; flex-direction: column; height: 95%; width: 100%;",
         )
 
         hist_before = Card(
-            Div(id="hist-before", style="flex-grow: 1; height: 0;"),
+            PlotContainer("hist-before"),
             header=H2(Span("Umzugsdistanz"), Span(id="n-hist-before")),
             style="display: flex; flex-direction: column; height: 95%; width: 100%;",
         )
@@ -151,8 +167,8 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
     @rt(f"/{route}/scatter")
     async def get():
         scatter = Card(
-            Div(id="scatter", style="flex-grow: 1; height: 0;"),
-            header=Span(H2("Wohnen weithergezogene Studierende näher an der Uni?"), ),
+            PlotContainer(id="scatter"),
+            header=H2("Wohnen weithergezogene Studierende näher an der Uni?"),
             footer=Label(Input(type="checkbox", id="check-regression"), "Lineare Regression"),
             style="display: flex; flex-direction: column; height: 95%; width: 100%;",
         )
@@ -173,8 +189,8 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
     @rt(f"/{route}/getuptime")
     async def get():
         hist = Card(
-            Div(id="hist-getuptime", style="flex-grow: 1; height: 0;"),
-            header=H2(""),
+            PlotContainer("hist-getuptime"),
+            header=H2("Wann bist du heute morgen aufgestanden?"),
             style="display: flex; flex-direction: column; height: 95%; width: 100%;",
         )
 
@@ -192,13 +208,14 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
 
 def survey_place(db, rt, route):
     setup_postalcodes(db, rt, route, "wohnort",
-          lat_current=float, lon_current=float,
-          lat_before=float, lon_before=float,
-          place_current=str, place_before=str, 
-          time=str)
+                      lat_current=float, lon_current=float,
+                      lat_before=float, lon_before=float,
+                      place_current=str, place_before=str,
+                      time=str, nebenfach=str, mathenote=int)
 
 
 db = database("surveys.db")
 app, rt = fast_app(live=True, hdrs=(leaflet_css, leaflet_js, pico_leaflet))
 survey_place(db, rt, "wohnort")
 serve(port=8081)
+

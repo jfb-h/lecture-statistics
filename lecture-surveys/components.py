@@ -59,6 +59,11 @@ def Slider(name, title, left, right):
         Group(SliderLabel(left), LikertSlider(name), SliderLabel(right)),
     )
 
+# SelectInput
+
+def SelectInput(name, *options):
+    return Card(Select(name, *options))
+
 
 # Choice items
 
@@ -72,10 +77,16 @@ def Choice(*options, title):
     return Card(Fieldset(Legend(Strong(title)), *options))
 
 
+# Plot container
+
+def PlotContainer(id):
+    return Div(id=id, style="padding: 20px; flex-grow: 1; height: 0;")
+
 # QRCode generation
 
 def QRCode(session):
-    qr = qrcode.QRCode(version=2, box_size=30, border=2, image_factory=qrcode.image.svg.SvgPathImage)
+    qr = qrcode.QRCode(version=2, box_size=35, border=2, image_factory=qrcode.image.svg.SvgPathImage)
     qr.add_data(f"https://surveys.eggroup-lmu.de/statlecture/{session}")
     img = qr.make_image()
     return NotStr(img.to_string().decode())
+

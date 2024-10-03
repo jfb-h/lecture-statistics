@@ -30,14 +30,17 @@ function hist() {
         width: containerWidth,
         height: containerHeight,
         style: {fontSize: "16px"},
-        marginBottom: 40,
-        marginTop: 40,
+        marginLeft: 50,
+        marginRight: 50,
+        marginBottom: 50,
+        marginTop: 50,
 
         marks: [
             Plot.rectY(getuptimes, Plot.binX({y: "count"}, {
                 x: d => d, 
                 thresholds: d3.utcMinute.every(15) 
-            }))
+            })),
+            Plot.ruleY([0])
         ],
         x: {
             label: "Uhrzeit",
