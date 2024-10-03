@@ -24,14 +24,16 @@ editor:
 ## (Kennen)lernen durch Statistik
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column width="45%"}
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort" title="Survey preview"> </iframe>
 :::
 
-::: {.column width="50%"}
+::: {.column width="55%"}
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort/qr" title="Survey link"> </iframe>
 :::
 :::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/getuptime" background-interactive="true" data-preload="true"}
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/map" background-interactive="true" data-preload="true"}
 
@@ -39,10 +41,8 @@ editor:
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter" background-interactive="true" data-preload="true"}
 
-##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/getuptime" background-interactive="true" data-preload="true"}
 
 ## TODO: Nebenfächer und Mathenoten
-
 
 
 # Ziele der Statistik
