@@ -31,6 +31,13 @@ def NumericInput(name, title, min, max):
     inp = Input(type="number", name=name, min=min, max=max)
     return Card(Group(tit, inp))
 
+# Time input
+
+def TimeInput(name, title, placeholder):
+    tit = Legend(Strong(title))
+    inp = Input(type="time", name=name, placeholder=placeholder)
+    return Card(Group(tit, inp))
+
 # Text input
 
 def TextInput(name, title, placeholder):
