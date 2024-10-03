@@ -7,6 +7,7 @@ execute:
     keep-md: false
 format:
     revealjs:
+        controls: true
         slide-number: true
         chalkboard:
             theme: whiteboard
@@ -20,7 +21,7 @@ editor:
 
 # Kennenlernen
 
-## Kennenlernen
+## (Kennen)lernen durch Statistik
 
 ::::: columns
 ::: {.column width="50%"}
@@ -36,7 +37,24 @@ editor:
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/hist" background-interactive="true" data-preload="true"}
 
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter" background-interactive="true" data-preload="true"}
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/getuptime" background-interactive="true" data-preload="true"}
+
+## TODO: Nebenfächer und Mathenoten
+
+
+
 # Ziele der Statistik
+
+## Ziele der Statistik
+
+1. **Beschreiben**: Daten veranschaulichen, Informationen extrahieren, auf Basis begrenzter Daten robuste Aussagen über größere Populationen treffen
+
+2. **Vorhersagen**: Prognosen über unbeobachtete Ausprägungen machen
+
+3. **Verstehen**: Hypothetische, theoretische Zusammenhänge überprüfen
+
 
 ## Datenbasierte Kristallkugeln?
 
@@ -74,7 +92,7 @@ editor:
 
 ::::: columns
 ::: {.column width="50%"}
-<img src="/images/us-economist-prediction.png" title="Economist Vorhersage US Wahl" alt="Economist Vorhersage US Wahl"/>
+![Quelle: Economist](/images/us-economist-prediction.png)
 :::
 
 ::: {.column width="50%"}
@@ -82,19 +100,23 @@ editor:
 
 -   Aktuell besteht noch große Unsicherheit in der Vorhersage.
 
--   Ergebnisse von 191 Sitzen (verheerende Niederlage) bis 377 Sitzen
+-   Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen
     (überwältigender Erfolg) für Kamala Harris sind statistisch
     glaubhaft.
 :::
 :::::
 
+
+## Quantifizierung von Unsicherheit {.smaller}
+
+- IPCC Bericht
+
+
 ## Was wäre wenn...? {.smaller}
 
 ::::: columns
 ::: {.column width="60%"}
-<img src="images/brexit.png" title="Brexit synthetic control" alt="Brexit synthetic control"/>
-
-Quelle: Born et al. 2019
+![Quelle: Born et al. 2019](images/brexit.png)
 :::
 
 ::: {.column width="40%"}
@@ -107,15 +129,14 @@ Quelle: Born et al. 2019
 :::
 :::::
 
+
 # Statistik und Geographie
 
 ## Die Politische Karte Deutschlands
 
 ::::: columns
 ::: {.column width="40%"}
-<a href="https://www.zeit.de/politik/deutschland/2021-09/ergebnisse-bundestagswahl-gemeinde-karte" target="_blank">
-<img src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png" title="Ergebnisse der Bundestagswahl 2021 (Zeit.de)" alt="Ergebnisse der Bundestagswahl 2021 (Zeit.de)" height="500"/>
-</a>
+![Quelle: Zeit.de](https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png)
 :::
 
 ::: {.column width="60%"}
@@ -126,6 +147,19 @@ Quelle: Born et al. 2019
 -   Thüringen beheimatet **2,5%** der deutschen Bevölkerung.
 :::
 :::::
+
+## Wo erfindet Europa?
+
+![](images/figure-map-inventors.png)
+
+## Multiskalarität und Aggregation
+
+- TODO: Entwicklung Gesamtdeutschland vs Gewinner / Verlierer
+- Spiky map
+
+## Räumliche Autokorrelation
+
+
 
 # Organisatorisches
 

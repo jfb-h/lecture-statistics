@@ -8,7 +8,7 @@
 <link href="einfuehrung_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="einfuehrung_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="einfuehrung_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.29">
+  <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
   <title>Einführung in die Statistik</title>
@@ -350,27 +350,114 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h1>Kennenlernen</h1>
 
 </section>
-<section id="kennenlernen-1" class="slide level2">
-<h2>Kennenlernen</h2>
+<section id="kennenlernen-durch-statistik" class="slide level2">
+<h2>(Kennen)lernen durch Statistik</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort" title="Survey preview"></iframe>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort" title="Survey preview">
+</iframe>
 </div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort/qr" title="Survey link"></iframe>
-</div>
-</div>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort/qr" title="Survey link">
+</iframe>
+</div></div>
 </section>
 <section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/map" data-background-interactive="true" data-preload="true">
 <h2></h2>
 </section>
 <section id="section-1" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/hist" data-background-interactive="true" data-preload="true">
 <h2></h2>
+</section>
+<section id="section-2" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter" data-background-interactive="true" data-preload="true">
+<h2></h2>
+</section>
+<section id="section-3" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/getuptime" data-background-interactive="true" data-preload="true">
+<h2></h2>
+</section>
+<section id="todo-nebenfächer-und-mathenoten" class="slide level2">
+<h2>TODO: Nebenfächer und Mathenoten</h2>
 </section></section>
+<section>
 <section id="ziele-der-statistik" class="title-slide slide level1 center">
 <h1>Ziele der Statistik</h1>
 
 </section>
-
+<section id="ziele-der-statistik-1" class="slide level2">
+<h2>Ziele der Statistik</h2>
+<ol type="1">
+<li><p><strong>Beschreiben</strong>: Daten veranschaulichen, Informationen extrahieren, auf Basis begrenzter Daten robuste Aussagen über größere Populationen treffen</p></li>
+<li><p><strong>Vorhersagen</strong>: Prognosen über unbeobachtete Ausprägungen machen</p></li>
+<li><p><strong>Verstehen</strong>: Hypothetische, theoretische Zusammenhänge überprüfen</p></li>
+</ol>
+</section>
+<section id="datenbasierte-kristallkugeln" class="slide level2">
+<h2>Datenbasierte Kristallkugeln?</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"></p>
+</div><div class="column" style="width:70%;">
+<ul>
+<li>US-Wahl 1936, Roosevelt vs.&nbsp;Landon</li>
+<li><strong>10 mio.</strong> Befragte (Leser, Telefonbuch, Automobilregister), <strong>2.4 mio.</strong> Antworten</li>
+<li>Vorhersage <strong>43 - 57</strong></li>
+<li>Ergebnis <strong>62 - 38</strong></li>
+<li><strong>Wie kam es zum Fehler von 38 pp?</strong></li>
+</ul>
+</div></div>
+</section>
+<section id="datenbasierte-kristallkugeln-1" class="slide level2">
+<h2>Datenbasierte Kristallkugeln?</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"></p>
+</div><div class="column" style="width:70%;">
+<ul>
+<li><strong>Sampling bias</strong> : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung</li>
+<li><strong>Non-response bias</strong>: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter</li>
+</ul>
+</div></div>
+</section>
+<section id="quantifizierung-von-unsicherheit" class="slide level2 smaller">
+<h2>Quantifizierung von Unsicherheit</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./images/us-economist-prediction.png"></p>
+<figcaption>Quelle: Economist</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Der Economist prognostiziert eine knappe Wahl in den USA.</p></li>
+<li><p>Aktuell besteht noch große Unsicherheit in der Vorhersage.</p></li>
+<li><p>Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="quantifizierung-von-unsicherheit-1" class="slide level2 smaller">
+<h2>Quantifizierung von Unsicherheit</h2>
+<ul>
+<li>IPCC Bericht</li>
+</ul>
+</section>
+<section id="was-wäre-wenn" class="slide level2 smaller">
+<h2>Was wäre wenn…?</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/brexit.png"></p>
+<figcaption>Quelle: Born et al.&nbsp;2019</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<ul>
+<li>Frage: Hat der Brexit der britischen Wirtschaft geschadet?</li>
+<li>Synthetic control: Tatsächliche Entwicklung der Wirtschaft <span style="color: blue">(blau)</span> vs.&nbsp;hypothetische Entwicklung ohne Brexit <span style="color: red">(blau)</span></li>
+<li>Bis Ende 2018 ist ein geschätzter Outputverlust von 1.7 pp bis 2.5 pp entstanden.</li>
+</ul>
+</div></div>
+</section></section>
 <section>
 <section id="statistik-und-geographie" class="title-slide slide level1 center">
 <h1>Statistik und Geographie</h1>
@@ -380,72 +467,33 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Die Politische Karte Deutschlands</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p><a href="https://www.zeit.de/politik/deutschland/2021-09/ergebnisse-bundestagswahl-gemeinde-karte" target="_blank"> <img height="500" src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png" title="Ergebnisse der Bundestagswahl 2021 (Zeit.de)" alt="Ergebnisse der Bundestagswahl 2021 (Zeit.de)"> </a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png"></p>
+<figcaption>Quelle: Zeit.de</figcaption>
+</figure>
+</div>
 </div><div class="column" style="width:60%;">
 <ul>
 <li>In Thüringen hat mit der AfD eine vom Verfassungsschutz als rechtsextrem eingestufte Partei die meisten Stimmen erlangt.</li>
 <li>Der Blick auf die Karte suggeriert, dass ein erheblicher Anteil Deutschlands AfD wählt.</li>
 <li>Thüringen beheimatet <strong>2,5%</strong> der deutschen Bevölkerung.</li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
-<section id="datenbasierte-kristallkugeln" class="slide level2">
-<h2>Datenbasierte Kristallkugeln?</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover"></p>
-</div><div class="column" style="width:70%;">
+<section id="wo-erfindet-europa" class="slide level2">
+<h2>Wo erfindet Europa?</h2>
+
+<img data-src="images/figure-map-inventors.png" class="r-stretch"></section>
+<section id="multiskalarität-und-aggregation" class="slide level2">
+<h2>Multiskalarität und Aggregation</h2>
 <ul>
-<li>US-Wahl 1936, Roosevelt vs.&nbsp;Landon</li>
-<li><strong>10 mio.</strong> Befragte (Leser, Telefonbuch, Automobilregister), <strong>2.4 mio.</strong> Antworten</li>
-<li>Vorhersage <strong>43 - 57</strong></li>
-<li>Ergebnis <strong>62 - 38</strong></li>
-<li><strong>Wie kam es zum Fehler von 38 pp?</strong></li>
+<li>TODO: Entwicklung Gesamtdeutschland vs Gewinner / Verlierer</li>
+<li>Spiky map</li>
 </ul>
-</div>
-</div>
 </section>
-<section id="datenbasierte-kristallkugeln-1" class="slide level2">
-<h2>Datenbasierte Kristallkugeln?</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img height="400" src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover"></p>
-</div><div class="column" style="width:70%;">
-<ul>
-<li><strong>Sampling bias</strong> : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung</li>
-<li><strong>Non-response bias</strong>: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="quantifizierung-von-unsicherheit" class="slide level2 smaller">
-<h2>Quantifizierung von Unsicherheit</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><a href="https://www.economist.com/interactive/us-2024-election/prediction-model/president" target="_blank"> <img src="/images/us-economist-prediction.png" title="Economist Vorhersage US Wahl" alt="Economist Vorhersage US Wahl"> </a></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><p>Der Economist prognostiziert eine knappe Wahl in den USA.</p></li>
-<li><p>Aktuell besteht noch große Unsicherheit in der Vorhersage.</p></li>
-<li><p>Ergebnisse von 191 Sitzen (verheerende Niederlage) bis 377 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="was-wäre-wenn" class="slide level2 smaller">
-<h2>Was wäre wenn…?</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><a href="https://academic.oup.com/ej/article/129/623/2722/5506774?login=true" target="_blank"> <img src="images/brexit.png" title="Brexit synthetic control" alt="Brexit synthetic control"> </a> Quelle: Born et al.&nbsp;2019</p>
-</div><div class="column" style="width:40%;">
-<ul>
-<li>Frage: Hat der Brexit der britischen Wirtschaft geschadet?</li>
-<li>Synthetic control: Tatsächliche Entwicklung der Wirtschaft <span style="color: blue">(blau)</span> vs.&nbsp;hypothetische Entwicklung ohne Brexit <span style="color: red">(blau)</span></li>
-<li>Bis Ende 2018 ist ein geschätzter Outputverlust von 1.7 pp bis 2.5 pp entstanden.</li>
-</ul>
-</div>
-</div>
+<section id="räumliche-autokorrelation" class="slide level2">
+<h2>Räumliche Autokorrelation</h2>
 </section></section>
 <section>
 <section id="organisatorisches" class="title-slide slide level1 center">
@@ -497,73 +545,58 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </section>
 <section id="lehrbücher" class="slide level2">
 <h2>Lehrbücher</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><a href="https://socviz.co/" target="_blank"> <img src="https://socviz.co/assets/dv-cover-pupress.jpg" style="border: 1px solid black; height: 550px" title="Brexit synthetic control" alt="Brexit synthetic control"> </a></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Einführung in die statistische Visualisierung mit R</li>
-<li>Viele sozialwissenschaftliche Beispiele</li>
-<li>Online verfügbar unter: <a href="https://socviz.co/">https://socviz.co/</a></li>
-</ul>
-</div>
-</div>
 </section>
 <section id="datenvisualisierung" class="slide level2">
 <h2>Datenvisualisierung</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://socviz.co/" target="_blank"> <img src="https://socviz.co/assets/dv-cover-pupress.jpg" style="border: 1px solid black; height: 550px" title="Brexit synthetic control" alt="Brexit synthetic control"> </a></p>
+<p><a href="https://socviz.co/" target="_blank"> <img src="https://socviz.co/assets/dv-cover-pupress.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"> </a></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Einführung in die statistische Visualisierung mit R</li>
 <li>Viele sozialwissenschaftliche Beispiele</li>
-<li>Online verfügbar unter: <a href="https://socviz.co/">https://socviz.co/</a></li>
+<li>Online verfügbar unter: <a href="https://socviz.co/" class="uri">https://socviz.co/</a></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="regressionsanalyse" class="slide level2">
 <h2>Regressionsanalyse</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://avehtari.github.io/ROS-Examples/" target="_blank"> <img src="https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp" style="border: 1px solid black; height: 550px" title="Brexit synthetic control" alt="Brexit synthetic control"> </a></p>
+<p><a href="https://avehtari.github.io/ROS-Examples/" target="_blank"> <img src="https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"> </a></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Umfassende und moderne Einführung in die Regressionsanalyse</li>
 <li>Viele sozial- und politikwissenschaftliche Anwendungsbeispiele in R</li>
-<li>Online verfügbar unter: <a href="https://avehtari.github.io/ROS-Examples/">https://avehtari.github.io/ROS-Examples/</a></li>
+<li>Online verfügbar unter: <a href="https://avehtari.github.io/ROS-Examples/" class="uri">https://avehtari.github.io/ROS-Examples/</a></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="statistische-modellierung" class="slide level2">
 <h2>Statistische Modellierung</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://xcelab.net/rm/" target="_blank"> <img src="https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg" style="border: 1px solid black; height: 500px" title="Brexit synthetic control" alt="Brexit synthetic control"> </a></p>
+<p><a href="https://xcelab.net/rm/" target="_blank"> <img src="https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"> </a></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Moderne perspektive auf statistische Modellierung</li>
 <li>Bayesianische Statistik, Anwendung in R</li>
-<li>Online verfügbar unter: <a href="https://xcelab.net/rm/">https://xcelab.net/rm/</a></li>
+<li>Online verfügbar unter: <a href="https://xcelab.net/rm/" class="uri">https://xcelab.net/rm/</a></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="wahrscheinlichkeitstheorie" class="slide level2">
 <h2>Wahrscheinlichkeitstheorie</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://projects.iq.harvard.edu/stat110/home" target="_blank"> <img src="https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg" style="border: 1px solid black; height: 500px" title="Brexit synthetic control" alt="Brexit synthetic control"> </a></p>
+<p><a href="https://projects.iq.harvard.edu/stat110/home" target="_blank"> <img src="https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"> </a></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Umfassende aber zugängliche Einführung in die Wahrscheinlichkeitstheorie</li>
 <li>Anwendungsbeispiele in R</li>
 <li>Online verfügbar unter: <a href="https://projects.iq.harvard.edu/stat110/home">https://projects.iq.harvard.edu /stat110/home</a></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section></section>
 <section>
 <section id="prüfungsfragen" class="title-slide slide level1 center">
@@ -607,7 +640,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -618,7 +651,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
