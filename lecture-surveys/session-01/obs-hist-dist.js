@@ -1,6 +1,18 @@
 import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
+// Dont change this
+let n_old = 0;
+function updatePlot(plotfun) {
+    if (surveydata.length > n_old) {
+        updateData(surveydata);
+        n_old = surveydata.length;
+        plotfun();
+    } else {
+        return;
+    }
+}
+
 function haversine(lat1, lon1, lat2, lon2) {
     const R = 6371;
     const toRad = (value) => value * Math.PI / 180; // Helper function to convert degrees to radians
@@ -14,46 +26,33 @@ function haversine(lat1, lon1, lat2, lon2) {
     return R * c;
 }
 
-const dep_lat = 48.1475;
-const dep_lon = 11.5644;
-
-let n_old = 0;
+// adapt these to the data used in the plot
 let counter_current = 0;
 let counter_before = 0;
 
 let dist_current = [];
 let dist_before = [];
 
-function updateData(route) {
-    fetch(route)
-    .then(response => response.json())
-    .then(data => {
-        let n_new = data.length;
+// this gets called only through updatePlot
+function updateData(data) {
+    const dep_lat = 48.1475;
+    const dep_lon = 11.5644;
 
-        if (n_new == n_old) {
-            console.log("No data changes");
-            return;
+    data.slice(n_old).forEach(point => {
+        if (point.lat_current !== null && point.lon_current !== null) {
+            let d = haversine(dep_lat, dep_lon, point.lat_current, point.lon_current)
+            dist_current.push(d);
+            counter_current += 1;
         }
-
-        data.slice(n_old).forEach(point => {
-            if (point.lat_current !== null && point.lon_current !== null) {
-                let d = haversine(dep_lat, dep_lon, point.lat_current, point.lon_current)
-                dist_current.push(d);
-                counter_current += 1;
-            }
-            if (point.lat_before !== null && point.lon_before !== null) {
-                let d = haversine(dep_lat, dep_lon, point.lat_before, point.lon_before)
-                dist_before.push(d);
-                counter_before += 1;
-            }
-        });
-
-        n_old = n_new;
-    })
-    .catch(error => { console.error("Error fetching data:", error); });
+        if (point.lat_before !== null && point.lon_before !== null) {
+            let d = haversine(dep_lat, dep_lon, point.lat_before, point.lon_before)
+            dist_before.push(d);
+            counter_before += 1;
+        }
+    });
 }
 
-function updateHistogram() {
+function histograms() {
     const containerBefore = document.getElementById('hist-before');
     const containerBeforeWidth = containerBefore.offsetWidth;
     const containerBeforeHeight = containerBefore.offsetHeight;
@@ -79,6 +78,9 @@ function updateHistogram() {
     const plotCurrent = Plot.plot({
         width: containerCurrentWidth,
         height: containerBeforeHeight,
+        style: {fontSize: "16px"},
+        marginBottom: 40,
+        marginTop: 40,
 
         marks: [
             Plot.rectY(dist_current, Plot.binX({y: "count"}, {x:  {value: (d) => d, interval: 1}})),
@@ -91,6 +93,9 @@ function updateHistogram() {
     const plotBefore = Plot.plot({
         width: containerBeforeWidth,
         height: containerBeforeHeight,
+        style: {fontSize: "16px"},
+        marginBottom: 40,
+        marginTop: 40,
 
         marks: [
             Plot.rectY(dist_before, Plot.binX({y: "count"}, {x: d => d})),
@@ -107,9 +112,7 @@ function updateHistogram() {
     containerCurrent.appendChild(plotCurrent);
 }
 
-updateData('data');
-updateHistogram();
+window.addEventListener('resize', debounce(() => { histograms(); }, 100));
 
-setInterval(x => updateData('data'), 1000);
-setInterval(x => updateHistogram(), 1000);
-
+updatePlot(histograms);
+setInterval(x => updatePlot(histograms), 1000);

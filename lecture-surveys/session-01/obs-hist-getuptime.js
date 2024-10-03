@@ -1,71 +1,58 @@
 import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
+// Dont change this
+let n_old = 0;
+function updatePlot(plotfun) {
+    if (surveydata.length > n_old) {
+        updateData(surveydata);
+        n_old = surveydata.length;
+        plotfun();
+    } else {
+        return;
+    }
+}
+
+// adapt this to data
 const parser = d3.timeParse("%H:%M");
 
-function updateData(route) {
-    fetch(route)
-    .then(response => response.json())
-    .
+let getuptimes = [];
+function updateData(data) {
+    getuptimes = data.map(d => parser(d.time));
 }
 
-function updateData(route) {
-    fetch(route)
-    .then(response => response.json())
-    .then(data => {
-        let n_new = data.length;
+function hist() {
+    const container = document.getElementById('hist-getuptime');
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
 
-        if (n_new == n_old) {
-            console.log("No data changes");
-            return;
-        }
+    const histogram = Plot.plot({
+        width: containerWidth,
+        height: containerHeight,
+        style: {fontSize: "16px"},
+        marginBottom: 40,
+        marginTop: 40,
 
-        data.slice(n_old).forEach(point => {
-            if (point.lat_current !== null && point.lon_current !== null) {
-                let d = haversine(dep_lat, dep_lon, point.lat_current, point.lon_current)
-                dist_current.push(d);
-                counter_current += 1;
-            }
-            if (point.lat_before !== null && point.lon_before !== null) {
-                let d = haversine(dep_lat, dep_lon, point.lat_before, point.lon_before)
-                dist_before.push(d);
-                counter_before += 1;
-            }
-        });
+        marks: [
+            Plot.rectY(getuptimes, Plot.binX({y: "count"}, {
+                x: d => d, 
+                thresholds: d3.utcMinute.every(15) 
+            }))
+        ],
+        x: {
+            label: "Uhrzeit",
+            tickFormat: d3.utcFormat("%H:%M"),
+        },
+        y: {
+            label: "Häufigkeit",
+        },
+    });
 
-        n_old = n_new;
-    })
-    .catch(error => { console.error("Error fetching data:", error); });
+    container.innerHTML = "";
+    container.appendChild(histogram);
 }
 
-const eventTimestamps = generateUTCTimestamps();
-console.log(eventTimestamps);
+window.addEventListener('resize', debounce(() => { hist(); }, 100));
 
-const events = eventTimestamps.map(d => new Date(d));
-
-const container = document.getElementById('hist-times');
-const containerWidth = container.offsetWidth;
-const containerHeight = container.offsetHeight;
-
-const histogram = Plot.plot({
-    width: containerWidth,
-    height: containerHeight,
-    marks: [
-        Plot.rectY(events, Plot.binX({y: "count"}, {
-            x: d => d, 
-            thresholds: d3.utcMinute.every(15) 
-        }))
-    ],
-    x: {
-        label: "Zeit",
-        tickFormat: d3.utcFormat("%H:%M"),
-    },
-    y: {
-        label: "Anzahl der Ereignisse",
-    },
-    width: 800,
-    height: 400,
-});
-
-container.innerHTML = "";
-container.appendChild(histogram);
+updatePlot(hist);
+setInterval(x => updatePlot(hist), 1000);
