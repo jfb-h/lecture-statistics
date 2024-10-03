@@ -48,8 +48,10 @@ function scatter() {
         width: containerScatterWidth,
         height: containerScatterHeight,
         style: {fontSize: "16px"},
-        marginBottom: 40,
-        marginTop: 40,
+        marginLeft: 50,
+        marginRight: 50,
+        marginBottom: 50,
+        marginTop: 50,
 
         marks: [
             Plot.dot(dists, {y: "dist_current", x: "dist_before"}),

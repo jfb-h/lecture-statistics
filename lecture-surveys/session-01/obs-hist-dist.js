@@ -79,14 +79,16 @@ function histograms() {
         width: containerCurrentWidth,
         height: containerBeforeHeight,
         style: {fontSize: "16px"},
-        marginBottom: 40,
-        marginTop: 40,
+        marginLeft: 50,
+        marginRight: 50,
+        marginBottom: 50,
+        marginTop: 50,
 
         marks: [
-            Plot.rectY(dist_current, Plot.binX({y: "count"}, {x:  {value: (d) => d, interval: 1}})),
+            Plot.rectY(dist_current.filter(d => d < q2 + 3.5 * iqr), Plot.binX({y: "count"}, {x:  {value: (d) => d, interval: 1}})),
             Plot.ruleY([0])
         ],
-        x: { label: "Distanz (km)", domain: [0, q2 + 3.5 * iqr]},
+        x: { label: "Distanz (km)"},
         y: { label: "Häufigkeit" }
     });
 
@@ -94,8 +96,10 @@ function histograms() {
         width: containerBeforeWidth,
         height: containerBeforeHeight,
         style: {fontSize: "16px"},
-        marginBottom: 40,
-        marginTop: 40,
+        marginLeft: 50,
+        marginRight: 50,
+        marginBottom: 50,
+        marginTop: 50,
 
         marks: [
             Plot.rectY(dist_before, Plot.binX({y: "count"}, {x: d => d})),
