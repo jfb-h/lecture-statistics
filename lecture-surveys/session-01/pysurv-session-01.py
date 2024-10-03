@@ -3,7 +3,7 @@ from fasthtml.common import *
 import pgeocode
 import json
 import random
-from components import setup, Survey, Items, QRCode, TextInput
+from components import setup, Survey, Items, QRCode, TextInput, TimeInput
 
 nomi = pgeocode.Nominatim('de')
 
@@ -40,7 +40,8 @@ leaflet_js = Script(src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js")
 pico_leaflet = StyleX("pico_leaflet.css")
 leaflet_app = ScriptX("leaflet_app.js")
 observable_hist = ScriptX("observable_hist.js", type="module")
-
+observable_scatter = ScriptX("scatter.js", type="module")
+observable_hist_times = ScriptX("hist-times.js", type="module")
 
 def setup_postalcodes(db, rt, route, tablename, **kwargs):
     table = db.t[tablename]
@@ -53,13 +54,18 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
     class PostalCodes:
         pc_current: str
         pc_before: str
+        time: str
+
+    @rt(f"/{route}")
+    def get():
+        pc = TextInput("pc_current", "Was ist die PLZ deines aktuellen Wohnortes?", "z.B. 80333")
+        pb = TextInput("pc_before", "Was ist die PLZ deines Wohnortes während des Abiturs?", "z.B. 40229")
+        pt = TimeInput("time", "Wann bist du heute morgen aufgestanden?", "z.B. 06:30")
+        return Survey("Kurzumfrage", Items(pc, pb, pt, hx_post=f"/statlecture/{route}"))
 
 
     @rt(f"/{route}")
     def post(item: PostalCodes):
-        """
-        convert postal codes to lat/lon and insert into table
-        """
         pc = nomi.query_postal_code(item.pc_current)
         pb = nomi.query_postal_code(item.pc_before)
 
@@ -71,18 +77,20 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
         i.lon_before=pb.longitude
         i.place_current=pc.place_name
         i.place_before=pb.place_name
+        i.time = item.time
 
         table.insert(i)
-        return Strong("Danke für deine Antwort!")
+        Strong("Danke für deine Antwort!")
 
 
     @rt(f"/{route}/simulate")
     async def get():
         global N_SIM
-        if N_SIM > 300:
-            N_SIM = 0
         N_SIM += 1
-        return json.dumps([simulate() for i in range(N_SIM)])
+        if N_SIM > 300:
+            return json.dumps([simulate() for i in range(300)])
+        else:
+            return json.dumps([simulate() for i in range(N_SIM)])
 
 
     @rt(f"/{route}/data")
@@ -139,6 +147,43 @@ def setup_postalcodes(db, rt, route, tablename, **kwargs):
         return Title("Wohnorte"), Main(grid, observable_hist, cls="container")
 
 
+    @rt(f"/{route}/scatter")
+    async def get():
+        scatter = Card(
+            Div(id="scatter", style="flex-grow: 1; height: 0;"),
+            header=H2("Wohnen weithergezogene Studierende näher an der Uni?"),
+            style="display: flex; flex-direction: column; height: 95%; width: 100%;",
+        )
+
+        grid = Grid(
+            scatter,
+            style = "grid-template-columns: 1fr; grid-template-rows: none; height: 95dvh"
+        )
+
+        return Title("Wohnorte"), Main(grid, observable_scatter, cls="container")
+
+
+    @rt(f"/{route}/qr")
+    def get(): return QRCode(f"{route}")
+
+
+
+    @rt(f"/{route}/times")
+    async def get():
+        hist = Card(
+            Div(id="hist-times", style="flex-grow: 1; height: 0;"),
+            header=H2(""),
+            style="display: flex; flex-direction: column; height: 95%; width: 100%;",
+        )
+
+        grid = Grid(
+            hist,
+            style = "grid-template-columns: 1fr; grid-template-rows: none; height: 95dvh"
+        )
+
+        return Title("Wohnorte"), Main(grid, observable_hist_times, cls="container")
+
+
     @rt(f"/{route}/qr")
     def get(): return QRCode(f"{route}")
 
@@ -147,18 +192,11 @@ def survey_place(db, rt, route):
     setup_postalcodes(db, rt, route, "wohnort",
           lat_current=float, lon_current=float,
           lat_before=float, lon_before=float,
-          place_current=str, place_before=str)
-
-    @rt(f"/{route}")
-    def get():
-        pc = TextInput("pc_current", "Was ist die PLZ deines aktuellen Wohnortes?", "z.B. 80333")
-        pb = TextInput("pc_before", "Was ist die PLZ deines Wohnortes während des Abiturs?", "z.B. 40229")
-        return Survey("Kurzumfrage", Items(pc, pb, hx_post=f"/statlecture/{route}"))
+          place_current=str, place_before=str, 
+          time=str)
 
 
 db = database("surveys.db")
 app, rt = fast_app(live=True, hdrs=(leaflet_css, leaflet_js, pico_leaflet))
-
 survey_place(db, rt, "wohnort")
-
 serve(port=8081)

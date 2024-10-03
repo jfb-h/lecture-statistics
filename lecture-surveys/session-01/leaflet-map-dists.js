@@ -18,8 +18,8 @@ var starIcon = L.divIcon({
     iconAnchor: [12, 12]
 });
 
-var map_current = L.map('map-current').setView([48.1351, 11.5820], 11);
-var map_before  = L.map('map-before').setView([51.545483, 9.905548], 5);
+var map_current = L.map('map-current').setView([48.1351, 11.5820], 10);
+var map_before  = L.map('map-before').setView([51.545483, 9.905548], 6);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -68,5 +68,5 @@ function updateMarkers(route) {
     .catch(error => { console.error("Error fetching data:", error); });
 }
 
-updateMarkers('simulate');
-setInterval(x => updateMarkers('simulate'), 1000);
+updateMarkers('data');
+setInterval(x => updateMarkers('data'), 1000);
