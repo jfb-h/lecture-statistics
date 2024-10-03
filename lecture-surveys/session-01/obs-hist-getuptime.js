@@ -3,22 +3,6 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 const parser = d3.timeParse("%H:%M");
 
-// function generateUTCTimestamps() {
-//     const timestamps = [];
-//
-//     const today = new Date();
-//     const start = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), 6, 0, 0));
-//     const end = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), 8, 0, 0));
-//
-//     let current = start;
-//     while (current <= end) {
-//       timestamps.push(current.toISOString());
-//       current = new Date(current.getTime() + 5 * 60 * 1000);
-//     }
-//
-//     return timestamps;
-// }
-
 function updateData(route) {
     fetch(route)
     .then(response => response.json())
