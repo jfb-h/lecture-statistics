@@ -24,6 +24,19 @@ def setup(db, rt, route, tablename, **kwargs):
     @rt(f"/{route}/qr")
     def get(): return QRCode(f"{route}")
 
+# Styled Cards and Grids
+
+def StyledCard(*items, header=None, footer=None):
+    return Card(*items, header=header, footer=footer,
+        style="display: flex; flex-direction: column; height: 95%; width: 100%;",
+    )
+
+def StyledGrid(*items, columns="1fr"):
+    return Grid(*items,
+        style = f"grid-template-columns: {columns}; grid-template-rows: none; height: 95vh"
+    )
+
+
 # Numeric input
 
 def NumericInput(name, title, min, max):
@@ -61,8 +74,11 @@ def Slider(name, title, left, right):
 
 # SelectInput
 
-def SelectInput(name, *options):
-    return Card(Select(name, *options))
+def SelectInput(name, title, *options):
+    return Card(
+        Legend(Strong(title)),
+        Select(name, *options)
+    )
 
 
 # Choice items
