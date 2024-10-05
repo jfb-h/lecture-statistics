@@ -10,13 +10,13 @@ function debounce(func, delay) {
 
 function updateData(route) {
     fetch(route)
-    .then(response => response.json())
-    .then(data => {
-        surveydata = data;
-        console.log("data updated")
-    })
-    .catch(error => { console.error("Error fetching data:", error); });
+        .then(response => response.json())
+        .then(data => {
+            surveydata = data;
+            console.log("data updated")
+        })
+        .catch(error => { console.error("Error fetching data:", error); });
 }
 
-setInterval(x => updateData('data'), 2000);
+setInterval(_ => updateData('data'), 2000);
 

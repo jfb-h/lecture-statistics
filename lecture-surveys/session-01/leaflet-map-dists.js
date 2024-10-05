@@ -19,7 +19,7 @@ var starIcon = L.divIcon({
 });
 
 var map_current = L.map('map-current').setView([48.1351, 11.5820], 10);
-var map_before  = L.map('map-before').setView([51.545483, 9.905548], 6);
+var map_before = L.map('map-before').setView([51.545483, 9.905548], 6);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -38,35 +38,35 @@ var counter_before = 0;
 
 function updateMarkers(route) {
     fetch(route)
-    .then(response => response.json())
-    .then(data => {
-        var n_new = data.length;
+        .then(response => response.json())
+        .then(data => {
+            var n_new = data.length;
 
-        if (n_new == n_old) {
-            console.log("No data changes");
-            return;
-        }
-
-        data.slice(n_old).forEach(point => {
-            if (point.lat_current !== null && point.lon_current !== null) {
-                var marker_current = L.marker([point.lat_current, point.lon_current], { icon: customIcon })
-                marker_current.addTo(map_current);
-                counter_current += 1;
+            if (n_new == n_old) {
+                console.log("No data changes");
+                return;
             }
-            if (point.lat_before !== null && point.lon_before !== null) {
-                var marker_before  = L.marker([point.lat_before , point.lon_before ], { icon: customIcon })
-                marker_before.addTo(map_before);
-                counter_before += 1;
-            }
-        });
 
-        document.getElementById("n-map-current").innerText = " (n = " + counter_current + ")";
-        document.getElementById("n-map-before").innerText = " (n = " + counter_before + ")";
+            data.slice(n_old).forEach(point => {
+                if (point.lat_current !== null && point.lon_current !== null) {
+                    var marker_current = L.marker([point.lat_current, point.lon_current], { icon: customIcon })
+                    marker_current.addTo(map_current);
+                    counter_current += 1;
+                }
+                if (point.lat_before !== null && point.lon_before !== null) {
+                    var marker_before = L.marker([point.lat_before, point.lon_before], { icon: customIcon })
+                    marker_before.addTo(map_before);
+                    counter_before += 1;
+                }
+            });
 
-        n_old = n_new;
-    })
-    .catch(error => { console.error("Error fetching data:", error); });
+            document.getElementById("n-map-current").innerText = " (n = " + counter_current + ")";
+            document.getElementById("n-map-before").innerText = " (n = " + counter_before + ")";
+
+            n_old = n_new;
+        })
+        .catch(error => { console.error("Error fetching data:", error); });
 }
 
 updateMarkers('data');
-setInterval(x => updateMarkers('data'), 1000);
+setInterval(_ => updateMarkers('data'), 1000);

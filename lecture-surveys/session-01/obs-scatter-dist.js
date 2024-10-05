@@ -35,7 +35,7 @@ function updateData(data) {
     data.slice(n_old).forEach(point => {
         let dist_current = haversine(dep_lat, dep_lon, point.lat_current, point.lon_current)
         let dist_before = haversine(dep_lat, dep_lon, point.lat_before, point.lon_before)
-        dists.push({dist_current: dist_current, dist_before: dist_before})
+        dists.push({ dist_current: dist_current, dist_before: dist_before })
     });
 }
 
@@ -47,19 +47,19 @@ function scatter() {
     const plotScatter = Plot.plot({
         width: containerScatterWidth,
         height: containerScatterHeight,
-        style: {fontSize: "16px"},
+        style: { fontSize: "16px" },
         marginLeft: 60,
         marginRight: 50,
         marginBottom: 50,
         marginTop: 50,
 
         marks: [
-            Plot.dot(dists, {y: "dist_current", x: "dist_before"}),
-            Plot.crosshair(dists, {y: "dist_current", x: "dist_before"}),
-            regression.checked ? Plot.linearRegressionY(dists, {y: "dist_current", x: "dist_before"}) : []
+            Plot.dot(dists, { y: "dist_current", x: "dist_before" }),
+            Plot.crosshair(dists, { y: "dist_current", x: "dist_before" }),
+            regression.checked ? Plot.linearRegressionY(dists, { y: "dist_current", x: "dist_before" }) : []
         ],
-        x: {label: "Umzugsdistanz (km)"},
-        y: {label: "Distanz zur Uni (km)"},
+        x: { label: "Umzugsdistanz (km)" },
+        y: { label: "Distanz zur Uni (km)" },
     });
 
     containerScatter.innerHTML = "";
@@ -74,5 +74,5 @@ document.getElementById('check-regression')
 window.addEventListener('resize', debounce(() => { scatter(); }, 100));
 
 updatePlot(scatter);
-setInterval(x => updatePlot(scatter), 1000);
+setInterval(_ => updatePlot(scatter), 1000);
 
