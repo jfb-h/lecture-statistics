@@ -77,7 +77,7 @@ def Slider(name, title, left, right):
 def SelectInput(name, title, *options):
     return Card(
         Legend(Strong(title)),
-        Select(name, *options)
+        Select(*options, name=name)
     )
 
 

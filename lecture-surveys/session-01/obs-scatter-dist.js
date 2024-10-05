@@ -48,7 +48,7 @@ function scatter() {
         width: containerScatterWidth,
         height: containerScatterHeight,
         style: {fontSize: "16px"},
-        marginLeft: 50,
+        marginLeft: 60,
         marginRight: 50,
         marginBottom: 50,
         marginTop: 50,
