@@ -21,14 +21,14 @@ editor:
 
 # Kennenlernen
 
-## (Kennen)lernen durch Statistik
+## Kennenlernen durch Statistik
 
 ::::: columns
-::: {.column width="45%"}
+::: {.column width="50%"}
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort" title="Survey preview"> </iframe>
 :::
 
-::: {.column width="55%"}
+::: {.column width="50%"}
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort/qr" title="Survey link"> </iframe>
 :::
 :::::
@@ -41,8 +41,7 @@ editor:
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter" background-interactive="true" data-preload="true"}
 
-
-## TODO: Nebenfächer und Mathenoten
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/boxplot" background-interactive="true" data-preload="true"}
 
 
 # Ziele der Statistik
@@ -56,35 +55,38 @@ editor:
 3. **Verstehen**: Hypothetische, theoretische Zusammenhänge überprüfen
 
 
-## Datenbasierte Kristallkugeln?
+## Datenbasierte Kristallkugeln? {.smaller}
 
 ::::: columns
-::: {.column width="30%"}
+::: {.column width="40%"}
 <img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"/>
 :::
 
-::: {.column width="70%"}
+::: {.column width="60%"}
 -   US-Wahl 1936, Roosevelt vs. Landon
--   **10 mio.** Befragte (Leser, Telefonbuch, Automobilregister), **2.4
+-   Wählerbefragung mit **10 mio.** Befragten (ausgewählt aus Leserschaft, Telefonbuch und Automobilregister) und **2.4
     mio.** Antworten
--   Vorhersage **43 - 57**
--   Ergebnis **62 - 38**
+-   Vorhersage:
+    - **43%** Roosevelt vs. **57%** Landon
+- Ergebnis:
+    - **62%** Roosevelt vs. **38%** Landon
 -   **Wie kam es zum Fehler von 38 pp?**
 :::
 :::::
 
-## Datenbasierte Kristallkugeln?
+## Datenbasierte Kristallkugeln? {.smaller}
 
 ::::: columns
-::: {.column width="30%"}
+::: {.column width="40%"}
 <img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"/>
 :::
 
-::: {.column width="70%"}
+::: {.column width="60%"}
 -   **Sampling bias** : Leser des Literary Digest, Automobilbesitzer und
     Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung
 -   **Non-response bias**: Gegner Roosevelts haben häufiger an der
     Befragung teilgenommen als seine Befürworter
+-   **Frage:** Kann ich auf Basis der vorherigen Befragung auf die Mathenote der gesamten LMU schließen?
 :::
 :::::
 
@@ -96,20 +98,25 @@ editor:
 :::
 
 ::: {.column width="50%"}
--   Der Economist prognostiziert eine knappe Wahl in den USA.
-
--   Aktuell besteht noch große Unsicherheit in der Vorhersage.
-
--   Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen
-    (überwältigender Erfolg) für Kamala Harris sind statistisch
-    glaubhaft.
+- Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren kombiniert.
+- Aktuell besteht noch große Unsicherheit in der Vorhersage: Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen
+  (überwältigender Erfolg) für Kamala Harris sind statistisch
+  glaubhaft.
+- Statistik dient nicht nur der Extraktion von Informationen aus Daten, sondern auch einer Einschätzung des Grades, zu dem Aussagen durch Daten unterstützt werden.
 :::
 :::::
 
 
 ## Quantifizierung von Unsicherheit {.smaller}
 
-- IPCC Bericht
+::::: columns
+::: {.column width="50%"}
+![Quelle: Guidance Note for Lead Authors of the IPCC Fifth Assessment Report on Consistent Treatment of Uncertainties](/images/uncertainty-wording.png)
+:::
+::: {.column width="50%" style="font-size: 22px;"}
+"It is *virtually certain* that hot extremes (including heatwaves) have become more frequent and more intense across most land regions since the 1950s, while cold extremes (including cold waves) have become less frequent and less severe, with *high confidence* that human-induced climate change is the main driver of these changes. Some recent hot extremes observed over the past decade would have been *extremely unlikely* to occur without human influence on the climate system. Marine heatwaves have approximately doubled in frequency since the 1980s (*high confidence*), and human influence has *very likely* contributed to most of them since at least 2006."
+:::
+:::::
 
 
 ## Was wäre wenn...? {.smaller}
@@ -123,7 +130,7 @@ editor:
 -   Frage: Hat der Brexit der britischen Wirtschaft geschadet?
 -   Synthetic control: Tatsächliche Entwicklung der Wirtschaft
     [(blau)]{style="color: blue"} vs. hypothetische Entwicklung ohne
-    Brexit [(blau)]{style="color: red"}
+    Brexit [(rot)]{style="color: red"}
 -   Bis Ende 2018 ist ein geschätzter Outputverlust von 1.7 pp bis 2.5
     pp entstanden.
 :::
@@ -155,6 +162,7 @@ editor:
 ## Multiskalarität und Aggregation
 
 - TODO: Entwicklung Gesamtdeutschland vs Gewinner / Verlierer
+- Mainz
 - Spiky map
 
 ## Räumliche Autokorrelation

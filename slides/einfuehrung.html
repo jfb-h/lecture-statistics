@@ -351,12 +351,12 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 
 </section>
 <section id="kennenlernen-durch-statistik" class="slide level2">
-<h2>(Kennen)lernen durch Statistik</h2>
+<h2>Kennenlernen durch Statistik</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
+<div class="column" style="width:50%;">
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort" title="Survey preview">
 </iframe>
-</div><div class="column" style="width:55%;">
+</div><div class="column" style="width:50%;">
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnort/qr" title="Survey link">
 </iframe>
 </div></div>
@@ -373,8 +373,8 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="section-3" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter" data-background-interactive="true" data-preload="true">
 <h2></h2>
 </section>
-<section id="todo-nebenfächer-und-mathenoten" class="slide level2">
-<h2>TODO: Nebenfächer und Mathenoten</h2>
+<section id="section-4" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/boxplot" data-background-interactive="true" data-preload="true">
+<h2></h2>
 </section></section>
 <section>
 <section id="ziele-der-statistik" class="title-slide slide level1 center">
@@ -389,30 +389,37 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <li><p><strong>Verstehen</strong>: Hypothetische, theoretische Zusammenhänge überprüfen</p></li>
 </ol>
 </section>
-<section id="datenbasierte-kristallkugeln" class="slide level2">
+<section id="datenbasierte-kristallkugeln" class="slide level2 smaller">
 <h2>Datenbasierte Kristallkugeln?</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
+<div class="column" style="width:40%;">
 <p><img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"></p>
-</div><div class="column" style="width:70%;">
+</div><div class="column" style="width:60%;">
 <ul>
 <li>US-Wahl 1936, Roosevelt vs.&nbsp;Landon</li>
-<li><strong>10 mio.</strong> Befragte (Leser, Telefonbuch, Automobilregister), <strong>2.4 mio.</strong> Antworten</li>
-<li>Vorhersage <strong>43 - 57</strong></li>
-<li>Ergebnis <strong>62 - 38</strong></li>
+<li>Wählerbefragung mit <strong>10 mio.</strong> Befragten (ausgewählt aus Leserschaft, Telefonbuch und Automobilregister) und <strong>2.4 mio.</strong> Antworten</li>
+<li>Vorhersage:
+<ul>
+<li><strong>43%</strong> Roosevelt vs.&nbsp;<strong>57%</strong> Landon</li>
+</ul></li>
+<li>Ergebnis:
+<ul>
+<li><strong>62%</strong> Roosevelt vs.&nbsp;<strong>38%</strong> Landon</li>
+</ul></li>
 <li><strong>Wie kam es zum Fehler von 38 pp?</strong></li>
 </ul>
 </div></div>
 </section>
-<section id="datenbasierte-kristallkugeln-1" class="slide level2">
+<section id="datenbasierte-kristallkugeln-1" class="slide level2 smaller">
 <h2>Datenbasierte Kristallkugeln?</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
+<div class="column" style="width:40%;">
 <p><img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"></p>
-</div><div class="column" style="width:70%;">
+</div><div class="column" style="width:60%;">
 <ul>
 <li><strong>Sampling bias</strong> : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung</li>
 <li><strong>Non-response bias</strong>: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter</li>
+<li><strong>Frage:</strong> Kann ich auf Basis der vorherigen Befragung auf die Mathenote der gesamten LMU schließen?</li>
 </ul>
 </div></div>
 </section>
@@ -428,17 +435,25 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>Der Economist prognostiziert eine knappe Wahl in den USA.</p></li>
-<li><p>Aktuell besteht noch große Unsicherheit in der Vorhersage.</p></li>
-<li><p>Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.</p></li>
+<li>Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren kombiniert.</li>
+<li>Aktuell besteht noch große Unsicherheit in der Vorhersage: Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.</li>
+<li>Statistik dient nicht nur der Extraktion von Informationen aus Daten, sondern auch einer Einschätzung des Grades, zu dem Aussagen durch Daten unterstützt werden.</li>
 </ul>
 </div></div>
 </section>
 <section id="quantifizierung-von-unsicherheit-1" class="slide level2 smaller">
 <h2>Quantifizierung von Unsicherheit</h2>
-<ul>
-<li>IPCC Bericht</li>
-</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./images/uncertainty-wording.png"></p>
+<figcaption>Quelle: Guidance Note for Lead Authors of the IPCC Fifth Assessment Report on Consistent Treatment of Uncertainties</figcaption>
+</figure>
+</div>
+</div><div class="column" style="font-size: 22px;">
+<p>“It is <em>virtually certain</em> that hot extremes (including heatwaves) have become more frequent and more intense across most land regions since the 1950s, while cold extremes (including cold waves) have become less frequent and less severe, with <em>high confidence</em> that human-induced climate change is the main driver of these changes. Some recent hot extremes observed over the past decade would have been <em>extremely unlikely</em> to occur without human influence on the climate system. Marine heatwaves have approximately doubled in frequency since the 1980s (<em>high confidence</em>), and human influence has <em>very likely</em> contributed to most of them since at least 2006.”</p>
+</div></div>
 </section>
 <section id="was-wäre-wenn" class="slide level2 smaller">
 <h2>Was wäre wenn…?</h2>
@@ -453,7 +468,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div><div class="column" style="width:40%;">
 <ul>
 <li>Frage: Hat der Brexit der britischen Wirtschaft geschadet?</li>
-<li>Synthetic control: Tatsächliche Entwicklung der Wirtschaft <span style="color: blue">(blau)</span> vs.&nbsp;hypothetische Entwicklung ohne Brexit <span style="color: red">(blau)</span></li>
+<li>Synthetic control: Tatsächliche Entwicklung der Wirtschaft <span style="color: blue">(blau)</span> vs.&nbsp;hypothetische Entwicklung ohne Brexit <span style="color: red">(rot)</span></li>
 <li>Bis Ende 2018 ist ein geschätzter Outputverlust von 1.7 pp bis 2.5 pp entstanden.</li>
 </ul>
 </div></div>
@@ -489,6 +504,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Multiskalarität und Aggregation</h2>
 <ul>
 <li>TODO: Entwicklung Gesamtdeutschland vs Gewinner / Verlierer</li>
+<li>Mainz</li>
 <li>Spiky map</li>
 </ul>
 </section>
