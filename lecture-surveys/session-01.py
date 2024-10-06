@@ -138,7 +138,11 @@ def init_app(db, rt, route, tablename, **kwargs):
         scatter = StyledCard(
             PlotContainer(id="scatter"),
             header=H2("Wohnen weithergezogene Studierende näher an der Uni?"),
-            footer=Label(Input(type="checkbox", id="check-regression"), "Lineare Regression"),
+            footer=Div(
+                Label(Input(type="checkbox", id="check-isoline"), "Isolinie", style="padding: 2px 10px"),
+                Label(Input(type="checkbox", id="check-regression"), "Lineare Regression", style="padding: 2px 10px"),
+                style="display: flex"
+            )
         )
         grid = StyledGrid(scatter)
         return Title("Wohnorte"), Main(grid, update_data, observable_scatter, cls="container")
@@ -167,6 +171,19 @@ def init_app(db, rt, route, tablename, **kwargs):
 
 
 # SERVER AND DB INITIALIZATION
+    observable_map_dens = ScriptX("session-01/obs-map-dens.js", type="module")
+
+    @rt(f"/{route}/density")
+    async def get():
+        plot = StyledCard(
+            PlotContainer("density-map"),
+            header=H2("Kerndichteschätzung der Studierendenherkunft"),
+        )
+        grid = StyledGrid(plot)
+        return Title("Wohnorte"), Main(grid, update_data, observable_map_dens, cls="container")
+
+
+# SERVER AND DB INITIALIZATION 
 
 route = "wohnort"
 table = "wohnort"
