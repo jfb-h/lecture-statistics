@@ -47,8 +47,6 @@ async function plot() {
         return;
     }
 
-    console.log(geodata);
-
     const domain = d3.geoCircle().center([11, 51]).radius(4.4)();
 
     const container = document.getElementById('density-map');
