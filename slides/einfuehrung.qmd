@@ -98,6 +98,7 @@ editor:
 :::
 
 ::: {.column width="50%"}
+- TODO: POLLS vs. FUNDAMENTALS
 - Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren kombiniert.
 - Aktuell besteht noch große Unsicherheit in der Vorhersage: Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen
   (überwältigender Erfolg) für Kamala Harris sind statistisch
@@ -139,6 +140,8 @@ editor:
 
 # Statistik und Geographie
 
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/density" background-interactive="true" data-preload="true"}
+
 ## Die Politische Karte Deutschlands
 
 ::::: columns
@@ -171,6 +174,22 @@ editor:
 
 # Organisatorisches
 
+## Was auf euch zu kommt
+
+- Lernziele
+- Inhalte
+- Aufbau der Vorlesung
+
+## Übung zur Vorlesung
+
+- Statistik lernen macht nur mit Anwendung Sinn
+- Der Besuch der Übung ist nicht optional
+
+## Leistungsnachweis
+
+- Klausur in der letzten Januarwoche
+- Prüfung von Inhalten der Vorlesung und der Übung
+
 ## Lernziele
 
 -   Möglichkeiten, Ziele und Grenzen statistischer Analyse
@@ -191,14 +210,6 @@ editor:
 -   Praktische Anwendung mit SPSS in der Übung
 -   Pause (2 x 40 min)
 
-## Übung zur Vorlesung
-
--   Hört nicht auf ältere Studierende; der Besuch der Übung ist nicht
-    optional
-
-## Überblick
-
--   Sitzungen / Blöcke
 
 # Lernmaterialien
 
@@ -270,11 +281,10 @@ editor:
 :::
 :::::
 
+
 # Prüfungsfragen
 
 ## Prüfungsfragen
 
--   Was sind mögliche Fehlerquellen bei der Wahlvorhersage auf Basis von
-    Meinungsumfragen?
--   Was sind neben Meinungsumfragen alternative/ergänzende Verfahren zur
-    Vorhersage von Wahlergebnissen?
+-  Was ist sampling bias? Was ist non-response bias?
+
