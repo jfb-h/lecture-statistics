@@ -1,4 +1,5 @@
 import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 function haversine(lat1, lon1, lat2, lon2) {
     if (lat1 == null || lon1 == null || lat2 == null || lon2 == null) { return null; };
@@ -44,6 +45,9 @@ function scatter() {
     const containerScatterWidth = containerScatter.offsetWidth;
     const containerScatterHeight = containerScatter.offsetHeight;
 
+    const max_before = d3.max(dists.map(d => d.dist_before));
+    const max_current = d3.max(dists.map(d => d.dist_current));
+
     const plotScatter = Plot.plot({
         width: containerScatterWidth,
         height: containerScatterHeight,
@@ -52,14 +56,16 @@ function scatter() {
         marginRight: 50,
         marginBottom: 50,
         marginTop: 50,
+        inset: 20,
 
         marks: [
             Plot.dot(dists, { y: "dist_current", x: "dist_before" }),
-            Plot.crosshair(dists, { y: "dist_current", x: "dist_before" }),
+            Plot.crosshair(dists, { y: "dist_current", x: "dist_before", color: "blue" }),
+            isoline.checked ? Plot.link({ length: 1 }, { x1: 0, x2: 500, y1: 0, y2: 500, stroke: "black", strokeOpacity: 0.2 }) : [],
             regression.checked ? Plot.linearRegressionY(dists, { y: "dist_current", x: "dist_before" }) : []
         ],
-        x: { label: "Umzugsdistanz (km)" },
-        y: { label: "Distanz zur Uni (km)" },
+        x: { label: "Umzugsdistanz (km)", domain: [0, max_before] },
+        y: { label: "Distanz zur Uni (km)", domain: [0, max_current] },
     });
 
     containerScatter.innerHTML = "";
@@ -67,8 +73,12 @@ function scatter() {
 }
 
 const regression = document.getElementById('check-regression');
+const isoline = document.getElementById('check-isoline');
 
 document.getElementById('check-regression')
+    .addEventListener('change', () => { scatter(); });
+
+document.getElementById('check-isoline')
     .addEventListener('change', () => { scatter(); });
 
 window.addEventListener('resize', debounce(() => { scatter(); }, 100));
