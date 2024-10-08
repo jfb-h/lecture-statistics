@@ -2,7 +2,9 @@
 title: Einführung in die Statistik
 subtitle: Einführung
 author: Dr. Jakob Hoffmann, Economic Geography Group
+css: custom.css
 execute:
+    cache: true
     keep-ipynb: false
     keep-md: false
 format:
@@ -59,7 +61,7 @@ editor:
 
 ::::: columns
 ::: {.column width="40%"}
-<img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"/>
+![Quelle: unrememberedhistory.com](https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg){.shadow height="400px"}
 :::
 
 ::: {.column width="60%"}
@@ -78,15 +80,15 @@ editor:
 
 ::::: columns
 ::: {.column width="40%"}
-<img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"/>
+![Quelle: unrememberedhistory.com](https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg){.shadow height="400px"}
 :::
 
 ::: {.column width="60%"}
--   **Sampling bias** : Leser des Literary Digest, Automobilbesitzer und
-    Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung
--   **Non-response bias**: Gegner Roosevelts haben häufiger an der
-    Befragung teilgenommen als seine Befürworter
--   **Frage:** Kann ich auf Basis der vorherigen Befragung auf die Mathenote der gesamten LMU schließen?
+- **Sampling bias** : Leser des Literary Digest, Automobilbesitzer und
+  Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung.
+- **Non-response bias**: Gegner Roosevelts haben häufiger an der
+  Befragung teilgenommen als seine Befürworter.
+- **Frage:** Kann ich auf Basis der vorherigen Befragung auf die Mathenote der gesamten LMU schließen?
 :::
 :::::
 
@@ -94,15 +96,12 @@ editor:
 
 ::::: columns
 ::: {.column width="50%"}
-![Quelle: Economist](/images/us-economist-prediction.png)
+![Quelle: Economist](/images/us-economist-prediction.png){.shadow height="400px"}
 :::
 
 ::: {.column width="50%"}
-- TODO: POLLS vs. FUNDAMENTALS
-- Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren kombiniert.
-- Aktuell besteht noch große Unsicherheit in der Vorhersage: Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen
-  (überwältigender Erfolg) für Kamala Harris sind statistisch
-  glaubhaft.
+- Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren (sog. *fundamentals*) kombiniert.
+- Aktuell besteht noch große Unsicherheit in der Vorhersage: Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.
 - Statistik dient nicht nur der Extraktion von Informationen aus Daten, sondern auch einer Einschätzung des Grades, zu dem Aussagen durch Daten unterstützt werden.
 :::
 :::::
@@ -112,7 +111,7 @@ editor:
 
 ::::: columns
 ::: {.column width="50%"}
-![Quelle: Guidance Note for Lead Authors of the IPCC Fifth Assessment Report on Consistent Treatment of Uncertainties](/images/uncertainty-wording.png)
+![Quelle: Guidance Note for Lead Authors of the IPCC Fifth Assessment Report on Consistent Treatment of Uncertainties](/images/uncertainty-wording.png){.shadow height="400px"}
 :::
 ::: {.column width="50%" style="font-size: 22px;"}
 "It is *virtually certain* that hot extremes (including heatwaves) have become more frequent and more intense across most land regions since the 1950s, while cold extremes (including cold waves) have become less frequent and less severe, with *high confidence* that human-induced climate change is the main driver of these changes. Some recent hot extremes observed over the past decade would have been *extremely unlikely* to occur without human influence on the climate system. Marine heatwaves have approximately doubled in frequency since the 1980s (*high confidence*), and human influence has *very likely* contributed to most of them since at least 2006."
@@ -124,7 +123,7 @@ editor:
 
 ::::: columns
 ::: {.column width="60%"}
-![Quelle: Born et al. 2019](images/brexit.png)
+![Quelle: Born et al. 2019](images/brexit.png){.shadow height="400px"}
 :::
 
 ::: {.column width="40%"}
@@ -142,86 +141,188 @@ editor:
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/density" background-interactive="true" data-preload="true"}
 
+## Wo erfindet Europa? {.smaller}
+
+![Quelle: Eigene Darstellung](images/figure-map-inventors.png){.shadow}
+
 ## Die Politische Karte Deutschlands
 
 ::::: columns
 ::: {.column width="40%"}
-![Quelle: Zeit.de](https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png)
+![Quelle: Zeit.de](https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png){.shadow}
 :::
 
 ::: {.column width="60%"}
--   In Thüringen hat mit der AfD eine vom Verfassungsschutz als
-    rechtsextrem eingestufte Partei die meisten Stimmen erlangt.
--   Der Blick auf die Karte suggeriert, dass ein erheblicher Anteil
-    Deutschlands AfD wählt.
--   Thüringen beheimatet **2,5%** der deutschen Bevölkerung.
+- Ein Blick auf die Karte suggeriert, dass ein erheblicher Anteil
+  Deutschlands AfD wählt.
+- Thüringen beheimatet **2,5%** der deutschen Bevölkerung, Sachsen **4,8%**.
+- Karten können trügerisch sein, da Bevölkerung selten proportional zu Fläche ist.
 :::
 :::::
 
-## Wo erfindet Europa?
+## Multiskalarität und Aggregation {.smaller}
+::::: columns
+::: {.column width="55%"}
+:::::: {.card}
+```{r}
+#| fig-width: 6
+#| fig-height: 5.625
+#| class-output: card
 
-![](images/figure-map-inventors.png)
+library(eurostat)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(ggthemes)
 
-## Multiskalarität und Aggregation
+theme_set(theme_tufte(base_family = "Arial"))
 
-- TODO: Entwicklung Gesamtdeutschland vs Gewinner / Verlierer
-- Mainz
-- Spiky map
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
 
-## Räumliche Autokorrelation
+# filters_inc <- list(time = 2000:2024, geo = c("DE212", "DED42", "DEB21"), UNIT = "MIO_EUR")
+# incomedata <- get_eurostat("nama_10r_3gdp", filters = filters_inc)
 
+filters_pop <- list(time = 2000:2024, geo = c("DE", "DE212", "DED42"), sex = "T", age = "TOTAL")
+popdata <- get_eurostat("demo_r_pjangrp3", filters = filters_pop)
+popdata |> 
+    group_by(geo) |>
+    mutate(perc = (values / first(values)) * 100) |>
+    transform(geo = factor(geo, labels=c("Deutschland", "München", "Erzgebirgkreis"), levels=c("DE", "DE212", "DED42"))) |> 
+    ggplot(aes(x=time, y=perc, color=geo)) +
+    geom_line(linewidth=1.5) +
+    geom_hline(yintercept=100, linetype="dashed") +
+    scale_color_tableau() +
+    labs(
+        title = "Bevölkerungsentwicklung in Deutschland",
+        subtitle = "Gesamtentwicklung und ausgewählte Kreise",
+        y="Bevölkerung (2014 = 100%)", x="", color="", 
+        caption="Datenquelle: Eurostat")
+```
+::::::
+:::
+::: {.column width="45%"}
+- Geographie betrachtet räumliche Eigenschaften auf unterschiedlichen Auflösungsebenen.
+- Statistische Eigenschaften von Aggregaten können nicht automatisch auf deren Mitglieder übertragen werden (z.B. Regionen in Ländern, Personen in Regionen).
+- Was ist die 'richtige' Aggregatsebene?
+- Später im Kurs: **Aggregation Bias** und die **Ecological Fallacy**
+:::
+:::::
+
+## Räumliche Autokorrelation {.smaller}
+
+Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191;</span> <span class="arrow-down">&#x2193;</span>)
+
+::::: columns
+::: {.column width="50%"}
+![Einkommen in München (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png){.shadow}
+:::
+::: {.column width="50%"}
+![Einkommen in Köln (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png){.shadow}
+:::
+:::::
+
+## Statistik und Geographie {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/c/c7/Snow-cholera-map.jpg){.shadow}
+:::
+::: {.column width="50%"}
+- Neben physikalischen Raummerkmalen sind auch die meisten sozial- und wirtschaftswissenschaftlichen Merkmale räumlich verortet.
+- Geographie interessiert sich für die räumliche Konfiguration bzw. Verteilung physikalischer / gesellschaftlicher Merkmale.
+- Die räumliche Anordnung von Beobachtungen erschwert deren statistische Analyse, selbst wenn deren Verteilung nicht direkt von Interesse ist.
+:::
+:::::
 
 
 # Organisatorisches
 
-## Was auf euch zu kommt
+## Diese Veranstaltung {.smaller}
 
-- Lernziele
-- Inhalte
-- Aufbau der Vorlesung
+::::: columns
+::: {.column width="40%"}
+![](images/syllabus.png){.lightbox .shadow}
+[**Moodle PW**: S1DTF9W](https://moodle.lmu.de/enrol/index.php?id=11572)
+:::
+::: {.column width="60%"}
+- **Ablauf:** 2 x 40 min, 10 min Pause
+- **Lernziel** 
+    - Verständnis der Ziele und Funktionsweisen geläufiger statistischer Verfahren
+    - Interpretations- und Kritikfähigkeit statistischer Befunde und Forschungsdesigns
+- **Inhalte**
+    - Numerische und visuelle Verfahren der deskriptiven Statistik
+    - Grundlagen der Inferenzstatistik und der statistischen Modellierung
+:::
+:::::
 
-## Übung zur Vorlesung
+## Übung zur Vorlesung {.smaller}
 
-- Statistik lernen macht nur mit Anwendung Sinn
-- Der Besuch der Übung ist nicht optional
+::::: columns
+::: {.column width="40%"}
+![](images/logos-tools.png){.shadow}
+:::
+::: {.column width="60%"}
+- Ein erheblicher Teil statistischer Praxis liegt in der Aufbereitung von Daten. Die Übung macht Studierende mit der Anwendung statistischer Verfahren *und* dem Umgang mit Daten vertraut.
+- Der Besuch der Übung ist nicht optional - nur die Vorlesung zu besuchen ist so sinnvoll wie ein Führerschein ohne Fahrpraxis.
+- Geographen setzen auf eine Vielzahl an Softwaretools (Spezialsoftware wie `SPSS` [Übung], Programmiersprachen wie `R`, `Python` oder `Julia`, oder Datenbankmanagementsysteme wie `DuckDB`).
+:::
+:::::
 
-## Leistungsnachweis
 
-- Klausur in der letzten Januarwoche
-- Prüfung von Inhalten der Vorlesung und der Übung
+## Leistungsnachweis {.smaller}
 
-## Lernziele
-
--   Möglichkeiten, Ziele und Grenzen statistischer Analyse
--   Interpretation statistischer Ergebnisse und Visualisierungen
--   Überblick über Verfahren und deren Anwendungsgebiete
-
-## Inhalte
-
--   Statistische Forschungsdesigns
--   Daten beschreiben und visualisieren
--   Statistische Modelle
--   Quantifizierung von Unsicherheit
-
-## Diese Vorlesung
-
--   Angewandte (nicht theoretische) Statistik
--   Grundlagen deskriptiver und inferentieller Statistik
--   Praktische Anwendung mit SPSS in der Übung
--   Pause (2 x 40 min)
+::::: columns
+::: {.column width="60%"}
+<div class ="card">
+<h3 style="font-size: 20px">
+    Welche der folgenden Aussagen ist richtig? Bei einer rechtsschiefen Verteilung ist der Median...
+</h3>
+<ul class="examlist">
+    <li>immer kleiner als das arithmetische Mittel</li>
+    <li>immer größer als das arithmetische Mittel</li>
+    <li>immer gleich groß wie das arithmetische Mittel</li>
+    <li>mal größer und mal kleiner als das arithmetische Mittel</li>
+</ul>
+</div>
+:::
+::: {.column width="40%"}
+- Die Vorlesung wird durch eine **Klausur** am letzten Vorlesungstermin (27. Januar) abgeschlossen.
+- Die Klausur prüft Kenntnisse der **Vorlesungs- und der Übungsinhalte** mittels eines Single-Choice-Verfahrens.
+- Single-Choice: Auswahlverfahren, bei dem **exakt eine** Option richtig ist.
+:::
+:::::
 
 
 # Lernmaterialien
 
-## Lehrbücher
+## Lehrbuch
+
+::::: columns
+::: {.column width="50%"}
+![](https://www.utb.de/cms/asset/e97ac5f1-38bf-4645-a0ed-16ec6816a264/9783838549330.cover.jpg){.shadow height="550px"}
+:::
+::: {.column width="50%"}
+- Aktuelles Lehrbuch in deutscher Sprache
+- Fachbezug zur Geographie
+- Breite Abdeckung der Grundlagen
+:::
+:::::
+
 
 ## Datenvisualisierung
 
 ::::: columns
 ::: {.column width="50%"}
-<a href="https://socviz.co/" target="_blank">
-<img src="https://socviz.co/assets/dv-cover-pupress.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"/>
-</a>
+![](https://socviz.co/assets/dv-cover-pupress.jpg){.shadow height="550px"}
 :::
 
 ::: {.column width="50%"}
@@ -235,9 +336,7 @@ editor:
 
 ::::: columns
 ::: {.column width="50%"}
-<a href="https://avehtari.github.io/ROS-Examples/" target="_blank">
-<img src="https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"/>
-</a>
+![](https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp){.shadow height="550px"}
 :::
 
 ::: {.column width="50%"}
@@ -251,9 +350,7 @@ editor:
 
 ::::: columns
 ::: {.column width="50%"}
-<a href="https://xcelab.net/rm/" target="_blank">
-<img src="https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"/>
-</a>
+![](https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg){.shadow height="500px"}
 :::
 
 ::: {.column width="50%"}
@@ -267,17 +364,13 @@ editor:
 
 ::::: columns
 ::: {.column width="50%"}
-<a href="https://projects.iq.harvard.edu/stat110/home" target="_blank">
-<img src="https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"/>
-</a>
+![](https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg){.shadow height="500px"}
 :::
 
 ::: {.column width="50%"}
--   Umfassende aber zugängliche Einführung in die
-    Wahrscheinlichkeitstheorie
+-   Umfassende aber zugängliche Einführung in die W'scheinlichkeitstheorie
 -   Anwendungsbeispiele in R
--   Online verfügbar unter: [https://projects.iq.harvard.edu
-    /stat110/home](https://projects.iq.harvard.edu/stat110/home)
+-   Online verfügbar unter: [https://projects.iq.harvard.edu/stat110/home](https://projects.iq.harvard.edu/stat110/home)
 :::
 :::::
 
@@ -286,5 +379,6 @@ editor:
 
 ## Prüfungsfragen
 
--  Was ist sampling bias? Was ist non-response bias?
+- Unter welchen Umständen kann selbst eine große Stichprobe in die Irre führen?
+- Wann spricht man von sampling bias? Non-response bias?
 

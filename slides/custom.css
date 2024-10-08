@@ -27,3 +27,42 @@
     height: 100vh;
     align-items: center;
 }
+
+.shadow {
+  padding: 10px 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+    border-radius: 8px;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.examlist {
+    list-style-type: '☐';
+    padding: 10px 10px;
+}
+
+.examlist li {
+  font-size: 18px;
+  padding: 2px 5px;
+}
+
+.examlist li::marker {
+  content: '☐ '
+}
+
+.arrow-up {
+  color: blue;
+  font-size: 30px;
+}
+
+.arrow-down {
+  color: red;
+  font-size: 30px;
+}
+

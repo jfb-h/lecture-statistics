@@ -7,7 +7,10 @@
 <link href="einfuehrung_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="einfuehrung_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="einfuehrung_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="einfuehrung_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="einfuehrung_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="einfuehrung_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="einfuehrung_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="einfuehrung_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
@@ -31,6 +34,7 @@
     }
   </style>
   <link rel="stylesheet" href="einfuehrung_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="custom.css">
   <link href="einfuehrung_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="einfuehrung_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="einfuehrung_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -393,7 +397,12 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Datenbasierte Kristallkugeln?</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p><img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg" class="shadow" height="400"></p>
+<figcaption>Quelle: unrememberedhistory.com</figcaption>
+</figure>
+</div>
 </div><div class="column" style="width:60%;">
 <ul>
 <li>US-Wahl 1936, Roosevelt vs.&nbsp;Landon</li>
@@ -414,11 +423,16 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Datenbasierte Kristallkugeln?</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p><img src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg?w=390&amp;h=546" title="Literary digest cover" height="400"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg" class="shadow" height="400"></p>
+<figcaption>Quelle: unrememberedhistory.com</figcaption>
+</figure>
+</div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li><strong>Sampling bias</strong> : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung</li>
-<li><strong>Non-response bias</strong>: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter</li>
+<li><strong>Sampling bias</strong> : Leser des Literary Digest, Automobilbesitzer und Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung.</li>
+<li><strong>Non-response bias</strong>: Gegner Roosevelts haben häufiger an der Befragung teilgenommen als seine Befürworter.</li>
 <li><strong>Frage:</strong> Kann ich auf Basis der vorherigen Befragung auf die Mathenote der gesamten LMU schließen?</li>
 </ul>
 </div></div>
@@ -429,14 +443,13 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="./images/us-economist-prediction.png"></p>
+<p><img data-src="./images/us-economist-prediction.png" class="shadow" height="400"></p>
 <figcaption>Quelle: Economist</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>TODO: POLLS vs.&nbsp;FUNDAMENTALS</li>
-<li>Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren kombiniert.</li>
+<li>Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren (sog. <em>fundamentals</em>) kombiniert.</li>
 <li>Aktuell besteht noch große Unsicherheit in der Vorhersage: Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft.</li>
 <li>Statistik dient nicht nur der Extraktion von Informationen aus Daten, sondern auch einer Einschätzung des Grades, zu dem Aussagen durch Daten unterstützt werden.</li>
 </ul>
@@ -448,7 +461,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="./images/uncertainty-wording.png"></p>
+<p><img data-src="./images/uncertainty-wording.png" class="shadow" height="400"></p>
 <figcaption>Quelle: Guidance Note for Lead Authors of the IPCC Fifth Assessment Report on Consistent Treatment of Uncertainties</figcaption>
 </figure>
 </div>
@@ -462,7 +475,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/brexit.png"></p>
+<p><img data-src="images/brexit.png" class="shadow" height="400"></p>
 <figcaption>Quelle: Born et al.&nbsp;2019</figcaption>
 </figure>
 </div>
@@ -482,105 +495,183 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="section-5" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/density" data-background-interactive="true" data-preload="true">
 <h2></h2>
 </section>
+<section id="wo-erfindet-europa" class="slide level2 smaller">
+<h2>Wo erfindet Europa?</h2>
+
+<img data-src="images/figure-map-inventors.png" class="shadow r-stretch quarto-figure-center"><p class="caption">Quelle: Eigene Darstellung</p></section>
 <section id="die-politische-karte-deutschlands" class="slide level2">
 <h2>Die Politische Karte Deutschlands</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png"></p>
+<p><img data-src="https://interactive.zeit.de/2021/wahl-btw-gemeindekarte/static/btw21.26c6ec590e3e34a06a4854b0b243e24d.cached.png" class="shadow"></p>
 <figcaption>Quelle: Zeit.de</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li>In Thüringen hat mit der AfD eine vom Verfassungsschutz als rechtsextrem eingestufte Partei die meisten Stimmen erlangt.</li>
-<li>Der Blick auf die Karte suggeriert, dass ein erheblicher Anteil Deutschlands AfD wählt.</li>
-<li>Thüringen beheimatet <strong>2,5%</strong> der deutschen Bevölkerung.</li>
+<li>Ein Blick auf die Karte suggeriert, dass ein erheblicher Anteil Deutschlands AfD wählt.</li>
+<li>Thüringen beheimatet <strong>2,5%</strong> der deutschen Bevölkerung, Sachsen <strong>4,8%</strong>.</li>
+<li>Karten können trügerisch sein, da Bevölkerung selten proportional zu Fläche ist.</li>
 </ul>
 </div></div>
 </section>
-<section id="wo-erfindet-europa" class="slide level2">
-<h2>Wo erfindet Europa?</h2>
-
-<img data-src="images/figure-map-inventors.png" class="r-stretch"></section>
-<section id="multiskalarität-und-aggregation" class="slide level2">
+<section id="multiskalarität-und-aggregation" class="slide level2 smaller">
 <h2>Multiskalarität und Aggregation</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="card">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="einfuehrung_files/figure-revealjs/unnamed-chunk-1-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
 <ul>
-<li>TODO: Entwicklung Gesamtdeutschland vs Gewinner / Verlierer</li>
-<li>Mainz</li>
-<li>Spiky map</li>
+<li>Geographie betrachtet räumliche Eigenschaften auf unterschiedlichen Auflösungsebenen.</li>
+<li>Statistische Eigenschaften von Aggregaten können nicht automatisch auf deren Mitglieder übertragen werden (z.B. Regionen in Ländern, Personen in Regionen).</li>
+<li>Was ist die ‘richtige’ Aggregatsebene?</li>
+<li>Später im Kurs: <strong>Aggregation Bias</strong> und die <strong>Ecological Fallacy</strong></li>
 </ul>
+</div></div>
 </section>
-<section id="räumliche-autokorrelation" class="slide level2">
+<section id="räumliche-autokorrelation" class="slide level2 smaller">
 <h2>Räumliche Autokorrelation</h2>
+<p>Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">↑</span> <span class="arrow-down">↓</span>)</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png" class="shadow"></p>
+<figcaption>Einkommen in München (Quelle: Zeit.de)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png" class="shadow"></p>
+<figcaption>Einkommen in Köln (Quelle: Zeit.de)</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="statistik-und-geographie-1" class="slide level2 smaller">
+<h2>Statistik und Geographie</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Snow-cholera-map.jpg" class="shadow"></p>
+<figcaption>Quelle: Wikimedia Commons</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Neben physikalischen Raummerkmalen sind auch die meisten sozial- und wirtschaftswissenschaftlichen Merkmale räumlich verortet.</li>
+<li>Geographie interessiert sich für die räumliche Konfiguration bzw. Verteilung physikalischer / gesellschaftlicher Merkmale.</li>
+<li>Die räumliche Anordnung von Beobachtungen erschwert deren statistische Analyse, selbst wenn deren Verteilung nicht direkt von Interesse ist.</li>
+</ul>
+</div></div>
 </section></section>
 <section>
 <section id="organisatorisches" class="title-slide slide level1 center">
 <h1>Organisatorisches</h1>
 
 </section>
-<section id="was-auf-euch-zu-kommt" class="slide level2">
-<h2>Was auf euch zu kommt</h2>
+<section id="diese-veranstaltung" class="slide level2 smaller">
+<h2>Diese Veranstaltung</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><a href="images/syllabus.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/syllabus.png" class="shadow"></a> <a href="https://moodle.lmu.de/enrol/index.php?id=11572"><strong>Moodle PW</strong>: S1DTF9W</a></p>
+</div><div class="column" style="width:60%;">
 <ul>
-<li>Lernziele</li>
-<li>Inhalte</li>
-<li>Aufbau der Vorlesung</li>
+<li><strong>Ablauf:</strong> 2 x 40 min, 10 min Pause</li>
+<li><strong>Lernziel</strong>
+<ul>
+<li>Verständnis der Ziele und Funktionsweisen geläufiger statistischer Verfahren</li>
+<li>Interpretations- und Kritikfähigkeit statistischer Befunde und Forschungsdesigns</li>
+</ul></li>
+<li><strong>Inhalte</strong>
+<ul>
+<li>Numerische und visuelle Verfahren der deskriptiven Statistik</li>
+<li>Grundlagen der Inferenzstatistik und der statistischen Modellierung</li>
+</ul></li>
 </ul>
+</div></div>
 </section>
-<section id="übung-zur-vorlesung" class="slide level2">
+<section id="übung-zur-vorlesung" class="slide level2 smaller">
 <h2>Übung zur Vorlesung</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/logos-tools.png" class="shadow"></p>
+</div><div class="column" style="width:60%;">
 <ul>
-<li>Statistik lernen macht nur mit Anwendung Sinn</li>
-<li>Der Besuch der Übung ist nicht optional</li>
+<li>Ein erheblicher Teil statistischer Praxis liegt in der Aufbereitung von Daten. Die Übung macht Studierende mit der Anwendung statistischer Verfahren <em>und</em> dem Umgang mit Daten vertraut.</li>
+<li>Der Besuch der Übung ist nicht optional - nur die Vorlesung zu besuchen ist so sinnvoll wie ein Führerschein ohne Fahrpraxis.</li>
+<li>Geographen setzen auf eine Vielzahl an Softwaretools (Spezialsoftware wie <code>SPSS</code> [Übung], Programmiersprachen wie <code>R</code>, <code>Python</code> oder <code>Julia</code>, oder Datenbankmanagementsysteme wie <code>DuckDB</code>).</li>
 </ul>
+</div></div>
 </section>
-<section id="leistungsnachweis" class="slide level2">
+<section id="leistungsnachweis" class="slide level2 smaller">
 <h2>Leistungsnachweis</h2>
-<ul>
-<li>Klausur in der letzten Januarwoche</li>
-<li>Prüfung von Inhalten der Vorlesung und der Übung</li>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="card">
+<h3 style="font-size: 20px">
+Welche der folgenden Aussagen ist richtig? Bei einer rechtsschiefen Verteilung ist der Median…
+</h3>
+<ul class="examlist">
+<li>
+immer kleiner als das arithmetische Mittel
+</li>
+<li>
+immer größer als das arithmetische Mittel
+</li>
+<li>
+immer gleich groß wie das arithmetische Mittel
+</li>
+<li>
+mal größer und mal kleiner als das arithmetische Mittel
+</li>
 </ul>
-</section>
-<section id="lernziele" class="slide level2">
-<h2>Lernziele</h2>
+</div>
+</div><div class="column" style="width:40%;">
 <ul>
-<li>Möglichkeiten, Ziele und Grenzen statistischer Analyse</li>
-<li>Interpretation statistischer Ergebnisse und Visualisierungen</li>
-<li>Überblick über Verfahren und deren Anwendungsgebiete</li>
+<li>Die Vorlesung wird durch eine <strong>Klausur</strong> am letzten Vorlesungstermin (27. Januar) abgeschlossen.</li>
+<li>Die Klausur prüft Kenntnisse der <strong>Vorlesungs- und der Übungsinhalte</strong> mittels eines Single-Choice-Verfahrens.</li>
+<li>Single-Choice: Auswahlverfahren, bei dem <strong>exakt eine</strong> Option richtig ist.</li>
 </ul>
-</section>
-<section id="inhalte" class="slide level2">
-<h2>Inhalte</h2>
-<ul>
-<li>Statistische Forschungsdesigns</li>
-<li>Daten beschreiben und visualisieren</li>
-<li>Statistische Modelle</li>
-<li>Quantifizierung von Unsicherheit</li>
-</ul>
-</section>
-<section id="diese-vorlesung" class="slide level2">
-<h2>Diese Vorlesung</h2>
-<ul>
-<li>Angewandte (nicht theoretische) Statistik</li>
-<li>Grundlagen deskriptiver und inferentieller Statistik</li>
-<li>Praktische Anwendung mit SPSS in der Übung</li>
-<li>Pause (2 x 40 min)</li>
-</ul>
+</div></div>
 </section></section>
 <section>
 <section id="lernmaterialien" class="title-slide slide level1 center">
 <h1>Lernmaterialien</h1>
 
 </section>
-<section id="lehrbücher" class="slide level2">
-<h2>Lehrbücher</h2>
+<section id="lehrbuch" class="slide level2">
+<h2>Lehrbuch</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="https://www.utb.de/cms/asset/e97ac5f1-38bf-4645-a0ed-16ec6816a264/9783838549330.cover.jpg" class="shadow" height="550"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Aktuelles Lehrbuch in deutscher Sprache</li>
+<li>Fachbezug zur Geographie</li>
+<li>Breite Abdeckung der Grundlagen</li>
+</ul>
+</div></div>
 </section>
 <section id="datenvisualisierung" class="slide level2">
 <h2>Datenvisualisierung</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://socviz.co/" target="_blank"> <img src="https://socviz.co/assets/dv-cover-pupress.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"> </a></p>
+<p><img data-src="https://socviz.co/assets/dv-cover-pupress.jpg" class="shadow" height="550"></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Einführung in die statistische Visualisierung mit R</li>
@@ -593,7 +684,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Regressionsanalyse</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://avehtari.github.io/ROS-Examples/" target="_blank"> <img src="https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 550px"> </a></p>
+<p><img data-src="https://www.book2look.com/BookContent/FlipBooks/AhkBODX6iT_assets/images/AhkBODX6iT_Zoom.webp" class="shadow" height="550"></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Umfassende und moderne Einführung in die Regressionsanalyse</li>
@@ -606,7 +697,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Statistische Modellierung</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://xcelab.net/rm/" target="_blank"> <img src="https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"> </a></p>
+<p><img data-src="https://images.routledge.com/common/jackets/amazon/978036713/9780367139919.jpg" class="shadow" height="500"></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Moderne perspektive auf statistische Modellierung</li>
@@ -619,12 +710,12 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Wahrscheinlichkeitstheorie</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><a href="https://projects.iq.harvard.edu/stat110/home" target="_blank"> <img src="https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg" title="Brexit synthetic control" alt="Brexit synthetic control" style="border: 1px solid black; height: 500px"> </a></p>
+<p><img data-src="https://images.routledge.com/common/jackets/amazon/978113836/9781138369917.jpg" class="shadow" height="500"></p>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>Umfassende aber zugängliche Einführung in die Wahrscheinlichkeitstheorie</li>
+<li>Umfassende aber zugängliche Einführung in die W’scheinlichkeitstheorie</li>
 <li>Anwendungsbeispiele in R</li>
-<li>Online verfügbar unter: <a href="https://projects.iq.harvard.edu/stat110/home">https://projects.iq.harvard.edu /stat110/home</a></li>
+<li>Online verfügbar unter: <a href="https://projects.iq.harvard.edu/stat110/home">https://projects.iq.harvard.edu/stat110/home</a></li>
 </ul>
 </div></div>
 </section></section>
@@ -636,7 +727,8 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="prüfungsfragen-1" class="slide level2">
 <h2>Prüfungsfragen</h2>
 <ul>
-<li>Was ist sampling bias? Was ist non-response bias?</li>
+<li>Unter welchen Umständen kann selbst eine große Stichprobe in die Irre führen?</li>
+<li>Wann spricht man von sampling bias? Non-response bias?</li>
 </ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -856,6 +948,44 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -1043,6 +1173,38 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
