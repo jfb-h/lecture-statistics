@@ -41,6 +41,8 @@ editor:
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/hist" background-interactive="true" data-preload="true"}
 
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter-time" background-interactive="true" data-preload="true"}
+
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter" background-interactive="true" data-preload="true"}
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/boxplot" background-interactive="true" data-preload="true"}
@@ -187,9 +189,6 @@ theme_update(
   legend.position = "top",
   legend.justification.top = "left"
 )
-
-# filters_inc <- list(time = 2000:2024, geo = c("DE212", "DED42", "DEB21"), UNIT = "MIO_EUR")
-# incomedata <- get_eurostat("nama_10r_3gdp", filters = filters_inc)
 
 filters_pop <- list(time = 2000:2024, geo = c("DE", "DE212", "DED42"), sex = "T", age = "TOTAL")
 popdata <- get_eurostat("demo_r_pjangrp3", filters = filters_pop)
