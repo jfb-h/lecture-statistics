@@ -34,14 +34,16 @@ function boxplot() {
 
         marks: [
             boxordot.checked ?
-                Plot.dot(gradedata, Plot.dodgeY("middle", { fy: "minor", x: "grade" }),) :
-                Plot.boxX(gradedata, { x: "grade", fy: "minor" }),
+                Plot.boxX(gradedata, { x: "grade", fy: "minor" }) :
+                Plot.dot(gradedata, Plot.group({ r: "count" }, {
+                    x: "grade", y: "minor", stroke: "black", fill: "minor", opacity: 0.4
+                }))
         ],
+        r: { range: [0, 20] },
         x: { label: "Punkte", grid: true, domain: [0, 15] },
         y: { label: null, },
         fy: { label: null, },
     });
-
     container.innerHTML = "";
     container.appendChild(boxplot);
 }

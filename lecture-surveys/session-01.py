@@ -166,7 +166,7 @@ def init_app(db, rt, route, tablename, **kwargs):
             PlotContainer("boxplot-grade"),
             header=H2("Beeinflussen Erfahrungen mit Schulmathematik die Nebenfachwahl?"),
             footer=Div(
-                Label(Input(type="checkbox", id="check-boxordot"), "Swarmplot", style="padding: 2px 10px"),
+                Label(Input(type="checkbox", id="check-boxordot"), "Boxplot", style="padding: 2px 10px"),
                 style="display: flex"
             )
         )
@@ -174,7 +174,18 @@ def init_app(db, rt, route, tablename, **kwargs):
         return Title("Wohnorte"), Main(grid, update_data, observable_boxp_grade, cls="container")
 
 
-# SERVER AND DB INITIALIZATION
+    observable_scatter_time = ScriptX("session-01/obs-scatter-dist-time.js", type="module")
+
+    @rt(f"/{route}/scatter-time")
+    async def get():
+        scatter = StyledCard(
+            PlotContainer(id="plot-dist-time"),
+            header=H2("Wer muss am frühesten aufstehen?"),
+        )
+        grid = StyledGrid(scatter)
+        return Title("Wohnorte"), Main(grid, update_data, observable_scatter_time, cls="container")
+
+
     observable_map_dens = ScriptX("session-01/obs-map-dens.js", type="module")
 
     @rt(f"/{route}/density")
