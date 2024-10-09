@@ -27,7 +27,7 @@ function boxplot() {
         width: containerWidth,
         height: containerHeight,
         style: { fontSize: "16px" },
-        marginLeft: 150,
+        marginLeft: 170,
         marginRight: 50,
         marginBottom: 50,
         marginTop: 50,
