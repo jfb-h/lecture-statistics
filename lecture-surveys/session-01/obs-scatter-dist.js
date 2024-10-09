@@ -73,11 +73,10 @@ function scatter() {
 }
 
 const regression = document.getElementById('check-regression');
-const isoline = document.getElementById('check-isoline');
-
 document.getElementById('check-regression')
     .addEventListener('change', () => { scatter(); });
 
+const isoline = document.getElementById('check-isoline');
 document.getElementById('check-isoline')
     .addEventListener('change', () => { scatter(); });
 

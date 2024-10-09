@@ -33,10 +33,13 @@ function boxplot() {
         marginTop: 50,
 
         marks: [
-            Plot.boxX(gradedata, { x: "grade", y: "minor" }),
+            boxordot.checked ?
+                Plot.dot(gradedata, Plot.dodgeY("middle", { fy: "minor", x: "grade" }),) :
+                Plot.boxX(gradedata, { x: "grade", fy: "minor" }),
         ],
         x: { label: "Punkte", grid: true, domain: [0, 15] },
         y: { label: null, },
+        fy: { label: null, },
     });
 
     container.innerHTML = "";
@@ -45,6 +48,9 @@ function boxplot() {
 
 window.addEventListener('resize', debounce(() => { boxplot(); }, 100));
 
+const boxordot = document.getElementById('check-boxordot');
+document.getElementById('check-boxordot')
+    .addEventListener('change', () => { boxplot(); });
 
 updatePlot(boxplot);
 setInterval(_ => updatePlot(boxplot), 1000);

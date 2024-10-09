@@ -164,7 +164,11 @@ def init_app(db, rt, route, tablename, **kwargs):
     async def get():
         plot = StyledCard(
             PlotContainer("boxplot-grade"),
-            header=H2("Wie viele Punkte hattest du im Abitur in Mathe?"),
+            header=H2("Beeinflussen Erfahrungen mit Schulmathematik die Nebenfachwahl?"),
+            footer=Div(
+                Label(Input(type="checkbox", id="check-boxordot"), "Swarmplot", style="padding: 2px 10px"),
+                style="display: flex"
+            )
         )
         grid = StyledGrid(plot)
         return Title("Wohnorte"), Main(grid, update_data, observable_boxp_grade, cls="container")
