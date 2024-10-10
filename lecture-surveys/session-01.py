@@ -30,8 +30,8 @@ def init_app(db, rt, route, tablename, **kwargs):
     def get():
         pc = TextInput("pc_current", "Was ist die PLZ deines aktuellen Wohnortes?", "z.B. 80333")
         pb = TextInput("pc_before", "Was ist die PLZ deines Wohnortes während des Abiturs?", "z.B. 40229")
-        ti = TimeInput("time", "Wann bist du heute morgen aufgestanden?", "z.B. 06:30")
-        gr = NumericInput("grade", "Wie viele Punkte hattest du im Abitur in Mathe?", 0, 15)
+        ti = TimeInput("time", "Wann bist du heute morgen aufgestanden?", "z.B. 06:30", min="00:00", max="08:00")
+        gr = NumericInput("grade", "Wie viele Punkte [0-15] hattest du im Abitur in Mathe?", min=0, max=15)
 
         nf = SelectInput(
             "minor",
@@ -111,10 +111,11 @@ def init_app(db, rt, route, tablename, **kwargs):
         )
         map_before = StyledCard(
             PlotContainer("map-before"),
-            header=H2(Span("Wohnort während des Abiturs"), Span(id="n-map-before")),
+            header=H2(Span("Wohnort Abitur"), Span(id="n-map-before")),
         )
         grid = StyledGrid(map_current, map_before, columns="1fr 1fr")
-        return Title("Wohnorte"), Main(grid, update_data, leaflet_app, cls="container")
+        return Title("Einführung"), Main(grid, update_data, leaflet_app, cls="container")
+
 
     observable_hist = ScriptX("session-01/obs-hist-dist.js", type="module")
 
@@ -129,7 +130,8 @@ def init_app(db, rt, route, tablename, **kwargs):
             header=H2(Span("Umzugsdistanz"), Span(id="n-hist-before")),
         )
         grid = StyledGrid(hist_current, hist_before, columns="1fr 1fr")
-        return Title("Wohnorte"), Main(grid, update_data, observable_hist, cls="container")
+        return Title("Einführung"), Main(grid, update_data, observable_hist, cls="container")
+
 
     observable_scatter = ScriptX("session-01/obs-scatter-dist.js", type="module")
 
@@ -145,7 +147,8 @@ def init_app(db, rt, route, tablename, **kwargs):
             )
         )
         grid = StyledGrid(scatter)
-        return Title("Wohnorte"), Main(grid, update_data, observable_scatter, cls="container")
+        return Title("Einführung"), Main(grid, update_data, observable_scatter, cls="container")
+
 
     observable_hist_times = ScriptX("session-01/obs-hist-getuptime.js", type="module")
 
@@ -156,7 +159,8 @@ def init_app(db, rt, route, tablename, **kwargs):
             header=H2("Wann bist du heute morgen aufgestanden?"),
         )
         grid = StyledGrid(hist)
-        return Title("Wohnorte"), Main(grid, update_data, observable_hist_times, cls="container")
+        return Title("Einführung"), Main(grid, update_data, observable_hist_times, cls="container")
+
 
     observable_boxp_grade = ScriptX("session-01/obs-boxp-grade.js", type="module")
 
@@ -171,7 +175,7 @@ def init_app(db, rt, route, tablename, **kwargs):
             )
         )
         grid = StyledGrid(plot)
-        return Title("Wohnorte"), Main(grid, update_data, observable_boxp_grade, cls="container")
+        return Title("Einführung"), Main(grid, update_data, observable_boxp_grade, cls="container")
 
 
     observable_scatter_time = ScriptX("session-01/obs-scatter-dist-time.js", type="module")
@@ -183,7 +187,7 @@ def init_app(db, rt, route, tablename, **kwargs):
             header=H2("Wer muss am frühesten aufstehen?"),
         )
         grid = StyledGrid(scatter)
-        return Title("Wohnorte"), Main(grid, update_data, observable_scatter_time, cls="container")
+        return Title("Einführung"), Main(grid, update_data, observable_scatter_time, cls="container")
 
 
     observable_map_dens = ScriptX("session-01/obs-map-dens.js", type="module")
@@ -195,7 +199,7 @@ def init_app(db, rt, route, tablename, **kwargs):
             header=H2("Kerndichteschätzung der Studierendenherkunft"),
         )
         grid = StyledGrid(plot)
-        return Title("Wohnorte"), Main(grid, update_data, observable_map_dens, cls="container")
+        return Title("Einführung"), Main(grid, update_data, observable_map_dens, cls="container")
 
 
 # SERVER AND DB INITIALIZATION 

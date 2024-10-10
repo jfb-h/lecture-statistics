@@ -62,7 +62,7 @@ function scatter() {
             Plot.dot(dists, { y: "dist_current", x: "dist_before" }),
             Plot.crosshair(dists, { y: "dist_current", x: "dist_before", color: "blue" }),
             isoline.checked ? Plot.link({ length: 1 }, { x1: 0, x2: 500, y1: 0, y2: 500, stroke: "black", strokeOpacity: 0.2 }) : [],
-            regression.checked ? Plot.linearRegressionY(dists, { y: "dist_current", x: "dist_before" }) : []
+            regression.checked ? Plot.linearRegressionY(dists, { y: "dist_current", x: "dist_before", stroke: "blue" }) : []
         ],
         x: { label: "Umzugsdistanz (km)", domain: [0, max_before] },
         y: { label: "Distanz zur Uni (km)", domain: [0, max_current] },

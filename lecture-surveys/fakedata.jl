@@ -42,7 +42,7 @@ const SUBJECTS = [
     "Informatik",
     "KI",
     "Soziologie",
-    "Politikwissenschaften",
+    "Politik",
     "VWL",
     "BWL",
     "Andere",
