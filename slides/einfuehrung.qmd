@@ -14,12 +14,9 @@ format:
         chalkboard:
             theme: whiteboard
             boardmarker-width: 2
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
-# Ankündigung: Skilager
+# Ankündigung
 
 # Kennenlernen
 
@@ -280,7 +277,7 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 ## Leistungsnachweis {.smaller}
 
 ::::: columns
-::: {.column width="60%"}
+::: {.column width="55%"}
 <div class ="card">
 <h3 style="font-size: 20px">
     Welche der folgenden Aussagen ist richtig? Bei einer rechtsschiefen Verteilung ist der Median...
@@ -293,7 +290,7 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 </ul>
 </div>
 :::
-::: {.column width="40%"}
+::: {.column width="45%"}
 - Die Vorlesung wird durch eine **Klausur** am letzten Vorlesungstermin (27. Januar) abgeschlossen.
 - Die Klausur prüft Kenntnisse der **Vorlesungs- und der Übungsinhalte** mittels eines Single-Choice-Verfahrens.
 - Single-Choice: Auswahlverfahren, bei dem **exakt eine** Option richtig ist.
