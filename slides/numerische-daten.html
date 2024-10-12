@@ -8,7 +8,7 @@
 <link href="numerische-daten_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="numerische-daten_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="numerische-daten_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.29">
+  <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
   <title>Einführung in die Statistik</title>
@@ -341,21 +341,25 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
-<section>
-<section id="daten-beschreiben" class="title-slide slide level1 center">
-<h1>Daten beschreiben</h1>
-
-</section>
-<section id="bilder-vs.-zahlen" class="slide level2">
-<h2>Bilder vs.&nbsp;Zahlen</h2>
+<section id="ein-bild-sagt-mehr-als-1000-worte" class="slide level2">
+<h2>Ein Bild sagt mehr als 1000 Worte</h2>
 <ul>
-<li><p>Bilder sind oft effektiver (ein Unterschied oder Trend wird offensichtlicher)</p></li>
-<li><p>Bilder sind oft effizienter (ein Unterschied oder Trend wird schneller erfasst)</p></li>
-<li><p>Aber: Bilder können existierende Zusammenhänge verschleiern oder nicht existente suggerieren</p></li>
+<li><p>Ein Bild ist oft <strong>effektiver</strong> als eine numerische Darstellung (ein Unterschied oder Trend wird offensichtlicher)</p></li>
+<li><p>Ein Bild ist oft <strong>effizienter</strong> als eine numerische Darstellung (ein Unterschied oder Trend wird schneller erfasst)</p></li>
+<li><p>Aber: Bilder können existierende Zusammenhänge <strong>verschleiern</strong> oder nicht existente <strong>suggerieren</strong></p></li>
 </ul>
 </section>
-<section id="effektivität-und-effizienz" class="slide level2">
-<h2>Effektivität und Effizienz</h2>
+<section id="ein-bild-sagt-mehr-als-1000-worte-1" class="slide level2">
+<h2>Ein Bild sagt mehr als 1000 Worte</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> 2001  2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012 
+-0.56 -0.79  0.77  0.84  0.97  2.68  3.14  1.88  1.19  0.75  1.97  2.33 </code></pre>
+</div>
+</div>
+</section>
+<section id="ein-bild-sagt-mehr-als-1000-worte-2" class="slide level2">
+<h2>Ein Bild sagt mehr als 1000 Worte</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code> 2001  2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012 
@@ -363,13 +367,18 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </div>
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="warum-visualisieren" class="slide level2">
-<h2>Warum Visualisieren?</h2>
+<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="experiment" class="slide level2">
+<h2>Experiment</h2>
+<ul>
+<li>Effektiv: Antworten zu Abb. / Tabelle, Zeitlimit -&gt; Fehlerraten vergleichen</li>
+<li>Effizient: In Paaren, Zeit stoppen bis Maximum gefunden</li>
+<li>Lügen mit Karten ?</li>
+</ul>
 </section>
 <section id="the-good-the-bad-and-the-ugly" class="slide level2">
 <h2>The good, the bad, and the ugly</h2>
-</section></section>
+</section>
 <section>
 <section id="grundprinzipien-der-visualisierung" class="title-slide slide level1 center">
 <h1>Grundprinzipien der Visualisierung</h1>
@@ -385,8 +394,11 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="trägerkombinationen-und-effizienz" class="slide level2">
 <h2>Trägerkombinationen und Effizienz</h2>
 </section>
-<section id="experiment" class="slide level2">
+<section id="experiment-1" class="slide level2">
 <h2>Experiment</h2>
+<ul>
+<li>Beispiele für Effektivität und Effizienz</li>
+</ul>
 </section></section>
 <section>
 <section id="datentypen-und-skalenniveaus" class="title-slide slide level1 center">
@@ -396,8 +408,16 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="numerische-und-kategorische-daten" class="slide level2">
 <h2>Numerische und kategorische Daten</h2>
 <ul>
-<li><strong>Numerisch</strong>: kontinuierlich, diskret (zählbar)</li>
-<li><strong>Kategorisch</strong>: nominal (ungeordnet), ordinal (geordnet)</li>
+<li><strong>Numerisch</strong>: kontinuierlich, diskret (zählbar)
+<ul>
+<li><strong>Kontinuierlich:</strong> Niederschlag, Einkommen, …</li>
+<li><strong>Diskret:</strong> Personen in Haushalt, Tore im Fußball, …</li>
+</ul></li>
+<li><strong>Kategorisch</strong>: nominal (ungeordnet), ordinal (geordnet)
+<ul>
+<li><strong>Nominal:</strong> Geschlecht, Studiengang, …</li>
+<li><strong>Ordinal:</strong> Bildungsabschluss, Likert-Rating, …</li>
+</ul></li>
 </ul>
 </section></section>
 <section>
@@ -411,7 +431,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="lagemaße" class="slide level2">
 <h2>Lagemaße</h2>
 
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="e-das-arithmetische-mittel" class="slide level2">
 <h2><span class="sq green">E</span> Das arithmetische Mittel</h2>
 <ul>
@@ -472,8 +492,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div><div class="column" style="width:50%;">
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link">
 </iframe>
-</div>
-</div>
+</div></div>
 </section>
 <section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload="true">
 <h2></h2>
@@ -482,7 +501,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Wie sehen die Umfragedaten aus?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>id</th>
@@ -533,8 +552,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <li>wohnart: <strong>kategorisch, nominal</strong></li>
 </ul></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="e-das-geometrische-mittel" class="slide level2">
 <h2><span class="sq green">E</span> Das geometrische Mittel</h2>
@@ -557,8 +575,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <li>BIP 2022:<br>
 <strong>3.673,8</strong> <span class="math inline">\(\times\)</span> (1 + 0,017) = 3.736,3</li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="d-das-geometrische-mittel" class="slide level2">
 <h2><span class="sq blue">D</span> Das geometrische Mittel</h2>
@@ -619,7 +636,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-5-1.png" width="672"></p>
+<p><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" width="672"></p>
 </figure>
 </div>
 </div>
@@ -627,8 +644,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div><div class="column" style="width:30%;">
 <p>Ungewichtetes arithm. Mittel:</p>
 <p>Gewichtetes arithm. Mittel:</p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="d-gewichtetes-geometrisches-mittel" class="slide level2">
 <h2><span class="sq blue">D</span> Gewichtetes geometrisches Mittel</h2>
@@ -684,8 +700,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 </div><div class="column" style="width:50%;">
 <iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen/qr" title="Survey link">
 </iframe>
-</div>
-</div>
+</div></div>
 </section>
 <section id="section-1" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/einkommen" data-preload="true">
 <h2></h2>
@@ -700,11 +715,11 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 <li>Wir können andere Quantile berechnen, z.B. um eine Aussage über einen “Großteil” (z.B. 90%-Perzentil) zu treffen.</li>
 </ul>
 
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152" class="r-stretch"></section>
+<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-7-1.png" width="1152" class="r-stretch"></section>
 <section id="e-quantile-und-boxplots" class="slide level2">
 <h2><span class="sq green">E</span> Quantile und Boxplots</h2>
 
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="unschlüssig" class="slide level2">
 <h2>Unschlüssig? ;)</h2>
 <p><img src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" height="500"></p>
@@ -927,80 +942,42 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       });
     </script>
     
-
     <script>
-
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
       // slide changes (different for each slide format).
-
       (function () {
-
         // dispatch for htmlwidgets
-
         function fireSlideEnter() {
-
           const event = window.document.createEvent("Event");
-
           event.initEvent("slideenter", true, true);
-
           window.document.dispatchEvent(event);
-
         }
-
-    
 
         function fireSlideChanged(previousSlide, currentSlide) {
-
           fireSlideEnter();
 
-    
-
           // dispatch for shiny
-
           if (window.jQuery) {
-
             if (previousSlide) {
-
               window.jQuery(previousSlide).trigger("hidden");
-
             }
-
             if (currentSlide) {
-
               window.jQuery(currentSlide).trigger("shown");
-
             }
-
           }
-
         }
-
-    
 
         // hookup for slidy
-
         if (window.w3c_slidy) {
-
           window.w3c_slidy.add_observer(function (slide_num) {
-
             // slide_num starts at position 1
-
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
           });
-
         }
 
-    
-
       })();
-
     </script>
-
-    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {

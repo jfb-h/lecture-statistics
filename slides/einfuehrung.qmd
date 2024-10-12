@@ -2,18 +2,18 @@
 title: Einführung in die Statistik
 subtitle: Einführung
 author: Dr. Jakob Hoffmann, Economic Geography Group
-css: custom.css
+lightbox: true
 execute:
     cache: true
     keep-ipynb: false
     keep-md: false
 format:
     revealjs:
+        # theme: [default, custom.scss]
+        css: custom.css
+        # embed-resources: true
         controls: true
         slide-number: true
-        chalkboard:
-            theme: whiteboard
-            boardmarker-width: 2
 ---
 
 # Ankündigung
@@ -41,6 +41,8 @@ format:
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter-time" background-interactive="true" data-preload="true"}
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/scatter" background-interactive="true" data-preload="true"}
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/hist-grade" background-interactive="true" data-preload="true"}
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/boxplot" background-interactive="true" data-preload="true"}
 
@@ -164,8 +166,8 @@ format:
 ::: {.column width="55%"}
 :::::: {.card}
 ```{r}
-#| fig-width: 6
-#| fig-height: 5.625
+#| fig-width: 5.5
+#| fig-height: 5
 #| class-output: card
 
 library(eurostat)
@@ -246,6 +248,9 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 
 ::::: columns
 ::: {.column width="40%"}
+<!-- <div class ="card"> -->
+<!-- <img src="images/syllabus.png"></img> -->
+<!-- </div> -->
 ![](images/syllabus.png){.lightbox .shadow}
 [**Moodle PW**: S1DTF9W](https://moodle.lmu.de/enrol/index.php?id=11572)
 :::
@@ -278,7 +283,7 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 
 ::::: columns
 ::: {.column width="55%"}
-<div class ="card">
+<div class ="card" style="padding: 20px; width: 480px">
 <h3 style="font-size: 20px">
     Welche der folgenden Aussagen ist richtig? Bei einer rechtsschiefen Verteilung ist der Median...
 </h3>
