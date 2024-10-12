@@ -35,7 +35,7 @@ end
 
 const SUBJECTS = [
     "Biologie",
-    "Gephysik",
+    "Geophysik",
     "Experimentalphysik",
     "Meteorologie",
     "Statistik",
@@ -57,7 +57,7 @@ end
 function simulate_grade(subject)
     s = findfirst(==(subject), SUBJECTS)
     subjm = GRADEMEANS[s]
-    grade = min(Int(floor(subjm + randn() * 2)), 15)
+    grade = max(0, min(Int(floor(subjm + randn() * 2)), 15))
     (; grade)
 end
 
