@@ -1,0 +1,507 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Datentypen und Visualisierung"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
+execute:
+    cache: true
+    keep-ipynb: false
+    keep-md: false
+format:
+    revealjs:
+        css: custom.css
+        controls: true
+        slide-number: true
+        # embed-resources: true
+        chalkboard:
+            theme: whiteboard
+            boardmarker-width: 2
+---
+
+```{r}
+#| cache: false
+
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(viridis)
+library(patchwork)
+library(stringr)
+
+theme_set(theme_tufte(base_family = "Arial"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+```
+
+# Datentypen
+
+## Numerische und kategorische Daten
+
+-   **Numerisch**
+    - **Kontinuierlich**: Niederschlag, Temperatur
+    - **Diskret** (zählbar): Personen in Haushalt, Tore im Fußball
+
+<hr>
+
+-   **Kategorisch**
+    - **Nominal** (ungeordnet): Geschlecht, Studiengang
+    - **Ordinal** (geordnet): Bildungsabschluss, Likert-Rating
+
+
+## Beispiele
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/datentypen" title="Survey preview"> </iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/datentypen/qr" title="Survey link"> </iframe>
+:::
+:::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/datentypen/results" background-interactive="true" data-preload="true"}
+
+
+# Grundprinzipien der Visualisierung
+
+## Ein Bild sagt mehr als 1000 Worte
+<!-- # Deskriptive Statistik und explorative Datenanalyse (EDA) -->
+-   Ein Bild ist oft **effektiver** als eine numerische Darstellung (ein Unterschied oder Trend wird
+    offensichtlicher)
+
+-   Ein Bild ist oft **effizienter** als eine numerische Darstellung (ein Unterschied oder Trend wird
+    schneller erfasst)
+
+-   Aber: Bilder können existierende Zusammenhänge **verschleiern** oder
+    nicht existente **suggerieren**
+
+
+## Ein Bild sagt mehr als 1000 Worte
+
+```{r}
+set.seed(123)
+data <- data.frame(x=2001:2012, y=cumsum(rnorm(12)))
+
+s = data$y
+names(s) = data$x
+print(round(s, 2))
+```
+
+## Ein Bild sagt mehr als 1000 Worte
+
+```{r}
+set.seed(123)
+data <- data.frame(x=2001:2012, y=cumsum(rnorm(12)))
+s = data$y
+names(s) = data$x
+print(round(s, 2))
+ggplot(data, aes(lubridate::make_date(x,1, 1), y)) +
+    geom_line() +
+    geom_point() +
+    labs(x="", y="")
+```
+
+## Anscombe's Quartet
+
+![](images/anscombe-data.png){height=400}
+
+
+## Anscombe's Quartet
+
+::::: columns
+::: {.column width="45%"}
+![](images/anscombe.png)
+:::
+::: {.column width="55%"}
+- Alle vier Datensätze haben die gleichen statistischen Zusammenfassungen.
+- Die Datensätze unterscheiden sich deutlich hinsichtlich der zugrundeliegenden Trends.
+:::
+:::::
+
+
+## Ausreißer erkennen
+
+::::: columns
+::: {.column width="45%"}
+![](images/outlier.png){height=500}
+:::
+::: {.column width="55%"}
+- Je nachdem ob Südafrika eingeschlossen wird, liegt ein deutlicher oder ein minimaler Zusammenhang zwischen Wahlbeteiligung und Einkommen vor.
+- Anomalien sind i.d.R. leichter visuell zu identifizieren.
+:::
+:::::
+
+
+## The good, the bad, and the ugly
+
+::: {.r-stack style="height: 80%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/intro-dataviz_files/figure-html/wsj-vaccines-example-1.png){.fragment height="550" style="border: 1px solid"}
+![](https://socviz.co/assets/ch-01-excel-3d-column-chart-values.png){.fragment .absolute width="900" top=150 left=50}
+<!-- ![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/img/class2_8.jpg){.fragment .absolute width="600" top=100 left=0} -->
+![](https://socviz.co/assets/ch-01-chartjunk-life-expectancy.png){.fragment .absolute width="600" bottom=10 right=50}
+:::
+
+<!-- [Quelle: Healy 2018, Irizarry 2019]{.ref} -->
+
+
+## Visuelle Informationsträger
+
+![](https://socviz.co/assets/ch-01-cleveland-task-types.png){height="200px"}
+
+- Uns steht eine Vielzahl an visuellen Informationsträgern bzw. Kanälen zur Verfügung (Lage, Länge, Fläche, Farbe).
+- Die menschliche Wahrnehmung übersetzt diese Kanäle unterschiedlich effektiv in akkurate Information.
+
+<!-- [Quelle: Healy 2018, Heer & Bostock 2010]{.ref} -->
+
+
+## Visuelle Informationsträger {.smaller}
+![](images/heer-bostock-results.png){height="500px"}
+
+<!-- [Quelle: Healy 2018, Heer & Bostock 2010]{.ref} -->
+
+
+## Kreisdiagramm vs. Säulendiagramm {.smaller}
+
+::::: columns
+::: {.column width="70%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/two-barplots-1.png)
+:::
+::: {.column width="30%"}
+- In den meisten Fällen sind Säulendiagramme oder simple Tabellen besser geeignet als Kreisdiagramme.
+- 'Donutdiagramme' sind eine Verbesserung, da nur Flächen und nicht zusätzlich Winkel als Kanäle eingesetzt werden.
+:::
+:::::
+
+
+## Kreisdiagramm vs. Säulendiagramm {.smaller}
+
+::::: columns
+::: {.column width="70%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/donutchart-1.png){height="400px"}
+:::
+::: {.column width="30%"}
+- In den meisten Fällen sind Säulendiagramme oder simple Tabellen besser geeignet als Kreisdiagramme.
+- 'Donutdiagramme' sind eine Verbesserung, da nur Flächen und nicht zusätzlich Winkel als Kanäle eingesetzt werden.
+:::
+:::::
+
+
+## Gestapelte Säulendiagramme {.smaller}
+
+```{r, fig.width=10, fig.height=5}
+y = 2000:2020
+g = LETTERS[1:4]
+df = data.frame(
+    year = rep(y, each=length(g)),
+    g = rep(g, length(y)),
+    v = rlnorm(length(y) * length(g), mean=2, sd=0.5))
+
+ggplot(df, aes(x = year, y = v, fill = g)) +
+    geom_bar(stat="identity") +
+    #scale_fill_tableau() +
+    labs(x="", y="", fill="")
+```
+
+Gestapelte Säulendiagramme kombinieren absolute und relative Häufigkeiten, wobei die Entwicklung für die meisten Kategorien schwer nachzuvollziehen ist.
+
+
+## Gestapelte Säulendiagramme {.smaller}
+
+```{r, fig.width=10, fig.height=5}
+df = df |> group_by(year) |> mutate(s = v / sum(v))
+
+p1 = ggplot(df, aes(x = year, y = v)) + geom_bar(stat="sum") +
+    labs(x="", y="") +
+    theme(
+        legend.position="none", axis.title.x=element_blank(),
+        axis.text.x=element_blank(), axis.ticks.x=element_blank()
+    )
+
+p2 = ggplot(df, aes(x = year, y = s, fill = g)) +
+    geom_bar(stat="identity", position="stack") +
+    #scale_fill_tableau() +
+    labs(x="", y="", fill="") + theme(legend.position="bottom")
+
+p1 / p2
+```
+
+Abbildungen, die mehrere Informationen kombinieren (z.B. absolute und relative Häufigkeiten), können zur Steigerung der Lesbarkeit oft aufgeteilt werden.
+
+
+## Farbskalen
+
+**Sequentiell**
+
+```{r, fig.width=8, fig.height=0.8}
+library(colorspace)
+
+COL = sequential_hcl(5, palette="Purples 3")
+
+par(mar=c(0,0,2,0))
+plot(NULL, xlim=c(0,length(COL)), ylim=c(0,1), xlab="", ylab="", xaxt="n", yaxt="n", bty="n")
+title( main="Geordnete Information, hoch - niedrig", adj=0, col.main="grey70")
+
+rect(0:(length(COL)-1), 0, 1:length(COL), 1, col=COL)
+```
+
+**Divergierend**
+
+```{r, fig.width=8, fig.height=0.8}
+COL = diverging_hcl(5, palette="Blue-Red")
+
+par(mar=c(0,0,2,0))
+plot(NULL, xlim=c(0,length(COL)), ylim=c(0,1), xlab="", ylab="", xaxt="n", yaxt="n", bty="n")
+title( main="Geordnete Information, neutraler Mittelpunkt", adj=0, col.main="grey70")
+
+rect(0:(length(COL)-1), 0, 1:length(COL), 1, col=COL)
+```
+
+**Qualitativ**
+
+```{r, fig.width=8, fig.height=0.8}
+COL = qualitative_hcl(5, palette="Dark 3")
+
+par(mar=c(0,0,2,0))
+plot(NULL, xlim=c(0,length(COL)), ylim=c(0,1), xlab="", ylab="", xaxt="n", yaxt="n", bty="n")
+title( main="Ungeordnete Information", adj=0, col.main="grey70")
+
+rect(0:(length(COL)-1), 0, 1:length(COL), 1, col=COL)
+```
+
+
+## Farbskalen
+<iframe width="850" height="700" src="https://datawrapper.dwcdn.net/3jiNL/2/"> </iframe>
+
+
+## Farbskalen
+<iframe width="850" height="700" src="https://datawrapper.dwcdn.net/3zViQ/4/"> </iframe>
+
+
+## Farbe vs. Form
+![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-dual-search-1.png){.card}
+
+- Bestimmte Kanäle (Farbe) erlauben in vielen Situationen eine schnellere Identifikation als andere (Form).
+- Kanalkombinationen können schnell zu visueller Überforderung führen.
+
+
+# Richtlinien
+
+
+## Wissen, wann die 0 relevant ist
+
+::::: columns
+::: {.column width="50%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/img/Bush-cuts.png){height=300}
+:::
+::: {.column width="50%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/img/venezuela-election.png){height=300}
+:::
+:::::
+
+- Bei Säulendiagrammen wird impliziert, dass die hinterlegte Größe proportional zur sichtbaren Länge ist.
+- Wenn die relevante Achse die 0 nicht enthält, werden Unterschiede verzerrt dargestellt.
+
+
+## Wissen, wann die 0 relevant ist
+
+::::: columns
+::: {.column width="50%"}
+![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-law-enrollments-1.png){height=300}
+:::
+::: {.column width="50%"}
+![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-law-enrollments-2.png){height=300}
+:::
+:::::
+
+- Wann die 0 bei anderen Darstellungstypen eine relevante Referenz ist, hängt von den zugrundeliegenden Daten und vom Ziel der Darstellung ab.
+
+
+## Wissen, wann die 0 relevant ist
+
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/points-plot-not-from-zero-1.png)
+
+
+## Größen nicht verzerren
+
+::::: columns
+::: {.column width="60%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/img/state-of-the-union.png){height=300}
+:::
+::: {.column width="40%"}
+```{r, fig.width=3, fig.height=3.3}
+ctr = c("US", "CN", "JP", "DE", "FR")
+df = data.frame(x = 1,
+    y=factor(ctr, levels=rev(ctr)),
+    z=c(14.6, 5.7, 5.3, 3.3, 2.5)
+)
+
+ggplot(df, aes(x = x, y = y)) +
+  geom_point(aes(size = z), shape = 21, fill = "grey") +
+  geom_text(aes(x = x + 0.1, label = y)) +
+  scale_size(range = c(3, 15)) +
+  xlim(0.8, 1.2) +
+  theme_void() +
+  guides(size="none")
+```
+:::
+:::::
+
+- Um welchen Faktor ist das amerikanische BIP größer als das chinesische?
+- Fläche ist als visueller Kanal dominanter und sollte daher der ausschlaggebende Informationsträger sein.
+
+
+## Die Daten zeigen
+
+::::: columns
+::: {.column width="40%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/show-data-1-1.png){height=300}
+:::
+::: {.column width="60%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/show-points-with-jitter-1.png){height=300}
+:::
+:::::
+
+- Wenn möglich, sollten alle Daten gezeigt werden und nicht nur eine Zusammenfassung (z.B. Mittelwerte).
+- Das Streudiagram gibt über die zentrale Tendenz *und* die Variation in den Daten Aufschluss.
+
+<!-- ![](https://imgs.xkcd.com/comics/statistics_2x.png){height="500"} -->
+
+
+## Vergleiche erleichtern
+
+::::: columns
+::: {.column width="50%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/common-axes-histograms-wrong-1.png)
+:::
+::: {.column width="50%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/common-axes-histograms-right-2-1.png)
+:::
+:::::
+
+- Darstellungen sollten so gewählt werden, dass Vergleiche der relevanten Unterschiede möglichst einfach sind.
+- In welcher der beiden Darstellungen werden Körpergrößenunterschiede deutlicher?
+
+
+## Kategorien ordnen
+
+::::: columns
+::: {.column width="55%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/dataviz-principles_files/figure-html/do-not-order-alphabetically-1.png){height=500}
+:::
+::: {.column width="45%"}
+- Visualisierungssoftware ordnet Kategorien oft alphabetisch.
+- I.d.R. gibt es sinnvollere Reihenfolgen, z.B. auf- / absteigend entsprechend der dargestellten Größe.
+:::
+:::::
+
+
+## Nicht zu viele Kategorien zeigen
+
+![](https://socviz.co/dataviz-pdfl_files/figure-html4/ch-01-multichannel-1.png)
+
+- Eine Vielzahl an Kategorien kann schnell überfordern, insbesondere wenn mehrere Kanäle eingesetzt werden.
+
+
+## Nicht zu viele Kategorien zeigen
+
+```{r, fig.width=10, fig.height=6}
+library(gapminder)
+
+gapminder |>
+    filter(year == 2007) |>
+    ggplot(aes(gdpPercap, lifeExp, color=continent)) +
+    geom_point(shape=1, size=1, stroke=1.2, alpha=0.8) +
+    scale_x_log10() +
+    labs(
+        x = "Pro-Kopf-Einkommen ($US)",
+        y = "Lebenserwartung (Jahre)",
+        color = "Kontinent",
+        caption = "Datenquelle: gapminder.org",
+        title = "Lebenserwartung und BIP",
+        subtitle = "Bereinigtes Pro-Kopf-BIP und Lebenserwartung bei Geburt für 142 Länder im Jahr 2007"
+    )
+```
+
+## Nicht zu viele Kategorien zeigen
+
+```{r, fig.width=10, fig.height=6}
+library(gapminder)
+
+gapminder |>
+    filter(year == 2007) |>
+    mutate(europe = ifelse(continent == "Europe", "European countries", "Other countries")) |>
+    ggplot(aes(gdpPercap, lifeExp, color=europe, size=europe)) +
+    geom_point(shape=16, stroke=1.2, alpha=0.8) +
+    scale_x_log10() +
+    scale_color_manual(values=c("orange", "grey60")) +
+    scale_size_manual(values=c(2.5, 0.6), guide='none') +
+    guides(size = NULL) +
+    labs(
+        x = "Pro-Kopf-Einkommen ($US)",
+        y = "Lebenserwartung (Jahre)",
+        color = NULL,
+        caption = "Datenquelle: gapminder.org",
+        title = "Lebenserwartung und BIP",
+        subtitle = "Bereinigtes Pro-Kopf-BIP und Lebenserwartung bei Geburt für 142 Länder im Jahr 2007"
+    )
+```
+
+
+## Edward Tufte
+
+::::: columns
+::: {.column width="50%"}
+![](images/tufte.jpg){.card height=500}
+:::
+::: {.column width="50%" style="font-size: 22pt"}
+"Graphical excellence is the well-designed presentation of interesting data - a matter of **substance, of statistics, and of design** ...[It] consists of comples ideas communicated with clarity, precision, and efficiency. ...[It] is that which gives to the viewer the **greatest number of ideas** in the **shortest time** with the **least ink** in the **smallest space**... [it] is nearly always **multivariate** ... And graphical excellence requires **telling the truth** about the data (Tufte, 1983, p. 51).
+:::
+:::::
+
+
+## Das Daten-Tinte-Verhältnis maximieren {.smallheader}
+
+![](https://deliveringdataanalytics.com/wp-content/uploads/2022/11/Toggle-Artboard-1-100-1024x576.jpg)
+
+
+## Das Daten-Tinte-Verhältnis maximieren {.smallheader}
+
+![](https://deliveringdataanalytics.com/wp-content/uploads/2022/11/Data-To-Ink-Ratio-Bold-Inside.gif)
+
+
+## Referenzen Visualisierung
+
+::::: columns
+::: {.column width="50%"}
+![](https://socviz.co/assets/dv-cover-pupress.jpg){.shadow height="550px"}
+:::
+::: {.column width="50%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/cover.png){.shadow height="550px"}
+:::
+:::::
+
+
+## Prüfungsfragen {.smaller}
+
+- Warum sind Säulendiagramme Kreisdiagrammen in den meisten Fällen zu bevorzugen?
+
+- In welcher der folgenden Darstellungen sollten Sie die 0 einbeziehen?
+    a. Gegenüberstellung der im Schnitt erzielten Punkte von männlichen und weiblichen Studierenden als Säulendiagramm
+    b. Entwicklung der CO2-Konzentration in der Atmosphäre über die vergangenen 30 Jahre als Liniendiagramm
+
+- Was ist ein Nachteil der in Szenario a. dargestellten Visualisierungsstrategie und was wären Alternativen?
+
+- Würden Sie zur Darstellung des Jahrestemperaturverlaufs in München auf eine divergierende oder eine sequentielle Farbskala zurückgreifen?
+
+
+
