@@ -190,6 +190,18 @@ def init_app(db, rt, route, tablename, **kwargs):
         return Title("Einführung"), Main(grid, update_data, observable_scatter_time, cls="container")
 
 
+    observable_hist_grades = ScriptX("session-01/obs-hist-grade.js", type="module")
+
+    @rt(f"/{route}/hist-grade")
+    async def get():
+        plot = StyledCard(
+            PlotContainer("hist-grade"),
+            header=H2("Häufigkeitsverteilung der Mathematiknoten"),
+        )
+        grid = StyledGrid(plot)
+        return Title("Einführung"), Main(grid, update_data, observable_hist_grades, cls="container")
+
+
     observable_map_dens = ScriptX("session-01/obs-map-dens.js", type="module")
 
     @rt(f"/{route}/density")
@@ -211,6 +223,8 @@ db = database("surveys.db")
 
 app, rt = fast_app(live=True, hdrs=(leaflet_css, leaflet_js, pico_leaflet))
 
-init_app(db, rt, route, table, lat_current=float, lon_current=float, lat_before=float, lon_before=float, place_current=str, place_before=str, time=str, minor=str, grade=int)
+init_app(db, rt, route, table,
+         lat_current=float, lon_current=float, lat_before=float, lon_before=float,
+         place_current=str, place_before=str, time=str, minor=str, grade=int)
 
 serve(port=8081)

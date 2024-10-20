@@ -1,6 +1,0 @@
-id,lat_current,lon_current,lat_before,lon_before,place_current,place_before,time,minor,grade
-1,48.1452,11.5668,51.1984,6.8415,"München","Düsseldorf","06:30",VWL,10
-2,48.1401,11.5885,48.1401,11.5885,"München","München","06:00",BWL,5
-3,49.2513,11.2366,49.2513,11.2366,Allersberg,Allersberg,"07:00",Statistik,14
-4,47.9746,11.1828,47.9746,11.1828,Andechs,Andechs,"06:00",BWL,8
-5,48.1667,11.3167,51.1984,6.8415,Eichenau,"Düsseldorf","07:30",VWL,10
