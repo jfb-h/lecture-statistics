@@ -78,34 +78,35 @@ function histograms() {
     const plotCurrent = Plot.plot({
         width: containerCurrentWidth,
         height: containerBeforeHeight,
-        style: {fontSize: "16px"},
+        style: { fontSize: "16px" },
         marginLeft: 50,
         marginRight: 50,
         marginBottom: 50,
         marginTop: 50,
 
         marks: [
-            Plot.rectY(dist_current.filter(d => d < q2 + 3.5 * iqr), Plot.binX({y: "count"}, {x:  {value: (d) => d, interval: 1}})),
+            // Plot.rectY(dist_current.filter(d => d < q2 + 3.5 * iqr), Plot.binX({y: "count"}, {x:  {value: (d) => d, interval: 1}})),
+            Plot.rectY(dist_current, Plot.binX({ y: "count" }, { x: { value: (d) => d } })),
             Plot.ruleY([0])
         ],
-        x: { label: "Distanz (km)"},
+        x: { label: "Distanz (km)" },
         y: { label: "Häufigkeit" }
     });
 
     const plotBefore = Plot.plot({
         width: containerBeforeWidth,
         height: containerBeforeHeight,
-        style: {fontSize: "16px"},
+        style: { fontSize: "16px" },
         marginLeft: 50,
         marginRight: 50,
         marginBottom: 50,
         marginTop: 50,
 
         marks: [
-            Plot.rectY(dist_before, Plot.binX({y: "count"}, {x: d => d})),
+            Plot.rectY(dist_before, Plot.binX({ y: "count" }, { x: d => d })),
             Plot.ruleY([0])
         ],
-        x: { label: "Distanz (km)"},
+        x: { label: "Distanz (km)" },
         y: { label: "Häufigkeit" }
     });
 

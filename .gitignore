@@ -2,6 +2,7 @@
 __pycache__
 .sesskey
 lecture-surveys/surveys.db*
+lecture-surveys/data/
 slides/slides.Rproj
 slides/.Rproj.user/
 slides/*_cache/

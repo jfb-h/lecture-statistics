@@ -18,7 +18,13 @@ const parser = d3.timeParse("%H:%M");
 
 let getuptimes = [];
 function updateData(data) {
-    getuptimes = data.map(d => parser(d.time));
+    // getuptimes = data.map(d => parser(d.time));
+    getuptimes = data.map(d => {
+        let date = parser(d.time);
+        let offset = date.getTimezoneOffset();
+        date.setMinutes(date.getMinutes() - offset);
+        return date;
+    });
 }
 
 function hist() {

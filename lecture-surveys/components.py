@@ -3,8 +3,8 @@ import qrcode
 import qrcode.image.svg
 
 
-def Survey(title, items):
-    return Titled(title, Hr(), items, style={"max-width": "600px"})
+def Survey(title, *items):
+    return Titled(title, Hr(), *items, style={"max-width": "600px"})
 
 def Items(*args, hx_post):
     return Form(Fieldset(*args, Button("Absenden")), hx_post=hx_post)
