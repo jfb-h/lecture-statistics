@@ -11,21 +11,29 @@
 .blue {
   color: #7fd2e2
 }
+
 .yellow {
   color: yellow
 }
+
 .red {
   color: red
 }
+
 .green {
   color: #36f251
 }
 
 .smallheader {
-    font-size: 2.0rem;
-    display: flex;
-    height: 100vh;
-    align-items: center;
+  font-size: 2.0rem;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+}
+
+.ref {
+  font-size: 16px;
+  vertical-align: bottom;
 }
 
 .shadow {
@@ -34,16 +42,16 @@
 }
 
 .card {
-    border-radius: 8px;
-    padding: 10px;
-    width: max-content;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-    margin: 20px 30px 20px 10px;
+  border-radius: 8px;
+  padding: 10px;
+  width: max-content;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  margin: 20px 30px 20px 10px;
 }
 
 .examlist {
-    list-style-type: '☐';
-    padding: 10px 10px;
+  list-style-type: '☐';
+  padding: 10px 10px;
 }
 
 .examlist li {
@@ -64,4 +72,3 @@
   color: red;
   font-size: 30px;
 }
-

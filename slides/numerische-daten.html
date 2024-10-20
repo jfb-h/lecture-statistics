@@ -7,7 +7,10 @@
 <link href="numerische-daten_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="numerische-daten_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="numerische-daten_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="numerische-daten_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="numerische-daten_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="numerische-daten_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="numerische-daten_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="numerische-daten_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
@@ -330,7 +333,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Deskriptive Statistik I: Numerische Daten</p>
+  <p class="subtitle">Desktiptive Statistik: Numerische Daten</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -341,114 +344,40 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
-<section id="ein-bild-sagt-mehr-als-1000-worte" class="slide level2">
-<h2>Ein Bild sagt mehr als 1000 Worte</h2>
-<ul>
-<li><p>Ein Bild ist oft <strong>effektiver</strong> als eine numerische Darstellung (ein Unterschied oder Trend wird offensichtlicher)</p></li>
-<li><p>Ein Bild ist oft <strong>effizienter</strong> als eine numerische Darstellung (ein Unterschied oder Trend wird schneller erfasst)</p></li>
-<li><p>Aber: Bilder können existierende Zusammenhänge <strong>verschleiern</strong> oder nicht existente <strong>suggerieren</strong></p></li>
-</ul>
-</section>
-<section id="ein-bild-sagt-mehr-als-1000-worte-1" class="slide level2">
-<h2>Ein Bild sagt mehr als 1000 Worte</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code> 2001  2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012 
--0.56 -0.79  0.77  0.84  0.97  2.68  3.14  1.88  1.19  0.75  1.97  2.33 </code></pre>
-</div>
-</div>
-</section>
-<section id="ein-bild-sagt-mehr-als-1000-worte-2" class="slide level2">
-<h2>Ein Bild sagt mehr als 1000 Worte</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code> 2001  2002  2003  2004  2005  2006  2007  2008  2009  2010  2011  2012 
--0.56 -0.79  0.77  0.84  0.97  2.68  3.14  1.88  1.19  0.75  1.97  2.33 </code></pre>
-</div>
-
-</div>
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="experiment" class="slide level2">
-<h2>Experiment</h2>
-<ul>
-<li>Effektiv: Antworten zu Abb. / Tabelle, Zeitlimit -&gt; Fehlerraten vergleichen</li>
-<li>Effizient: In Paaren, Zeit stoppen bis Maximum gefunden</li>
-<li>Lügen mit Karten ?</li>
-</ul>
-</section>
-<section id="the-good-the-bad-and-the-ugly" class="slide level2">
-<h2>The good, the bad, and the ugly</h2>
-</section>
-<section>
-<section id="grundprinzipien-der-visualisierung" class="title-slide slide level1 center">
-<h1>Grundprinzipien der Visualisierung</h1>
-
-</section>
-<section id="visuelle-informationsträger" class="slide level2">
-<h2>Visuelle Informationsträger</h2>
-<ul>
-<li>Winkel, Fläche, Höhe</li>
-<li>Pie, Donut, Tabelle, Bar</li>
-</ul>
-</section>
-<section id="trägerkombinationen-und-effizienz" class="slide level2">
-<h2>Trägerkombinationen und Effizienz</h2>
-</section>
-<section id="experiment-1" class="slide level2">
-<h2>Experiment</h2>
-<ul>
-<li>Beispiele für Effektivität und Effizienz</li>
-</ul>
-</section></section>
-<section>
-<section id="datentypen-und-skalenniveaus" class="title-slide slide level1 center">
-<h1>Datentypen und Skalenniveaus</h1>
-
-</section>
-<section id="numerische-und-kategorische-daten" class="slide level2">
-<h2>Numerische und kategorische Daten</h2>
-<ul>
-<li><strong>Numerisch</strong>: kontinuierlich, diskret (zählbar)
-<ul>
-<li><strong>Kontinuierlich:</strong> Niederschlag, Einkommen, …</li>
-<li><strong>Diskret:</strong> Personen in Haushalt, Tore im Fußball, …</li>
-</ul></li>
-<li><strong>Kategorisch</strong>: nominal (ungeordnet), ordinal (geordnet)
-<ul>
-<li><strong>Nominal:</strong> Geschlecht, Studiengang, …</li>
-<li><strong>Ordinal:</strong> Bildungsabschluss, Likert-Rating, …</li>
-</ul></li>
-</ul>
-</section></section>
 <section>
 <section id="numerische-daten-beschreiben" class="title-slide slide level1 center">
 <h1>Numerische Daten beschreiben</h1>
 
 </section>
-<section id="entfernung-zur-uni" class="slide level2">
-<h2>Entfernung zur Uni</h2>
-</section>
 <section id="lagemaße" class="slide level2">
 <h2>Lagemaße</h2>
-
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="e-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq green">E</span> Das arithmetische Mittel</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="das-arithmetische-mittel" class="slide level2">
+<h2>Das arithmetische Mittel</h2>
 <ul>
 <li>Das <em>arithmetische Mittel</em> fasst eine Datenreihe in einer Zahl zusammen, die deren “Mitte” bzw. “zentrale Tendenz” darstellen soll.</li>
 <li>Das arithmetische Mittel ist damit ein Beispiel für ein <em>Lagemaß</em>.</li>
 <li>Das arithmetische Mittel ist der geläufigste Mittelwert, aber nicht der einzige.</li>
 </ul>
 </section>
-<section id="b-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Das arithmetische Mittel</h2>
+<section id="das-arithmetische-mittel-1" class="slide level2">
+<h2>Das arithmetische Mittel</h2>
 <p>Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte. Für die folgende Datenreihe <span class="math inline">\(x\)</span> mit <span class="math inline">\(n=4\)</span> Werten:</p>
 <p><span class="math display">\[x = {179, 163, 180, 192}\]</span></p>
 <p>gilt also:</p>
 <p><span class="math display">\[\textrm{Arith. Mittel} = \bar{x} = \frac{179 + 163 + 180 + 192}{4} = 178,5\]</span></p>
 </section>
-<section id="d-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Das arithmetische Mittel</h2>
+<section id="das-arithmetische-mittel-2" class="slide level2">
+<h2>Das arithmetische Mittel</h2>
 <p>Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte.</p>
 <p>Etwas genereller können wir diese Definition mit Summennotation formalisieren:</p>
 <p><span class="math display">\[\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n} = \frac{1}{n} \sum_{i=1}^n{x_i}\]</span></p>
@@ -468,8 +397,8 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div>
 </section>
-<section id="e-dummyvariablen" class="slide level2">
-<h2><span class="sq green">E</span> Dummyvariablen</h2>
+<section id="dummyvariablen" class="slide level2">
+<h2>Dummyvariablen</h2>
 <p>Im Fall einer Dummyvariable (die die Werte 0 oder 1 annehmen kann), gibt das arithmetische Mittel eine Proportion an:</p>
 <p><span class="math display">\[x =
     \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}},
@@ -487,14 +416,14 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <p>Wie viel geben Studierende in München für das Wohnen aus?</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation" title="Survey preview">
 </iframe>
 </div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/qr" title="Survey link">
 </iframe>
 </div></div>
 </section>
-<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload="true">
+<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/results" data-preload="true">
 <h2></h2>
 </section>
 <section id="wie-sehen-die-umfragedaten-aus" class="slide level2">
@@ -549,21 +478,21 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <li><p>Variablentypen:</p>
 <ul>
 <li>ausgaben: <strong>numerisch</strong></li>
-<li>wohnart: <strong>kategorisch, nominal</strong></li>
+<li>wohnart: <strong>kategorisch (nominal)</strong></li>
 </ul></li>
 </ul>
 </div></div>
 </section>
-<section id="e-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq green">E</span> Das geometrische Mittel</h2>
+<section id="das-geometrische-mittel" class="slide level2">
+<h2>Das geometrische Mittel</h2>
 <ul>
 <li>Bei Verhältnisskalen (Zahlen, die in einem multiplikativen Verhältnis zueinander stehen), sollte das <em>geometrische</em> und nicht das <em>arithmetische</em> Mittel eingesetzt werden.</li>
 <li>Ein typischer Fall sind <em>Wachstumsraten</em></li>
 <li>z.B. Bevölkerungsentwicklung, Investments, BIP-Wachstum</li>
 </ul>
 </section>
-<section id="b-bip-wachstum-in-deutschland" class="slide level2 smaller">
-<h2><span class="sq yellow">B</span> BIP-Wachstum in Deutschland</h2>
+<section id="bip-wachstum-in-deutschland" class="slide level2 smaller">
+<h2>BIP-Wachstum in Deutschland</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
 <p><img src="https://de.statista.com/graphic/1/2112/veraenderung-des-bruttoinlandprodukts-im-vergleich-zum-vorjahr.jpg" title="BIP Veränderung (Statista)" width="700"></p>
@@ -577,14 +506,14 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div></div>
 </section>
-<section id="d-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Das geometrische Mittel</h2>
+<section id="das-geometrische-mittel-1" class="slide level2">
+<h2>Das geometrische Mittel</h2>
 <p>Das geometrische Mittel ist definiert als die <span class="math inline">\(n\)</span>-te Wurzel des Produkts der Werte.</p>
 <p>Analog zur Summe im arithm. Mittel können wir das geom. Mittel mit der Produktnotation (<span class="math inline">\(\Pi\)</span>, groß Pi) definieren:</p>
 <p><span class="math display">\[\textrm{geom. Mittel} = \sqrt[n]{x_1 \times x_2 \times ... \times x_n} = \left( \prod_{i=1}^n x_i \right)^\frac{1}{n}\]</span></p>
 </section>
-<section id="b-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Das geometrische Mittel</h2>
+<section id="das-geometrische-mittel-2" class="slide level2">
+<h2>Das geometrische Mittel</h2>
 <div>
 <p>Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 <span class="math display">\[
     \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
@@ -604,16 +533,16 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div>
 </section>
-<section id="e-gewichtete-mittelwerte" class="slide level2">
-<h2><span class="sq green">E</span> Gewichtete Mittelwerte</h2>
+<section id="gewichtete-mittelwerte" class="slide level2">
+<h2>Gewichtete Mittelwerte</h2>
 <ul>
 <li>Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich gewichtet.</li>
-<li>In vielen Situationen muss z.B. für Größenunterschiede der Beobachtungseinheiten korrigiert werden.</li>
+<li>In vielen Situationen müssen z.B. Größenunterschiede der Beobachtungseinheiten korrigiert werden.</li>
 <li>In solchen Fällen können Werte für das geometrische oder arithmetische Mittel individuell gewichtet werden.</li>
 </ul>
 </section>
-<section id="d-gewichtetes-arithmetisches-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Gewichtetes arithmetisches Mittel</h2>
+<section id="gewichtetes-arithmetisches-mittel" class="slide level2">
+<h2>Gewichtetes arithmetisches Mittel</h2>
 <p>Das gewichtete arithmetische Mittel ist die Summe der gewichteten Werte geteilt durch die Summe der Gewichte.</p>
 <p>Für eine Datenreihe <span class="math inline">\(x\)</span> mit zugehörigen Gewichten <span class="math inline">\(w\)</span> gilt:</p>
 <p><span class="math display">\[\begin{align}
@@ -621,22 +550,22 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 &amp;= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i
 \end{align}\]</span></p>
 </section>
-<section id="b-gewichtetes-arithmetisches-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Gewichtetes arithmetisches Mittel</h2>
+<section id="gewichtetes-arithmetisches-mittel-1" class="slide level2">
+<h2>Gewichtetes arithmetisches Mittel</h2>
 <p>Für die Folgenden Werte <span class="math inline">\(x\)</span> (z.B. Körpergrößen) und Gewichte <span class="math inline">\(w\)</span> (z.B. Anzahl Beobachtungen):</p>
 <p><span class="math display">\[x = {163, 179, 180, 192} \ \ \ w = {3, 11, 4, 7}\]</span></p>
 <p>ergibt sich ein gewichtetes arithmetisches Mittel von:</p>
 <p><span class="math display">\[ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 \]</span></p>
 </section>
-<section id="b-regionale-einkommensverteilung" class="slide level2 smaller">
-<h2><span class="sq yellow">B</span> Regionale Einkommensverteilung</h2>
+<section id="regionale-einkommensverteilung" class="slide level2 smaller">
+<h2>Regionale Einkommensverteilung</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" width="672"></p>
+<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-4-1.png" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -646,36 +575,36 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <p>Gewichtetes arithm. Mittel:</p>
 </div></div>
 </section>
-<section id="d-gewichtetes-geometrisches-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Gewichtetes geometrisches Mittel</h2>
+<section id="gewichtetes-geometrisches-mittel" class="slide level2">
+<h2>Gewichtetes geometrisches Mittel</h2>
 <p>Im gewichteten geometrischen Mittel werden die Werte mit ihren zugehörigen Gewichten exponiert.</p>
 <p>Die Anzahl der Werte <span class="math inline">\(n\)</span> wird wie beim gewichteten arithm. Mittel durch die Summe der Gewichte ersetzt.</p>
 <p>Für eine Datenreihe <span class="math inline">\(x\)</span> mit zugehörigen Gewichten <span class="math inline">\(w\)</span> gilt:</p>
 <p><span class="math display">\[ \textrm{gew. geom. Mittel} = \left( \prod_{i=1}^n x_i^{w_i} \right)^{1 / \sum_{i=1}^n w_i} \]</span></p>
 </section>
-<section id="b-gewichtetes-geometrisches-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Gewichtetes geometrisches Mittel</h2>
-<p>Für die Folgenden Werte <span class="math inline">\(x\)</span> (z.B. Renditen) und Gewichte <span class="math inline">\(w\)</span> (z.B. Anzahl Anleihen):</p>
+<section id="gewichtetes-geometrisches-mittel-1" class="slide level2">
+<h2>Gewichtetes geometrisches Mittel</h2>
+<p>Für die Folgenden Werte <span class="math inline">\(x\)</span> (z.B. Renditen) und Gewichte <span class="math inline">\(w\)</span> (z.B. Anzahl Positionen):</p>
 <p><span class="math display">\[x = {-2\%, 10\%, 1\%, 5\%} \ \ \ w = {3, 1, 4, 2}\]</span></p>
 <p>ergibt sich ein gewichtetes geometrisches Mittel von:</p>
 <p><span class="math display">\[ (0.02^3 \times 0.1^1 \times 0.01^4 \times 0.05^2)^{1 / (3 + 1 + 4 + 2)} = 2.14\%\]</span></p>
 </section>
-<section id="b-inflation-und-warenkorb" class="slide level2">
-<h2><span class="sq yellow">B</span> Inflation und Warenkorb</h2>
+<section id="inflation-und-warenkorb" class="slide level2">
+<h2>Inflation und Warenkorb</h2>
 <ul>
 <li><a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html">Beispiel Warenkorb</a></li>
 </ul>
 </section>
-<section id="e-der-median" class="slide level2">
-<h2><span class="sq green">E</span> Der Median</h2>
+<section id="der-median" class="slide level2">
+<h2>Der Median</h2>
 <ul>
 <li>Das arithmetische Mittel ist empfindlich gegenüber Ausreißern bzw. Extremwerten.</li>
 <li>Der Median berücksichtigt ausschließlich die Reihenfolge (den Rang) der Werte zur Identifikation der ‘Mitte’.</li>
 <li>Der Median ist robuster, tauscht dafür aber Informationsgehalt ein.</li>
 </ul>
 </section>
-<section id="d-der-median" class="slide level2">
-<h2><span class="sq blue">D</span> Der Median</h2>
+<section id="der-median-1" class="slide level2">
+<h2>Der Median</h2>
 <ul>
 <li><p>Der Median ist der Wert in der Mitte einer größensortierten Datenreihe. Bei einer geraden Anzahl an Werten <span class="math inline">\(n\)</span> ist der Median das arithmetische Mittel der beiden mittleren Werte.</p></li>
 <li><p>Für eine sortierte Datenreihe <span class="math inline">\(s\)</span> gilt also:</p></li>
@@ -685,8 +614,8 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 \frac{s_{\frac{n}{2}} + s_{\frac{n}{2} + 1}}{2}, \textrm{wenn \(n\) gerade}
 \end{cases}\]</span></p>
 </section>
-<section id="b-der-median" class="slide level2">
-<h2><span class="sq yellow">B</span> Der Median</h2>
+<section id="der-median-2" class="slide level2">
+<h2>Der Median</h2>
 <p>Beispiel mit <span class="math inline">\(n\)</span> ungerade: <span class="math display">\[s = {163, 177, \color{orange}{179}, 180, 192}\]</span> <span class="math display">\[s_\color{orange}{\frac{n + 1}{2}} = 179\]</span></p>
 <p>Beispiel mit <span class="math inline">\(n\)</span> gerade: <span class="math display">\[s = {163, \color{orange}{179}, \color{orange}{180}, 192}\]</span> <span class="math display">\[\frac{s_\color{orange}{{\frac{n}{2}}} + s_\color{orange}{{\frac{n}{2} + 1}}}{2} = \frac{179 + 180}{2} = 179.5\]</span></p>
 </section>
@@ -708,18 +637,34 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 <section id="section-2" class="slide level2" data-background-image="images/einkommen-de.svg" data-background-size="contain">
 <h2></h2>
 </section>
-<section id="e-quantile-und-perzentile" class="slide level2">
-<h2><span class="sq green">E</span> Quantile und Perzentile</h2>
+<section id="quantile-und-perzentile" class="slide level2">
+<h2>Quantile und Perzentile</h2>
 <ul>
 <li>Der Median ist das 0,5-Quantil bzw. das 50%-Perzentil, d.h. 50% der Werte sind kleiner als der Median.</li>
 <li>Wir können andere Quantile berechnen, z.B. um eine Aussage über einen “Großteil” (z.B. 90%-Perzentil) zu treffen.</li>
 </ul>
-
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-7-1.png" width="1152" class="r-stretch"></section>
-<section id="e-quantile-und-boxplots" class="slide level2">
-<h2><span class="sq green">E</span> Quantile und Boxplots</h2>
-
-<img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-5-1.png" width="1152"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="quantile-und-boxplots" class="slide level2">
+<h2>Quantile und Boxplots</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="unschlüssig" class="slide level2">
 <h2>Unschlüssig? ;)</h2>
 <p><img src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" height="500"></p>
@@ -754,7 +699,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -765,7 +710,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -1166,6 +1111,38 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

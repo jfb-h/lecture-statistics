@@ -1,14 +1,16 @@
 ---
 title: "Einführung in die Statistik"
-subtitle: "Deskriptive Statistik I: Numerische Daten"
+subtitle: "Desktiptive Statistik: Numerische Daten"
 author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
 execute:
     cache: true
     keep-ipynb: false
     keep-md: false
-css: custom.css
 format:
     revealjs:
+        css: custom.css
+        controls: true
         slide-number: true
         # embed-resources: true
         chalkboard:
@@ -40,83 +42,7 @@ theme_update(
 )
 ```
 
-## Ein Bild sagt mehr als 1000 Worte
-
--   Ein Bild ist oft **effektiver** als eine numerische Darstellung (ein Unterschied oder Trend wird
-    offensichtlicher)
-
--   Ein Bild ist oft **effizienter** als eine numerische Darstellung (ein Unterschied oder Trend wird
-    schneller erfasst)
-
--   Aber: Bilder können existierende Zusammenhänge **verschleiern** oder
-    nicht existente **suggerieren**
-
-
-## Ein Bild sagt mehr als 1000 Worte
-
-```{r}
-set.seed(123)
-data <- data.frame(x=2001:2012, y=cumsum(rnorm(12)))
-
-s = data$y
-names(s) = data$x
-print(round(s, 2))
-```
-
-## Ein Bild sagt mehr als 1000 Worte
-
-```{r}
-set.seed(123)
-data <- data.frame(x=2001:2012, y=cumsum(rnorm(12)))
-s = data$y
-names(s) = data$x
-print(round(s, 2))
-ggplot(data, aes(lubridate::make_date(x,1, 1), y)) +
-    geom_line() +
-    geom_point() +
-    labs(x="", y="")
-```
-
-
-## Experiment
-
-- Effektiv: Antworten zu Abb. / Tabelle, Zeitlimit -> Fehlerraten vergleichen
-- Effizient: In Paaren, Zeit stoppen bis Maximum gefunden
-- Lügen mit Karten ?
-
-
-## The good, the bad, and the ugly
-
-
-# Grundprinzipien der Visualisierung
-
-## Visuelle Informationsträger
-
--   Winkel, Fläche, Höhe
--   Pie, Donut, Tabelle, Bar
-
-## Trägerkombinationen und Effizienz
-
-## Experiment
-
-- Beispiele für Effektivität und Effizienz
-
-
-# Datentypen und Skalenniveaus
-
-## Numerische und kategorische Daten
-
--   **Numerisch**: kontinuierlich, diskret (zählbar)
-    - **Kontinuierlich:** Niederschlag, Einkommen, ...
-    - **Diskret:** Personen in Haushalt, Tore im Fußball, ...
--   **Kategorisch**: nominal (ungeordnet), ordinal (geordnet)
-    - **Nominal:** Geschlecht, Studiengang, ...
-    - **Ordinal:** Bildungsabschluss, Likert-Rating, ...
-
-
 # Numerische Daten beschreiben
-
-## Entfernung zur Uni
 
 ## Lagemaße
 
@@ -131,7 +57,7 @@ ggplot(d, aes(x, fill=g)) +
     labs(x="", y="") + scale_fill_tableau()
 ```
 
-## [E]{.sq .green} Das arithmetische Mittel
+##  Das arithmetische Mittel
 
 -   Das *arithmetische Mittel* fasst eine Datenreihe in einer Zahl
     zusammen, die deren "Mitte" bzw. "zentrale Tendenz" darstellen soll.
@@ -139,7 +65,7 @@ ggplot(d, aes(x, fill=g)) +
 -   Das arithmetische Mittel ist der geläufigste Mittelwert, aber nicht
     der einzige.
 
-## [B]{.sq .yellow} Das arithmetische Mittel
+##  Das arithmetische Mittel
 
 Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch
 die Anzahl der Werte. Für die folgende Datenreihe $x$ mit $n=4$ Werten:
@@ -150,7 +76,7 @@ gilt also:
 
 $$\textrm{Arith. Mittel} = \bar{x} = \frac{179 + 163 + 180 + 192}{4} = 178,5$$
 
-## [D]{.sq .blue} Das arithmetische Mittel
+##  Das arithmetische Mittel
 
 Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch
 die Anzahl der Werte.
@@ -179,7 +105,7 @@ $$\bar{x} = \frac{1}{n} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{n}{x
       \overset{\color{lightgrey}{192}}{x_{\color{blue}{4}}})$$
 :::
 
-## [E]{.sq .green} Dummyvariablen
+## Dummyvariablen 
 
 Im Fall einer Dummyvariable (die die Werte 0 oder 1 annehmen kann), gibt
 das arithmetische Mittel eine Proportion an:
@@ -202,19 +128,19 @@ Wie viel geben Studierende in München für das Wohnen aus?
 
 ::::: columns
 ::: {.column width="50%"}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation" title="Survey preview">
 
 </iframe>
 :::
 
 ::: {.column width="50%"}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/qr" title="Survey link">
 
 </iframe>
 :::
 :::::
 
-##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload="true"}
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/results" data-preload="true"}
 
 ## Wie sehen die Umfragedaten aus?
 
@@ -238,11 +164,11 @@ Wie viel geben Studierende in München für das Wohnen aus?
 -   Variablentypen:
 
     -   ausgaben: **numerisch**
-    -   wohnart: **kategorisch, nominal**
+    -   wohnart: **kategorisch (nominal)**
 :::
 :::::
 
-## [E]{.sq .green} Das geometrische Mittel
+##  Das geometrische Mittel
 
 -   Bei Verhältnisskalen (Zahlen, die in einem multiplikativen
     Verhältnis zueinander stehen), sollte das *geometrische* und nicht
@@ -250,7 +176,7 @@ Wie viel geben Studierende in München für das Wohnen aus?
 -   Ein typischer Fall sind *Wachstumsraten*
 -   z.B. Bevölkerungsentwicklung, Investments, BIP-Wachstum
 
-## [B]{.sq .yellow} BIP-Wachstum in Deutschland {.smaller}
+##  BIP-Wachstum in Deutschland {.smaller}
 
 ::::: columns
 ::: {.column width="65%"}
@@ -268,7 +194,7 @@ an, d.h. eine Wachstumsrate.
 :::
 :::::
 
-## [D]{.sq .blue} Das geometrische Mittel
+##  Das geometrische Mittel
 
 Das geometrische Mittel ist definiert als die $n$-te Wurzel des Produkts
 der Werte.
@@ -278,7 +204,7 @@ Produktnotation ($\Pi$, groß Pi) definieren:
 
 $$\textrm{geom. Mittel} = \sqrt[n]{x_1 \times x_2 \times ... \times x_n} = \left( \prod_{i=1}^n x_i \right)^\frac{1}{n}$$
 
-## [B]{.sq .yellow} Das geometrische Mittel
+##  Das geometrische Mittel
 
 ::: incremental
 Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 $$
@@ -296,16 +222,16 @@ $$
     -   $3.431,1 \times 1.0347^5 = 3.491 \textrm{ Mrd.}$
 :::
 
-## [E]{.sq .green} Gewichtete Mittelwerte
+##  Gewichtete Mittelwerte
 
 -   Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich
     gewichtet.
--   In vielen Situationen muss z.B. für Größenunterschiede der
+-   In vielen Situationen müssen z.B. Größenunterschiede der
     Beobachtungseinheiten korrigiert werden.
 -   In solchen Fällen können Werte für das geometrische oder
     arithmetische Mittel individuell gewichtet werden.
 
-## [D]{.sq .blue} Gewichtetes arithmetisches Mittel
+##  Gewichtetes arithmetisches Mittel
 
 Das gewichtete arithmetische Mittel ist die Summe der gewichteten Werte
 geteilt durch die Summe der Gewichte.
@@ -317,7 +243,7 @@ $$\begin{align}
 &= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i 
 \end{align}$$
 
-## [B]{.sq .yellow} Gewichtetes arithmetisches Mittel
+##  Gewichtetes arithmetisches Mittel
 
 Für die Folgenden Werte $x$ (z.B. Körpergrößen) und Gewichte $w$ (z.B.
 Anzahl Beobachtungen):
@@ -328,7 +254,7 @@ ergibt sich ein gewichtetes arithmetisches Mittel von:
 
 $$ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 $$
 
-## [B]{.sq .yellow} Regionale Einkommensverteilung {.smaller}
+##  Regionale Einkommensverteilung {.smaller}
 
 ```{r}
 library(eurostat)
@@ -384,7 +310,7 @@ Gewichtetes arithm. Mittel:
 :::
 :::::
 
-## [D]{.sq .blue} Gewichtetes geometrisches Mittel
+##  Gewichtetes geometrisches Mittel
 
 Im gewichteten geometrischen Mittel werden die Werte mit ihren
 zugehörigen Gewichten exponiert.
@@ -396,10 +322,10 @@ Für eine Datenreihe $x$ mit zugehörigen Gewichten $w$ gilt:
 
 $$ \textrm{gew. geom. Mittel} = \left( \prod_{i=1}^n x_i^{w_i} \right)^{1 / \sum_{i=1}^n w_i} $$
 
-## [B]{.sq .yellow} Gewichtetes geometrisches Mittel
+##  Gewichtetes geometrisches Mittel
 
 Für die Folgenden Werte $x$ (z.B. Renditen) und Gewichte $w$ (z.B.
-Anzahl Anleihen):
+Anzahl Positionen):
 
 $$x = {-2\%, 10\%, 1\%, 5\%} \ \ \ w = {3, 1, 4, 2}$$
 
@@ -407,12 +333,12 @@ ergibt sich ein gewichtetes geometrisches Mittel von:
 
 $$ (0.02^3 \times 0.1^1 \times 0.01^4 \times 0.05^2)^{1 / (3 + 1 + 4 + 2)} = 2.14\%$$
 
-## [B]{.sq .yellow} Inflation und Warenkorb
+##  Inflation und Warenkorb
 
 -   [Beispiel
     Warenkorb](https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html)
 
-## [E]{.sq .green} Der Median
+##  Der Median
 
 -   Das arithmetische Mittel ist empfindlich gegenüber Ausreißern bzw.
     Extremwerten.
@@ -420,7 +346,7 @@ $$ (0.02^3 \times 0.1^1 \times 0.01^4 \times 0.05^2)^{1 / (3 + 1 + 4 + 2)} = 2.1
     der Werte zur Identifikation der 'Mitte'.
 -   Der Median ist robuster, tauscht dafür aber Informationsgehalt ein.
 
-## [D]{.sq .blue} Der Median
+##  Der Median
 
 -   Der Median ist der Wert in der Mitte einer größensortierten
     Datenreihe. Bei einer geraden Anzahl an Werten $n$ ist der Median
@@ -433,7 +359,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 \frac{s_{\frac{n}{2}} + s_{\frac{n}{2} + 1}}{2}, \textrm{wenn \(n\) gerade}
 \end{cases}$$
 
-## [B]{.sq .yellow} Der Median
+##  Der Median
 
 Beispiel mit $n$ ungerade:
 $$s = {163, 177, \color{orange}{179}, 180, 192}$$
@@ -465,7 +391,7 @@ Was ist euer monatliches Einkommen?
 
 ##  {background-image="images/einkommen-de.svg" background-size="contain"}
 
-## [E]{.sq .green} Quantile und Perzentile
+##  Quantile und Perzentile
 
 -   Der Median ist das 0,5-Quantil bzw. das 50%-Perzentil, d.h. 50% der
     Werte sind kleiner als der Median.
@@ -490,7 +416,7 @@ ggplot(data, aes(x)) +
     geom_rangeframe()
 ```
 
-## [E]{.sq .green} Quantile und Boxplots
+##  Quantile und Boxplots
 
 ```{r fig.height=5.625, fig.width=10}
 set.seed(123)

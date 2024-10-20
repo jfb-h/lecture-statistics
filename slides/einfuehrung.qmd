@@ -65,14 +65,12 @@ format:
 ![Quelle: unrememberedhistory.com](https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg){.shadow height="400px"}
 :::
 
-::: {.column width="60%"}
+::: {.column .incremental width="60%"}
 -   US-Wahl 1936, Roosevelt vs. Landon
 -   Wählerbefragung mit **10 mio.** Befragten (ausgewählt aus Leserschaft, Telefonbuch und Automobilregister) und **2.4
     mio.** Antworten
--   Vorhersage:
-    - **43%** Roosevelt vs. **57%** Landon
-- Ergebnis:
-    - **62%** Roosevelt vs. **38%** Landon
+-   Vorhersage: **43%** Roosevelt vs. **57%** Landon
+-   Ergebnis: **62%** Roosevelt vs. **38%** Landon
 -   **Wie kam es zum Fehler von 38 pp?**
 :::
 :::::
@@ -84,7 +82,7 @@ format:
 ![Quelle: unrememberedhistory.com](https://unrememberedhistory.com/wp-content/uploads/2016/02/album11.jpg){.shadow height="400px"}
 :::
 
-::: {.column width="60%"}
+::: {.column .incremental width="60%"}
 - **Sampling bias** : Leser des Literary Digest, Automobilbesitzer und
   Telefonbesitzer waren nicht repräsentativ für die Gesamtbevölkerung.
 - **Non-response bias**: Gegner Roosevelts haben häufiger an der
@@ -142,7 +140,7 @@ format:
 
 ##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnort/density" background-interactive="true" data-preload="true"}
 
-## Wo erfindet Europa? {.smaller}
+## Wo innoviert Europa? {.smaller}
 
 ![Quelle: Eigene Darstellung](images/figure-map-inventors.png){.shadow}
 
@@ -221,10 +219,10 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 
 ::::: columns
 ::: {.column width="50%"}
-![Einkommen in München (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png){.shadow}
+![Einkommen in München (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png){.shadow height="400px"}
 :::
 ::: {.column width="50%"}
-![Einkommen in Köln (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png){.shadow}
+![Einkommen in Köln (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png){.shadow height="400px"}
 :::
 :::::
 
@@ -256,12 +254,12 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 :::
 ::: {.column width="60%"}
 - **Ablauf:** 2 x 40 min, 10 min Pause
-- **Lernziel** 
-    - Verständnis der Ziele und Funktionsweisen geläufiger statistischer Verfahren
-    - Interpretations- und Kritikfähigkeit statistischer Befunde und Forschungsdesigns
 - **Inhalte**
     - Numerische und visuelle Verfahren der deskriptiven Statistik
     - Grundlagen der Inferenzstatistik und der statistischen Modellierung
+- **Lernziel** 
+    - Verständnis der Ziele und Funktionsweisen geläufiger statistischer Verfahren
+    - Interpretations- und Kritikfähigkeit statistischer Befunde und Forschungsdesigns
 :::
 :::::
 
@@ -381,5 +379,4 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 ## Prüfungsfragen
 
 - Unter welchen Umständen kann selbst eine große Stichprobe in die Irre führen?
-- Wann spricht man von sampling bias? Non-response bias?
 
