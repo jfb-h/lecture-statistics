@@ -44,7 +44,19 @@ theme_update(
 
 # Datentypen
 
-## Numerische und kategorische Daten
+## Variablen
+
+- **Variable** oder **Merkmal**
+    - Nebenfach, Schulnote, Distanz...
+
+- **Merkmalsausprägung**
+    - Nebenfach: VWL, BWL, Biologie, ...
+    - Schulnote: sehr gut - ungenügend oder 0 - 15 Punkte
+
+- **Merkmalsträger**
+    - Studierende/r
+
+## Arten von Variablen
 
 -   **Numerisch**
     - **Kontinuierlich**: Niederschlag, Temperatur
@@ -296,6 +308,16 @@ rect(0:(length(COL)-1), 0, 1:length(COL), 1, col=COL)
 
 # Richtlinien
 
+## 
+
+::::: columns
+::: {.column width="50%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/img/Bush-cuts.png){height=300}
+:::
+::: {.column width="50%"}
+![](https://rafalab.dfci.harvard.edu/dsbook-part-1/dataviz/img/venezuela-election.png){height=300}
+:::
+:::::
 
 ## Wissen, wann die 0 relevant ist
 
