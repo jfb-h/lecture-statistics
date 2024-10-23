@@ -2,7 +2,7 @@ from fasthtml.common import *
 import json
 import dataclasses
 import polars as pl
-from components import Survey, Items, QRCode, PlotContainer, StyledGrid, StyledCard, Choice, Radio
+from components import Survey, Items, QRCode, PlotContainer, StyledGrid, StyledCard, Choice, Radio, NumericInput
 
 
 def choice_datatype(name, title):
@@ -14,7 +14,9 @@ def choice_datatype(name, title):
         title=title
     )
 
-def init_app(db, rt, route, tablename, **kwargs):
+# SURVEY DATATYPES
+
+def init_datatypes(db, rt, route, tablename, **kwargs):
     table = db.t[tablename]
     if table not in db.t:
         table.create(id=int, pk="id", **kwargs)
@@ -25,8 +27,7 @@ def init_app(db, rt, route, tablename, **kwargs):
 
     @rt(f"/{route}")
     def get():
-        header = H1("Datenniveaus")
-        question = H4("Welches Datenniveau haven die folgenden Variablen?")
+        question = H4("Was ist der Datentyp der folgenden Variablen?")
 
         i1 = choice_datatype("bip", "Das deutsche BIP")
         i2 = choice_datatype("co2", "Die CO₂-Konzentration in der Atmosphäre")
@@ -36,7 +37,7 @@ def init_app(db, rt, route, tablename, **kwargs):
         i6 = choice_datatype("gen", "Generationszugehörigkeit (Boomer, Millienials, Gen Z, ...)")
 
         items = Items(question, i1, i2, i3, i4, i5, i6, hx_post=f"/statlecture/{route}")
-        return Survey("Datenniveaus", items)
+        return Survey("Datentypen", items)
 
     @rt(f"/{route}")
     def post(item: Item):
@@ -65,18 +66,67 @@ def init_app(db, rt, route, tablename, **kwargs):
         return Title("Einführung"), Main(grid, update_data, obs_results, cls="container")
 
 
+# SURVEY LIVINGCOST
+
+def init_livingcost(db, rt, route, tablename, **kwargs):
+    table = db.t[tablename]
+    if table not in db.t:
+        table.create(id=int, pk="id", **kwargs)
+
+    Item = table.dataclass()
+
+    @rt(f"/{route}")
+    def get():
+        num = NumericInput("kosten", "Wie viel gibst du montlich für's Wohnen aus?", "0", "10000")
+
+        choice = Choice(
+            Radio("wohnsituation", "Familie", "Ich wohne bei meinen Eltern / meiner Familie"),
+            Radio("wohnsituation", "Alleine", "Ich wohne alleine"),
+            Radio("wohnsituation", "WG", "Ich wohne in einer WG"),
+            Radio("wohnsituation", "Andere", "Andere"),
+            title="Was trifft auf deine Wohnsituation zu?",
+        )
+
+        return Survey( "Kurzumfrage", Items(num, choice, hx_post=f"/statlecture/{route}"))
+
+    @rt(f"/{route}")
+    def post(item: Item):
+        table.insert(item)
+        return Strong("Danke für deine Antwort!")
+
+    @rt(f"/{route}/qr")
+    def get(): return QRCode(f"{route}")
+
+    @rt(f"/{route}/data")
+    async def get():
+        return json.dumps([dataclasses.asdict(item) for item in table()], ensure_ascii=False)
+
+    update_data = ScriptX("session-01/fetch-data.js")
+    obs_results = ScriptX("session-02/obs-livingcost.js", type="module")
+
+    @rt(f"/{route}/results")
+    async def get():
+        plot = StyledCard(
+            PlotContainer(id="wohnsituation"),
+            header=H2("Wie viel geben Studierende in München für das Wohnen aus?"),
+        )
+        grid = StyledGrid(plot)
+        return Title("Einführung"), Main(grid, update_data, obs_results, cls="container")
+
+
 # SERVER AND DB INITIALIZATION 
 
-route = "datentypen"
-table = "datentypen"
-
 db = database("surveys.db")
-
 app, rt = fast_app(live=True)
 
-init_app(
-    db, rt, route, table,
+init_datatypes(
+    db, rt, "datentypen", "datentypen",
     bip=str, co2=str, stars=str, likes=str, shf=str, gen=str
+)
+
+init_livingcost(
+    db, rt, "wohnsituation", "wohnsituation",
+    kosten=float, wohnsituation=str
 )
 
 serve(port=8081)

@@ -29,6 +29,14 @@ function plot() {
     const fx = (key) => index.get(key) % n;
     const fy = (key) => Math.floor(index.get(key) / n);
 
+    const labels = new Map();
+    labels.set("bip", "Das deutsche BIP")
+    labels.set("co2", "CO₂-Konzentration")
+    labels.set("stars", "Sterne bei Amazon")
+    labels.set("likes", "Youtube Likes")
+    labels.set("shf", "Frauenanteil")
+    labels.set("gen", "Generationszugehörigkeit")
+
     const p = Plot.plot({
         width: containerWidth,
         height: containerHeight,
@@ -41,7 +49,7 @@ function plot() {
 
         marks: [
             Plot.barY(answers, Plot.groupX({ y: "count" }, { x: "value", fx: (d) => fx(d.variable), fy: (d) => fy(d.variable) })),
-            Plot.text(keys, { fx, fy, frameAnchor: "top-left", dx: 6, dy: -10 }),
+            Plot.text(keys, { fx, fy, text: (k) => labels.get(k), frameAnchor: "top-left", dx: 6, dy: -10 }),
             Plot.axisFx({ color: "white" }),
             Plot.axisFy({ color: "white" }),
             Plot.ruleY([0])
