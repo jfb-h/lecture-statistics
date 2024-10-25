@@ -11,7 +11,7 @@
 <script src="numerische-daten_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="numerische-daten_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="numerische-daten_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.4">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
   <title>Einführung in die Statistik</title>
@@ -380,11 +380,15 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Das arithmetische Mittel</h2>
 <p>Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte.</p>
 <p>Etwas genereller können wir diese Definition mit Summennotation formalisieren:</p>
-<p><span class="math display">\[\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n} = \frac{1}{n} \sum_{i=1}^n{x_i}\]</span></p>
+<p><span class="math display">\[
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n} = \frac{1}{n} \sum_{i=1}^n{x_i}
+\]</span></p>
 </section>
 <section id="exkurs-summen" class="slide level2">
 <h2>Exkurs: Summen</h2>
-<p><span class="math display">\[\bar{x} = \frac{1}{n} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{n}{x_\color{green}{i}}\]</span></p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{n}{x_\color{green}{i}}
+\]</span></p>
 <div>
 <ul>
 <li class="fragment"><p>Das große Sigma <span class="math inline">\(\color{red}{\Sigma}\)</span> zeigt eine Summation über die Werte der Datenreihe <span class="math inline">\(x\)</span> an.</p></li>
@@ -397,19 +401,23 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div>
 </section>
-<section id="dummyvariablen" class="slide level2">
+<section id="dummyvariablen" class="slide level2 smaller">
 <h2>Dummyvariablen</h2>
 <p>Im Fall einer Dummyvariable (die die Werte 0 oder 1 annehmen kann), gibt das arithmetische Mittel eine Proportion an:</p>
-<p><span class="math display">\[x =
+<p><span class="math display">\[
+x =
     \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}},
     \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
     \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
-    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}}\]</span></p>
-<p><span class="math display">\[\bar{x} = \frac{1}{n} (
+    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}}
+\]</span></p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} (
     \overset{\color{lightgrey}{0}}{x_{\color{green}{1}}} \color{red}{+}
     \overset{\color{lightgrey}{1}}{x_{\color{green}{2}}} \color{red}{+}
     \overset{\color{lightgrey}{1}}{x_{\color{green}{3}}} \color{red}{+}
-    \overset{\color{lightgrey}{0}}{x_{\color{blue}{4}}}) = \frac{\textrm{# bestanden}}{\textrm{# gesamt}} = \frac{1}{2}\]</span></p>
+    \overset{\color{lightgrey}{0}}{x_{\color{blue}{4}}}) = \frac{\textrm{# bestanden}}{\textrm{# gesamt}} = \frac{1}{2}
+\]</span></p>
 </section>
 <section id="umfrage" class="slide level2">
 <h2>Umfrage</h2>
@@ -483,14 +491,6 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div></div>
 </section>
-<section id="das-geometrische-mittel" class="slide level2">
-<h2>Das geometrische Mittel</h2>
-<ul>
-<li>Bei Verhältnisskalen (Zahlen, die in einem multiplikativen Verhältnis zueinander stehen), sollte das <em>geometrische</em> und nicht das <em>arithmetische</em> Mittel eingesetzt werden.</li>
-<li>Ein typischer Fall sind <em>Wachstumsraten</em></li>
-<li>z.B. Bevölkerungsentwicklung, Investments, BIP-Wachstum</li>
-</ul>
-</section>
 <section id="bip-wachstum-in-deutschland" class="slide level2 smaller">
 <h2>BIP-Wachstum in Deutschland</h2>
 <div class="columns">
@@ -506,6 +506,79 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div></div>
 </section>
+<section id="exkurs-wachstumsraten" class="slide level2">
+<h2>Exkurs: Wachstumsraten</h2>
+<p>Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 <span class="math display">\[
+    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
+    \overset{\color{lightgrey}{2019}}{1,0 \%} \
+    \overset{\color{lightgrey}{2020}}{-4,1 \%} \
+    \overset{\color{lightgrey}{2021}}{3,7\%} \
+    \overset{\color{lightgrey}{2022}}{1,4\%} \
+    \overset{\color{lightgrey}{2023}}{-0,3\%}
+\]</span></p>
+<p><span class="math display">\[
+    \overset{\color{lightgrey}{2018}}{\color{blue}{3.431,1} \textrm{ Mrd. | }}
+    \overset{\color{lightgrey}{2019}}{\color{blue}{1,010}}
+    \quad
+    \overset{\color{lightgrey}{2020}}{\color{red}{0,959}}
+    \quad
+    \overset{\color{lightgrey}{2021}}{1,037}
+    \quad
+    \overset{\color{lightgrey}{2022}}{1,014}
+    \quad
+    \overset{\color{lightgrey}{2023}}{0,997}
+\]</span></p>
+<p><span class="math display">\[
+    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
+    \overset{\color{lightgrey}{2019}}{\color{red}{3.465,4}}
+    \hspace{0.4cm}
+    \overset{\color{lightgrey}{2020}}{\color{green}{3.324,7}}
+    \hspace{0.4cm}
+    \overset{\color{lightgrey}{2021}}{3.451,7}
+    \hspace{0.4cm}
+    \overset{\color{lightgrey}{2022}}{3.499,7}
+    \hspace{0.4cm}
+    \overset{\color{lightgrey}{2023}}{3.489,4}
+\]</span></p>
+</section>
+<section id="das-mittlere-jährliche-wachstum" class="slide level2">
+<h2>Das mittlere jährliche Wachstum</h2>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{5} (1,010 + 0,959 + 1,037 + 1,014 + 0,997) = \color{green}{1,0034}
+\]</span></p>
+<p><span class="math display">\[
+    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
+    \overset{\color{lightgrey}{2019}}{3.442,8}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2020}}{3.454,5}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2021}}{3.466,2}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2022}}{3.478,0}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2023}}{\color{green}{3.489,8}}
+\]</span></p>
+<p><span class="math display">\[
+    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
+    \overset{\color{lightgrey}{2019}}{3.465,4}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2020}}{3.324,7}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2021}}{3.451,7}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2022}}{3.499,7}
+    \hspace{0.7cm}
+    \overset{\color{lightgrey}{2023}}{\color{red}{3.489,4}}
+\]</span></p>
+</section>
+<section id="das-geometrische-mittel" class="slide level2">
+<h2>Das geometrische Mittel</h2>
+<ul>
+<li>Bei Verhältnisskalen (Zahlen, die in einem multiplikativen Verhältnis zueinander stehen), sollte das <em>geometrische</em> und nicht das <em>arithmetische</em> Mittel eingesetzt werden.</li>
+<li>Ein typischer Fall sind <em>Wachstumsraten</em></li>
+<li>z.B. Bevölkerungsentwicklung, Investments, BIP-Wachstum</li>
+</ul>
+</section>
 <section id="das-geometrische-mittel-1" class="slide level2">
 <h2>Das geometrische Mittel</h2>
 <p>Das geometrische Mittel ist definiert als die <span class="math inline">\(n\)</span>-te Wurzel des Produkts der Werte.</p>
@@ -515,13 +588,9 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <section id="das-geometrische-mittel-2" class="slide level2">
 <h2>Das geometrische Mittel</h2>
 <div>
-<p>Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 <span class="math display">\[
-    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{1,0 \%} \
-    \overset{\color{lightgrey}{2020}}{-4,1 \%} \
-    \overset{\color{lightgrey}{2021}}{3,6\%} \
-    \overset{\color{lightgrey}{2022}}{1,7\%} \
-    \overset{\color{lightgrey}{2023}}{-0,3\%}
+<p>Beispiel: mittleres BIP-Wachstum (in %), 2019-2023</p>
+<p><span class="math display">\[  \small
+  \textrm{geom. Mittel} = \left( 1,010 \times 0,959 \times 1,037 \times 1,014 \times 0,997 \right)^\frac{1}{5} = \color{green}{1,0031}
 \]</span></p>
 <ul>
 <li class="fragment">BIP 2023: <strong>3491 Mrd.</strong> | AM: <strong>0.38%</strong> | GM: <strong>0.347%</strong></li>
@@ -565,7 +634,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-4-1.png" width="672"></a></p>
+<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-5-1.png" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -589,8 +658,44 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <p>ergibt sich ein gewichtetes geometrisches Mittel von:</p>
 <p><span class="math display">\[ (0.02^3 \times 0.1^1 \times 0.01^4 \times 0.05^2)^{1 / (3 + 1 + 4 + 2)} = 2.14\%\]</span></p>
 </section>
-<section id="inflation-und-warenkorb" class="slide level2">
+<section id="inflation-und-warenkorb" class="slide level2 smaller">
 <h2>Inflation und Warenkorb</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 28%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kategorie</th>
+<th style="text-align: center;">Gewicht (‰)</th>
+<th style="text-align: center;">Veränderung (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fleisch und Fleischwaren</td>
+<td style="text-align: center;">22,16</td>
+<td style="text-align: center;">0,0</td>
+</tr>
+<tr class="even">
+<td>Obst</td>
+<td style="text-align: center;">11,62</td>
+<td style="text-align: center;">2,5</td>
+</tr>
+<tr class="odd">
+<td>Gemüse</td>
+<td style="text-align: center;">13,72</td>
+<td style="text-align: center;">0,9</td>
+</tr>
+<tr class="even">
+<td>Alkoholische Getränke und Tabakwaren</td>
+<td style="text-align: center;">35,26</td>
+<td style="text-align: center;">3,2</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li><a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html">Beispiel Warenkorb</a></li>
 </ul>
@@ -647,7 +752,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-5-1.png" width="1152"></a></p>
+<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152"></a></p>
 </figure>
 </div>
 </div>
@@ -659,7 +764,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="numerische-daten_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="numerische-daten_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -887,42 +992,80 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1111,7 +1254,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
