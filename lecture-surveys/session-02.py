@@ -107,11 +107,19 @@ def init_livingcost(db, rt, route, tablename, **kwargs):
     @rt(f"/{route}/results")
     async def get():
         plot = StyledCard(
-            PlotContainer(id="wohnsituation"),
-            header=H2("Wie viel geben Studierende in München für das Wohnen aus?"),
+            PlotContainer(id="wohnsituation")
         )
-        grid = StyledGrid(plot)
-        return Title("Einführung"), Main(grid, update_data, obs_results, cls="container")
+
+        c1 = Card(Div(id="c1"), header=Strong("Alleine"), style="height: 200px")
+        c2 = Card(Div(id="c2"), header=Strong("Familie"), style="height: 200px")
+        c3 = Card(Div(id="c3"), header=Strong("WG"), style="height: 200px")
+
+        grid = Grid(Div(c1, c2, c3), plot,
+            style = f"grid-template-columns: 1fr 4fr; grid-template-rows: none; height: 90vh;"
+        )
+        
+
+        return Title("Einführung"), Main(H2("Wie viel geben Studierende in München für das Wohnen aus?"), grid, update_data, obs_results, cls="container")
 
 
 # SERVER AND DB INITIALIZATION 
