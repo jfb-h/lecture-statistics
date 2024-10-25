@@ -473,9 +473,9 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </table>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>Reihe = eine <strong>Beobachtung</strong></p></li>
-<li><p>Spalte = eine <strong>Variable</strong></p></li>
-<li><p>Variablentypen:</p>
+<li>Reihe = eine <strong>Beobachtung</strong></li>
+<li>Spalte = eine <strong>Variable</strong></li>
+<li>Variablentypen:
 <ul>
 <li>ausgaben: <strong>numerisch</strong></li>
 <li>wohnart: <strong>kategorisch (nominal)</strong></li>
@@ -537,7 +537,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Gewichtete Mittelwerte</h2>
 <ul>
 <li>Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich gewichtet.</li>
-<li>In vielen Situationen müssen z.B. Größenunterschiede der Beobachtungseinheiten korrigiert werden.</li>
+<li>In vielen Situationen müssen z.B. Größenunterschiede oder Mehrfachzählungen korrigiert werden.</li>
 <li>In solchen Fällen können Werte für das geometrische oder arithmetische Mittel individuell gewichtet werden.</li>
 </ul>
 </section>
@@ -549,16 +549,71 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 \textrm{gew. arithm. Mittel} &amp;= \frac{w_1 x_1 + w_2 x_2 + \cdots + w_n x_n}{w_1 + w_2 + \cdots + w_n} \\[0.8em]
 &amp;= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i
 \end{align}\]</span></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Größe</th>
+<th># Beob.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>163</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>179</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>180</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>192</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="gewichtetes-arithmetisches-mittel-1" class="slide level2">
 <h2>Gewichtetes arithmetisches Mittel</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Größe} &amp; \textbf{\# Beobachtungen} \\
+\hline
+\textcolor{orange}{163} &amp; \textcolor{orange}{3} \\
+\textcolor{blue}{179} &amp; \textcolor{blue}{11} \\
+\textcolor{green}{180} &amp; \textcolor{green}{4} \\
+\textcolor{red}{192} &amp; \textcolor{red}{7} \\
+\hline
+\end{tabular}
+\end{table}
+\]</span></p>
+</div><div class="column" style="width:50%;">
 <p>Für die Folgenden Werte <span class="math inline">\(x\)</span> (z.B. Körpergrößen) und Gewichte <span class="math inline">\(w\)</span> (z.B. Anzahl Beobachtungen):</p>
-<p><span class="math display">\[x = {163, 179, 180, 192} \ \ \ w = {3, 11, 4, 7}\]</span></p>
+<p><span class="math display">\[
+x = \color{orange}{163}, \color{blue}{179}, \color{green}{180}, \color{red}{192} \ \ \
+w = \color{orange}{ 3 }, \color{blue}{ 11}, \color{green}{  4}, \color{red}{  7}
+\]</span></p>
+</div></div>
 <p>ergibt sich ein gewichtetes arithmetisches Mittel von:</p>
-<p><span class="math display">\[ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 \]</span></p>
+<p><span class="math display">\[
+\frac{
+\color{orange}{3} \times \color{orange}{163} +
+\color{blue}{11} \times \color{blue}{179} +
+\color{green}{4} \times \color{green}{180} +
+\color{red}{7} \times \color{red}{192}}
+{\color{orange}{3} + \color{blue}{11} + \color{green}{4} + \color{red}{7}} = \frac{4522}{25} = 180.88
+\]</span></p>
 </section>
-<section id="regionale-einkommensverteilung" class="slide level2 smaller">
-<h2>Regionale Einkommensverteilung</h2>
+<section id="regionales-pro-kopf-bip" class="slide level2">
+<h2>Regionales Pro-Kopf-BIP</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
@@ -571,8 +626,13 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 </div>
 </div><div class="column" style="width:30%;">
-<p>Ungewichtetes arithm. Mittel:</p>
-<p>Gewichtetes arithm. Mittel:</p>
+<p><strong>Arithmetischer Mittelwert</strong></p>
+<hr>
+<p>ungewichtet:</p>
+<p>44 066 Euro</p>
+<hr>
+<p>gewichtet:</p>
+<p>48 002 Euro</p>
 </div></div>
 </section>
 <section id="gewichtetes-geometrisches-mittel" class="slide level2">
@@ -1111,7 +1171,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

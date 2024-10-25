@@ -155,16 +155,12 @@ Wie viel geben Studierende in München für das Wohnen aus?
 | 5   | 1100     | Alleine |
 | 6   | 950      | Alleine |
 :::
-
 ::: {.column width="50%"}
 -   Reihe = eine **Beobachtung**
-
 -   Spalte = eine **Variable**
-
 -   Variablentypen:
-
-    -   ausgaben: **numerisch**
-    -   wohnart: **kategorisch (nominal)**
+    - ausgaben: **numerisch**
+    - wohnart: **kategorisch (nominal)**
 :::
 :::::
 
@@ -224,12 +220,9 @@ $$
 
 ##  Gewichtete Mittelwerte
 
--   Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich
-    gewichtet.
--   In vielen Situationen müssen z.B. Größenunterschiede der
-    Beobachtungseinheiten korrigiert werden.
--   In solchen Fällen können Werte für das geometrische oder
-    arithmetische Mittel individuell gewichtet werden.
+-   Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich gewichtet.
+-   In vielen Situationen müssen z.B. Größenunterschiede oder Mehrfachzählungen korrigiert werden.
+-   In solchen Fällen können Werte für das geometrische oder arithmetische Mittel individuell gewichtet werden.
 
 ##  Gewichtetes arithmetisches Mittel
 
@@ -243,50 +236,102 @@ $$\begin{align}
 &= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i 
 \end{align}$$
 
+| Größe | # Beob. |
+|-------|---------|
+| 163   | 3       |
+| 179   | 11      |
+| 180   | 4       |
+| 192   | 7       |
+
 ##  Gewichtetes arithmetisches Mittel
+
+::::: columns
+::: {.column width="50%"}
+
+$$
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Größe} & \textbf{\# Beobachtungen} \\
+\hline
+\textcolor{orange}{163} & \textcolor{orange}{3} \\
+\textcolor{blue}{179} & \textcolor{blue}{11} \\
+\textcolor{green}{180} & \textcolor{green}{4} \\
+\textcolor{red}{192} & \textcolor{red}{7} \\
+\hline
+\end{tabular}
+\end{table}
+$$
+
+:::
+::: {.column width="50%"}
 
 Für die Folgenden Werte $x$ (z.B. Körpergrößen) und Gewichte $w$ (z.B.
 Anzahl Beobachtungen):
 
-$$x = {163, 179, 180, 192} \ \ \ w = {3, 11, 4, 7}$$
+$$
+x = \color{orange}{163}, \color{blue}{179}, \color{green}{180}, \color{red}{192} \ \ \ 
+w = \color{orange}{ 3 }, \color{blue}{ 11}, \color{green}{  4}, \color{red}{  7}
+$$
+
+:::
+:::::
 
 ergibt sich ein gewichtetes arithmetisches Mittel von:
 
-$$ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 $$
+$$
+\frac{
+\color{orange}{3} \times \color{orange}{163} +
+\color{blue}{11} \times \color{blue}{179} +
+\color{green}{4} \times \color{green}{180} +
+\color{red}{7} \times \color{red}{192}}
+{\color{orange}{3} + \color{blue}{11} + \color{green}{4} + \color{red}{7}} = \frac{4522}{25} = 180.88
+$$
 
-##  Regionale Einkommensverteilung {.smaller}
+##  Regionales Pro-Kopf-BIP
 
 ```{r}
 library(eurostat)
 library(sf)
 
-incomedata <- get_eurostat("nama_10r_3gdp", 
-  filters = list(time = 2020, UNIT = "EUR_HAB")
-  ) |> 
-  mutate(NUTS_ID=geo) |> 
-  filter(str_starts(geo, "DE2")) |>
-  select(values, NUTS_ID)
+incomedata <- get_eurostat(
+  "nama_10r_3gdp", 
+  filters = list(
+    time = 2020,
+    UNIT = "EUR_HAB"
+    )
+) |> 
+  filter(
+    str_starts(geo, "DE2"),
+    str_length(geo) == 5) |>
+  select(values, geo)
 
-populationdata <- get_eurostat("demo_r_pjangrp3", 
-  filters = list(time = 2020, sex = "T", age = "TOTAL")
-  ) |> 
-  mutate(NUTS_ID=geo, bev = values) |> 
-  filter(str_starts(geo, "DE2")) |> 
-  select(NUTS_ID, bev)
+populationdata <- get_eurostat(
+  "demo_r_pjangrp3", 
+  filters = list(
+    time = 2020,
+    sex = "T",
+    age = "TOTAL"
+    )
+) |> 
+  mutate(bev = values) |> 
+  filter(
+    str_starts(geo, "DE2"),
+    str_length(geo) == 5) |> 
+  select(geo, bev)
 
 map <- get_eurostat_geospatial(
   output_class = "sf",
   resolution = "10",
   nuts_level = "3",
-  year = "2016",
-  cache = TRUE,
-  update_cache = FALSE,
-  cache_dir = NULL,
   crs = "4326",
-  make_valid = "DEPRECATED") |> filter(str_starts(NUTS_ID, "DE2"))
+)
 
-mergedata <- merge(populationdata, incomedata, by="NUTS_ID")
-mapdata <- st_as_sf(merge(mergedata, map, by="NUTS_ID"))
+data <- left_join(incomedata, populationdata, by="geo")
+
+#mean(data$values)
+#sum(as.numeric(data$values) * as.numeric(data$bev)) / sum(data$bev)
 ```
 
 ::::: columns
@@ -295,18 +340,34 @@ mapdata <- st_as_sf(merge(mergedata, map, by="NUTS_ID"))
 #| fig-width: 7
 #| fig-height: 5.625
 
-ggplot(mapdata) +
-    geom_sf( aes(fill = values),color = "dim grey") +
+left_join(
+    data, map
+    ) |>
+ggplot(aes(fill = values, geometry = geometry)) +
+    geom_sf(color = "grey70") +
+    coord_sf(crs=4326) +
     scale_fill_viridis() +
     theme_void() +
-    labs(title = "Pro-Kopf-BIP",fill = "Euro")
+    labs(fill = "Euro")
 ```
 :::
 
 ::: {.column width="30%"}
-Ungewichtetes arithm. Mittel:
 
-Gewichtetes arithm. Mittel:
+**Arithmetischer Mittelwert**
+
+***
+
+ungewichtet:
+
+44 066 Euro
+
+***
+
+gewichtet:
+
+48 002 Euro
+
 :::
 :::::
 
