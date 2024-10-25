@@ -7,6 +7,8 @@ execute:
     cache: true
     keep-ipynb: false
     keep-md: false
+filters:
+    - parse-latex
 format:
     revealjs:
         css: custom.css
@@ -193,9 +195,10 @@ an, d.h. eine Wachstumsrate.
 :::
 :::::
 
-##  Exkurs: Wachstumsraten
+##  Exkurs: Wachstumsraten {.smaller}
 
-Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 
+Wachstumsraten (in %), 2019-2023 
+
 $$
     \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
     \overset{\color{lightgrey}{2019}}{1,0 \%} \ 
@@ -205,33 +208,28 @@ $$
     \overset{\color{lightgrey}{2023}}{-0,3\%} 
 $$
 
+::: {.fragment}
+
+Wachstumsfaktor:
 $$
-    \overset{\color{lightgrey}{2018}}{\color{blue}{3.431,1} \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{\color{blue}{1,010}} 
-    \quad
-    \overset{\color{lightgrey}{2020}}{\color{red}{0,959}}
-    \quad
-    \overset{\color{lightgrey}{2021}}{1,037} 
-    \quad 
-    \overset{\color{lightgrey}{2022}}{1,014}
-    \quad
+    \overset{\color{lightgrey}{2019}}{1,010} \quad
+    \overset{\color{lightgrey}{2020}}{0,959} \quad
+    \overset{\color{lightgrey}{2021}}{1,037} \quad
+    \overset{\color{lightgrey}{2022}}{1,014} \quad
     \overset{\color{lightgrey}{2023}}{0,997}
 $$
+:::
 
-
+::: {.fragment}
+BIP in Euro
 $$
-    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{\color{red}{3.465,4}}
-    \hspace{0.4cm}
-    \overset{\color{lightgrey}{2020}}{\color{green}{3.324,7}}
-    \hspace{0.4cm}
-    \overset{\color{lightgrey}{2021}}{3.451,7}
-    \hspace{0.4cm}
-    \overset{\color{lightgrey}{2022}}{3.499,7}
-    \hspace{0.4cm}
+    \overset{\color{lightgrey}{2019}}{3.465,4} \quad
+    \overset{\color{lightgrey}{2020}}{3.324,7} \quad
+    \overset{\color{lightgrey}{2021}}{3.451,7} \quad
+    \overset{\color{lightgrey}{2022}}{3.499,7} \quad
     \overset{\color{lightgrey}{2023}}{3.489,4}
 $$
-
+:::
 
 ##  Das mittlere jährliche Wachstum
 
@@ -239,19 +237,18 @@ $$
 \bar{x} = \frac{1}{5} (1,010 + 0,959 + 1,037 + 1,014 + 0,997) = \color{green}{1,0034}
 $$
 
+::: {.fragment}
 $$
     \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{3.442,8}
-    \hspace{0.7cm}
-    \overset{\color{lightgrey}{2020}}{3.454,5}
-    \hspace{0.7cm}
-    \overset{\color{lightgrey}{2021}}{3.466,2} 
-    \hspace{0.7cm}
-    \overset{\color{lightgrey}{2022}}{3.478,0} 
-    \hspace{0.7cm} 
+    \overset{\color{lightgrey}{2019}}{3.442,8} \hspace{0.7cm}
+    \overset{\color{lightgrey}{2020}}{3.454,5} \hspace{0.7cm}
+    \overset{\color{lightgrey}{2021}}{3.466,2} \hspace{0.7cm}
+    \overset{\color{lightgrey}{2022}}{3.478,0} \hspace{0.7cm} 
     \overset{\color{lightgrey}{2023}}{\color{green}{3.489,8}}
 $$
+:::
 
+::: {.fragment}
 $$
     \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
     \overset{\color{lightgrey}{2019}}{3.465,4} 
@@ -264,7 +261,7 @@ $$
     \hspace{0.7cm} 
     \overset{\color{lightgrey}{2023}}{\color{red}{3.489,4}}
 $$
-
+:::
 
 ##  Das geometrische Mittel
 
@@ -327,19 +324,13 @@ $$\begin{align}
 &= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i 
 \end{align}$$
 
-| Größe | # Beob. |
-|-------|---------|
-| 163   | 3       |
-| 179   | 11      |
-| 180   | 4       |
-| 192   | 7       |
 
 ##  Gewichtetes arithmetisches Mittel
 
 ::::: columns
 ::: {.column width="50%"}
 
-$$
+```{=latex}
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|}
@@ -353,23 +344,13 @@ $$
 \hline
 \end{tabular}
 \end{table}
-$$
+```
 
 :::
 ::: {.column width="50%"}
-
-Für die Folgenden Werte $x$ (z.B. Körpergrößen) und Gewichte $w$ (z.B.
-Anzahl Beobachtungen):
-
-$$
-x = \color{orange}{163}, \color{blue}{179}, \color{green}{180}, \color{red}{192} \ \ \ 
-w = \color{orange}{ 3 }, \color{blue}{ 11}, \color{green}{  4}, \color{red}{  7}
-$$
-
+Für die Werte (Körpergröße) und Gewichte (Häufigkeit des Wertes) in der Tabelle ergibt sich ein gewichtetes arithmetisches Mittel von:
 :::
 :::::
-
-ergibt sich ein gewichtetes arithmetisches Mittel von:
 
 $$
 \frac{
@@ -379,6 +360,7 @@ $$
 \color{red}{7} \times \color{red}{192}}
 {\color{orange}{3} + \color{blue}{11} + \color{green}{4} + \color{red}{7}} = \frac{4522}{25} = 180.88
 $$
+
 
 ##  Regionales Pro-Kopf-BIP
 
