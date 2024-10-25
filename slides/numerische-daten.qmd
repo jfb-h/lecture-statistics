@@ -7,6 +7,8 @@ execute:
     cache: true
     keep-ipynb: false
     keep-md: false
+filters:
+    - parse-latex
 format:
     revealjs:
         css: custom.css
@@ -165,16 +167,12 @@ Wie viel geben Studierende in München für das Wohnen aus?
 | 5   | 1100     | Alleine |
 | 6   | 950      | Alleine |
 :::
-
 ::: {.column width="50%"}
 -   Reihe = eine **Beobachtung**
-
 -   Spalte = eine **Variable**
-
 -   Variablentypen:
-
-    -   ausgaben: **numerisch**
-    -   wohnart: **kategorisch (nominal)**
+    - ausgaben: **numerisch**
+    - wohnart: **kategorisch (nominal)**
 :::
 :::::
 
@@ -197,9 +195,10 @@ an, d.h. eine Wachstumsrate.
 :::
 :::::
 
-##  Exkurs: Wachstumsraten
+##  Exkurs: Wachstumsraten {.smaller}
 
-Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 
+Wachstumsraten (in %), 2019-2023 
+
 $$
     \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
     \overset{\color{lightgrey}{2019}}{1,0 \%} \ 
@@ -209,33 +208,28 @@ $$
     \overset{\color{lightgrey}{2023}}{-0,3\%} 
 $$
 
+::: {.fragment}
+
+Wachstumsfaktor:
 $$
-    \overset{\color{lightgrey}{2018}}{\color{blue}{3.431,1} \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{\color{blue}{1,010}} 
-    \quad
-    \overset{\color{lightgrey}{2020}}{\color{red}{0,959}}
-    \quad
-    \overset{\color{lightgrey}{2021}}{1,037} 
-    \quad 
-    \overset{\color{lightgrey}{2022}}{1,014}
-    \quad
+    \overset{\color{lightgrey}{2019}}{1,010} \quad
+    \overset{\color{lightgrey}{2020}}{0,959} \quad
+    \overset{\color{lightgrey}{2021}}{1,037} \quad
+    \overset{\color{lightgrey}{2022}}{1,014} \quad
     \overset{\color{lightgrey}{2023}}{0,997}
 $$
+:::
 
-
+::: {.fragment}
+BIP in Euro
 $$
-    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{\color{red}{3.465,4}}
-    \hspace{0.4cm}
-    \overset{\color{lightgrey}{2020}}{\color{green}{3.324,7}}
-    \hspace{0.4cm}
-    \overset{\color{lightgrey}{2021}}{3.451,7}
-    \hspace{0.4cm}
-    \overset{\color{lightgrey}{2022}}{3.499,7}
-    \hspace{0.4cm}
+    \overset{\color{lightgrey}{2019}}{3.465,4} \quad
+    \overset{\color{lightgrey}{2020}}{3.324,7} \quad
+    \overset{\color{lightgrey}{2021}}{3.451,7} \quad
+    \overset{\color{lightgrey}{2022}}{3.499,7} \quad
     \overset{\color{lightgrey}{2023}}{3.489,4}
 $$
-
+:::
 
 ##  Das mittlere jährliche Wachstum
 
@@ -243,19 +237,18 @@ $$
 \bar{x} = \frac{1}{5} (1,010 + 0,959 + 1,037 + 1,014 + 0,997) = \color{green}{1,0034}
 $$
 
+::: {.fragment}
 $$
     \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{3.442,8}
-    \hspace{0.7cm}
-    \overset{\color{lightgrey}{2020}}{3.454,5}
-    \hspace{0.7cm}
-    \overset{\color{lightgrey}{2021}}{3.466,2} 
-    \hspace{0.7cm}
-    \overset{\color{lightgrey}{2022}}{3.478,0} 
-    \hspace{0.7cm} 
+    \overset{\color{lightgrey}{2019}}{3.442,8} \hspace{0.7cm}
+    \overset{\color{lightgrey}{2020}}{3.454,5} \hspace{0.7cm}
+    \overset{\color{lightgrey}{2021}}{3.466,2} \hspace{0.7cm}
+    \overset{\color{lightgrey}{2022}}{3.478,0} \hspace{0.7cm} 
     \overset{\color{lightgrey}{2023}}{\color{green}{3.489,8}}
 $$
+:::
 
+::: {.fragment}
 $$
     \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
     \overset{\color{lightgrey}{2019}}{3.465,4} 
@@ -268,7 +261,7 @@ $$
     \hspace{0.7cm} 
     \overset{\color{lightgrey}{2023}}{\color{red}{3.489,4}}
 $$
-
+:::
 
 ##  Das geometrische Mittel
 
@@ -315,12 +308,9 @@ $$
 
 ##  Gewichtete Mittelwerte
 
--   Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich
-    gewichtet.
--   In vielen Situationen müssen z.B. Größenunterschiede der
-    Beobachtungseinheiten korrigiert werden.
--   In solchen Fällen können Werte für das geometrische oder
-    arithmetische Mittel individuell gewichtet werden.
+-   Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich gewichtet.
+-   In vielen Situationen müssen z.B. Größenunterschiede oder Mehrfachzählungen korrigiert werden.
+-   In solchen Fällen können Werte für das geometrische oder arithmetische Mittel individuell gewichtet werden.
 
 ##  Gewichtetes arithmetisches Mittel
 
@@ -334,50 +324,87 @@ $$\begin{align}
 &= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i 
 \end{align}$$
 
+
 ##  Gewichtetes arithmetisches Mittel
 
-Für die Folgenden Werte $x$ (z.B. Körpergrößen) und Gewichte $w$ (z.B.
-Anzahl Beobachtungen):
+::::: columns
+::: {.column width="50%"}
 
-$$x = {163, 179, 180, 192} \ \ \ w = {3, 11, 4, 7}$$
+```{=latex}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Größe} & \textbf{\# Beobachtungen} \\
+\hline
+\textcolor{orange}{163} & \textcolor{orange}{3} \\
+\textcolor{blue}{179} & \textcolor{blue}{11} \\
+\textcolor{green}{180} & \textcolor{green}{4} \\
+\textcolor{red}{192} & \textcolor{red}{7} \\
+\hline
+\end{tabular}
+\end{table}
+```
 
-ergibt sich ein gewichtetes arithmetisches Mittel von:
+:::
+::: {.column width="50%"}
+Für die Werte (Körpergröße) und Gewichte (Häufigkeit des Wertes) in der Tabelle ergibt sich ein gewichtetes arithmetisches Mittel von:
+:::
+:::::
 
-$$ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 $$
+$$
+\frac{
+\color{orange}{3} \times \color{orange}{163} +
+\color{blue}{11} \times \color{blue}{179} +
+\color{green}{4} \times \color{green}{180} +
+\color{red}{7} \times \color{red}{192}}
+{\color{orange}{3} + \color{blue}{11} + \color{green}{4} + \color{red}{7}} = \frac{4522}{25} = 180.88
+$$
 
-##  Regionale Einkommensverteilung {.smaller}
+
+##  Regionales Pro-Kopf-BIP
 
 ```{r}
 library(eurostat)
 library(sf)
 
-incomedata <- get_eurostat("nama_10r_3gdp", 
-  filters = list(time = 2020, UNIT = "EUR_HAB")
-  ) |> 
-  mutate(NUTS_ID=geo) |> 
-  filter(str_starts(geo, "DE2")) |>
-  select(values, NUTS_ID)
+incomedata <- get_eurostat(
+  "nama_10r_3gdp", 
+  filters = list(
+    time = 2020,
+    UNIT = "EUR_HAB"
+    )
+) |> 
+  filter(
+    str_starts(geo, "DE2"),
+    str_length(geo) == 5) |>
+  select(values, geo)
 
-populationdata <- get_eurostat("demo_r_pjangrp3", 
-  filters = list(time = 2020, sex = "T", age = "TOTAL")
-  ) |> 
-  mutate(NUTS_ID=geo, bev = values) |> 
-  filter(str_starts(geo, "DE2")) |> 
-  select(NUTS_ID, bev)
+populationdata <- get_eurostat(
+  "demo_r_pjangrp3", 
+  filters = list(
+    time = 2020,
+    sex = "T",
+    age = "TOTAL"
+    )
+) |> 
+  mutate(bev = values) |> 
+  filter(
+    str_starts(geo, "DE2"),
+    str_length(geo) == 5) |> 
+  select(geo, bev)
 
 map <- get_eurostat_geospatial(
   output_class = "sf",
   resolution = "10",
   nuts_level = "3",
-  year = "2016",
-  cache = TRUE,
-  update_cache = FALSE,
-  cache_dir = NULL,
   crs = "4326",
-  make_valid = "DEPRECATED") |> filter(str_starts(NUTS_ID, "DE2"))
+)
 
-mergedata <- merge(populationdata, incomedata, by="NUTS_ID")
-mapdata <- st_as_sf(merge(mergedata, map, by="NUTS_ID"))
+data <- left_join(incomedata, populationdata, by="geo")
+
+#mean(data$values)
+#sum(as.numeric(data$values) * as.numeric(data$bev)) / sum(data$bev)
 ```
 
 ::::: columns
@@ -386,18 +413,34 @@ mapdata <- st_as_sf(merge(mergedata, map, by="NUTS_ID"))
 #| fig-width: 7
 #| fig-height: 5.625
 
-ggplot(mapdata) +
-    geom_sf( aes(fill = values),color = "dim grey") +
+left_join(
+    data, map
+    ) |>
+ggplot(aes(fill = values, geometry = geometry)) +
+    geom_sf(color = "grey70") +
+    coord_sf(crs=4326) +
     scale_fill_viridis() +
     theme_void() +
-    labs(title = "Pro-Kopf-BIP",fill = "Euro")
+    labs(fill = "Euro")
 ```
 :::
 
 ::: {.column width="30%"}
-Ungewichtetes arithm. Mittel:
 
-Gewichtetes arithm. Mittel:
+**Arithmetischer Mittelwert**
+
+***
+
+ungewichtet:
+
+44 066 Euro
+
+***
+
+gewichtet:
+
+48 002 Euro
+
 :::
 :::::
 
