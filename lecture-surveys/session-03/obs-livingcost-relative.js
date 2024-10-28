@@ -15,26 +15,38 @@ function updatePlot(plotfun) {
 
 let answers = [];
 function updateData(data) {
-    answers = data.filter((d) => d.wohnsituation != "Andere" && d.kosten < 10000);
+    answers = data
+        .filter((d) => d.wohnsituation != "Andere" && d.kosten < 10000)
+        .map((d) => {
+            return {
+                wohnsituation: d.wohnsituation,
+                kosten: d.kosten / 538 * 100 // Wohnung in HD 
+            }
+        });
 }
 
 const groups = new Map();
-groups.set("Alleine", "c1");
-groups.set("Familie", "c2");
-groups.set("WG", "c3");
+groups.set("Alleine", "c1-gm");
+groups.set("Familie", "c2-gm");
+groups.set("WG", "c3-gm");
+
+function geometricMean(data) {
+    return Math.exp(d3.mean(data.map((d) => Math.log(0.01 + d))))
+}
 
 function createSummary(data) {
     const fmt = d3.format(".1f");
     const cost = data.map(d => d.kosten);
     const sum = d3.sum(cost);
-    const mean = d3.mean(cost);
+    const am = d3.mean(cost);
+    const gm = geometricMean(cost);
     return `Anzahl: <strong>${data.length}</strong><br>
-            Summe: <strong>${fmt(sum)}</strong><br>
-            Mittelwert: <strong>${fmt(mean)}</strong>`
+            <span style="color:red">AM</span>: <strong>${fmt(am)}</strong><br>
+            <span style="color:blue">GM</span>: <strong>${fmt(gm)}</strong>`
 }
 
 function plot() {
-    const container = document.getElementById('wohnsituation');
+    const container = document.getElementById('wohnsituation-gm');
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;
 
@@ -54,10 +66,11 @@ function plot() {
 
         marks: [
             Plot.rectY(answers, Plot.binX({ y: "count" }, { x: "kosten", fy: "wohnsituation" })),
+            Plot.ruleX(answers, Plot.groupZ({ x: geometricMean }, { x: "kosten", fy: "wohnsituation", stroke: "blue", strokeWidth: 5 })),
             Plot.ruleX(answers, Plot.groupZ({ x: "mean" }, { x: "kosten", fy: "wohnsituation", stroke: "red", strokeWidth: 5 })),
             Plot.ruleY([0])
         ],
-        x: { label: "Wohnkosten (Euro)" },
+        x: { label: "Relative Wohnkosten (% HD)" },
         y: { label: "Häufigkeit" },
         fy: { label: null },
     });
