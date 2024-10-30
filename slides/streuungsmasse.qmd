@@ -1,0 +1,78 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Streuungsmaße"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
+execute:
+    cache: true
+    keep-ipynb: false
+    keep-md: false
+filters:
+    - parse-latex
+format:
+    revealjs:
+        css: custom.css
+        controls: true
+        slide-number: true
+        # embed-resources: true
+        chalkboard:
+            theme: whiteboard
+            boardmarker-width: 2
+---
+
+```{r}
+#| cache: false
+
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(viridis)
+library(patchwork)
+library(stringr)
+
+theme_set(theme_tufte(base_family="Arial"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+
+```
+
+# Wiederholung Lagemaße
+
+# Streuungs- oder Dispersionsmaße
+
+## Varianz
+
+## Standardabweichung
+
+## Absolute Abweichung vom Median
+
+- Median Absolute Deviation (MAD)
+
+# Kategorische Daten
+
+# Lagemaße für kategorische Daten
+
+## Nominal: Modus
+
+## Ordinal: Median
+
+
+# Streuungsmaße für kategorische Daten
+
+## Nominal: Entropie
+
+- Shannon entropy, normalized
+
+## Ordinal: Dissenz
+
+- [See paper by Tastle & Wierman (2007)](https://www.sciencedirect.com/science/article/pii/S0888613X06001186)
+
