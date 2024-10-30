@@ -15,7 +15,7 @@ function updatePlot(plotfun) {
 
 let answers = [];
 function updateData(data) {
-    answers = data.filter((d) => d.wohnsituation != "Andere" && d.kosten < 10000);
+    answers = data.filter((d) => d.wohnsituation != "Andere" && d.kosten < 10000 && d.wohnsituation != null);
 }
 
 const groups = new Map();
@@ -51,14 +51,15 @@ function plot() {
         marginRight: 150,
         marginBottom: 50,
         marginTop: 50,
+        facet: { data: answers, y: "wohnsituation" },
 
         marks: [
-            Plot.rectY(answers, Plot.binX({ y: "count" }, { x: "kosten", fy: "wohnsituation" })),
-            Plot.ruleX(answers, Plot.groupZ({ x: "mean" }, { x: "kosten", fy: "wohnsituation", stroke: "red", strokeWidth: 5 })),
+            Plot.rectY(answers, Plot.binX({ y: "proportion-facet" }, { x: "kosten" })),
+            Plot.ruleX(answers, Plot.groupZ({ x: "mean" }, { x: "kosten", stroke: "red", strokeWidth: 5 })),
             Plot.ruleY([0])
         ],
         x: { label: "Wohnkosten (Euro)" },
-        y: { label: "Häufigkeit" },
+        y: { label: "Rel. Häufigkeit (%)", percent: true },
         fy: { label: null },
     });
 

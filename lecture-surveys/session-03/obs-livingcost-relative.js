@@ -16,7 +16,7 @@ function updatePlot(plotfun) {
 let answers = [];
 function updateData(data) {
     answers = data
-        .filter((d) => d.wohnsituation != "Andere" && d.kosten < 10000)
+        .filter((d) => d.wohnsituation != "Andere" && d.kosten < 10000 && d.wohnsituation != null)
         .map((d) => {
             return {
                 wohnsituation: d.wohnsituation,
@@ -31,13 +31,12 @@ groups.set("Familie", "c2-gm");
 groups.set("WG", "c3-gm");
 
 function geometricMean(data) {
-    return Math.exp(d3.mean(data.map((d) => Math.log(0.01 + d))))
+    return Math.exp(d3.mean(data.map((d) => Math.log(d || NaN))))
 }
 
 function createSummary(data) {
     const fmt = d3.format(".1f");
     const cost = data.map(d => d.kosten);
-    const sum = d3.sum(cost);
     const am = d3.mean(cost);
     const gm = geometricMean(cost);
     return `Anzahl: <strong>${data.length}</strong><br>
@@ -63,15 +62,17 @@ function plot() {
         marginRight: 150,
         marginBottom: 50,
         marginTop: 50,
+        facet: { data: answers, y: "wohnsituation" },
 
         marks: [
-            Plot.rectY(answers, Plot.binX({ y: "count" }, { x: "kosten", fy: "wohnsituation" })),
-            Plot.ruleX(answers, Plot.groupZ({ x: geometricMean }, { x: "kosten", fy: "wohnsituation", stroke: "blue", strokeWidth: 5 })),
+            Plot.rectY(answers, Plot.binX({ y: "proportion-facet" }, { x: "kosten" })),
+            Plot.ruleX(answers, Plot.groupZ({ x: geometricMean }, { x: "kosten", stroke: "blue", strokeWidth: 5 })),
             Plot.ruleX(answers, Plot.groupZ({ x: "mean" }, { x: "kosten", fy: "wohnsituation", stroke: "red", strokeWidth: 5 })),
-            Plot.ruleY([0])
+            Plot.ruleY([0]),
+            Plot.ruleX([100])
         ],
         x: { label: "Relative Wohnkosten (% HD)" },
-        y: { label: "Häufigkeit" },
+        y: { label: "Rel. Häufigkeit (%)", percent: true },
         fy: { label: null },
     });
 

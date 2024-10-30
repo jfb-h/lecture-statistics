@@ -31,8 +31,8 @@ function plot() {
         width: containerWidth,
         height: containerHeight,
         style: { fontSize: "16px" },
-        marginLeft: 50,
-        marginRight: 50,
+        marginLeft: 30,
+        marginRight: 30,
         marginBottom: 50,
         marginTop: 50,
 
