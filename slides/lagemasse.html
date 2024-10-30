@@ -7,8 +7,11 @@
 <link href="lagemasse_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lagemasse_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lagemasse_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="lagemasse_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.29">
+<link href="lagemasse_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lagemasse_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="lagemasse_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="lagemasse_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
   <title>Einführung in die Statistik</title>
@@ -330,7 +333,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Deskriptive Statistik I: Numerische Daten</p>
+  <p class="subtitle">Lagemaße</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,38 +345,59 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 
 </section>
 <section>
-<section id="lagemaße" class="title-slide slide level1 center">
-<h1>Lagemaße</h1>
+<section id="wiederholung-datentypen" class="title-slide slide level1 center">
+<h1>Wiederholung Datentypen</h1>
 
 </section>
-<section id="lagemaße-1" class="slide level2">
-<h2>Lagemaße</h2>
+<section id="section" class="slide level2">
+<h2></h2>
+<p><a href="images/survey-datatypes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/survey-datatypes.png" width="1050"></a></p>
+</section></section>
+<section>
+<section id="numerische-daten-beschreiben" class="title-slide slide level1 center">
+<h1>Numerische Daten beschreiben</h1>
 
-<img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="e-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq green">E</span> Das arithmetische Mittel</h2>
+</section>
+<section id="lagemaße" class="slide level2">
+<h2>Lagemaße</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lagemasse_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="das-arithmetische-mittel" class="slide level2">
+<h2>Das arithmetische Mittel</h2>
 <ul>
-<li>Das <em>arithmetische Mittel</em> fasst eine Datenreihe in einer Zahl zusammen, die deren “Mitte” bzw. “zentrale Tendenz” darstellen soll.</li>
-<li>Das arithmetische Mittel ist damit ein Beispiel für ein <em>Lagemaß</em>.</li>
+<li>Ein Mittelwert fasst eine Datenreihe in einer Zahl zusammen, die deren “Mitte” bzw. “zentrale Tendenz” darstellen soll.</li>
+<li>Mittelwerte werden auch <em>Lagemaße</em> genannt, da sie die Lage einer Verteilung im möglichen Wertebereich angeben.</li>
 <li>Das arithmetische Mittel ist der geläufigste Mittelwert, aber nicht der einzige.</li>
 </ul>
 </section>
-<section id="b-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Das arithmetische Mittel</h2>
+<section id="das-arithmetische-mittel-1" class="slide level2">
+<h2>Das arithmetische Mittel</h2>
 <p>Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte. Für die folgende Datenreihe <span class="math inline">\(x\)</span> mit <span class="math inline">\(n=4\)</span> Werten:</p>
 <p><span class="math display">\[x = {179, 163, 180, 192}\]</span></p>
 <p>gilt also:</p>
 <p><span class="math display">\[\textrm{Arith. Mittel} = \bar{x} = \frac{179 + 163 + 180 + 192}{4} = 178,5\]</span></p>
 </section>
-<section id="d-das-arithmetische-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Das arithmetische Mittel</h2>
+<section id="das-arithmetische-mittel-2" class="slide level2">
+<h2>Das arithmetische Mittel</h2>
 <p>Das arithm. Mittel ist definiert als die Summe der Werte geteilt durch die Anzahl der Werte.</p>
 <p>Etwas genereller können wir diese Definition mit Summennotation formalisieren:</p>
-<p><span class="math display">\[\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n} = \frac{1}{n} \sum_{i=1}^n{x_i}\]</span></p>
+<p><span class="math display">\[
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n} = \frac{1}{n} \sum_{i=1}^n{x_i}
+\]</span></p>
 </section>
-<section id="exkurs-summen" class="slide level2">
+<section id="exkurs-summen" class="slide level2 smaller">
 <h2>Exkurs: Summen</h2>
-<p><span class="math display">\[\bar{x} = \frac{1}{n} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{n}{x_\color{green}{i}}\]</span></p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} \color{red}{\sum}_{\color{green}{i=1}}^\color{blue}{n}{x_\color{green}{i}}
+\]</span></p>
 <div>
 <ul>
 <li class="fragment"><p>Das große Sigma <span class="math inline">\(\color{red}{\Sigma}\)</span> zeigt eine Summation über die Werte der Datenreihe <span class="math inline">\(x\)</span> an.</p></li>
@@ -386,41 +410,41 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </ul>
 </div>
 </section>
-<section id="e-dummyvariablen" class="slide level2">
-<h2><span class="sq green">E</span> Dummyvariablen</h2>
+<section id="dummyvariablen" class="slide level2 smaller">
+<h2>Dummyvariablen</h2>
 <p>Im Fall einer Dummyvariable (die die Werte 0 oder 1 annehmen kann), gibt das arithmetische Mittel eine Proportion an:</p>
-<p><span class="math display">\[x =
+<p><span class="math display">\[
+x =
     \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}},
     \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
     \overset{\color{lightgrey}{1}}{\textrm{bestanden}},
-    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}}\]</span></p>
-<p><span class="math display">\[\bar{x} = \frac{1}{n} (
+    \overset{\color{lightgrey}{0}}{\textrm{nicht bestanden}}
+\]</span></p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n} (
     \overset{\color{lightgrey}{0}}{x_{\color{green}{1}}} \color{red}{+}
     \overset{\color{lightgrey}{1}}{x_{\color{green}{2}}} \color{red}{+}
     \overset{\color{lightgrey}{1}}{x_{\color{green}{3}}} \color{red}{+}
-    \overset{\color{lightgrey}{0}}{x_{\color{blue}{4}}}) = \frac{\textrm{# bestanden}}{\textrm{# gesamt}} = \frac{1}{2}\]</span></p>
+    \overset{\color{lightgrey}{0}}{x_{\color{blue}{4}}}) = \frac{\textrm{# bestanden}}{\textrm{# gesamt}} = \frac{1}{2}
+\]</span></p>
 </section>
 <section id="umfrage" class="slide level2">
 <h2>Umfrage</h2>
 <p>Wie viel geben Studierende in München für das Wohnen aus?</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen" title="Survey preview">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation" title="Survey preview">
 </iframe>
 </div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnen/qr" title="Survey link">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/qr" title="Survey link">
 </iframe>
-</div>
-</div>
-</section>
-<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/wohnen" data-preload="true">
-<h2></h2>
+</div></div>
 </section>
 <section id="wie-sehen-die-umfragedaten-aus" class="slide level2">
 <h2>Wie sehen die Umfragedaten aus?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>id</th>
@@ -463,141 +487,337 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </table>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>Reihe = eine <strong>Beobachtung</strong></p></li>
-<li><p>Spalte = eine <strong>Variable</strong></p></li>
-<li><p>Variablentypen:</p>
+<li>Reihe = eine <strong>Beobachtung</strong></li>
+<li>Spalte = eine <strong>Variable</strong></li>
+<li>Variablentypen:
 <ul>
 <li>ausgaben: <strong>numerisch</strong></li>
-<li>wohnart: <strong>kategorisch, nominal</strong></li>
+<li>wohnart: <strong>kategorisch (nominal)</strong></li>
 </ul></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
-<section id="e-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq green">E</span> Das geometrische Mittel</h2>
-<ul>
-<li>Bei Verhältnisskalen (Zahlen, die in einem multiplikativen Verhältnis zueinander stehen), sollte das <em>geometrische</em> und nicht das <em>arithmetische</em> Mittel eingesetzt werden.</li>
-<li>Ein typischer Fall sind <em>Wachstumsraten</em></li>
-<li>z.B. Bevölkerungsentwicklung, Investments, BIP-Wachstum</li>
-</ul>
+<section id="section-1" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/results" data-preload="true">
+<h2></h2>
 </section>
-<section id="b-bip-wachstum-in-deutschland" class="slide level2 smaller">
-<h2><span class="sq yellow">B</span> BIP-Wachstum in Deutschland</h2>
+<section id="bip-wachstum-in-deutschland" class="slide level2 smaller">
+<h2>BIP-Wachstum in Deutschland</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
 <p><img src="https://de.statista.com/graphic/1/2112/veraenderung-des-bruttoinlandprodukts-im-vergleich-zum-vorjahr.jpg" title="BIP Veränderung (Statista)" width="700"></p>
 </div><div class="column" style="width:35%;">
 <p>Die Werte zeigen das <em>Verhältnis</em> des diesjährigen BIP zum Vorjahreswert an, d.h. eine Wachstumsrate.</p>
 <ul>
-<li>BIP 2021: <strong>3.673,8 Mrd.</strong></li>
-<li>Wachstumsrate 2022: <strong>1,7%</strong></li>
-<li>BIP 2022:<br>
-<strong>3.673,8</strong> <span class="math inline">\(\times\)</span> (1 + 0,017) = 3.736,3</li>
+<li>BIP 2018: <strong>3.431,1 Mrd.</strong></li>
+<li>Wachstumsrate 2019: <strong>1%</strong></li>
+<li>Was ist das BIP in 2019?</li>
 </ul>
+</div></div>
+</section>
+<section id="wachstumsraten" class="slide level2 smaller">
+<h2>Wachstumsraten</h2>
+<p><strong>Wachstumsrate (in %)</strong></p>
+<p><span class="math display">\[
+    \overset{\color{lightgrey}{2019}}{1{,}0 \%} \quad
+    \overset{\color{lightgrey}{2020}}{-4{,}1 \%} \quad
+    \overset{\color{lightgrey}{2021}}{3{,}7\%} \quad
+    \overset{\color{lightgrey}{2022}}{1{,}4\%} \quad
+    \overset{\color{lightgrey}{2023}}{-0{,}3\%}
+\]</span></p>
+<div class="fragment">
+<p><strong>Wachstumsfaktor</strong> <span class="math display">\[
+    \overset{\color{lightgrey}{2019}}{1{,}010} \quad
+    \overset{\color{lightgrey}{2020}}{0{,}959} \quad
+    \overset{\color{lightgrey}{2021}}{1{,}037} \quad
+    \overset{\color{lightgrey}{2022}}{1{,}014} \quad
+    \overset{\color{lightgrey}{2023}}{0{,}997}
+\]</span></p>
 </div>
+<div class="fragment">
+<p><strong>BIP (in Mrd. €</strong>) <span class="math display">\[
+\overset{\color{lightgrey}{2018}}{3.431{,}1} \xrightarrow{\color{red}{\times 1{,}010}}
+\overset{\color{lightgrey}{2019}}{3.465{,}4} \xrightarrow{\color{red}{\times 0{,}959}}
+\ldots \xrightarrow{\color{red}{\times 0{,}997}}
+\overset{\color{lightgrey}{2023}}{3.484{,}06}
+\]</span></p>
 </div>
 </section>
-<section id="d-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Das geometrische Mittel</h2>
+<section id="mittleres-jährliches-wachstum" class="slide level2 smaller">
+<h2>Mittleres jährliches Wachstum</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lagemasse_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<ul>
+<li>Das arithmetische Mittel der deutschen Wachstumsrate 2018 - 2023 ist <strong>0.34%</strong>:</li>
+</ul>
+<p><span class="math inline">\(\frac{1}{5} (1{,}010 + 0{,}959 + 1{,}037 + \\ 1{,}014 + 0{,}997) \approx 1{,}0034\)</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>Wenn wir das BIP 2018 fünf mal mit dem arithmetischen Mittel multiplizieren, erhalten wir nicht das BIP 2023:</li>
+</ul>
+<p><span class="math inline">\(\overset{\color{lightgrey}{2018}}{3.431{,}1} \xrightarrow{\color{red}{\times 1{,}0034}}
+\overset{\color{lightgrey}{2019}}{3.442{,}8} \xrightarrow{\color{red}{\times 1{,}0034}}
+\ldots \\
+\overset{\color{lightgrey}{2022}}{3.478{,}0} \xrightarrow{\color{red}{\times 1{,}0034}}
+\overset{\color{lightgrey}{2023}}{3.489{,}83} \color{red}{\neq 3.484{,}06}\)</span></p>
+</div>
+</div></div>
+</section>
+<section id="das-geometrische-mittel" class="slide level2">
+<h2>Das geometrische Mittel</h2>
+<ul>
+<li>Bei Zahlen, die in einem multiplikativen Verhältnis zu einem Referenzwert stehen, sollte das <em>geometrische</em> und nicht das <em>arithmetische</em> Mittel eingesetzt werden.</li>
+<li>Ein typischer Fall sind <em>Wachstumsraten</em></li>
+<li>z.B. Bevölkerungsentwicklung, Investments, BIP-Wachstum</li>
+</ul>
+</section>
+<section id="das-geometrische-mittel-1" class="slide level2">
+<h2>Das geometrische Mittel</h2>
 <p>Das geometrische Mittel ist definiert als die <span class="math inline">\(n\)</span>-te Wurzel des Produkts der Werte.</p>
 <p>Analog zur Summe im arithm. Mittel können wir das geom. Mittel mit der Produktnotation (<span class="math inline">\(\Pi\)</span>, groß Pi) definieren:</p>
 <p><span class="math display">\[\textrm{geom. Mittel} = \sqrt[n]{x_1 \times x_2 \times ... \times x_n} = \left( \prod_{i=1}^n x_i \right)^\frac{1}{n}\]</span></p>
 </section>
-<section id="b-das-geometrische-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Das geometrische Mittel</h2>
-<div>
-<p>Beispiel: mittleres BIP-Wachstum (in %), 2019-2023 <span class="math display">\[
-    \overset{\color{lightgrey}{2018}}{3.431,1 \textrm{ Mrd. | }}
-    \overset{\color{lightgrey}{2019}}{1,0 \%} \
-    \overset{\color{lightgrey}{2020}}{-4,1 \%} \
-    \overset{\color{lightgrey}{2021}}{3,6\%} \
-    \overset{\color{lightgrey}{2022}}{1,7\%} \
-    \overset{\color{lightgrey}{2023}}{-0,3\%}
-\]</span></p>
+<section id="mittleres-jährliches-wachstum-1" class="slide level2 smaller">
+<h2>Mittleres jährliches Wachstum</h2>
 <ul>
-<li class="fragment">BIP 2023: <strong>3491 Mrd.</strong> | AM: <strong>0.38%</strong> | GM: <strong>0.347%</strong></li>
-<li class="fragment">Das arithm. Mittel produziert falsche Ergebnisse:
-<ul>
-<li class="fragment"><span class="math inline">\(3.431,1 \times 1.038^5 = 3.496,8 \textrm{ Mrd.}\)</span></li>
-<li class="fragment"><span class="math inline">\(3.431,1 \times 1.0347^5 = 3.491 \textrm{ Mrd.}\)</span></li>
-</ul></li>
+<li>Das <em>arithmetische</em> Mittel der deutschen Wachstumsrate 2018 - 2023 ist <strong>0.34%</strong>:</li>
 </ul>
+<p><span class="math display">\[
+\textrm{AM} = \frac{1}{5} (1{,}010 + 0{,}959 + 1{,}037 + 1{,}014 + 0{,}997) \approx \color{red}{1{,}0034}
+\]</span></p>
+<div class="fragment">
+<ul>
+<li>Das <em>geometrische</em> Mittel der deutschen Wachstumsrate 2018 - 2023 ist <strong>0.31%</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\textrm{GM} = \left( 1{,}010 \times 0{,}959 \times 1{,}037 \times 1{,}014 \times 0{,}997 \right)^\frac{1}{5} \approx \color{green}{1{,}0031}
+\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>Wenn wir fälschlicher Weise das arithmetische und nicht das geometrische Mittel einsetzen, überschätzen wir das deutsche Wirtschaftswachstum um fast <strong>6 Mrd. €</strong>:</li>
+</ul>
+<p><span class="math display">\[
+4.431{,}1 \times \textrm{AM}^5 - 4.431{,}1 \times \textrm{GM}^5 \approx \color{red}{5{,}77 \textrm{ Mrd. €}}
+\]</span></p>
 </div>
 </section>
-<section id="e-gewichtete-mittelwerte" class="slide level2">
-<h2><span class="sq green">E</span> Gewichtete Mittelwerte</h2>
+<section id="section-2" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/results-geometric" data-preload="true">
+<h2></h2>
+</section>
+<section id="gewichtete-mittelwerte" class="slide level2">
+<h2>Gewichtete Mittelwerte</h2>
 <ul>
 <li>Bei den bisher besprochenen Mittelwerten wird jeder Wert gleich gewichtet.</li>
-<li>In vielen Situationen muss z.B. für Größenunterschiede der Beobachtungseinheiten korrigiert werden.</li>
+<li>In vielen Situationen müssen z.B. Größenunterschiede oder Mehrfachzählungen korrigiert werden.</li>
 <li>In solchen Fällen können Werte für das geometrische oder arithmetische Mittel individuell gewichtet werden.</li>
 </ul>
 </section>
-<section id="d-gewichtetes-arithmetisches-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Gewichtetes arithmetisches Mittel</h2>
+<section id="gewichtetes-arithmetisches-mittel" class="slide level2">
+<h2>Gewichtetes arithmetisches Mittel</h2>
 <p>Das gewichtete arithmetische Mittel ist die Summe der gewichteten Werte geteilt durch die Summe der Gewichte.</p>
 <p>Für eine Datenreihe <span class="math inline">\(x\)</span> mit zugehörigen Gewichten <span class="math inline">\(w\)</span> gilt:</p>
 <p><span class="math display">\[\begin{align}
 \textrm{gew. arithm. Mittel} &amp;= \frac{w_1 x_1 + w_2 x_2 + \cdots + w_n x_n}{w_1 + w_2 + \cdots + w_n} \\[0.8em]
 &amp;= \frac{1}{\sum_{i=1}^n w_i} \sum_{i=1}^n w_i x_i
-\end{align}\]</span></p>
+\end{align}
+\]</span></p>
 </section>
-<section id="b-gewichtetes-arithmetisches-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Gewichtetes arithmetisches Mittel</h2>
-<p>Für die Folgenden Werte <span class="math inline">\(x\)</span> (z.B. Körpergrößen) und Gewichte <span class="math inline">\(w\)</span> (z.B. Anzahl Beobachtungen):</p>
-<p><span class="math display">\[x = {163, 179, 180, 192} \ \ \ w = {3, 11, 4, 7}\]</span></p>
-<p>ergibt sich ein gewichtetes arithmetisches Mittel von:</p>
-<p><span class="math display">\[ \frac{3 \times 163 + 11 \times 179 + 4 \times 180 + 7 \times 192}{3 + 11 + 4 + 7} = \frac{4522}{25} = 180.88 \]</span></p>
+<section id="gewichtetes-arithmetisches-mittel-1" class="slide level2">
+<h2>Gewichtetes arithmetisches Mittel</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Größe</strong></th>
+<th style="text-align: center;"><strong># Beobachtungen</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span style="color: teal">163</span></td>
+<td style="text-align: center;"><span style="color: orange">11</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="color: teal">179</span></td>
+<td style="text-align: center;"><span style="color: orange">2</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span style="color: teal">180</span></td>
+<td style="text-align: center;"><span style="color: orange">4</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="color: teal">192</span></td>
+<td style="text-align: center;"><span style="color: orange">3</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<p>Für die <span style="color: teal">Werte</span> (Körpergröße) und <span style="color: orange">Gewichte</span> (Häufigkeit des Wertes) in der Tabelle ergibt sich ein gewichtetes arithmetisches Mittel von:</p>
+</div></div>
+<p><br></p>
+<p><span class="math display">\[
+\frac{
+\color{orange}{11} \times \color{teal}{163} +
+\color{orange}{2} \times \color{teal}{179} +
+\color{orange}{4} \times \color{teal}{180} +
+\color{orange}{3} \times \color{teal}{192}}
+{\color{orange}{11} + \color{orange}{2} + \color{orange}{4} + \color{orange}{3}} = 172.4
+\]</span></p>
 </section>
-<section id="b-regionale-einkommensverteilung" class="slide level2 smaller">
-<h2><span class="sq yellow">B</span> Regionale Einkommensverteilung</h2>
+<section id="regionales-pro-kopf-bip" class="slide level2">
+<h2>Regionales Pro-Kopf-BIP</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-4-1.png" width="672"></p>
+<p><a href="lagemasse_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-6-1.png" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
-<p>Ungewichtetes arithm. Mittel:</p>
-<p>Gewichtetes arithm. Mittel:</p>
-</div>
-</div>
+<p><strong>Arithmetischer Mittelwert</strong></p>
+<hr>
+<p>ungewichtet:</p>
+<p>44 066 Euro</p>
+<hr>
+<p>gewichtet:</p>
+<p>48 002 Euro</p>
+</div></div>
 </section>
-<section id="d-gewichtetes-geometrisches-mittel" class="slide level2">
-<h2><span class="sq blue">D</span> Gewichtetes geometrisches Mittel</h2>
+<section id="gewichtetes-geometrisches-mittel" class="slide level2">
+<h2>Gewichtetes geometrisches Mittel</h2>
 <p>Im gewichteten geometrischen Mittel werden die Werte mit ihren zugehörigen Gewichten exponiert.</p>
 <p>Die Anzahl der Werte <span class="math inline">\(n\)</span> wird wie beim gewichteten arithm. Mittel durch die Summe der Gewichte ersetzt.</p>
 <p>Für eine Datenreihe <span class="math inline">\(x\)</span> mit zugehörigen Gewichten <span class="math inline">\(w\)</span> gilt:</p>
 <p><span class="math display">\[ \textrm{gew. geom. Mittel} = \left( \prod_{i=1}^n x_i^{w_i} \right)^{1 / \sum_{i=1}^n w_i} \]</span></p>
 </section>
-<section id="b-gewichtetes-geometrisches-mittel" class="slide level2">
-<h2><span class="sq yellow">B</span> Gewichtetes geometrisches Mittel</h2>
-<p>Für die Folgenden Werte <span class="math inline">\(x\)</span> (z.B. Renditen) und Gewichte <span class="math inline">\(w\)</span> (z.B. Anzahl Anleihen):</p>
-<p><span class="math display">\[x = {-2\%, 10\%, 1\%, 5\%} \ \ \ w = {3, 1, 4, 2}\]</span></p>
-<p>ergibt sich ein gewichtetes geometrisches Mittel von:</p>
-<p><span class="math display">\[ (0.02^3 \times 0.1^1 \times 0.01^4 \times 0.05^2)^{1 / (3 + 1 + 4 + 2)} = 2.14\%\]</span></p>
+<section id="gewichtetes-geometrisches-mittel-1" class="slide level2">
+<h2>Gewichtetes geometrisches Mittel</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Rendite</strong></th>
+<th style="text-align: center;"><strong>Investmentsumme</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span style="color: teal">-2%</span></td>
+<td style="text-align: center;"><span style="color: orange">3 000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="color: teal">10%</span></td>
+<td style="text-align: center;"><span style="color: orange">1 000</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span style="color: teal">1%</span></td>
+<td style="text-align: center;"><span style="color: orange">4 000</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span style="color: teal">5%</span></td>
+<td style="text-align: center;"><span style="color: orange">2 000</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:45%;">
+<p>Für die <span style="color: teal">Werte</span> (Renditen) und <span style="color: orange">Gewichte</span> (Investment-summe) in der Tabelle ergibt sich ein gewichtetes geometrisches Mittel von:</p>
+</div></div>
+<p><br></p>
+<p><span class="math display">\[
+\left(
+\color{teal}{0{,}98}^{\color{orange}{3}} \times
+\color{teal}{1{,}10}^{\color{orange}{1}} \times
+\color{teal}{1{,}01}^{\color{orange}{4}} \times
+\color{teal}{1{,}05}^{\color{orange}{2}}
+\right)^{\frac{1}{\color{orange}{3 + 1 + 4 + 2}}} = 1{,}017
+\]</span></p>
 </section>
-<section id="b-inflation-und-warenkorb" class="slide level2">
-<h2><span class="sq yellow">B</span> Inflation und Warenkorb</h2>
-<ul>
-<li><a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html">Beispiel Warenkorb</a></li>
-</ul>
+<section id="inflation-und-warenkorb" class="slide level2 smaller">
+<h2>Inflation und Warenkorb</h2>
+<p>Die <a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_340_611.html">Inflationsrate</a> wird als durchschnittlicher Preisanstieg eines <em>Korbs ausgewählter Waren</em> und Dienstleistungen innerhalb eines Jahres berechnet.</p>
+<p><br></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 28%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kategorie</th>
+<th style="text-align: center;">Gewicht (‰)</th>
+<th style="text-align: center;">Veränderung (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fleisch und Fleischwaren</td>
+<td style="text-align: center;">22,16</td>
+<td style="text-align: center;">0,0</td>
+</tr>
+<tr class="even">
+<td>Obst</td>
+<td style="text-align: center;">11,62</td>
+<td style="text-align: center;">2,5</td>
+</tr>
+<tr class="odd">
+<td>Gemüse</td>
+<td style="text-align: center;">13,72</td>
+<td style="text-align: center;">0,9</td>
+</tr>
+<tr class="even">
+<td>Alkoholische Getränke und Tabak</td>
+<td style="text-align: center;">35,26</td>
+<td style="text-align: center;">3,2</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Die mittlere Teureungsrate für die Auswahl in der Tabelle berechnet sich als deren gewichtetes geometrisches Mittel:</p>
+<p><span class="math display">\[
+(1{,}000^{22{,}16} \times 1{,}025^{11{,}62} \times 1{,}009^{13{,}72} \times 1{,}032^{35{,}26})^{1 / (22{,}16 + 11{,}62 + 13{,}72 + 35{,}26)} = 1{,}019
+\]</span></p>
 </section>
-<section id="e-der-median" class="slide level2">
-<h2><span class="sq green">E</span> Der Median</h2>
+<section id="wohnkosten" class="slide level2 smaller">
+<h2>Wohnkosten</h2>
+<p>Was passiert mit dem AM wenn sich ein saudischer Prinz für das Geographiestudium entscheidet, der im Bayerischen Hof eine Suite (5 000€ / Nacht) bezieht?</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation" title="Survey preview">
+</iframe>
+</div><div class="column" style="width:60%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/wohnsituation/results-median" title="Survey results">
+</iframe>
+</div></div>
+</section>
+<section id="der-median" class="slide level2">
+<h2>Der Median</h2>
 <ul>
 <li>Das arithmetische Mittel ist empfindlich gegenüber Ausreißern bzw. Extremwerten.</li>
 <li>Der Median berücksichtigt ausschließlich die Reihenfolge (den Rang) der Werte zur Identifikation der ‘Mitte’.</li>
 <li>Der Median ist robuster, tauscht dafür aber Informationsgehalt ein.</li>
 </ul>
 </section>
-<section id="d-der-median" class="slide level2">
-<h2><span class="sq blue">D</span> Der Median</h2>
+<section id="der-median-1" class="slide level2">
+<h2>Der Median</h2>
 <ul>
 <li><p>Der Median ist der Wert in der Mitte einer größensortierten Datenreihe. Bei einer geraden Anzahl an Werten <span class="math inline">\(n\)</span> ist der Median das arithmetische Mittel der beiden mittleren Werte.</p></li>
 <li><p>Für eine sortierte Datenreihe <span class="math inline">\(s\)</span> gilt also:</p></li>
@@ -607,45 +827,79 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 \frac{s_{\frac{n}{2}} + s_{\frac{n}{2} + 1}}{2}, \textrm{wenn \(n\) gerade}
 \end{cases}\]</span></p>
 </section>
-<section id="b-der-median" class="slide level2">
-<h2><span class="sq yellow">B</span> Der Median</h2>
+<section id="der-median-2" class="slide level2">
+<h2>Der Median</h2>
 <p>Beispiel mit <span class="math inline">\(n\)</span> ungerade: <span class="math display">\[s = {163, 177, \color{orange}{179}, 180, 192}\]</span> <span class="math display">\[s_\color{orange}{\frac{n + 1}{2}} = 179\]</span></p>
-<p>Beispiel mit <span class="math inline">\(n\)</span> gerade: <span class="math display">\[s = {163, \color{orange}{179}, \color{orange}{180}, 192}\]</span> <span class="math display">\[\frac{s_\color{orange}{{\frac{n}{2}}} + s_\color{orange}{{\frac{n}{2} + 1}}}{2} = \frac{179 + 180}{2} = 179.5\]</span></p>
+<p>Beispiel mit <span class="math inline">\(n\)</span> gerade: <span class="math display">\[s = {163, \color{orange}{179}, \color{orange}{180}, 192}\]</span> <span class="math display">\[\frac{s_\color{orange}{{\frac{n}{2}}} + s_\color{orange}{{\frac{n}{2} + 1}}}{2} = \frac{179 + 180}{2} = 179{,}5\]</span></p>
 </section>
-<section id="umfrage-1" class="slide level2">
-<h2>Umfrage</h2>
-<p>Was ist euer monatliches Einkommen?</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen" title="Survey preview">
-</iframe>
-</div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/einkommen/qr" title="Survey link">
-</iframe>
-</div>
-</div>
-</section>
-<section id="section-1" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture-results/einkommen" data-preload="true">
+<section id="section-3" class="slide level2" data-background-image="images/einkommen-de.svg" data-background-size="contain">
 <h2></h2>
 </section>
-<section id="section-2" class="slide level2" data-background-image="images/einkommen-de.svg" data-background-size="contain">
-<h2></h2>
-</section>
-<section id="e-quantile-und-perzentile" class="slide level2">
-<h2><span class="sq green">E</span> Quantile und Perzentile</h2>
+<section id="quantile-und-perzentile" class="slide level2">
+<h2>Quantile und Perzentile</h2>
 <ul>
 <li>Der Median ist das 0,5-Quantil bzw. das 50%-Perzentil, d.h. 50% der Werte sind kleiner als der Median.</li>
 <li>Wir können andere Quantile berechnen, z.B. um eine Aussage über einen “Großteil” (z.B. 90%-Perzentil) zu treffen.</li>
 </ul>
-
-<img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-5-1.png" width="1152" class="r-stretch"></section>
-<section id="e-quantile-und-boxplots" class="slide level2">
-<h2><span class="sq green">E</span> Quantile und Boxplots</h2>
-
-<img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lagemasse_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-7-1.png" width="1152"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="quantile-und-boxplots" class="slide level2">
+<h2>Quantile und Boxplots</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lagemasse_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="lagemasse_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="unschlüssig" class="slide level2">
 <h2>Unschlüssig? ;)</h2>
 <p><img src="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" title="https://imgs.xkcd.com/comics/geothmetic_meandian_2x.png" height="500"></p>
+</section>
+<section id="prüfungsfragen" class="slide level2 smaller">
+<h2>Prüfungsfragen</h2>
+<ul>
+<li>Ihnen liegt eine Zeitreihe über die letzen 100 Jahre vor, die die prozentuale Veränderung der weltweiten Jahresmitteltemperatur gegenüber dem Vorjahr angibt. Wie berechnen Sie den mittleren jährlichen Temperaturanstieg?</li>
+<li>Was sind die jeweiligen Vor- und Nachteile des Medians bzw. des arithmetischen Mittels?</li>
+<li>Berechnen Sie das gewichtete geometrische Mittel der Rendite für das folgende Portfolio:</li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Rendite</th>
+<th>Investment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-2%</td>
+<td>1500</td>
+</tr>
+<tr class="even">
+<td>5%</td>
+<td>1000</td>
+</tr>
+<tr class="odd">
+<td>24%</td>
+<td>400</td>
+</tr>
+<tr class="even">
+<td>-10%</td>
+<td>1200</td>
+</tr>
+</tbody>
+</table>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -677,7 +931,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -688,7 +942,7 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -865,80 +1119,42 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       });
     </script>
     
-
     <script>
-
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
       // slide changes (different for each slide format).
-
       (function () {
-
         // dispatch for htmlwidgets
-
         function fireSlideEnter() {
-
           const event = window.document.createEvent("Event");
-
           event.initEvent("slideenter", true, true);
-
           window.document.dispatchEvent(event);
-
         }
-
-    
 
         function fireSlideChanged(previousSlide, currentSlide) {
-
           fireSlideEnter();
 
-    
-
           // dispatch for shiny
-
           if (window.jQuery) {
-
             if (previousSlide) {
-
               window.jQuery(previousSlide).trigger("hidden");
-
             }
-
             if (currentSlide) {
-
               window.jQuery(currentSlide).trigger("shown");
-
             }
-
           }
-
         }
-
-    
 
         // hookup for slidy
-
         if (window.w3c_slidy) {
-
           window.w3c_slidy.add_observer(function (slide_num) {
-
             // slide_num starts at position 1
-
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
           });
-
         }
 
-    
-
       })();
-
     </script>
-
-    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1127,6 +1343,38 @@ s_{\frac{n + 1}{2}}, \textrm{wenn \(n\) ungerade} \\
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":false});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
