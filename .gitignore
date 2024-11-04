@@ -6,6 +6,7 @@ lecture-surveys/data/
 slides/slides.Rproj
 slides/.Rproj.user/
 slides/*_cache/
+slides/data/
 slides/.quarto
 .Rproj.user
 

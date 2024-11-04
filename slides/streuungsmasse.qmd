@@ -45,34 +45,895 @@ theme_update(
 
 ```
 
-# Wiederholung Lagemaße
+## Wiederholung Lagemaße
 
-# Streuungs- oder Dispersionsmaße
+```{r}
+set.seed(123)
+x = rnorm(5000, mean=165, sd=6)
+y = rnorm(5000, mean=180, sd=6)
+d = data.frame(x=c(x, y), g=factor(rep(c(1,2), each=5000)))
+ggplot(d, aes(x, fill=g)) +
+    geom_histogram(color="white", alpha=0.7, position="identity", show.legend=FALSE) +
+    geom_segment(aes(x = 165, y = 0, xend = 180, yend = 0), arrow = arrow(ends = "both", type = "closed")) +
+    geom_vline(xintercept=165, linewidth=2) + 
+    geom_vline(xintercept=180, linewidth=2) + 
+    labs(x="", y="") + scale_fill_tableau()
+```
 
-## Varianz
+##  Quantile und Perzentile
 
-## Standardabweichung
+-   Der Median ist das 0,5-Quantil bzw. das 50%-Perzentil, d.h. 50% der
+    Werte sind kleiner als der Median.
+-   Wir können andere Quantile berechnen, z.B. um eine Aussage über
+    einen "Großteil" (z.B. 90%-Perzentil) zu treffen.
+
+```{r fig.height=3.5, fig.width=12}
+set.seed(123)
+data <- data.frame(x=rlnorm(10000, meanlog = 8, sdlog = 0.3))
+p <- c(0.01, 0.25, 0.5, 0.75, 0.99)
+q <- quantile(data$x, probs = p)
+percentiles <- data.frame(x = q, y = 0, xend = q, 
+                          yend = 1400, label = paste0(p, "%"))
+
+ggplot(data, aes(x)) +
+    geom_histogram(fill="tomato", color="white") +
+    geom_segment(data=percentiles, 
+                 aes(x, y, xend=xend, yend=yend), 
+                 linewidth=1.2, linetype=2) +
+    geom_text(data=percentiles, aes(x, yend, label=label), nudge_y = 150) + 
+    xlab("Einkommen") + ylab("Häufigkeit") +
+    geom_rangeframe()
+
+```
+
+## Boxplots
+
+```{r fig.height=5.625, fig.width=10}
+library(dbplyr)
+library(forcats)
+
+db = DBI::dbConnect(RSQLite::SQLite(), "data/surveys.db")
+
+df = tbl(db, "wohnort") |>
+    select(minor, grade) |>
+    filter(minor != "Andere") |>
+    collect() |> drop_na()
+
+ggplot(df, aes(grade, fct_reorder(minor, grade), fill = minor)) +
+    geom_boxplot(fill = "grey80", alpha = 0.3) +
+    labs(
+        title = "Nebenfachwahl und Mathematiknote im Abitur",
+        x="Punkte in Mathe",
+        y= NULL) +
+    theme(legend.position="none")
+
+```
+
+## Boxplots
+
+```{r fig.height=5.625, fig.width=10}
+library(dbplyr)
+library(forcats)
+
+db = DBI::dbConnect(RSQLite::SQLite(), "data/surveys.db")
+
+df = tbl(db, "wohnort") |>
+    select(minor, grade) |>
+    filter(minor != "Andere") |>
+    collect() |> drop_na()
+
+ggplot(df, aes(grade, fct_reorder(minor, grade), fill = minor)) +
+    geom_jitter(aes(color=minor), width=0, height=0.3, pch=1, stroke=1.5) +
+    geom_boxplot(fill = "grey80", alpha = 0.3) +
+    labs(
+        title = "Nebenfachwahl und Mathematiknote im Abitur",
+        x="Punkte in Mathe",
+        y= NULL) +
+    theme(legend.position="none")
+
+```
+
+##  Quantile und Boxplots
+
+```{r fig.height=5.625, fig.width=10}
+
+set.seed(123)
+data <- data.frame(x=rlnorm(10000, meanlog = 8, sdlog = 0.3))
+p <- c(0.25, 0.5, 0.75)
+q <- quantile(data$x, probs = p)
+percentiles <- data.frame(x = q, y = 0, xend = q,
+                          yend = 1400, label = paste0(p, "%"))
+
+library(ggside)
+
+ggplot(data, aes(x = x)) +
+    geom_histogram(fill = "tomato", color = "white") +
+    geom_xsideboxplot(orientation="y", 
+                      fill="grey70", outlier.shape=1, outlier.alpha=0.2) +
+    geom_segment(data=percentiles, 
+                 aes(x, y, xend=xend, yend=yend), 
+                 linewidth=1.2, linetype=2) +
+    geom_text(data=percentiles, aes(x, yend, label=label), nudge_y = 50) + 
+    xlab("Einkommen") + ylab("") +
+    geom_rangeframe() +
+    theme(ggside.axis.text.y = element_blank(), 
+          ggside.axis.ticks.y = element_blank())
+
+```
+
+# Streuungsmaße für numerische Variablen
+
+## Streuungsmaße
+
+```{r}
+set.seed(123)
+sdx = 10
+sdy = 4
+mean = 180
+x = rnorm(5000, mean=mean, sd=sdx)
+y = rnorm(5000, mean=mean, sd=sdy)
+d = data.frame(x=c(x, y), g=factor(rep(c(1,2), each=5000)))
+ggplot(d, aes(x, fill=g)) +
+    geom_histogram(color="white", alpha=0.7, position="identity", binwidth=2, show.legend=FALSE) +
+    geom_segment(
+        aes(x = mean - sdx, y = -40, xend = mean + sdx, yend = -40),
+        color = "cornflowerblue",
+        arrow = arrow(ends = "both", type = "closed")
+    ) +
+    geom_segment(
+        aes(x = mean - sdy, y = 1050, xend = mean + sdy, yend = 1050),
+        color = "orange",
+        arrow = arrow(ends = "both", type = "closed")
+    ) +
+    # geom_vline(xintercept=mean, linewidth=1) +
+    labs(x="", y="") + scale_fill_tableau()
+```
+
+## Streuungsmaße
+
+- Ein Streuungsmaß fasst eine Datenreihe in einer Zahl zusammen, die deren 'Streuung' oder Dispersion darstellt.
+- Streuungs- oder Dispersionsmaße geben an, wie eng oder weitläufig eine Variable um ihre Mitte verteilt ist.
+- So wie es unterschiedliche Lagemaße gibt, kann auch Streuung auf vielfältige Art und Weise gemessen werden.
+
+
+## Streuungsmaße
+
+```{r, fig.width=10, fig.height=6}
+library(gapminder)
+library(scales)
+
+df = gapminder |>
+    group_by(year) |>
+    mutate(gdpPercap = log10(gdpPercap)) |>
+    summarize(mean=mean(gdpPercap), sd=sd(gdpPercap), gdp=gdpPercap)
+
+p1  = df |>
+    ggplot(aes(x = gdp,  group = factor(year))) +
+    geom_histogram(color="white") +
+    geom_vline(aes(xintercept=mean), linewidth=1.5) +
+    geom_segment(
+        aes(x = mean - sd, xend = mean + sd, y = 0, yend = 0),
+        color = "orange", linewidth=2,
+    ) +
+    facet_wrap(~year, ncol=2, dir="v") +
+    scale_x_continuous(
+        labels = scales::math_format(10^.x)
+    ) +
+    labs(
+        x = "Pro-Kopf-BIP",
+        y = NULL,
+        # title = "Pro-Kopf-BIP für 142 Länder, 1952 - 2007",
+        # caption = "Datenquelle: gapminder.org"
+    ) +
+    theme(
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()
+    )
+
+p2 = df |>
+    group_by(year) |>
+    summarize(sd = first(sd)) |>
+    mutate(year = factor(year, levels=rev(year))) |>
+    ggplot(aes(x = mean-sd, xend = mean+sd, y = year, yend = year)) +
+    geom_vline(xintercept = mean) +
+    geom_segment(color = "orange", linewidth=2) +
+    theme(axis.text.x = element_blank(), axis.ticks.x=element_blank()) +
+    labs(x="Streuung", y=NULL)
+
+p = p1 | p2
+
+p + plot_layout(widths=c(0.8, 0.2)) +
+    plot_annotation( tag_levels="A",
+        title="Pro-Kopf-BIP für 142 Länder, 1952 - 2007",
+        caption = "Datenquelle: gampinder.org"
+    )
+```
+
+## Spannweite
+
+Das einfachste Streuungsmaß ist die *Spannweite*, die den Abstand zwischen Maximalwert und Minimalwert misst:
+
+$$
+R = x_{max} - x_{min}
+$$
+
+Beispiel:
+
+$$x = {163, 177, 179, 180, 192}$$
+
+$$R = 192 - 163 = 29$$
+
+
+## Interquartilsabstand
+
+Der IQA gibt die Spannweite der mittleren 50% der Daten an, d.h. den Abstand zwischen dem 25%- und dem 75%-Quantil:
+
+$$IQA = \tilde{Q}_{75} - \tilde{Q}_{25}$$
+
+Für das vorherige Beispiel gilt: 
+
+$$IQA = 180 - 177 = 3$$
+
+Da der IQA Ausreißer ignoriert, ist er robuster als die Spannweite.
+
+## Spannweite vs. IQR
+
+```{r}
+library(dbplyr)
+
+db = DBI::dbConnect(RSQLite::SQLite(), "data/surveys.db")
+
+df = tbl(db, "wohnsituation") |>
+    filter(wohnsituation != "Andere") |> 
+    collect() |> drop_na()
+
+p1 = df |>
+    filter(kosten > 0) |>
+    ggplot(aes(x = kosten)) +
+    geom_histogram(fill="tomato", binwidth=50) +
+    labs(x = NULL, y = NULL) +
+    theme(
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()
+    )
+
+p2 = df |>
+    filter(kosten > 0) |>
+    ggplot(aes(x = kosten)) +
+    geom_vline(aes(xintercept = median(kosten)), color="grey80", linewidth = 1) +
+    geom_text(
+        aes(x = median(kosten), y = 1.8),
+        label="Median",
+        nudge_x = 10,
+        hjust = 0,
+        color="grey80"
+    ) +
+    # geom_jitter(aes(y = 0), pch=1, color="tomato", alpha=0.8, stroke=1.8) +
+    geom_segment(
+        aes(x=kosten, xend=kosten, y=-0.5, yend=0.5),
+        color = "tomato"
+    ) +
+    geom_segment(aes(y = 1, yend = 1, x = min(kosten), xend = max(kosten))) +
+    geom_segment(aes(y = 1, yend = 0.9, x = min(kosten), xend = min(kosten))) +
+    geom_segment(aes(y = 1, yend = 0.9, x = max(kosten), xend = max(kosten))) +
+    geom_segment(aes(y = -1, yend = -1, x = quantile(kosten, 0.25), xend = quantile(kosten, 0.75))) +
+    geom_segment(aes(y = -1, yend = -0.9, x = quantile(kosten, 0.25), xend = quantile(kosten, 0.25))) +
+    geom_segment(aes(y = -1, yend = -0.9, x = quantile(kosten, 0.75), xend = quantile(kosten, 0.75))) +
+    geom_text(
+        aes(x = min(kosten), y = 1.2),
+        label="Spannweite (100% aller Daten)",
+        nudge_x = 10,
+        hjust = 0,
+    ) +
+    geom_text(
+        aes(x = quantile(kosten, 0.25), y = -1.2),
+        label="IQR (50% aller Daten)",
+        nudge_x = 10,
+        hjust = 0,
+    ) +
+    lims(y=c(-2, 2)) +
+    labs(x="Wohnkosten", y=NULL) +
+    theme(
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()
+    )
+
+(p1 / p2) + plot_layout(heights=c(0.2, 0.8))
+```
+
+
+## Varianz und Standardabweichung
+
+Die *Varianz* ist definiert als die mittlere quadrierte Abweichung vom arithmetischen Mittel:
+
+$$
+s^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2
+$$
+
+Statt der Varianz ($s^2$) wird häufig die *Standardabweichung* ($s$) angegeben, die eine natürlichere Interpretation hat:
+
+$$
+s = \sqrt{s^2}
+$$
+
+
+## Varianz und Standardabweichung {.smaller}
+
+- **Schritt 1**: Berechnung des arithm. Mittels:
+
+$$\bar{x} = \frac{1}{5}(163, 177, 179, 180, 192) = 178{,}2$$
+
+:::{.fragment}
+- **Schritt 2**: Quadrierte Differenzen:
+
+$$
+\overset{\color{lightgrey}{231.04}}{(163 - \bar{x})^2}, \quad
+\overset{\color{lightgrey}{  1.44}}{(177 - \bar{x})^2}, \quad
+\overset{\color{lightgrey}{  0.64}}{(179 - \bar{x})^2}, \quad
+\overset{\color{lightgrey}{  3.24}}{(180 - \bar{x})^2}, \quad
+\overset{\color{lightgrey}{190.44}}{(192 - \bar{x})^2}
+$$
+:::
+
+:::{.fragment}
+- **Schritt 3**: Mittelwert der quadrierten Differenzen:
+
+$$
+\begin{align}
+s^2 &= \frac{1}{5}(231.04 + 1.44 + 0.64 + 3.24 + 190.44) = 85.36 \\
+s &= \sqrt{\textrm{Var}} = \sqrt{85.36} = 9.24
+\end{align}
+$$
+:::
+
 
 ## Absolute Abweichung vom Median
 
-- Median Absolute Deviation (MAD)
+Da Varianz und Standardabw. auf *quadrierten* Abweichungen basieren, sind sie besonders anfällig gegenüber Ausreißern.
+
+Eine robustere Alternative ist der *Median der absoluten Abweichungen vom Median* (MAD):
+
+$$
+\textrm{MAD} = \textrm{median}(|x_i - \textrm{median}(x)|)
+$$
+
+
+## Absolute Abweichung vom Median {.smaller}
+
+- **Schritt 1**: Berechnung des Medians von x:
+
+$$\tilde{x} = \textrm{median}(163, 177, \color{orange}{179}, 180, 192) = 179$$
+
+:::{.fragment}
+- **Schritt 2**: Absolutdifferenzen zum Median:
+
+$$
+\overset{\color{lightgrey}{16}}{|163 - \tilde{x}|} \quad
+\overset{\color{lightgrey}{2 }}{|177 - \tilde{x}|} \quad
+\overset{\color{lightgrey}{0 }}{|179 - \tilde{x}|} \quad
+\overset{\color{lightgrey}{1 }}{|180 - \tilde{x}|} \quad
+\overset{\color{lightgrey}{13}}{|192 - \tilde{x}|}
+$$
+:::
+
+:::{.fragment}
+- **Schritt 3**: Median der Absolutdifferenzen:
+
+$$\textrm{MAD} = \textrm{median}(0,1,\color{orange}{2},13,16) = 2$$
+:::
+
+
+## Streuung der Wohnkosten
+
+```{r}
+library(dbplyr)
+db = DBI::dbConnect(RSQLite::SQLite(), "data/surveys.db")
+
+df = tbl(db, "wohnsituation") |>
+    filter(wohnsituation != "Andere") |> 
+    collect() |> drop_na()
+
+p1 = df |>
+    ggplot(aes(kosten, fill=wohnsituation, color=wohnsituation)) +
+    # geom_histogram() +
+    # geom_rug() +
+   # geom_hline(yintercept = 0, linewidth=0.3, color="black") +
+    geom_segment(
+        aes(x=kosten, xend=kosten, y=-1, yend=1, show.legend = FALSE)
+    ) +
+    ylim(-2, 2) +
+    # geom_jitter(
+    #     aes(y = 0),
+    #     alpha = 0.8,
+    #     pch = 1,
+    #     stroke = 1.5,
+    #     show.legend = FALSE
+    # ) +
+    # geom_hline(yintercept = -1, linewidth=0.3) +
+    facet_wrap(~wohnsituation, ncol=1, scales="free_y") +
+    labs(x=NULL, y=NULL) +
+    theme(
+        legend.position="none",
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()
+    )
+
+p2 = df |>
+    group_by(wohnsituation) |>
+    drop_na() |>
+    summarize(
+        R = range(kosten),
+        s = sd(kosten),
+        MAD = median(abs(kosten - median(kosten))),
+        IQR = quantile(kosten, 0.75) - quantile(kosten, 0.25)
+    ) |>
+    pivot_longer(-wohnsituation) |>
+    mutate(
+        name=factor(name, levels=c("R", "IQR", "s", "MAD"))
+    ) |>
+   ggplot(aes(name, value, fill = wohnsituation)) +
+   geom_bar(stat="identity", show.legend = FALSE) +
+   geom_hline(yintercept = 0, linewidth=0.3) +
+   facet_wrap(~wohnsituation, ncol=1, scales="free_y") +
+   labs(x=NULL, y=NULL) +
+   theme(legend.position="none")
+
+p = p1 | p2
+
+p + plot_layout(widths = c(0.8, 0.2))
+
+```
+
+
+## Relative Streuungsmaße
+
+- Die bisher besprochenen Maße geben die Streuung in Einheiten der betrachteten Variable an.
+- Für Vergleiche einer Variable zwischen Gruppen oder zwischen unterschiedlichen Variablen kann es sinnvoll sein, die Streuung relativ zur Lage anzugeben.
+- Das geläufigste relative Streuungsmaß ist der *Variationskoeffizient*, der die Standardabweichung um das arithmetische Mittel normalisiert.
+
+
+## Variationskoeffizient
+
+::::: columns
+::: {.column width="50%"}
+
+```{r, fig.width=5, fig.height=6}
+
+library(maps)
+
+gm = filter(gapminder, year == 2007) |>
+    group_by(continent) |>
+    mutate(gdp = (gdpPercap - mean(gdpPercap))/ mean(gdpPercap))
+
+gm$gdp[!gm$continent %in% c("Europe", "Africa")] = NA
+
+map = map_data("world")
+
+df = left_join(map, gm, by = c("region" = "country"))
+
+ggplot(df, aes(long, lat, group=group)) +
+    geom_polygon(aes(fill=gdp), color="grey20", linewidth=.1) +
+    # coord_map("ortho", orientation = c(33, 15, 0)) +
+    coord_quickmap(xlim=c(-20, 60), ylim=c(-35, 69)) +
+    scale_fill_gradient2(
+        low = "#af8dc3",
+        high = "#7fbf7b",
+        na.value = "grey70",
+    ) +
+    theme(
+        legend.position = "right",
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        panel.background = element_rect(fill="#f4fcfe", color="white")
+    ) +
+    labs(
+        x = NULL, y = NULL,
+        title = "Pro-Kopf-BIP, 2007",
+        subtitle = "Relative Abweichung vom kontinentalen Mittel",
+        fill = "Relative\nAbweichung",
+        caption = "Datenquelle: gapminder.org"
+    )
+
+```
+:::
+
+::: {.column width="50%"}
+
+Absolute und relative Streuung des Pro-Kopf-BIP
+
+***
+
+*Afrika*
+
+**AM** = 3 089\$, **SD** = 3 618\$
+
+**VK** = **SD** / **AM** = 1.17
+
+***
+
+*Europa*
+
+**AM** = 25 054\$, **SD** = 11 800\$
+
+**VK** = **SD** / **AM** = 0.47
+
+
+:::
+:::::
+
 
 # Kategorische Daten
 
-# Lagemaße für kategorische Daten
 
-## Nominal: Modus
-
-## Ordinal: Median
+# Kategorisch-nominale Daten beschreiben
 
 
-# Streuungsmaße für kategorische Daten
+## Modus
 
-## Nominal: Entropie
+- Nominalskalierte Variablen enthalten neben der Unterschiedlichkeit der Kategorien keine Informationen über Reihenfolge oder Abstände zwischen Kategorien.
+- Für nominalskalierte Variablen sind die bisher besprochenen Lagemaße, wie Mittelwerte oder Median, daher ungeeignet.
+- Der *Modus* einer nominalen Variable ist deren häufigster Wert (und kann nach dem gleichen Prinzip auch für numerische Variablen berechnet werden).
 
-- Shannon entropy, normalized
+## Modus
 
-## Ordinal: Dissenz
+Für die kategorisch-nominale Datenreihe
 
-- [See paper by Tastle & Wierman (2007)](https://www.sciencedirect.com/science/article/pii/S0888613X06001186)
+$$x = 🦆, 🦆, 🦆, ☕, ☕, 🍰$$
+
+Ist der Modus also 🦆.
+
+- Der Modus ist nicht notwendigerweise einzigartig, da mehrere Kategorien die gleiche maximale Häufigkeit aufweisen können. In solchen Fällen spricht man von einer *multimodalen* Verteilung.
+
+## Multimodale Verteilungen
+
+Üblicherweise wird auch eine Verteilung mit mehreren *lokalen* Maxima als multimodal bezeichnet, selbst wenn es nur ein *globales* Maximum existiert.
+
+```{r, fig.width=10, fig.height=4}
+set.seed(123)
+
+d1 = rbinom(10000, 40, 0.3)
+d2 = rbinom(6000, 40, 0.7)
+
+d = data.frame(x=c(d1, d2))
+
+ggplot(d, aes(x)) +
+    geom_bar(fill="tomato", color="white") +
+    geom_hline(yintercept=0, color="black") +
+    labs(x=NULL, y=NULL) +
+    theme(
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()
+    )
+
+
+```
+
+## Entropie
+
+- Wie für Lagemaße sind auch die bisher besprochenen Streuungsmaße, wie Varianz oder MAD, nicht anwendbar.
+
+- Die Entropie misst, zu welchem Grand sich die Werte einer kategorischen Variable auf eine Kategorie konzentrieren (↓) bzw. sich gleichmäßig über alle Kategorien verteilen (↑).
+
+- In der Informationstheorie gibt die Entropie den Informationsgehalt bzw. die inhärente Unsicherheit einer Wahrscheinlichkeitsverteilung an.
+
+## Sektorale Beschäftigung
+
+```{r}
+countries = c("Vietnam", "Chile", "Luxembourg")
+
+
+df = tibble(
+    country = c("Germany", "Chile", "USA", "Vietnam", "Nigeria", "Luxembourg"),
+    agriculture = c(1, 6, 2, 33, 38, 1),
+    industry = c(27, 23, 19, 31, 15, 9),
+    services = c(72, 71, 79, 36, 47, 90)
+    ) |>
+    pivot_longer(
+        cols = -country,
+        names_to = "sector",
+        values_to = "value"
+    ) |>
+    filter(country %in% countries) |>
+    mutate(country = factor(country, levels=countries))
+
+maxent = log(length(countries))
+
+val_vietnam = df$value[df$country == "Vietnam"]
+val_chile = df$value[df$country == "Chile"]
+val_luxembourg = df$value[df$country == "Luxembourg"]
+
+entropy = function(x) -sum(x * log(x)) / log(length(x))
+
+entropy_labels = c(
+    Vietnam = paste("Vietnam | Entropie: ", round(entropy(val_vietnam / 100), digits=3)),
+    Chile = paste("Chile | Entropie: ", round(entropy(val_chile / 100), digits=3)),
+    Luxembourg = paste("Luxembourg | Entropie: ", round(entropy(val_luxembourg / 100), digits=3))
+)
+
+df |> ggplot(aes(x=sector, y=value, fill=country)) +
+    geom_bar(stat="identity", show.legend=FALSE) +
+    facet_wrap(~country, nrow=1, labeller=labeller(country=entropy_labels)) +
+    scale_fill_tableau() +
+    labs(
+        title = "Beschäftigungsanteil nach Wirtschaftssektor",
+        x=NULL,
+        y="Relative Häufigkeit (%)",
+        fill = NULL,
+        caption = "Datenquelle: Weltbank"
+    )
+```
+
+## Entropie
+
+ Für eine nominale Variable mit $k$ Kategorien und relativen Häufigkeiten $p_i = \frac{\textrm{# Kategorie } i}{\textrm{# Gesamt}}$ ist die Entropie definiert als:
+
+$$
+H = -\sum_{i=1}^k p_i \textrm{log}(p_i)
+$$
+
+Die Entropie kann durch $\textrm{log}(k)$ geteilt werden, um ein normalisiertes Maß mit Wertebereich 0 bis 1 zu erhalten.
+
+
+## Entropie {.smaller}
+
+Für die kategorisch-nominale Datenreihe
+
+$$x = 🦆, 🦆, 🦆, ☕, ☕, 🍰$$
+
+::: {.fragment}
+mit relativen Häufigkeiten
+
+$$
+p_🦆 = 3/6, \quad
+p_☕ = 2/6, \quad
+p_🍰 = 1/6,
+$$
+
+:::
+
+::: {.fragment}
+ist die (normalisierte) Entropie:
+
+$$
+\begin{align}
+H &= 
+-\left(
+\overset{\color{lightgrey}{0.50}}{p_🦆}  \overset{\color{lightgrey}{-0.69}}{\log(p_🦆)} +
+\overset{\color{lightgrey}{0.33}}{p_☕}  \overset{\color{lightgrey}{-1.10}}{\log(p_☕)} +
+\overset{\color{lightgrey}{0.17}}{p_🍰}  \overset{\color{lightgrey}{-1.79}}{\log(p_🍰)}
+\right) = 1.01 \\
+\\
+H_{\textrm{norm}} &= \frac{H}{\textrm{log}(3)} = 0.92
+\end{align}
+$$
+:::
+
+
+## Nebenfächer
+
+```{r}
+library(forcats)
+
+db = DBI::dbConnect(RSQLite::SQLite(), "data/surveys.db")
+
+df = tbl(db, "wohnort") |>
+    select(minor, place_current, place_before) |>
+    filter(minor != "Andere") |>
+    group_by(minor) |>
+    summarize(n = n()) |>
+    collect() |> drop_na()
+
+r = df$n / sum(df$n)
+H = -sum(r * log(r))
+Hnorm = H / log(length(r))
+
+df |> ggplot(aes(y=fct_reorder(minor, n), x=n)) +
+    geom_bar(stat="identity", color = "white", fill="tomato") +
+    labs(
+        title = paste0("Modus = {VWL, Meteorologie}, Entropie = ", round(Hnorm, digits=2)),
+        y=NULL,
+        x="Häufigkeit"
+    )
+```
+
+
+# Kategorisch-ordinale Daten beschreiben
+
+
+## Ordinale Variablen
+
+```{r}
+lvls = c("Strongly disagree", "2", "3", "4", "Strongly agree")
+
+df1 = data.frame(
+    x = factor(lvls, levels = lvls),
+    y = c(6, 3, 1, 3, 6),
+    g = "Physische Geographie ist interessanter als Humangeographie"
+)
+
+df2 = data.frame(
+    x = factor(lvls, levels = lvls),
+    y = c(0, 1, 3, 5, 7),
+    g = "Geographie ist interessanter als BWL"
+)
+
+rbind(df1, df2) |>
+    ggplot(aes(x, y, fill=factor(g))) +
+    geom_bar(stat="identity", show.legend=FALSE) +
+    facet_wrap(~g, ncol=1) +
+    scale_fill_tableau() +
+    labs(x=NULL, y=NULL)
+
+```
+
+## Median
+
+- Da der Median nur geordnete Positionen bzw. Ränge der Beobachtungen berücksichtigt, ist er ein geeignetes Lagemaß für ordinalskalierte Variablen.
+- Während in der Praxis häufig auch arithm. Mittelwerte für ordinale Variablen angegeben werden, basieren diese auf der i.d.R. fehlerhaften Annahme, dass die Abstände zwischen unterschiedlichen Stufen vergleichbar sind.
+
+
+## Median
+
+```{r}
+lvls = c("Strongly disagree", "2", "3", "4", "Strongly agree")
+x = factor(lvls, levels = lvls, ordered=TRUE)
+y1 = c(6, 3, 1, 3, 6)
+y2 = c(0, 1, 3, 5, 7)
+
+df1 = data.frame(
+    x = rep(x, y1),
+    m = median(as.numeric(rep(x, y1))),
+    g = "Physische Geographie ist interessanter als Humangeographie"
+)
+
+df2 = data.frame(
+    x = rep(x, y2),
+    m = median(as.numeric(rep(x, y2))),
+    g = "Geographie ist interessanter als BWL"
+)
+
+rbind(df1, df2) |>
+    ggplot(aes(x, fill=factor(g))) +
+    geom_bar(show.legend=FALSE) +
+    geom_vline(aes(xintercept=m), linewidth=1.5) +
+    facet_wrap(~g, ncol=1) +
+    scale_fill_tableau() +
+    labs(x=NULL, y=NULL)
+
+```
+
+## Konsens & Dissens
+
+- Ordinale Variablen geben in der Regel eine Bewertung bzw. Zustimmung zu einer Aussage an.
+- Intuitiv sollte ein Streuungsmaß Meinungsunterschiede in Form von abweichenden Bewertungen quantifizieren.
+- Der Dissens nach Tastle & Wierman (2007) gibt den Polarisierungsgrad der Ausprägungen einer ordinalen Variable an.
+
+## Konsens & Dissens
+
+Für eine kategorische Variable $x$ mit $k$ Stufen und relativer Häufigkeit $p_i$ für Stufe $i$ ist der Dissens gegeben als:
+
+$$
+\textrm{Dissens} = -\sum_{i=1}^k p_i \textrm{log}\left( 1 - \frac{|i - \bar{x}|}{k-1}\right)
+$$
+
+Der Wertebereich des Dissens ist 0 (perfekte Übereinstimmung) bis 1 (maximale Polarisierung). Konsens ist definiert als 1 - Dissens.
+
+
+## Konsens & Dissens {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+
+```{=latex}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Größe} & \textbf{\# Beobachtungen} \\
+\hline
+\textrm{\textcolor{red}{1 Strongly disagree}} & \textcolor{orange}{11} \\
+\textrm{\textcolor{darkred}{2 Sligthly disagree}} & \textcolor{orange}{2}  \\
+\textrm{\textcolor{grey}{3 Neutral}}           & \textcolor{orange}{2}  \\
+\textrm{\textcolor{darkgreen}{4 Sligthly agree}}   & \textcolor{orange}{5}  \\
+\textrm{\textcolor{lightgreen}{5 Strongly agree}}   & \textcolor{orange}{7}  \\
+\hline
+\end{tabular}
+\end{table}
+```
+
+:::
+::: {.column width="50%"}
+Für die ordinale Bewertungsskala und die entsprechenden Antworthäufigkeiten in der Tabelle ergibt sich ein Mittelwert von
+$\bar{x} = \frac{1}{27}(
+\color{orange}{11} \times \color{red}{1} +
+\color{orange}{2 } \times \color{darkred}{2} +
+\color{orange}{2 } \times \color{grey}{3} + \\ 
+\color{orange}{5 } \times \color{darkgreen}{4} +
+\color{orange}{7 } \times \color{lightgreen}{5}
+) = 2.81$
+
+Der Dissenz berechnet sich damit als:
+:::
+:::::
+
+<br>
+
+::: {.fragment}
+$$
+\textrm{Dis} = -\left(
+\color{orange}{\frac{11}{27}} \textrm{log}\left(1 - {\frac{|\color{red}{1} - \bar{x}|}{4}}\right) +
+\color{orange}{\frac{ 2}{27}} \textrm{log}\left(1 - {\frac{|\color{darkred}{2} - \bar{x}|}{4}}\right) +
+\color{orange}{\frac{ 2}{27}} \textrm{log}\left(1 - {\frac{|\color{grey}{3} - \bar{x}|}{4}}\right) \\ +
+\color{orange}{\frac{ 5}{27}} \textrm{log}\left(1 - {\frac{|\color{darkgreen}{4} - \bar{x}|}{4}}\right) +
+\color{orange}{\frac{ 7}{27}} \textrm{log}\left(1 - {\frac{|\color{lightgreen}{5} - \bar{x}|}{4}}\right)
+\right) = 0.54
+$$
+:::
+
+
+
+## Konsens & Dissens
+
+```{r}
+
+library(posterior)
+
+lvls = c("Strongly disagree", "2", "3", "4", "Strongly agree")
+x = factor(lvls, levels = lvls, ordered=TRUE)
+y1 = c(6, 3, 1, 3, 6)
+y2 = c(0, 1, 3, 5, 7)
+
+df1 = data.frame(
+    x = rep(x, y1),
+    m = median(as.numeric(rep(x, y1))),
+    l = "b",
+    g = "Physische Geographie ist interessanter als Humangeographie"
+)
+
+df2 = data.frame(
+    x = rep(x, y2),
+    m = median(as.numeric(rep(x, y2))),
+    l = "a",
+    g = "Geographie ist interessanter als BWL"
+)
+
+# dissens = function(x) {
+#     t = table(as.numeric(x))
+#     r = t / sum(t)
+#     k = length(t)
+#     m = mean(as.numeric(x))
+#     -sum(r * log(1 - abs(t - m) / (k-1)))
+# }
+
+labels = c(
+    "b" = paste0("Dissens: ", round(dissent(df1$x), digits=2)),
+    "a" = paste0("Dissens: ", round(dissent(df2$x), digits=2))
+)
+
+rbind(df1, df2) |>
+    ggplot(aes(x, fill=factor(g))) +
+    geom_bar(show.legend=FALSE) +
+    geom_vline(aes(xintercept=m), linewidth=1.5) +
+    facet_wrap(~l, ncol=1, labeller = as_labeller(labels)) +
+    scale_fill_tableau() +
+    labs(x=NULL, y=NULL)
+
+```
+
+
+## Überblick
+
+| Datentyp                       | Lagemaße                                  | Streuungsmaße                          |
+|--------------------------------|-------------------------------------------|----------------------------------------|
+| Numerische Variablen           | arithm. / geom. Mittel, Median, Modus     | IQR, Varianz / Standardabweichung, MAD |
+| Ordinale Variablen             | Median, Modus                             | Dissens, Entropie                      |
+| Nominale Variablen             | Modus                                     | Entropie                               |
+
+
 
