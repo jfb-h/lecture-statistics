@@ -24,11 +24,14 @@ format:
 #| cache: false
 
 library(dplyr)
+library(tidyr)
+library(readr)
+library(stringr)
 library(ggplot2)
 library(ggthemes)
 library(viridis)
 library(patchwork)
-library(stringr)
+library(posterior)
 
 theme_set(theme_tufte(base_family="Arial"))
 
