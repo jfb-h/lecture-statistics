@@ -1,6 +1,6 @@
 ---
 title: "Einführung in die Statistik"
-subtitle: "Zusammenhangsmaße"
+subtitle: "Multivariate deskriptive Statistik"
 author: Dr. Jakob Hoffmann, Economic Geography Group
 lightbox: true
 execute:
@@ -87,25 +87,63 @@ num_summary <- function(df, name) {
 
 ```
 
-## Wahlen in den USA
+## Wahlen in den USA (vor 4 Wochen)
 
-Blog Andrew Gelman
+::::: columns
+::: {.column width="50%"}
+![Quelle: Economist](/images/us-economist-prediction.png){.shadow height="400px"}
+:::
+::: {.column width="50%"}
+- Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren (sog. *fundamentals*) kombiniert.
 
-Economist
+- Kurz vor der Wahl waren Donald Trump und Kamala Harris quasi gleichauf.
 
-Non-Response Bias
+<!-- - Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft. -->
+:::
+:::::
 
+## Wahlen in den USA (heute)
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Economist](/images/us-economist-result.png){.shadow height="400px"}
+:::
+::: {.column width="50%"}
+
+- Donald Trump hat die Wahl eindeutig gewonnen (auch wenn die *popular Vote*, d.h. das Gesamtstimmen-verhältnis, knapp war).
+
+- Ist das Ergebnis konsistent mit den Vorhersagen?
+
+:::
+:::::
+
+
+## Wahlen in den USA (heute)
+
+::::: columns
+::: {.column width="45%"}
+![Quelle: Economist](https://www.economist.com/cdn-cgi/image/width=384,quality=80,format=auto/content-assets/images/20241109_USC696.png){.shadow height="500px"}
+:::
+::: {.column width="55%"}
+
+- In den *Swing States* wurde Donald Trumps Gewinnmarge in den *Polls* um 1,5 bis 3,5 Prozentpunkte unterschätzt.
+
+- Warum hat Donald Trump bei Befragungen im Verhältnis zur tatsächlichen Wahl schlechter abgeschnitten als Kamala Harris?
+
+:::
+:::::
 
 ## Verlieren die USA ihre Werte?
 
 :::: {.columns}
 ::: {.column width="50%"}
-![WSJ & NORC, 2023](images/wsj-poll.png){height="500px"}
+![Quelle: WSJ & NORC, 2023](images/wsj-poll.png){.shadow height="500px"}
 :::
 ::: {.column width="50%"}
 - Eine Befragung des Wall Street Journal hat ergeben, dass amerikanische 'Ur-Werte', wie Patriotismus, Religion und Familie über die vergangenen 25 Jahre an Relevanz verloren haben.
 
 - Stattdessen gewinnt Geld zunehmend an Bedeutung.
+
 :::
 ::::
 
@@ -114,14 +152,33 @@ Non-Response Bias
 
 :::: {.columns}
 ::: {.column width="50%"}
-![WSJ & NORC, 2023](images/wsj-poll.png){height="500px"}
+![Quelle: WSJ & NORC, 2023](images/wsj-poll.png){.shadow height="500px"}
 :::
 ::: {.column width="50%"}
 - Ist die Umfrage Evidenz für einen Werteverfall?
 
 - Das WSJ hat zuletzt zunehmend auf Online-befragungen anstatt wie zuvor auf telefonbasierte Interviews gesetzt.
+
+- Repräsentative Befragungen werden schwieriger. Warum?
 :::
 ::::
+
+# Wiederholung
+Univariate deskriptive Statistik
+
+## Quiz
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/measures" title="Survey preview"> </iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/measures/qr" title="Survey link"> </iframe>
+:::
+:::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/measures/results" background-interactive="true" data-preload="true"}
 
 
 ## Wiederholung
@@ -133,11 +190,8 @@ Non-Response Bias
 | Nominale Variablen             | Modus                                     | Entropie                               |
 
 
-
-## Survey
-
-
-# Vertrauen in Politik und Wissenschaft
+# Fallstudie
+Vertrauen in Politik und Wissenschaft in Europa
 
 ## Datenquelle
 
@@ -195,7 +249,8 @@ data10 |>
 ## Vertrauen in Politik und Wissenschaft
 
 
-```{r}
+```{r, fig.height=6, fig.width=11}
+
 labels <- c(
   Politik = num_summary(svy_pol, "Politik"),
   Wissenschaft = num_summary(svy_sci, "Wissenschaft")
@@ -222,7 +277,8 @@ rbind(
 
 ## Vertrauen in Politik und Wissenschaft
 
-```{r}
+```{r, fig.height=6, fig.width=11}
+
 data_ess <- read_csv("data/CRON2W5e01/CRON2W5e01.csv")
 
 svy_ess <- data_ess |>
@@ -238,7 +294,8 @@ svy_ess <- data_ess |>
   )
 ```
 
-```{r}
+```{r, fig.height=6, fig.width=11}
+
 labels <- c(
   Physik = num_summary(svy_counts(svy_ess, Physik), "Physik"),
   Medizin = num_summary(svy_counts(svy_ess, Medizin), "Medizin"),
@@ -268,7 +325,8 @@ rbind(
 
 ## Vertrauen in Politik und Wissenschaft
 
-```{r}
+```{r, fig.height=6, fig.width=11}
+
 svy_country = svy |>
     group_by(country, Politik) |>
     srvyr::survey_tally() |>
@@ -317,6 +375,7 @@ dat_country |>
     y = NULL,
     fill = NULL,
     title = "Vertrauen in die Politik",
+    subtitle = "European Social Survey, Item trstplt",
     caption = "ESS CRONOS 2 Wave 5"
   )
 ```
@@ -359,7 +418,29 @@ sum |>
   theme(legend.position="none")
 ```
 
-# Temperaturen in München
+## Vertrauen in Politik und Wissenschaft
+
+```{r, fig.height=6, fig.width=11}
+
+as_tibble(svy) |>
+    filter(
+      Wissenschaft %in% 0:10,
+      Politik %in% 0:10
+    ) |>
+    mutate(
+      Wissenschaft = factor(Wissenschaft, levels=0:10, labels=lvls),
+      Politik = factor(Politik, levels=0:10, labels=lvls)
+    ) |>
+    ggplot(aes(Wissenschaft, Politik)) +
+    geom_jitter(alpha=0.3, size=0.3) +
+    scale_x_discrete(labels=lvls) +
+    scale_y_discrete(labels=lvls)
+
+```
+
+
+# Fallstudie
+Temperaturen in München, 1973 - 2023
 
 ## Daten
 
@@ -384,6 +465,16 @@ data |>
 :::
 ::: {.column width="60%"}
 Temperaturdaten werden von tausenden Messstationen weltweit erfasst und in aggregierter Form veröffentlicht, wie z.B. in der Global Summary of the Day (GSOD).
+
+```{.r}
+libary(GSODR)
+
+get_GSOD(
+  years=2013:2023,
+  station="108660-99999"
+)
+
+```
 :::
 ::::
 
@@ -481,11 +572,11 @@ data |>
     nudge_y=-0.3, size=8, color="grey60", vjust=1
   ) +
   geom_text(
-    aes(x=am-sd, y=1, label="x̄ - 1 × s"),
+    aes(x=am-sd, y=1, label="x̄ - s"),
     nudge_y=-0.3, size=8, color="grey60", vjust=1
   ) +
   geom_text(
-    aes(x=am+sd, y=1, label="x̄ + 1 × s"),
+    aes(x=am+sd, y=1, label="x̄ + s"),
     nudge_y=-0.3, size=8, color="grey60", vjust=1
   ) +
   lims(
@@ -548,8 +639,6 @@ ggplot(data, aes(x = TEMP, y = fct_rev(MONTH), fill=stat(x))) +
     theme_ridges() +
     theme(legend.position="none")
 ```
-
-
 
 ## Kerndichtediagramme
 
@@ -637,40 +726,247 @@ td |>
 
 ```
 
-# Multivariate deskriptive Statistik
+# Deskriptive Statistik II
+Multivariate Visualisierung und Zusammenhangsmaße
 
-## Multivariate Beschreibungen
+## Bisher: Univariate Beschreibungen
 
-- Wissenschaftliche Fragestellungen
-- Statistische vs. theoretische Zusammenhänge
+```{r, fig.width=11, fig.height=6}
 
-# Multivariate Visualisierungen
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
 
-## Numerisch-numerisch
+d1 = tibble(
+  x=rlnorm(1000, meanlog = 8, sdlog = 0.3)
+)
 
-- diskret vs. kontinuierlich
+p1 = d1 |> ggplot(aes(x)) +
+  # geom_histogram(aes(y=..density..), fill="grey70") +
+  geom_hline(yintercept=0) +
+  geom_density(linewidth=1.5, color="grey40") +
+  geom_vline(xintercept=median(d1$x), color="tomato", linewidth=2) +
+  labs(y=NULL, x=NULL) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
 
-## Numerisch-kategorisch
+d2 = tibble(
+  x = fct_infreq(sample(LETTERS[1:5], 100, replace=TRUE))
+)
 
-## Kategorisch-kategorisch
+p2 = d2 |> ggplot(aes(x)) +
+  geom_bar(fill="grey70") +
+  geom_bar(data = filter(d2, x == getmode(x)), fill="tomato") +
+  geom_hline(yintercept=0) +
+  labs(y=NULL, x=NULL) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
 
-# Zusammenhangsmaße
+p1 / p2
+```
 
-## Korrelationskoeffizient
-- kont-kont
+## Jetzt: Multivariate Beschreibungen
 
-## Spearman Korrelation
-- ordinal / kontinuous
+```{r, fig.width=11, fig.height=6}
+N <- 2000
+k <- 6
 
-## Korrelationsverhältnis
-- correlation ratio
-- kont-kat
+g <- factor(sample(1:k, N, replace=T), labels=paste0("Gruppe ", 1:k))
+z <- factor(sample(1:2, N, replace=T), labels=LETTERS[25:26])
+x <- rnorm(N) + ifelse(z == "Z", rnorm(N, -1), rnorm(N, 1))
 
-## Kontingenztabellen
-- kat-kat
+a <- rnorm(k)
+b <- rnorm(k)
+d <- c(1,2)
 
-Teilsummen
-Relative Häufigkeiten
-Odds-ratio
-Uncertainty/entropy coefficient
+y <- a[g] + b[g]*x + d[z] + rnorm(N, sd=2)
+
+data_sim <- tibble(y, x, g, z)
+
+data_sim |>
+  ggplot(aes(x=x, y=y)) + 
+  geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
+  geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
+  geom_point(aes(color=z), shape=1) +
+  scale_color_tableau() +
+  geom_smooth(method="lm", color="grey20", se=FALSE, linewidth=1) +
+  facet_wrap(~g) +
+  labs(color=NULL, x="", y="") +
+  theme(legend.position="none")
+```
+
+
+
+## Multivariate Statistik
+
+- Die meisten wissenschaftlichen Fragestellungen betreffen das Zusammenspiel von zwei oder mehr Variablen.
+
+- Multivariate Verfahren dienen der *Identifikation* von bisher unbekannten oder der *Überprüfung* von vermuteten statistischen Zusammenhängen zwischen Variablen.
+
+- Die beteiligten Variablen spielen in multivariaten Verfahren oft (aber nicht immer) unterschiedliche Rollen (z.B. Explanans, Explanandum, Kontrollvariable).
+
+## Variablentypen
+
+- Die **abhängige Variable** und ihre Variation zu Verstehen ist das primäre Untersuchungsziel einer multivariaten Analyse.
+
+- **Unabhängige Variablen** dienen der Erklärung oder Vorhersage von Variation in der abhängigen Variable. Die Variation der
+unabhängigen Variable selbst wird i.d.R. als gegeben angesehen oder experimentell manipuliert.
+
+- **Kontrollvariablen** dienen der Vermeidung von verzerrten Schlussfolgerungen über den Zusammenhang zwischen unabhängigen und abhängigen Variablen.
+
+
+## Variablentypen
+
+**Untersuchungsziel**: Gender Pay Gap
+
+```{dot}
+//| fig-width: 10
+//| fig-height: 5
+
+digraph G {
+  layout=dot
+  rankdir=LR
+
+  node [
+    shape=rect
+    color="#FF8C00"
+    style="filled,rounded"
+    fontname="Helvetica,Arial,sans-serif"
+    fontcolor="#FFFFFF"
+    width=1.2
+    height=0.6
+    margin=0.2
+  ]
+
+  edge [
+    color="#555555"
+    penwidth=2
+  ]
+
+  {
+    rank=same;
+    A[label="Unabhängige Variable\n(Geschlecht)"];
+    B[label="Abhängige Variable\n(Gehalt)"];
+  }
+  C[label="Kontrollvariable(n)\n(z.B. Beruf)" color=lightgrey fontcolor="#333333"];
+
+  A -> B;
+  C -> A;
+  C -> B;
+}
+```
+
+## Variablentypen
+
+Wir beschreiben die abhängige Variable (AV, Output) auch oft als eine *Funktion* der unabhängigen Variable(UV, Input):
+
+$$\textrm{AV} = f(\textrm{UV})$$
+
+bzw. mit Kontrollvariablen (KV):
+
+$$\textrm{AV} = f(\textrm{UV, KV})$$
+
+Die exakte Spezifikation der Funktion $f$ ist Gegenstand der statistischen Modellierung.
+
+
+## Was ist die abhängige Variable?
+
+```{r, fig.width=11, fig.height=6}
+
+data |>
+  ggplot(aes(x=factor(week(date)), y=TEMP)) +
+  geom_hline(yintercept=0) +
+  geom_boxplot(fill="tomato", outlier.size=0.6) +
+  scale_color_distiller(
+    palette="RdBu", type="div", limit = limit
+  ) +
+  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
+  labs(
+    x = "Woche", y = "Temperatur (°C)", color = NULL,
+    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
+    subtitle = "Wochenweise aggregierte Boxplots",
+    caption = "Datenquelle: GSOD"
+    )
+
+```
+
+## Was ist die abhängige Variable?
+
+```{r, fig.height=6, fig.width=11}
+
+as_tibble(svy) |>
+    filter(
+      Wissenschaft %in% 0:10,
+      Politik %in% 0:10
+    ) |>
+    mutate(
+      Wissenschaft = factor(Wissenschaft, levels=0:10, labels=lvls),
+      Politik = factor(Politik, levels=0:10, labels=lvls)
+    ) |>
+    ggplot(aes(Wissenschaft, Politik)) +
+    geom_jitter(alpha=0.3, size=0.3) +
+    scale_x_discrete(labels=lvls) +
+    scale_y_discrete(labels=lvls)
+
+```
+
+## (Un)supervised learning {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+
+```{r, fig.width=5, fig.height=6}
+
+library(mvtnorm)
+library(ggforce)
+library(purrr)
+
+set.seed(123)
+
+S = list(
+  list(id = "a", n=500, s=c(20, 15)),
+  list(id = "b", n=900, s=c(10, 10)),
+  list(id = "c", n=700, s=c(12, 25))
+)
+
+df_clust = map(S, function(s) {
+  x = rmvnorm(s$n, s$s, sigma=diag(c(3,2)))
+  colnames(x) = c("x", "y")
+  as_tibble(x) |> mutate(g = s$id)
+}) |> list_rbind()
+
+df_clust |>
+ggplot(aes(x, y, color=g)) +
+  geom_point(color="grey20", alpha=0.5, size=0.5) +
+  geom_mark_hull(
+    concavity = 100
+  ) +
+  lims(x=c(0, 30), y=c(0, 30)) +
+  labs(x=NULL, y=NULL) +
+  theme(legend.position = "none")
+
+```
+
+:::
+::: {.column width="50%"}
+- Nicht alle multivariaten Analysen haben asymmetrische Variablenrollen.
+- Ein prominentes Beispiel ist die *Clusteranalyse*, die zum Ziel hat, latente (unbeobachtete) Gruppen zu identifizeren.
+- Im Machine Learning wird zwischen *supervised learning* (Vorhersage einer bekannten und beobachteten Variable) und *unsupervised learning* (Identifikation von latenten Mustern) unterschieden.
+:::
+:::::
+
+
+## Prüfungsfragen
+
+- Welche Rolle spielen abhängige, unabhängige und Kontrollvariablen in multivariaten Analysen?
+
+- Sie haben in einer Befragung Meinungen zur kürzlich diskutierten Anhebung von Parkgebühren für SUVs eingeholt (7-Punkte-Skala, stimme gar nicht zu bis stimme voll zu). Welche Visualisierung und welche Lage-/Streuungsmaße setzen Sie ein, um die Verteilung der Antworten zu beschreiben?
+
+- Was ist der Unterschied zwischen Entropie und Dissens?
+
 

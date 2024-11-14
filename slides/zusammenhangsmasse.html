@@ -32,6 +32,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="zusammenhangsmasse_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
@@ -333,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Zusammenhangsmaße</p>
+  <p class="subtitle">Multivariate deskriptive Statistik</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -344,11 +409,57 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
-<section id="wahlen-in-den-usa" class="slide level2">
-<h2>Wahlen in den USA</h2>
-<p>Blog Andrew Gelman</p>
-<p>Economist</p>
-<p>Non-Response Bias</p>
+<section id="wahlen-in-den-usa-vor-4-wochen" class="slide level2">
+<h2>Wahlen in den USA (vor 4 Wochen)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="./images/us-economist-prediction.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Quelle: Economist"><img data-src="./images/us-economist-prediction.png" class="shadow" height="400" alt="Quelle: Economist"></a></p>
+<figcaption>Quelle: Economist</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren (sog. <em>fundamentals</em>) kombiniert.</p></li>
+<li><p>Kurz vor der Wahl waren Donald Trump und Kamala Harris quasi gleichauf.</p></li>
+</ul>
+<!-- - Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft. -->
+</div></div>
+</section>
+<section id="wahlen-in-den-usa-heute" class="slide level2">
+<h2>Wahlen in den USA (heute)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="./images/us-economist-result.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Quelle: Economist"><img data-src="./images/us-economist-result.png" class="shadow" height="400" alt="Quelle: Economist"></a></p>
+<figcaption>Quelle: Economist</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Donald Trump hat die Wahl eindeutig gewonnen (auch wenn die <em>popular Vote</em>, d.h. das Gesamtstimmen-verhältnis, knapp war).</p></li>
+<li><p>Ist das Ergebnis konsistent mit den Vorhersagen?</p></li>
+</ul>
+</div></div>
+</section>
+<section id="wahlen-in-den-usa-heute-1" class="slide level2">
+<h2>Wahlen in den USA (heute)</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.economist.com/cdn-cgi/image/width=384,quality=80,format=auto/content-assets/images/20241109_USC696.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Quelle: Economist"><img data-src="https://www.economist.com/cdn-cgi/image/width=384,quality=80,format=auto/content-assets/images/20241109_USC696.png" class="shadow" height="500" alt="Quelle: Economist"></a></p>
+<figcaption>Quelle: Economist</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:55%;">
+<ul>
+<li><p>In den <em>Swing States</em> wurde Donald Trumps Gewinnmarge in den <em>Polls</em> um 1,5 bis 3,5 Prozentpunkte unterschätzt.</p></li>
+<li><p>Warum hat Donald Trump bei Befragungen im Verhältnis zur tatsächlichen Wahl schlechter abgeschnitten als Kamala Harris?</p></li>
+</ul>
+</div></div>
 </section>
 <section id="verlieren-die-usa-ihre-werte" class="slide level2">
 <h2>Verlieren die USA ihre Werte?</h2>
@@ -356,8 +467,8 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="images/wsj-poll.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="WSJ &amp; NORC, 2023"><img data-src="images/wsj-poll.png" height="500" alt="WSJ &amp; NORC, 2023"></a></p>
-<figcaption>WSJ &amp; NORC, 2023</figcaption>
+<p><a href="images/wsj-poll.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Quelle: WSJ &amp; NORC, 2023"><img data-src="images/wsj-poll.png" class="shadow" height="500" alt="Quelle: WSJ &amp; NORC, 2023"></a></p>
+<figcaption>Quelle: WSJ &amp; NORC, 2023</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -373,18 +484,38 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="images/wsj-poll.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="WSJ &amp; NORC, 2023"><img data-src="images/wsj-poll.png" height="500" alt="WSJ &amp; NORC, 2023"></a></p>
-<figcaption>WSJ &amp; NORC, 2023</figcaption>
+<p><a href="images/wsj-poll.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Quelle: WSJ &amp; NORC, 2023"><img data-src="images/wsj-poll.png" class="shadow" height="500" alt="Quelle: WSJ &amp; NORC, 2023"></a></p>
+<figcaption>Quelle: WSJ &amp; NORC, 2023</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
 <li><p>Ist die Umfrage Evidenz für einen Werteverfall?</p></li>
 <li><p>Das WSJ hat zuletzt zunehmend auf Online-befragungen anstatt wie zuvor auf telefonbasierte Interviews gesetzt.</p></li>
+<li><p>Repräsentative Befragungen werden schwieriger. Warum?</p></li>
 </ul>
 </div></div>
 </section>
-<section id="wiederholung" class="slide level2">
+<section>
+<section id="wiederholung" class="title-slide slide level1 center">
+<h1>Wiederholung</h1>
+<p>Univariate deskriptive Statistik</p>
+</section>
+<section id="quiz" class="slide level2">
+<h2>Quiz</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/measures" title="Survey preview">
+</iframe>
+</div><div class="column" style="width:50%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/measures/qr" title="Survey link">
+</iframe>
+</div></div>
+</section>
+<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/measures/results" data-background-interactive="true" data-preload="true">
+<h2></h2>
+</section>
+<section id="wiederholung-1" class="slide level2">
 <h2>Wiederholung</h2>
 <table class="caption-top">
 <colgroup>
@@ -417,14 +548,11 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </tr>
 </tbody>
 </table>
-</section>
-<section id="survey" class="slide level2">
-<h2>Survey</h2>
-</section>
+</section></section>
 <section>
-<section id="vertrauen-in-politik-und-wissenschaft" class="title-slide slide level1 center">
-<h1>Vertrauen in Politik und Wissenschaft</h1>
-
+<section id="fallstudie" class="title-slide slide level1 center">
+<h1>Fallstudie</h1>
+<p>Vertrauen in Politik und Wissenschaft in Europa</p>
 </section>
 <section id="datenquelle" class="slide level2">
 <h2>Datenquelle</h2>
@@ -1125,13 +1253,25 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 </div>
 </section>
+<section id="vertrauen-in-politik-und-wissenschaft" class="slide level2">
+<h2>Vertrauen in Politik und Wissenschaft</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="vertrauen-in-politik-und-wissenschaft-1" class="slide level2">
 <h2>Vertrauen in Politik und Wissenschaft</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-6-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1143,7 +1283,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-8-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1155,7 +1295,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-8-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1167,16 +1307,16 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-10-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section></section>
 <section>
-<section id="temperaturen-in-münchen" class="title-slide slide level1 center">
-<h1>Temperaturen in München</h1>
-
+<section id="fallstudie-1" class="title-slide slide level1 center">
+<h1>Fallstudie</h1>
+<p>Temperaturen in München, 1973 - 2023</p>
 </section>
 <section id="daten-1" class="slide level2">
 <h2>Daten</h2>
@@ -1262,6 +1402,12 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 </div><div class="column" style="width:60%;">
 <p>Temperaturdaten werden von tausenden Messstationen weltweit erfasst und in aggregierter Form veröffentlicht, wie z.B. in der Global Summary of the Day (GSOD).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">libary</span>(GSODR)</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a><span class="fu">get_GSOD</span>(</span>
+<span id="cb1-4"><a href=""></a>  <span class="at">years=</span><span class="dv">2013</span><span class="sc">:</span><span class="dv">2023</span>,</span>
+<span id="cb1-5"><a href=""></a>  <span class="at">station=</span><span class="st">"108660-99999"</span></span>
+<span id="cb1-6"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 </section>
 <section id="tagestemperaturen" class="slide level2">
@@ -1271,7 +1417,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-11-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-12-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1283,7 +1429,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-12-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-13-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1295,7 +1441,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1308,7 +1454,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-14-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-15-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1320,7 +1466,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-15-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-16-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1333,7 +1479,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-16-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-17-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1345,71 +1491,176 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-17-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-18-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section></section>
 <section>
-<section id="multivariate-deskriptive-statistik" class="title-slide slide level1 center">
-<h1>Multivariate deskriptive Statistik</h1>
-
+<section id="deskriptive-statistik-ii" class="title-slide slide level1 center">
+<h1>Deskriptive Statistik II</h1>
+<p>Multivariate Visualisierung und Zusammenhangsmaße</p>
 </section>
-<section id="multivariate-beschreibungen" class="slide level2">
-<h2>Multivariate Beschreibungen</h2>
+<section id="bisher-univariate-beschreibungen" class="slide level2">
+<h2>Bisher: Univariate Beschreibungen</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-19-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="jetzt-multivariate-beschreibungen" class="slide level2">
+<h2>Jetzt: Multivariate Beschreibungen</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-20-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multivariate-statistik" class="slide level2">
+<h2>Multivariate Statistik</h2>
 <ul>
-<li>Wissenschaftliche Fragestellungen</li>
-<li>Statistische vs.&nbsp;theoretische Zusammenhänge</li>
-</ul>
-</section></section>
-<section>
-<section id="multivariate-visualisierungen" class="title-slide slide level1 center">
-<h1>Multivariate Visualisierungen</h1>
-
-</section>
-<section id="numerisch-numerisch" class="slide level2">
-<h2>Numerisch-numerisch</h2>
-<ul>
-<li>diskret vs.&nbsp;kontinuierlich</li>
-</ul>
-</section>
-<section id="numerisch-kategorisch" class="slide level2">
-<h2>Numerisch-kategorisch</h2>
-</section>
-<section id="kategorisch-kategorisch" class="slide level2">
-<h2>Kategorisch-kategorisch</h2>
-</section></section>
-<section>
-<section id="zusammenhangsmaße" class="title-slide slide level1 center">
-<h1>Zusammenhangsmaße</h1>
-
-</section>
-<section id="korrelationskoeffizient" class="slide level2">
-<h2>Korrelationskoeffizient</h2>
-<ul>
-<li>kont-kont</li>
+<li><p>Die meisten wissenschaftlichen Fragestellungen betreffen das Zusammenspiel von zwei oder mehr Variablen.</p></li>
+<li><p>Multivariate Verfahren dienen der <em>Identifikation</em> von bisher unbekannten oder der <em>Überprüfung</em> von vermuteten statistischen Zusammenhängen zwischen Variablen.</p></li>
+<li><p>Die beteiligten Variablen spielen in multivariaten Verfahren oft (aber nicht immer) unterschiedliche Rollen (z.B. Explanans, Explanandum, Kontrollvariable).</p></li>
 </ul>
 </section>
-<section id="spearman-korrelation" class="slide level2">
-<h2>Spearman Korrelation</h2>
+<section id="variablentypen" class="slide level2">
+<h2>Variablentypen</h2>
 <ul>
-<li>ordinal / kontinuous</li>
+<li><p>Die <strong>abhängige Variable</strong> und ihre Variation zu Verstehen ist das primäre Untersuchungsziel einer multivariaten Analyse.</p></li>
+<li><p><strong>Unabhängige Variablen</strong> dienen der Erklärung oder Vorhersage von Variation in der abhängigen Variable. Die Variation der unabhängigen Variable selbst wird i.d.R. als gegeben angesehen oder experimentell manipuliert.</p></li>
+<li><p><strong>Kontrollvariablen</strong> dienen der Vermeidung von verzerrten Schlussfolgerungen über den Zusammenhang zwischen unabhängigen und abhängigen Variablen.</p></li>
 </ul>
 </section>
-<section id="korrelationsverhältnis" class="slide level2">
-<h2>Korrelationsverhältnis</h2>
-<ul>
-<li>correlation ratio</li>
-<li>kont-kat</li>
-</ul>
+<section id="variablentypen-1" class="slide level2">
+<h2>Variablentypen</h2>
+<p><strong>Untersuchungsziel</strong>: Gender Pay Gap</p>
+<div class="cell" data-fig-width="10" data-fig-height="5" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 335.97 149.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 145.6)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-145.6 331.97,-145.6 331.97,4 -4,4"></polygon>
+<!-- A -->
+<g id="node1" class="node">
+<title>A</title>
+<path fill="#ff8c00" stroke="#ff8c00" d="M316.03,-141.4C316.03,-141.4 184.79,-141.4 184.79,-141.4 178.79,-141.4 172.79,-135.4 172.79,-129.4 172.79,-129.4 172.79,-92.2 172.79,-92.2 172.79,-86.2 178.79,-80.2 184.79,-80.2 184.79,-80.2 316.03,-80.2 316.03,-80.2 322.03,-80.2 328.03,-86.2 328.03,-92.2 328.03,-92.2 328.03,-129.4 328.03,-129.4 328.03,-135.4 322.03,-141.4 316.03,-141.4"></path>
+<text text-anchor="middle" x="250.41" y="-115" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">Unabhängige Variable</text>
+<text text-anchor="middle" x="250.41" y="-98.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">(Geschlecht)</text>
+</g>
+<!-- B -->
+<g id="node2" class="node">
+<title>B</title>
+<path fill="#ff8c00" stroke="#ff8c00" d="M309.32,-61.4C309.32,-61.4 191.5,-61.4 191.5,-61.4 185.5,-61.4 179.5,-55.4 179.5,-49.4 179.5,-49.4 179.5,-12.2 179.5,-12.2 179.5,-6.2 185.5,-0.2 191.5,-0.2 191.5,-0.2 309.32,-0.2 309.32,-0.2 315.32,-0.2 321.32,-6.2 321.32,-12.2 321.32,-12.2 321.32,-49.4 321.32,-49.4 321.32,-55.4 315.32,-61.4 309.32,-61.4"></path>
+<text text-anchor="middle" x="250.41" y="-35" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">Abhängige Variable</text>
+<text text-anchor="middle" x="250.41" y="-18.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">(Gehalt)</text>
+</g>
+<!-- A&#45;&gt;B -->
+<g id="edge1" class="edge">
+<title>A-&gt;B</title>
+<path fill="none" stroke="#555555" stroke-width="2" d="M250.41,-79.94C250.41,-77.14 250.41,-74.35 250.41,-71.55"></path>
+<polygon fill="#555555" stroke="#555555" stroke-width="2" points="253.91,-71.42 250.41,-61.43 246.91,-71.43 253.91,-71.42"></polygon>
+</g>
+<!-- C -->
+<g id="node3" class="node">
+<title>C</title>
+<path fill="lightgrey" stroke="lightgrey" d="M124.77,-101.4C124.77,-101.4 12.08,-101.4 12.08,-101.4 6.08,-101.4 0.08,-95.4 0.08,-89.4 0.08,-89.4 0.08,-52.2 0.08,-52.2 0.08,-46.2 6.08,-40.2 12.08,-40.2 12.08,-40.2 124.77,-40.2 124.77,-40.2 130.77,-40.2 136.77,-46.2 136.77,-52.2 136.77,-52.2 136.77,-89.4 136.77,-89.4 136.77,-95.4 130.77,-101.4 124.77,-101.4"></path>
+<text text-anchor="middle" x="68.42" y="-75" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#333333">Kontrollvariable(n)</text>
+<text text-anchor="middle" x="68.42" y="-58.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#333333">(z.B. Beruf)</text>
+</g>
+<!-- C&#45;&gt;A -->
+<g id="edge2" class="edge">
+<title>C-&gt;A</title>
+<path fill="none" stroke="#555555" stroke-width="2" d="M136.96,-85.81C145.44,-87.69 154.2,-89.64 162.92,-91.58"></path>
+<polygon fill="#555555" stroke="#555555" stroke-width="2" points="162.21,-95.01 172.73,-93.76 163.73,-88.17 162.21,-95.01"></polygon>
+</g>
+<!-- C&#45;&gt;B -->
+<g id="edge3" class="edge">
+<title>C-&gt;B</title>
+<path fill="none" stroke="#555555" stroke-width="2" d="M136.96,-55.79C147.57,-53.43 158.63,-50.97 169.5,-48.56"></path>
+<polygon fill="#555555" stroke="#555555" stroke-width="2" points="170.39,-51.95 179.4,-46.36 168.88,-45.11 170.39,-51.95"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="kontingenztabellen" class="slide level2">
-<h2>Kontingenztabellen</h2>
+<section id="variablentypen-2" class="slide level2">
+<h2>Variablentypen</h2>
+<p>Wir beschreiben die abhängige Variable (AV, Output) auch oft als eine <em>Funktion</em> der unabhängigen Variable(UV, Input):</p>
+<p><span class="math display">\[\textrm{AV} = f(\textrm{UV})\]</span></p>
+<p>bzw. mit Kontrollvariablen (KV):</p>
+<p><span class="math display">\[\textrm{AV} = f(\textrm{UV, KV})\]</span></p>
+<p>Die exakte Spezifikation der Funktion <span class="math inline">\(f\)</span> ist Gegenstand der statistischen Modellierung.</p>
+</section>
+<section id="was-ist-die-abhängige-variable" class="slide level2">
+<h2>Was ist die abhängige Variable?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-22-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-22-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="was-ist-die-abhängige-variable-1" class="slide level2">
+<h2>Was ist die abhängige Variable?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-23-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="unsupervised-learning" class="slide level2 smaller">
+<h2>(Un)supervised learning</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-24-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-24-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <ul>
-<li>kat-kat</li>
+<li>Nicht alle multivariaten Analysen haben asymmetrische Variablenrollen.</li>
+<li>Ein prominentes Beispiel ist die <em>Clusteranalyse</em>, die zum Ziel hat, latente (unbeobachtete) Gruppen zu identifizeren.</li>
+<li>Im Machine Learning wird zwischen <em>supervised learning</em> (Vorhersage einer bekannten und beobachteten Variable) und <em>unsupervised learning</em> (Identifikation von latenten Mustern) unterschieden.</li>
 </ul>
-<p>Teilsummen Relative Häufigkeiten Odds-ratio Uncertainty/entropy coefficient</p>
+</div></div>
+</section>
+<section id="prüfungsfragen" class="slide level2">
+<h2>Prüfungsfragen</h2>
+<ul>
+<li><p>Welche Rolle spielen abhängige, unabhängige und Kontrollvariablen in multivariaten Analysen?</p></li>
+<li><p>Sie haben in einer Befragung Meinungen zur kürzlich diskutierten Anhebung von Parkgebühren für SUVs eingeholt (7-Punkte-Skala, stimme gar nicht zu bis stimme voll zu). Welche Visualisierung und welche Lage-/Streuungsmaße setzen Sie ein, um die Verteilung der Antworten zu beschreiben?</p></li>
+<li><p>Was ist der Unterschied zwischen Entropie und Dissens?</p></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -1851,7 +2102,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":false});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
