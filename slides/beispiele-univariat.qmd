@@ -1,0 +1,736 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Fallbeispiele Lage & Streuung"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
+execute:
+    cache: true
+    keep-ipynb: false
+    keep-md: false
+filters:
+    - parse-latex
+format:
+    revealjs:
+        css: custom.css
+        controls: true
+        slide-number: true
+        # embed-resources: true
+        # chalkboard:
+        #     theme: whiteboard
+        #     boardmarker-width: 2
+---
+
+```{r}
+#| cache: false
+
+library(rlang)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(lubridate)
+library(stringr)
+library(forcats)
+library(ggplot2)
+library(ggthemes)
+library(ggridges)
+library(viridis)
+library(patchwork)
+library(srvyr)
+library(posterior)
+
+theme_set(theme_tufte(base_family="Arial"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+
+lvls <- c(
+  "No trust\nat all",
+  1, 2, 3, 4, 5, 6, 7, 8, 9,
+  "Complete\ntrust"
+)
+
+svy_counts <- function(df, name) {
+  colname <- as_string(ensym(name))
+  df |>
+    group_by({{ name }}) |>
+    srvyr::survey_tally() |>
+    filter(!{{ name }} %in% c(77, 88, 99)) |>
+    mutate(
+      field = colname,
+      value = factor(
+        {{ name }},
+        levels = 0:10,
+        labels = lvls,
+        ordered = TRUE
+      ),
+      n = round(n)
+    ) |>
+    select(field, value, n)
+}
+
+num_summary <- function(df, name) {
+  counts <- rep(df$value, df$n)
+  paste0(
+    name, " - ",
+    "Median: ", median(as.numeric(counts) - 1),
+    " | Entropie: ", round(entropy(counts), digits = 2),
+    " | Dissens: ", round(dissent(counts), digits = 2)
+  )
+}
+
+```
+
+## Wahlen in den USA (vor 4 Wochen)
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Economist](/images/us-economist-prediction.png){.shadow height="400px"}
+:::
+::: {.column width="50%"}
+- Der Economist nutzt ein statistisches Modell, welches Wählerbefragungen und andere Prädiktoren (sog. *fundamentals*) kombiniert.
+
+- Kurz vor der Wahl waren Donald Trump und Kamala Harris quasi gleichauf.
+
+<!-- - Ergebnisse von 196 Sitzen (verheerende Niederlage) bis 375 Sitzen (überwältigender Erfolg) für Kamala Harris sind statistisch glaubhaft. -->
+:::
+:::::
+
+## Wahlen in den USA (heute)
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Economist](/images/us-economist-result.png){.shadow height="400px"}
+:::
+::: {.column width="50%"}
+
+- Donald Trump hat die Wahl eindeutig gewonnen (auch wenn die *popular Vote*, d.h. das Gesamtstimmen-verhältnis, knapp war).
+
+- Ist das Ergebnis konsistent mit den Vorhersagen?
+
+:::
+:::::
+
+
+## Wahlen in den USA (heute)
+
+::::: columns
+::: {.column width="45%"}
+![Quelle: Economist](https://www.economist.com/cdn-cgi/image/width=384,quality=80,format=auto/content-assets/images/20241109_USC696.png){.shadow height="500px"}
+:::
+::: {.column width="55%"}
+
+- In den *Swing States* wurde Donald Trumps Gewinnmarge in den *Polls* um 1,5 bis 3,5 Prozentpunkte unterschätzt.
+
+- Warum hat Donald Trump bei Befragungen im Verhältnis zur tatsächlichen Wahl schlechter abgeschnitten als Kamala Harris?
+
+:::
+:::::
+
+## Verlieren die USA ihre Werte?
+
+:::: {.columns}
+::: {.column width="50%"}
+![Quelle: WSJ & NORC, 2023](images/wsj-poll.png){.shadow height="500px"}
+:::
+::: {.column width="50%"}
+- Eine Befragung des Wall Street Journal hat ergeben, dass amerikanische 'Ur-Werte', wie Patriotismus, Religion und Familie über die vergangenen 25 Jahre an Relevanz verloren haben.
+
+- Stattdessen gewinnt Geld zunehmend an Bedeutung.
+
+:::
+::::
+
+
+## Verlieren die USA ihre Werte?
+
+:::: {.columns}
+::: {.column width="50%"}
+![Quelle: WSJ & NORC, 2023](images/wsj-poll.png){.shadow height="500px"}
+:::
+::: {.column width="50%"}
+- Ist die Umfrage Evidenz für einen Werteverfall?
+
+- Das WSJ hat zuletzt zunehmend auf Online-befragungen anstatt wie zuvor auf telefonbasierte Interviews gesetzt.
+
+- Repräsentative Befragungen werden schwieriger. Warum?
+:::
+::::
+
+# Wiederholung
+Univariate deskriptive Statistik
+
+## Quiz
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/measures" title="Survey preview"> </iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/measures/qr" title="Survey link"> </iframe>
+:::
+:::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/measures/results" background-interactive="true" data-preload="true"}
+
+
+## Wiederholung
+
+| Datentyp                       | Lagemaße                                  | Streuungsmaße                          |
+|--------------------------------|-------------------------------------------|----------------------------------------|
+| Numerische Variablen           | arithm. / geom. Mittel, Median, Modus     | IQR, Varianz / Standardabweichung, MAD |
+| Ordinale Variablen             | Median, Modus                             | Dissens, Entropie                      |
+| Nominale Variablen             | Modus                                     | Entropie                               |
+
+
+# Fallstudie
+Vertrauen in Politik und Wissenschaft in Europa
+
+## Datenquelle
+
+:::: {.columns}
+::: {.column width="42%"}
+<div class ="card">
+<img src="https://svusav.sk/storage/uploads/clanky/t.28april.jpg" style="width: 400px"></img>
+</div>
+:::
+::: {.column width="58%"}
+Die [European Social Survey (ESS)](https://www.europeansocialsurvey.org/) ist eine repräsentative europäische Haushaltsbefragung und erfasst Meinungen, Verhalten und soziodemographische Merkmale.
+
+Die ESS wird jährlich durchgeführt und deckt eine Mehrheit der europäischen Mitgliedstaaten ab.
+:::
+::::
+
+
+## Daten
+
+```{r}
+data10 <- read_csv("data/ESS10/ESS10.csv")
+# data11 = read_csv("data/ESS11/ESS11.csv")
+# cols = intersect(names(data11), names(data10))
+
+svy <- data10 |>
+  as_survey_design(
+    ids = psu,
+    strata = stratum,
+    weights = anweight,
+    nest = TRUE
+  ) |>
+  select(
+    country = cntry,
+    region = region,
+    Wissenschaft = trstsci,
+    Politik = trstplt
+  )
+
+svy_pol <- svy_counts(svy, Politik)
+svy_sci <- svy_counts(svy, Wissenschaft)
+
+```
+
+```{r}
+library(kableExtra)
+data10 |>
+  head(15) |>
+  select(-(inwds:jinwe)) |>
+  select(1:40) |>
+  knitr::kable() |>
+  kable_styling(font_size=18)
+```
+
+
+## Vertrauen in Politik und Wissenschaft
+
+
+```{r, fig.height=6, fig.width=11}
+
+labels <- c(
+  Politik = num_summary(svy_pol, "Politik"),
+  Wissenschaft = num_summary(svy_sci, "Wissenschaft")
+)
+
+rbind(
+  svy_pol,
+  svy_sci
+) |>
+  ggplot(aes(value, n, group = field)) +
+  geom_bar(stat = "identity", fill = "tomato") +
+  geom_hline(yintercept=0) +
+  facet_wrap(~field, ncol = 1, labeller = as_labeller(labels)) +
+  # geom_vline(aes(xintercept = median(as.numeric(value) - 1))) +
+  labs(
+    x = NULL,
+    y = "Häufigkeit",
+    title = "Vertrauen in Politik und Wissenschaft",
+    subtitle = "European Social Survey, Items trstsci, trstplt",
+    caption = "Quelle: ESS10"
+  ) +
+  theme(legend.position = "none")
+```
+
+## Vertrauen in Politik und Wissenschaft
+
+```{r, fig.height=6, fig.width=11}
+
+data_ess <- read_csv("data/CRON2W5e01/CRON2W5e01.csv")
+
+svy_ess <- data_ess |>
+  as_survey_design(
+    ids = idno,
+    weights = c2weight
+  ) |>
+  select(
+    cntry, c2weight,
+    Medizin = w5q7,
+    Umweltwissenschaften = w5q9,
+    Physik = w5q6,
+  )
+```
+
+```{r, fig.height=6, fig.width=11}
+
+labels <- c(
+  Physik = num_summary(svy_counts(svy_ess, Physik), "Physik"),
+  Medizin = num_summary(svy_counts(svy_ess, Medizin), "Medizin"),
+  Umweltwissenschaften = num_summary(
+    svy_counts(svy_ess, Umweltwissenschaften), "Umweltwissenschaften"
+  )
+)
+
+rbind(
+  svy_counts(svy_ess, Medizin),
+  svy_counts(svy_ess, Physik),
+  svy_counts(svy_ess, Umweltwissenschaften)
+) |>
+  ggplot(aes(value, n, group = field)) +
+  geom_bar(stat = "identity", fill = "tomato") +
+  geom_hline(yintercept=0, linewidth=0.2) +
+  facet_wrap(~field, ncol = 1, labeller = as_labeller(labels)) +
+  labs(
+    x = NULL,
+    y = "Häufigkeit",
+    title = "Vertrauen in die Wissenschaften",
+    subtitle = "European Social Survey, Items w5q7, w5q8, w5q9",
+    caption = "ESS CRONOS 2 Wave 5"
+  ) +
+  theme(legend.position = "none")
+```
+
+## Vertrauen in Politik und Wissenschaft
+
+```{r, fig.height=6, fig.width=11}
+
+svy_country = svy |>
+    group_by(country, Politik) |>
+    srvyr::survey_tally() |>
+    filter(!Politik %in% c(77, 88, 99)) |>
+    mutate(
+    n = round(n),
+    value = factor(
+      Politik,
+      levels = 0:10,
+      labels = lvls,
+      ordered = TRUE
+    )
+  ) |>
+  reframe(
+    country = rep(country, n),
+    value = rep(value, n)
+  )
+
+```
+
+```{r, fig.height=6, fig.width=11}
+
+sum = svy_country |>
+  group_by(country) |>
+  summarize(
+    m=median(as.numeric(value) - 1),
+    e=entropy(value),
+    d=dissent(value)
+  )
+
+dat_country = svy_country |>
+  group_by(country, value) |>
+  summarize(n=n()) |>
+  group_by(country) |>
+  mutate(r=n / sum(n)) |>
+  left_join(sum)
+
+dat_country |>
+  ggplot(aes(y=fct_reorder(country, m), x=n, fill=value)) +
+  geom_bar(position=position_fill(reverse=TRUE), stat="identity") +
+  scale_fill_brewer(palette="RdYlGn") +
+  scale_x_continuous(labels=scales::percent) +
+  guides(fill=guide_legend(nrow=1)) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Vertrauen in die Politik",
+    subtitle = "European Social Survey, Item trstplt",
+    caption = "ESS CRONOS 2 Wave 5"
+  )
+```
+
+## Vertrauen in Politik und Wissenschaft
+
+```{r, fig.height=6, fig.width=11}
+
+sum = svy_country |>
+  group_by(country) |>
+  summarize(
+    m=median(as.numeric(value) - 1),
+    value=dissent(value)
+  ) |>
+  mutate(m=factor(round(m), levels=0:10, ordered=TRUE))
+
+sum |>
+  ggplot(aes(x=fct_reorder(country, value), y=value, color=m)) +
+  geom_segment(aes(y=0, yend=value, xend=country), color="grey70") +
+  geom_point(color="grey70") +
+  geom_segment(
+    data=filter(sum, country %in% c("BG", "IE")),
+    aes(y=0, yend=value, xend=country),
+    linewidth=2
+  ) +
+  geom_point(
+    data=filter(sum, country %in% c("BG", "IE")),
+    aes(size=10),
+  ) +
+  geom_hline(yintercept=0) +
+  scale_color_brewer(palette="RdYlGn") +
+  # scale_color_distiller(palette="RdYlGn", limit=c(0,10), direction=1) +
+  # scale_color_manual(values=RColorBrewer::brewer.pal(10, "RdYlGn")) +
+  labs(
+    x = NULL, y = "Dissens",
+    title = "Vertrauen in die Politik",
+    subtitle = "European Social Survey, Item trstplt",
+    caption = "ESS CRONOS 2 Wave 5"
+  ) +
+  theme(legend.position="none")
+```
+
+## Vertrauen in Politik und Wissenschaft
+
+```{r, fig.height=6, fig.width=11}
+
+plt = as_tibble(svy) |>
+    filter(
+      Wissenschaft %in% 0:10,
+      Politik %in% 0:10
+    ) |>
+    mutate(
+      Wissenschaft = factor(Wissenschaft, levels=0:10, labels=lvls),
+      Politik = factor(Politik, levels=0:10, labels=lvls)
+    ) |>
+    ggplot(aes(Wissenschaft, Politik)) +
+    geom_jitter(alpha=0.3, size=0.3) +
+    scale_x_discrete(labels=lvls) +
+    scale_y_discrete(labels=lvls)
+
+ggsave("images/trst-pol-sci.png", plt)
+plt
+```
+
+# Fallstudie
+Temperaturen in München, 1973 - 2023
+
+## Daten
+
+:::: {.columns}
+::: {.column width="40%"}
+```{r}
+# library(GSODR)
+# data = get_GSOD(years=2013:2023, station="108660-99999") |> select(YEAR, MONTH, DAY, TEMP)
+# data$MONTH = lubridate::month(data$MONTH, label=T, abbr=T)
+# arrow::write_parquet(data, "data/temp_munich.parquet")
+
+data = arrow::read_parquet("data/temp_munich.parquet") |>
+  mutate(date = lubridate::make_date(YEAR, MONTH, DAY))
+
+data |>
+  select(YEAR:TEMP) |>
+  head(10) |>
+  knitr::kable() |>
+  kable_styling(font_size=24)
+
+```
+:::
+::: {.column width="60%"}
+Temperaturdaten werden von tausenden Messstationen weltweit erfasst und in aggregierter Form veröffentlicht, wie z.B. in der Global Summary of the Day (GSOD).
+
+```{.r}
+libary(GSODR)
+
+get_GSOD(
+  years=2013:2023,
+  station="108660-99999"
+)
+
+```
+:::
+::::
+
+## Tagestemperaturen
+
+<!-- <div style="width:11in; height:6in; background-color: rgba(0, 128, 0, 0.5)">test</div> -->
+
+```{r, fig.width=11, fig.height=6}
+cal = data |>
+  filter(year(date) == 2023) |>
+  mutate(
+    month = month(date, label=TRUE),
+    week = week(date),
+    day = day(date),
+    weekday = fct_inorder(weekdays(date, abbreviate=TRUE)),
+    ) |>
+  mutate(month=factor(month, levels=unique(month))) |>
+  group_by(month) |>
+  mutate(
+    weekmonth = data.table::frank(week, ties.method="dense")
+  )
+
+limit <- max(abs(cal$TEMP)) * c(-1, 1)
+
+ggplot(cal, aes(x = weekday, y = weekmonth, fill = TEMP)) +
+  geom_tile(color="white") +
+  geom_text(aes(label=day), size = 2) +
+  facet_wrap(~month, scales="free_x", ncol=3) +
+  scale_x_discrete() +
+  scale_y_reverse(breaks=NULL) +
+  scale_fill_distiller(palette="RdBu", type="div", limit = limit) +
+  guides(fill=guide_colorbar(barwidth=0.7, barheight=10)) +
+  labs(
+    title = "Temperaturen im Jahresverlauf, München 2023",
+    subtitle = "Durchschnittliche Tagestemperatur",
+    x=NULL,
+    y=NULL,
+    fill = "Temp.",
+    caption = "Datenquelle: GSOD"
+  ) +
+  theme(legend.position="right")
+```
+
+## Tagestemperaturen
+
+```{r, fig.width=11, fig.height=6}
+
+data |>
+  group_by(MONTH, DAY) |>
+  summarize(am=mean(TEMP), sd=sd(TEMP)) |>
+  arrange(MONTH, DAY) |>
+  ungroup() |>
+  mutate(x=1:n()) |>
+  ggplot(aes(x, am, color=am)) +
+  geom_hline(yintercept=0) +
+  geom_point(size=0.5) +
+  geom_linerange(aes(ymin=am - sd, ymax = am + sd)) +
+  scale_color_distiller(palette="RdBu", type="div", limit = limit) +
+  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
+  labs(
+    x = "Tag", y = "Temperatur (°C)", color = NULL,
+    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
+    subtitle = "Tagesweise aggregierte arithmetische Mittel ± Standardabweichungen",
+    caption = "Datenquelle: GSOD"
+    ) +
+  theme(
+    panel.background=element_rect(fill="grey30"),
+    # plot.background=element_rect(fill="grey90", color="transparent"),
+  )
+
+```
+
+## Mittelwert und Abweichung
+
+```{r, fig.width=10, fig.height=3}
+
+data |>
+  summarize(
+    am=mean(TEMP),
+    sd=sd(TEMP)
+  ) |>
+  ggplot() +
+  geom_linerange(
+    aes(y=1, x=am, xmin=am-sd, xmax=am+sd),
+    linewidth=2
+  ) +
+  geom_point(
+    aes(y=1, x=am),
+    size = 12
+  ) +
+  geom_text(
+    aes(x=am, y=1, label="Arithmetisches\nMittel (x̄)"),
+    nudge_y=-0.3, size=8, color="grey60", vjust=1
+  ) +
+  geom_text(
+    aes(x=am-sd, y=1, label="x̄ - s"),
+    nudge_y=-0.3, size=8, color="grey60", vjust=1
+  ) +
+  geom_text(
+    aes(x=am+sd, y=1, label="x̄ + s"),
+    nudge_y=-0.3, size=8, color="grey60", vjust=1
+  ) +
+  lims(
+    x=c(-3, 18),
+    y=c(0, 2)
+  ) +
+  theme_void()
+
+```
+
+Der Punkt kann auch ein anderes Lagemaß darstellen, der Strich eine andere Form der Abweichung (z.B. Standardfehler).
+
+
+
+## Tagestemperaturen
+
+```{r, fig.width=11, fig.height=6}
+
+data |>
+  ggplot(aes(x=factor(week(date)), y=TEMP)) +
+  geom_hline(yintercept=0) +
+  geom_boxplot(fill="tomato", outlier.size=0.6) +
+  scale_color_distiller(
+    palette="RdBu", type="div", limit = limit
+  ) +
+  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
+  labs(
+    x = "Woche", y = "Temperatur (°C)", color = NULL,
+    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
+    subtitle = "Wochenweise aggregierte Boxplots",
+    caption = "Datenquelle: GSOD"
+    )
+
+```
+
+## Temperaturen
+
+```{r, fig.width=11, fig.height=6}
+
+limit <- max(abs(data$TEMP)) * c(-1, 1)
+
+ggplot(data, aes(x = TEMP, y = fct_rev(MONTH), fill=stat(x))) +
+    geom_density_ridges_gradient(
+          scale=4, rel_min_height=0.01, gradient_lwd = 1.0
+      ) +
+    scale_y_discrete(expand=c(0,0)) +
+    scale_x_continuous(expand=c(0,0)) +
+    # scale_fill_viridis_c(name="Temp. (°C)") +
+    scale_fill_distiller(palette="RdBu", type="div", limit = limit) +
+    guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
+    coord_cartesian(clip="off") +
+    labs(
+      # title="Monatsweise Temperaturen in München",
+      title="Temperaturen im Jahresverlauf, München 1973 - 2023",
+      subtitle = "Monatsweise aggregierte Kerndichtediagramme",
+      y="",
+      x="Temperatur (°C)",
+      caption = "Datenquelle: GSOD"
+    ) +
+    theme_ridges() +
+    theme(legend.position="none")
+```
+
+## Kerndichtediagramme
+
+Kerndichtediagramme sind eine kontinuierliche Variante des diskreten Histogramms. Das KDD gibt relative Häufigkeiten statt absolute Häufigkeiten in einem Wertebereich an.
+
+```{r fig.width=11, fig.height=4}
+set.seed(321)
+
+sim = data.frame(
+  x = rnorm(10000, mean=170, sd=8)
+  )
+
+dens = density(sim$x)
+dens = tibble(x=dens$x, y=dens$y)
+
+ggplot(sim, aes(x=x, y=after_stat(density))) +
+  geom_histogram(fill="grey70", color="white", binwidth=2) +
+  geom_area(
+    data = filter(dens, x > 170),
+    aes(x=x, y=y),
+    fill = "tomato",
+    alpha = 0.5
+  ) +
+  geom_line(
+    data=dens,
+    aes(x=x, y=y),
+    linewidth=2
+    ) +
+  labs(
+    x=NULL, y="Dichte",
+  )
+```
+
+
+## Tagestemperaturen
+
+```{r fig.width=11, fig.height=6}
+
+td = data |>
+  group_by(YEAR, MONTH) |>
+  summarize(am=mean(TEMP))
+
+td |>
+  ggplot() +
+  geom_hline(yintercept=0) +
+  geom_line(
+    aes(x=MONTH, y=am, group=YEAR),
+    linewidth=0.1,
+    color="grey80",
+    alpha=0.7
+  ) +
+  geom_point(
+    aes(x=MONTH, y=am, group=YEAR, color=am),
+  ) +
+  geom_line(
+    aes(x=MONTH, y=am, group=YEAR, color=am),
+    data=filter(td, YEAR==2023),
+    color="grey20"
+  ) +
+  geom_point(
+    aes(x=MONTH, y=am, group=YEAR, color=am),
+    data=filter(td, YEAR==2023),
+    color="grey20",
+  ) +
+  geom_point(
+    data = summarize(group_by(td, MONTH), y=mean(am)),
+    aes(x=MONTH, y=y),
+    color = "grey20",
+    shape = "-",
+    size = 12
+    ) +
+  geom_text(
+    data=filter(td, YEAR == 2023, MONTH == "Dec"),
+    aes(x=MONTH, y=am, label="2023"), size=3, nudge_x=0.3) +
+  scale_color_distiller(
+    palette="RdBu", type="div", limit = limit
+  ) +
+  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
+  labs(
+    x = NULL, y = "Temperatur (°C)", color = NULL,
+    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
+    subtitle = "Verbundene Punkte zeigen mittlere Monatstemperaturen für jedes Jahr,\nMarkierungen die mittleren Monatstemperaturen über die letzten 50 Jahre.",
+    caption = "Datenquelle: GSOD"
+    )
+
+```
+
+## Prüfungsfragen
+
+- Sie haben in einer Befragung Meinungen zur diskutierten Anhebung von Parkgebühren für SUVs eingeholt (7-Punkte-Skala, stimme gar nicht zu bis stimme voll zu). Welche Visualisierung und welche Lage-/Streuungsmaße setzen Sie ein, um das Meinungsbild zu beschreiben?
+
+- Berechnen Sie die Entropie der folgenden Nebenfach-verteilung: 15x VWL, 10x BWL, 3x Statistik, 20x Meteorologie.
+
+- Was ist der Unterschied zwischen Entropie und Dissens?
+
