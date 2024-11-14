@@ -26,8 +26,6 @@ def choice_streuung(name, title):
 
 # SURVEY measures
 
-
-
 def init_measures(db, rt, route, tablename, **kwargs):
     table = db.t[tablename]
     if table not in db.t:
