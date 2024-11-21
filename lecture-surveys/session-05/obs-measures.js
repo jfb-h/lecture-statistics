@@ -45,7 +45,7 @@ function plot() {
             Plot.barY(answers_lage, Plot.groupX({ y: "count" }, { x: "value", fx: "variable" })),
             Plot.ruleY([0])
         ],
-        x: { label: null, domain: ["AM", "GM", "Median", "Mode"] },
+        x: { label: null, domain: ["AM", "GM", "Median", "Modus"] },
         y: { label: "Häufigkeit", },
         fx: { label: null, }
     });

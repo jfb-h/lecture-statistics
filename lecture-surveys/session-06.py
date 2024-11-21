@@ -31,11 +31,11 @@ def init_app(db, rt, route, tablename, **kwargs):
         vb = NumericInput("varb", "Welche Schuhgröße hast Du?", min=30, max=60)
         
         choicemedia = Choice(
-            Radio("media","Social_Media", "Social Media (z.B. Instagram, TikTok, Facebook)"),
-            Radio("media","Zeitung_DE", "Deutschsprachige Zeitungen (z.B. FAZ, Zeit, Sueddeutsche, TAZ, NZZ)",),
-            Radio("media","Zeitung_Intnational", "Internationale Zeitungen (z.B. Guardian, NYT, Economist, LeMonde)",),
-            Radio("media","TV_Radio", "TV oder Radio"),
-            Radio("media","Andere", "Andere"),
+            Radio("media","Soc. Media", "Social Media (z.B. Instagram, TikTok, Facebook)"),
+            Radio("media","Zeitung DE", "Deutschsprachige Zeitungen (z.B. FAZ, Zeit, Sueddeutsche, TAZ, NZZ)",),
+            Radio("media","Zeitung Int", "Internationale Zeitungen (z.B. Guardian, NYT, Economist, LeMonde)",),
+            Radio("media","TV / Radio", "TV oder Radio"),
+            Radio("media","Sonstige", "Sonstige"),
             title="Welche Quellen nutzt du primär, um dich über aktuelle Ereignisse zu informieren?",
         )
 
@@ -44,12 +44,12 @@ def init_app(db, rt, route, tablename, **kwargs):
             Radio("wahl_d", "SPD", "SPD"),
             Radio("wahl_d", "Gruene", "Grüne"),
             Radio("wahl_d", "FDP", "FDP"),
-            Radio("wahl_d", "Afd", "AfD"),
+            Radio("wahl_d", "AfD", "AfD"),
             Radio("wahl_d", "Sonstige", "Sonstige"),
             title="Sonntagsfrage: Wen würdest Du wählen, wenn nächsten Sonntag Bundestagswahl wäre?",
         )
 
-        items = Items(va, vb, choicemedia, choiced, hx_post=f"/{route}")
+        items = Items(va, vb, choicemedia, choiced, hx_post=f"/statlecture/{route}")
         return Survey("Kurzumfrage", items)
         
 

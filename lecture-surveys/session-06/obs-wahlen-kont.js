@@ -19,10 +19,9 @@ function updateData(data) {
 }
 
 function correctedContingencyCoefficient(data) {
-
     const usCategories = [...new Set(data.map(d => d.media))];
     const dCategories = [...new Set(data.map(d => d.wahl_d))];
-    
+
     const contingencyTable = {};
     usCategories.forEach(us => {
         contingencyTable[us] = {};
@@ -30,15 +29,15 @@ function correctedContingencyCoefficient(data) {
             contingencyTable[us][d] = 0;
         });
     });
-    
+
     data.forEach(d => {
         contingencyTable[d.media][d.wahl_d]++;
     });
-    
+
     const rowTotals = {};
     const colTotals = {};
     let total = 0;
-    
+
     usCategories.forEach(us => {
         rowTotals[us] = 0;
         dCategories.forEach(d => {
@@ -47,7 +46,7 @@ function correctedContingencyCoefficient(data) {
             total += contingencyTable[us][d];
         });
     });
-    
+
     let chiSquared = 0;
     usCategories.forEach(us => {
         dCategories.forEach(d => {
@@ -56,9 +55,8 @@ function correctedContingencyCoefficient(data) {
             chiSquared += Math.pow(observed - expected, 2) / expected;
         });
     });
-    
+
     const correctedCoefficient = Math.sqrt(chiSquared / (chiSquared + total));
-    
     return correctedCoefficient;
 }
 
@@ -67,8 +65,6 @@ function createSummary(data) {
     const pcor = correctedContingencyCoefficient(answers)
     return `Pearson korrigiert: <strong>${ftm(pcor)}</strong><br>`
 }
-
-
 
 function plot() {
     const container = document.getElementById('wahlen');
@@ -84,29 +80,29 @@ function plot() {
         acc[curr.media] = (acc[curr.media] || 0) + 1;
         return acc;
     }, {});
-    
+
     const media_data = Object.entries(media_counts).map(([media, count]) => ({
         media,
         count,
     }));
-    
+
     const d_counts = answers.reduce((acc, curr) => {
         acc[curr.wahl_d] = (acc[curr.wahl_d] || 0) + 1;
         return acc;
     }, {});
-    
+
 
     const d_data = Object.entries(d_counts).map(([party, count]) => ({
         party,
         count,
     }));
-    
+
     const media_plot = Plot.plot({
         height: 300,
         width: containerWidth,
         x: {
-            label: "Media",
-            domain: ["Social_Media", "Zeitung_DE", "Zeitung_Intnational", "TV_Radio", "Andere"],
+            label: null,
+            domain: ["Soc. Media", "Zeitung DE", "Zeitung Int", "TV / Radio", "Sonstige"],
         },
         y: {
             label: "Anzahl",
@@ -116,12 +112,12 @@ function plot() {
         ],
         color: { legend: true }
     });
-    
+
     const d_plot = Plot.plot({
         height: 300,
         width: containerWidth,
         x: {
-            label: "Partei",
+            label: null,
             domain: ["Union", "SPD", "Gruene", "FDP", "AfD", "Sonstige"],
         },
         y: {
@@ -138,28 +134,35 @@ function plot() {
         width: container_heatWidth,
         height: 600,
         style: { fontSize: "16px" },
-        marginLeft: 60,
+        marginLeft: 70,
         marginRight: 50,
-        marginBottom: 50,
+        marginBottom: 120,
         marginTop: 50,
-        inset: 20, 
+        inset: 20,
 
-        x: {label: null, tickRotate: 90},
-        y: {label: null},
-        color: {label: "Anzahl", legend: true, scheme: "YlGnBu"},
+        x: {
+            label: null,
+            domain: ["Soc. Media", "Zeitung DE", "Zeitung Int", "TV / Radio", "Sonstige"],
+            tickRotate: 90
+        },
+        y: {
+            label: null,
+            domain: ["Union", "SPD", "Gruene", "FDP", "AfD", "Sonstige"],
+        },
+        color: { label: "Anzahl", legend: true, scheme: "YlGnBu" },
         marks: [
-          Plot.cell(answers, Plot.group({fill: "count"}, {fill: "count", x: "media", y: "wahl_d"}))
+            Plot.cell(answers, Plot.group({ fill: "count" }, { fill: "count", x: "media", y: "wahl_d" }))
         ]
-      });
+    });
 
     container.innerHTML = "";
     container.appendChild(media_plot);
     container.appendChild(d_plot);
-    
+
     container_heat.innerHTML = "";
     container_heat.appendChild(heat_plot);
 
-    
+
 }
 
 window.addEventListener('resize', debounce(() => { plot(); }, 100));

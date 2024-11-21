@@ -123,7 +123,7 @@ def init_measures(db, rt, route, tablename, **kwargs):
     async def get():
         plot = StyledCard(
             PlotContainer(id="results"),
-            header=H2("Welche Datenniveaus haben diese Variablen?"),
+            header=H2("Welche Maße setzen Sie ein?"),
         )
         grid = StyledGrid(plot)
         return Title("Einführung"), Main(grid, update_data, obs_results, cls="container")
