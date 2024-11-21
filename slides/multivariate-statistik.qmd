@@ -1,6 +1,6 @@
 ---
 title: "Einführung in die Statistik"
-subtitle: "Multivariate deskriptive Statistik"
+subtitle: "Zusammenhangsmaße"
 author: Dr. Jakob Hoffmann, Economic Geography Group
 lightbox: true
 execute:
@@ -52,6 +52,16 @@ theme_update(
 )
 
 ```
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/measures/results" background-interactive="true" data-preload="true"}
+
+# Fallstudie
+Vertrauen in Politik und Wissenschaft in Europa
+
+## Vertrauen in Politik und Wissenschaft
+
+![](images/trst-pol-sci.png)
+
 # Fallstudie
 Temperaturen in München, 1973 - 2023
 
@@ -410,10 +420,6 @@ data_sim |>
   theme(legend.position="none")
 ```
 
-## Multivariate Statistik
-
-- TODO
-
 
 ## Multivariate Statistik
 
@@ -422,6 +428,7 @@ data_sim |>
 - Multivariate Verfahren dienen der *Identifikation* von bisher unbekannten oder der *Überprüfung* von vermuteten statistischen Zusammenhängen zwischen Variablen.
 
 - Die beteiligten Variablen spielen in multivariaten Verfahren oft (aber nicht immer) unterschiedliche Rollen (z.B. Explanans, Explanandum, Kontrollvariable).
+
 
 
 ## Variablentypen
@@ -470,7 +477,7 @@ digraph G {
   C[label="Kontrollvariable(n)\n(z.B. Beruf)" color=lightgrey fontcolor="#333333"];
 
   A -> B;
-  C -> A;
+  A -> C;
   C -> B;
 }
 ```
@@ -479,13 +486,13 @@ digraph G {
 
 Wir beschreiben die abhängige Variable (AV, Output) auch oft als eine *Funktion* der unabhängigen Variable(UV, Input):
 
-$$\textrm{AV} = f(\textrm{UV})$$
+$$\textrm{AV} = f(\textrm{UV}) \color{lightgrey}{+ \epsilon}$$
 
 bzw. mit Kontrollvariablen (KV):
 
-$$\textrm{AV} = f(\textrm{UV, KV})$$
+$$\textrm{AV} = f(\textrm{UV, KV}) \color{lightgrey}{+ \epsilon}$$
 
-Die exakte Spezifikation der Funktion $f$ ist Gegenstand der statistischen Modellierung.
+Die exakte Spezifikation der Funktion $f$ hängt von den Daten, der Forschungsfrage und dem Forschungsdesign ab.
 
 
 ## Was ist die abhängige Variable?
@@ -559,8 +566,755 @@ ggplot(aes(x, y, color=g)) +
 :::
 :::::
 
+# Zusammenhangsmaße
+Numerische Variablen
+
+## Streudiagramm
+
+```{r, fig.width=11, fig.height=6}
+library(gapminder)
+
+gapminder |>
+  filter(year==2007) |>
+  ggplot(aes(log10(gdpPercap), lifeExp)) +
+  # geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
+  # geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
+  geom_point(shape=1, color="tomato") +
+  scale_x_continuous(
+      breaks = c(1,2,3,4,5),
+      labels = scales::math_format(10^.x)
+  ) +
+  labs(
+    x = "BIP (Log-Skala)",
+    y = "Lebenserwartung (Jahre)",
+    title = "Lebenserwartung und BIP",
+    subtitle = "Daten für 142 Länder im Jahr 2007",
+    caption = "Datenquelle: gampinder.org"
+  )
+
+```
+
+## Kovarianz
+
+```{r, fig.width=11, fig.height=6}
+set.seed(123)
+
+set.seed(123)
+d_cov = tibble(
+  x = rnorm(10),
+  y = x + rnorm(10)
+)
+pts = tibble(
+  x = c(1.0),
+  y = c(2.5)
+)
+
+dat = rbind(d_cov, pts)
+x_mean <- mean(dat$x)
+y_mean <- mean(dat$y)
+dat$color = factor(
+  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
+  levels = c(TRUE, FALSE),
+  labels=c("pos", "neg")
+)
+
+dat |>
+  ggplot(aes(x, y)) +
+  geom_hline(yintercept = y_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
+  geom_vline(xintercept = x_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
+  annotate("text",
+    x = x_mean + 0.05, y = max(dat$y), label = "x̄",
+    size = 6, color = "grey60", vjust = 1
+  ) +
+  annotate("text",
+    y = y_mean - 0.05, x = max(dat$x), label = "ȳ",
+    size = 6, color = "grey60", vjust = 1
+  ) +
+  annotate("segment",
+    x = x_mean, xend = pts$x, y = pts$y, yend = pts$y, color = "cornflower blue"
+  ) +
+  annotate("segment",
+    y = y_mean, yend = pts$y, x = pts$x, xend = pts$x, color = "cornflower blue"
+  ) +
+  annotate("text",
+    x = 0.55, y = 2.7, label = "(xᵢ - x̄)", color = "cornflower blue", size = 6
+  ) +
+  annotate("text",
+    x = 1.12, y = 1.3, label = "(yᵢ - ȳ)", color = "cornflower blue", size = 6
+  ) +
+  geom_point(shape = 1, color = "black", stroke = 2) +
+  labs(x = NULL, y = NULL)
+
+```
+
+## Kovarianz
+
+```{r, fig.width=11, fig.height=6}
+set.seed(123)
+d_cov = tibble(
+  x = rnorm(10),
+  y = x + rnorm(10)
+)
+pts = tibble(
+  x = c(1.0),
+  y = c(2.5)
+)
+
+dat = rbind(d_cov, pts)
+x_mean <- mean(dat$x)
+y_mean <- mean(dat$y)
+dat$color = factor(
+  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
+  levels = c(TRUE, FALSE),
+  labels=c("pos", "neg")
+)
+
+dat |>
+  ggplot(aes(x, y)) +
+  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = y_mean, ymax = Inf,  fill = "#dce8f5") +
+  annotate("rect", xmin = x_mean, xmax = Inf, ymin = -Inf, ymax = y_mean,  fill = "#dce8f5") +
+  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = -Inf, ymax = y_mean, fill = "#f5e1dc") +
+  annotate("rect", xmin = x_mean, xmax = Inf, ymin = y_mean, ymax = Inf,   fill = "#f5e1dc") +
+  geom_hline(yintercept = y_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
+  geom_vline(xintercept = x_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
+  annotate("text",
+    x = -0.6, y = -1.8,
+    label = "(xᵢ - x̄)(yᵢ - ȳ)\nist positiv",
+    size = 6, color = "darkred", vjust = 1
+  ) +
+  annotate("text",
+    x = -0.6, y = 2.4,
+    label = "(xᵢ - x̄)(yᵢ - ȳ)\nist negativ",
+    size = 6, color = "navyblue", vjust = 1
+  ) +
+  annotate("text",
+    x = x_mean + 0.05, y = max(dat$y), label = "x̄",
+    size = 6, color = "grey60", vjust = 1
+  ) +
+  annotate("text",
+    y = y_mean - 0.05, x = max(dat$x), label = "ȳ",
+    size = 6, color = "grey60", vjust = 1
+  ) +
+  geom_point(aes(color = color), shape = 1,  stroke = 2) +
+  scale_color_manual(values=c("darkred", "navyblue")) +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position="none")
+
+```
+
+## Kovarianz
+
+Analog zur Varianz ist die *Kovarianz* zweier Variablen $x$ und $y$ definiert als der Mittelwert der Produkte der Abweichungen von den jeweiligen Mittelwerten:
+
+$$s_{xy} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})$$
+
+Die Kovarianz ist positiv (negativ) wenn höhere Werte von $x$ mit höheren (niedrigeren) Werten von $y$ einhergehen.
+
+## Kovarianz
+
+Die Kovarianz zweier Variablen $x$ und $y$ ist symmetrisch (d.h. es gibt keine abhängige und unabhängige Variable):
+
+$$s_{xy} = s_{yx}$$
+
+Die Kovarianz ist zwar invariant unter der Addition von Konstanten, wird aber durch Faktoren der Variablen skaliert:
+
+$$s_{ax + b, cy + d} = a \cdot c \cdot s_{xy}$$
+
+Abhängigkeit von der Skalierung der Variablen macht die Kovarianz schwierig zu interpretieren / zu vergleichen.
+
+
+## Korrelationskoeffizient
+
+Normalisierung der Kovarianz durch das 'Herausteilen' der Standardabweichungen der beiden Variablen gibt uns den *Korrelationskoeffizienten* mit Wertebereich -1 bis 1:
+
+$$
+r_{xy} = \frac{s_{xy}}{s_x s_y}
+$$
+
+Die Normalisierung auf den Bereich -1 bis 1 kann durch die Cauchy-Schwarz-Ungleichung oder durch Anwendung der Kosinusdefinition des Skalarprodukts bewiesen werden.
+
+
+## Korrelationskoeffizient
+
+Für die beiden Datenreihen
+
+$$
+\begin{align}
+\color{orange}{x = 1{,}4 \quad 2{,}3 \quad 1{,}1 \quad 2{,}7 \quad}
+\color{cornflowerblue}{y = 5{,}3 \quad 4{,}3 \quad 0{,}4 \quad 4{,}8}
+\end{align}
+$$
+
+ist die Kovarianz:
+$\color{green}{s_{xy}} = \frac{1}{n}
+\sum_{i=1}^n \color{orange}{(x_i - \bar{x})} \color{cornflowerblue}{(y_i - \bar{y})} = 1{,}04$
+
+<br>
+
+:::{.fragment}
+Mit Standardabweichungen $\color{orange}{s_x = 0{,}75}$ und $\color{cornflowerblue}{s_y = 2{,}28}$ ist der Korrelationskoeffizient:
+
+$$r_{xy} = \frac{\color{green}{s_{xy}}}{\color{orange}{s_x} \color{cornflowerblue}{s_y}} = 0.61$$
+:::
+
+
+## Korrelationskoeffizient
+
+```{r, fig.width=11, fig.height=6}
+set.seed(123)
+n = 2000
+rdf = rbind(
+  tibble(g = LETTERS[1], x=rnorm(n, mean = 170, sd = 5), y=rnorm(n, mean = 170, sd = 5)),
+  tibble(g = LETTERS[2], x=rnorm(n, mean = 170, sd = 5), y= 1.0 * x + rnorm(n, sd = 5)),
+  tibble(g = LETTERS[3], x=rnorm(n, mean = 170, sd = 5), y=-1.0 * x + rnorm(n, sd = 5)),
+  tibble(g = LETTERS[4], x=rnorm(n, mean = 170, sd = 5), y= 0.4 * x + rnorm(n, sd = 5))
+) |>
+  mutate(
+    mx = mean(x),
+    my=mean(y),
+    color = factor(
+      ((x - mean(x)) * (y - mean(y)) > 0),
+      levels = c(TRUE, FALSE),
+      labels=c("pos", "neg")
+    ),
+    .by=g
+  )
+
+cov_sum = function(df) {
+  x = df$x
+  y = df$y
+  paste0(
+    "Kovarianz = ",
+    round(cov(x, y), digits=2), " | ",
+    "Korrelation = ",
+    round(cor(x, y), digits=2)
+  )
+}
+
+labels = c(
+  "A" = filter(rdf, g == "A") |> cov_sum(),
+  "B" = filter(rdf, g == "B") |> cov_sum(),
+  "C" = filter(rdf, g == "C") |> cov_sum(),
+  "D" = filter(rdf, g == "D") |> cov_sum()
+  )
+```
+
+```{r, fig.width=11, fig.height=6}
+rdf |>
+  ggplot(aes(x, y)) +
+  geom_point(color="tomato", size=0.4, alpha=0.3) +
+  facet_wrap(~g, labeller = as_labeller(labels), scales="free") +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position="none")
+```
+
+## Korrelationskoeffizient
+
+```{r, fig.width=11, fig.height=6}
+rdf |>
+  ggplot(aes(x, y)) +
+  geom_rect(aes(xmin = -Inf, xmax = mx, ymin = my, ymax = Inf),  fill = "#dce8f5") +
+  geom_rect(aes(xmin = mx, xmax = Inf, ymin = -Inf, ymax = my),  fill = "#dce8f5") +
+  geom_rect(aes(xmin = -Inf, xmax = mx, ymin = -Inf, ymax = my), fill = "#f5e1dc") +
+  geom_rect(aes(xmin = mx, xmax = Inf, ymin = my, ymax = Inf),   fill = "#f5e1dc") +
+  geom_point(aes(color=color), size=0.4, alpha=0.3) +
+  scale_color_manual(values=c("darkred", "navyblue")) +
+  facet_wrap(~g, labeller = as_labeller(labels), scales="free") +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position="none")
+```
+
+
+## Nichtlineare Zusammenhänge
+
+```{r, fig.width=11, fig.height=6}
+set.seed(123)
+n = 30
+d_cov = tibble(
+  x = seq(-1, 1, length.out=n),
+  y = -x^2 + rnorm(n, sd=0.2)
+)
+
+dat = d_cov
+x_mean <- mean(dat$x)
+y_mean <- mean(dat$y)
+dat$color = factor(
+  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
+  levels = c(TRUE, FALSE),
+  labels=c("pos", "neg")
+)
+
+dat |>
+  ggplot(aes(x, y)) +
+  geom_point(color="black", shape = 1,  stroke = 2) +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position="none")
+
+```
+
+
+## Nichtlineare Zusammenhänge
+
+```{r, fig.width=11, fig.height=6}
+set.seed(123)
+n = 30
+d_cov = tibble(
+  x = seq(-1, 1, length.out=n),
+  y = -x^2 + rnorm(n, sd=0.2)
+)
+
+dat = d_cov
+x_mean <- mean(dat$x)
+y_mean <- mean(dat$y)
+dat$color = factor(
+  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
+  levels = c(TRUE, FALSE),
+  labels=c("pos", "neg")
+)
+
+dat |>
+  ggplot(aes(x, y)) +
+  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = y_mean, ymax = Inf,  fill = "#dce8f5") +
+  annotate("rect", xmin = x_mean, xmax = Inf, ymin = -Inf, ymax = y_mean,  fill = "#dce8f5") +
+  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = -Inf, ymax = y_mean, fill = "#f5e1dc") +
+  annotate("rect", xmin = x_mean, xmax = Inf, ymin = y_mean, ymax = Inf,   fill = "#f5e1dc") +
+  geom_point(aes(color = color), shape = 1,  stroke = 2) +
+  scale_color_manual(values=c("darkred", "navyblue")) +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position="none")
+
+```
+
+
+## Nichtlineare Zusammenhänge
+
+```{r, fig.width=11, fig.height=6}
+library(gapminder)
+
+gapminder |>
+  filter(year==2007) |>
+  ggplot(aes(gdpPercap, lifeExp)) +
+  # geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
+  # geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
+  geom_point(shape=1, color="tomato") +
+  labs(
+    x = "BIP",
+    y = "Lebenserwartung (Jahre)",
+    title = "Lebenserwartung und BIP",
+    subtitle = "Daten für 142 Länder im Jahr 2007",
+    caption = "Datenquelle: gampinder.org"
+  )
+
+```
+
+## Transformationen
+
+```{r, fig.width=11, fig.height=6}
+d1 = gapminder |>
+  filter(year==2007) 
+
+p1 = d1|>
+  ggplot(aes(gdpPercap, lifeExp)) +
+  geom_point(shape=1, color="tomato") +
+  labs(
+    x = "BIP",
+    y = "Lebenserwartung (Jahre)",
+    title = "Ohne Log-Transformation",
+    subtitle = paste(
+      "r = ",
+      round(cor(d1$gdpPercap, d1$lifeExp), digits=2),
+      " | rₛ = ",
+      round(cor(d1$gdpPercap, d1$lifeExp, method="spearman"), digits=2)
+    ),
+    x = NULL, y = NULL
+  )
+
+p2 = d1 |>
+  ggplot(aes(log10(gdpPercap), lifeExp)) +
+  geom_point(shape=1, color="tomato") +
+  scale_x_continuous(
+      breaks = c(1,2,3,4,5),
+      labels = scales::math_format(10^.x)
+  ) +
+  labs(
+    x = "BIP (Log-Skala)",
+    y = NULL,
+    title = "Mit Log-Transformation",
+    subtitle = paste(
+      "r = ",
+      round(cor(log10(d1$gdpPercap), d1$lifeExp), digits=2),
+      " | rₛ = ",
+      round(cor(log10(d1$gdpPercap), d1$lifeExp, method="spearman"), digits=2)
+    ),
+    caption = "Datenquelle: gampinder.org"
+  )
+
+p1 | p2
+```
+
+## Rangkorrelationskoeffizient
+
+Der *Rangkorrelationskoeffizient* ist der Korrelationskoeffizient der *Ränge* zweier Variablen. Für rangtransformierte Variablen $x_r$ und $y_r$ gilt also wie zuvor:
+
+<!-- \textrm{cov}(\textrm{rang(x)}, \textrm{rang(y)}) -->
+$$
+r_s = \frac{
+    s_{x_r, y_r}
+  }{
+    s_{x_r} s_{y_r}
+}
+$$
+
+Der Rangkorrelationskoeffizient erfasst nicht nur lineare sondern auch nichtlineare aber monotone Zusammenhänge und kann auch für ordinale Variablen eingesetzt werden.
+
+## Rangkorrelationskoeffizient
+
+Die beiden Datenreihen
+
+$$
+\begin{align}
+\color{orange}{x = 1{,}4 \quad 2{,}3 \quad 1{,}1 \quad 2{,}7 \quad}
+\color{cornflowerblue}{y = 5{,}3 \quad 4{,}3 \quad 0{,}4 \quad 4{,}8}
+\end{align}
+$$
+
+werden rangtransformiert zu:
+$$
+\begin{align}
+\color{orange}{x_r = 3 \quad 2 \quad 4 \quad 1 \quad}
+\color{cornflowerblue}{y_r = 1 \quad 3 \quad 4 \quad 2}
+\end{align}
+$$
+
+Damit ergibt sich unter Anwendung der gleichen Schritte:
+
+$$
+r_s = \frac{ s_{x_r, y_r} }{ s_{x_r} s_{y_r} }
+= \frac{0.67}{1.29 \times 1.29} = 0.4
+$$
+
+
+## Rangkorrelationskoeffizient
+
+```{r, fig.width=11, fig.height=6}
+set.seed(123)
+n = 1000
+d1 = tibble(
+  x = seq(0.001, 0.5, length.out=n),
+  x2 = seq(-1, 1, length.out=n),
+  y1 = x + rnorm(n, sd=0.1),
+  y2 = log(x) + rnorm(n, sd=0.1),
+  y3 = -x2^2 + rnorm(n, sd=0.1)
+)
+
+p1 = d1 |>
+  ggplot(aes(x, y1)) +
+  geom_point(color="tomato", shape=1) +
+  labs(
+    title = paste(
+      "r = ",
+      round(cor(d1$x, d1$y1), digits=2),
+      " | rₛ = ",
+      round(cor(d1$x, d1$y1, method="spearman"), digits=2)
+    ),
+    x = NULL, y = NULL
+  )
+
+p2 = d1 |>
+  ggplot(aes(x, y=y2)) +
+  geom_point(color="cornflower blue", shape=1) +
+  labs(
+    title = paste(
+      "r = ",
+      round(cor(d1$x, d1$y2), digits=2),
+      " | rₛ = ",
+      round(cor(d1$x, d1$y2, method="spearman"), digits=2)
+    ),
+    x = NULL, y = NULL
+  )
+
+p3 = d1 |>
+  ggplot(aes(x2, y=y3)) +
+  geom_point(color="orange", shape=1) +
+  labs(
+    title = paste(
+      "r = ",
+      round(cor(d1$x2, d1$y3), digits=2),
+      " | rₛ = ",
+      round(cor(d1$x2, d1$y3, method="spearman"), digits=2)
+    ),
+    x = NULL, y = NULL
+  )
+
+p1 | p2 | p3
+
+```
+
+# Exkurs 
+Räumliche Autokorrelation
+
+## Räumliche Autokorrelation {.smaller}
+
+Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191;</span> <span class="arrow-down">&#x2193;</span>)
+
+::::: columns
+::: {.column width="50%"}
+![Einkommen in München (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png){.shadow height="400px"}
+:::
+::: {.column width="50%"}
+![Einkommen in Köln (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png){.shadow height="400px"}
+:::
+:::::
+
+## Räumliche Autokorrelation
+
+- Beispiel
+
+## Räumliche Autokorrelation
+
+- Einordnung
+
+## Räumliche Gewichte
+
+## Nachbarschaften
+
+## Moran's I
+
+Moran's $I$ misst die räumliche Autokorrelation einer Variable $x$ und Gewichten $w$ mit Summe $S_w = \sum_{i=1}^n \sum_{j=1}^n w_{ij}$ als:
+
+$$
+I = \frac{n}{S_w}
+\frac{\sum_{i=1}^n \sum_{j=1}^n w_{ij}(x_i - \bar{x})(x_j - \bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2}
+$$
+
+Moran's I nimmt Werte im Bereich -1 (perfekte räumliche Antikorrelation) bis 1 (perfekte räumliche Korrelation) an. Neben dem globalen Index gibt es auch lokale Versionen des Maßes.
+
+## Zeitliche Autokorrelation
+
+
+# Zusammenhangsmaße
+Kategorische Variablen
+
+## Die Kontingenztabelle
+
+```{r}
+bes = readr::read_csv("data/BES.csv")
+bes$education = factor(
+  bes$education,
+  levels = 1:5,
+  labels = c(
+    "Keine Qualifikation",
+    "Realschulabschluss",
+    "Abitur",
+    "Bachelor",
+    "Master"
+  )
+)
+```
+
+```{r}
+library(janitor)
+library(knitr)
+library(kableExtra)
+
+f = function(x) format(x, big.mark = " ")
+
+bes |>
+  rename(Bildung = education) |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  tabyl(Bildung, vote) |>
+  adorn_totals(where = "both", name="Gesamt") |>
+  adorn_percentages("row") |>
+  adorn_pct_formatting(digits = 1) |>
+  adorn_ns(position = "front", format_func = f) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="2016 BES Brexit Survey",
+    general_title = "Quelle:",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28)
+```
+
+Eine Kontingenztabelle zeigt Beobachtungshäufigkeiten und Randhäufigkeiten (Reihen- und Spaltensummen) für alle Ausprägungskombinationen zweier kategorialer Variablen.
+
+## Die Kontingenztabelle
+
+```{r, fig.height=6, fig.width=11}
+bes_p = bes |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na()
+
+p1 = bes_p |>
+  ggplot(aes(vote, education)) +
+  geom_jitter(alpha=0.3, size=0.3) +
+  labs(x=NULL, y=NULL)
+
+p2 = bes_p |>
+  summarize(n=n(), .by=c(vote, education)) |>
+  mutate(s = n / sum(n), .by=education) |>
+  ggplot(aes(vote, education, fill=s)) +
+  geom_tile(color="white", linewidth=5) +
+  geom_text(aes(label=format(n, big.mark=" ")), size=4, color="grey40") +
+  scale_fill_distiller(
+    palette="RdBu",
+    type="div",
+    limit = c(0.0, 1.0),
+    breaks = c(0.0, 0.5, 1.0),
+    labels = scales::percent,
+    guide = guide_colourbar(nbin = 100, draw.ulim = FALSE, draw.llim = FALSE)
+  ) +
+  guides(fill=guide_colorbar(barwidth=10, barheight=0.7)) +
+  labs(x=NULL, y=NULL, fill=NULL)
+
+p1 | p2
+```
+
+## Die Indifferenztabelle
+
+```{r}
+fr = function(x) format(x, big.mark = " ")
+
+bes |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  summarize(n=n(), .by=c(education, vote)) |>
+  mutate(Hg=sum(n)) |>
+  mutate(Hr = sum(n), .by=education) |>
+  mutate(Hc = sum(n), .by=vote) |>
+  mutate(TH = round(Hr * Hc / Hg, 1)) |>
+  arrange(education, vote) |>
+  pivot_wider(
+    id_cols=education,
+    names_from = vote,
+    values_from = TH
+  ) |>
+  rename(Bildung = education) |>
+  adorn_totals(where = "both", name="Gesamt") |>
+  adorn_percentages("row") |>
+  adorn_pct_formatting(digits = 1) |>
+  adorn_ns(position = "front", format_func = fr) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="2016 BES Brexit Survey",
+    general_title = "Quelle:",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28)
+
+```
+
+Die Indifferenztabelle bildet theoretische Häufigkeiten unter der Annahme von Unabhängigkeit der beiden Variablen ab.
+
+## Theoretische Häufigkeiten
+
+Die theoretische Häufikgeit $H_{ij}^{(T)}$ für Reihe $i$ und Spalte $j$ ist bei $n$ Beobachtungen und mit Reihensumme $H_i^{(R)}$ und Spaltensumme $H_j^{(C)}$ gegeben durch:
+
+$$
+H_{ij}^{(T)} = \frac{H_i^{(R)} H_j^{(C)}}{n}
+$$
+
+Theoretische Häufikgeiten stellen eine Gleichverteilung unter Präservation der Randhäufigkeiten der beiden Variablen dar.
+
+
+## Chi-Quadrat ($\chi^2$)
+
+Der Chi-Quadrat-Koeffizient misst die Abweichungen der beobachteten von den theoretischen Häufigkeiten:
+
+$$
+\chi^2 = \sum_{i=1}^r \sum_{j=1}^c \frac{(H_{ij} - H_{ij}^{(T)})^2}{H_{ij}^{(T)}}
+$$
+
+$\chi^2$ ist abhängig von der Beobachtungsanzahl $n$ und weicht bei unterschiedlichen $n$ selbst bei identischen relativen Verteilungen ab.
+
+
+## Kontingenzkoeffizient
+
+Der *Kontingenzkoeffizient* $C$ normalisiert $\chi^2$ für beliebige $n$:
+
+$$
+C = \sqrt{\frac{\chi^2}{\chi^2 + n}}
+$$
+
+Wenn die theoretische und die beobachtete Verteilung identisch sind, ist $C=0$. Das Maximum ist immer < 1, der genaue Wert hängt aber von den Dimensionen der Tabelle ab.
+<!-- Um ein oberes Limit von 1 zu erhalten, kann $C$ nochmals normalisiert werden: -->
+<!---->
+<!-- $$C_{korr} = \frac{C}{\sqrt{(k - 1)/k}}$$ -->
+
+## Brexit und Bildung {.smaller}
+
+:::: {.columns}
+::: {.column width="45%"}
+```{r}
+f = function(x) format(x, big.mark = " ")
+
+bes |>
+  rename(Bildung = education) |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  tabyl(Bildung, vote) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="Beobachtet",
+    general_title = "",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28)
+
+```
+:::
+::: {.column width="55%"}
+```{r}
+bes |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  summarize(n=n(), .by=c(education, vote)) |>
+  mutate(Hg=sum(n)) |>
+  mutate(Hr = sum(n), .by=education) |>
+  mutate(Hc = sum(n), .by=vote) |>
+  mutate(TH = round(Hr * Hc / Hg, 1)) |>
+  mutate(diff = n - TH) |>
+  arrange(education, vote) |>
+  pivot_wider(
+    id_cols=education,
+    names_from = vote,
+    values_from = TH
+  ) |>
+  rename(Bildung = education) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="Theoretisch",
+    general_title = "",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28, full_width=FALSE)
+```
+
+:::
+::::
+
+$$
+\chi^2 =
+\frac{(1356 - 874{,}9)^2}{847{,}9} + \ldots +
+\frac{(1898 - 1335{,}6)^2}{1335{,}6}
+= 2025{,}8 \\
+C =
+\sqrt{\frac{2025{,}8}{2025{,}8 + 25097}} = 0.27
+$$
+
 
 ## Prüfungsfragen
 
 - Welche Rolle spielen abhängige, unabhängige und Kontrollvariablen in multivariaten Analysen?
+
+- Berechnen Sie den Korrelationskoeffizienten für die folgenden Datenreihen.
+
+- Welches Zusammenhangsmaß nutzen Sie für zwei ordinale Variablen?
+
+- Was ist der zentrale Vergleich der dem Kontingenzkoeffizienten zugrunde liegt?
 
