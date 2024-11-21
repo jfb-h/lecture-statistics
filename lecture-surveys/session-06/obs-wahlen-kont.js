@@ -20,7 +20,7 @@ function updateData(data) {
 
 function correctedContingencyCoefficient(data) {
 
-    const usCategories = [...new Set(data.map(d => d.wahl_us))];
+    const usCategories = [...new Set(data.map(d => d.media))];
     const dCategories = [...new Set(data.map(d => d.wahl_d))];
     
     const contingencyTable = {};
@@ -32,7 +32,7 @@ function correctedContingencyCoefficient(data) {
     });
     
     data.forEach(d => {
-        contingencyTable[d.wahl_us][d.wahl_d]++;
+        contingencyTable[d.media][d.wahl_d]++;
     });
     
     const rowTotals = {};
@@ -72,18 +72,21 @@ function createSummary(data) {
 
 function plot() {
     const container = document.getElementById('wahlen');
+    const container_heat = document.getElementById('wahlen_heat');
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;
-    
+    const container_heatWidth = container_heat.offsetWidth;
+    const container_heatHeight = container_heat.offsetHeight;
+
     document.getElementById('c2').innerHTML = createSummary(answers);
 
-    const us_counts = answers.reduce((acc, curr) => {
-        acc[curr.wahl_us] = (acc[curr.wahl_us] || 0) + 1;
+    const media_counts = answers.reduce((acc, curr) => {
+        acc[curr.media] = (acc[curr.media] || 0) + 1;
         return acc;
     }, {});
     
-    const us_data = Object.entries(us_counts).map(([candidate, count]) => ({
-        candidate,
+    const media_data = Object.entries(media_counts).map(([media, count]) => ({
+        media,
         count,
     }));
     
@@ -98,31 +101,31 @@ function plot() {
         count,
     }));
     
-    const us_plot = Plot.plot({
+    const media_plot = Plot.plot({
         height: 300,
-        width: 400,
+        width: containerWidth,
         x: {
-            label: "US Candidates",
-            domain: ["harris", "trump"],
+            label: "Media",
+            domain: ["Social_Media", "Zeitung_DE", "Zeitung_Intnational", "TV_Radio", "Andere"],
         },
         y: {
-            label: "Votes",
+            label: "Anzahl",
         },
         marks: [
-            Plot.barY(us_data, { x: "candidate", y: "count", fill: "steelblue" })
+            Plot.barY(media_data, { x: "media", y: "count", fill: "steelblue" })
         ],
         color: { legend: true }
     });
     
     const d_plot = Plot.plot({
         height: 300,
-        width: 400,
+        width: containerWidth,
         x: {
-            label: "German Parties",
-            domain: ["union", "spd", "gr", "fdp", "afd", "sonstige"],
+            label: "Partei",
+            domain: ["Union", "SPD", "Gruene", "FDP", "AfD", "Sonstige"],
         },
         y: {
-            label: "Votes",
+            label: "Anzahl",
         },
         marks: [
             Plot.barY(d_data, { x: "party", y: "count", fill: "orange" })
@@ -130,9 +133,33 @@ function plot() {
         color: { legend: true }
     });
 
+
+    const heat_plot = Plot.plot({
+        width: container_heatWidth,
+        height: 600,
+        style: { fontSize: "16px" },
+        marginLeft: 60,
+        marginRight: 50,
+        marginBottom: 50,
+        marginTop: 50,
+        inset: 20, 
+
+        x: {label: null, tickRotate: 90},
+        y: {label: null},
+        color: {label: "Anzahl", legend: true, scheme: "YlGnBu"},
+        marks: [
+          Plot.cell(answers, Plot.group({fill: "count"}, {fill: "count", x: "media", y: "wahl_d"}))
+        ]
+      });
+
     container.innerHTML = "";
-    container.appendChild(us_plot);
+    container.appendChild(media_plot);
     container.appendChild(d_plot);
+    
+    container_heat.innerHTML = "";
+    container_heat.appendChild(heat_plot);
+
+    
 }
 
 window.addEventListener('resize', debounce(() => { plot(); }, 100));

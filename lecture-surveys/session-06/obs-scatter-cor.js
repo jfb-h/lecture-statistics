@@ -112,8 +112,8 @@ function scatter() {
             isoline.checked ? Plot.link({ length: 1 }, { x1: 0, x2: 500, y1: 0, y2: 500, stroke: "black", strokeOpacity: 0.2 }) : [],
             regression.checked ? Plot.linearRegressionY(vars, { y: "vara", x: "varb", stroke: "blue" }) : []
         ],
-        x: { label: "Variable b", domain: [0, 100] },
-        y: { label: "Variable a", domain: [0, 100] },
+        x: { label: "Schuhgroesse", domain: [30, 60] },
+        y: { label: "Koerpergroesse", domain: [100, 250] },
     });
 
     containerScatter.innerHTML = "";

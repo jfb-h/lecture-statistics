@@ -27,26 +27,29 @@ def init_app(db, rt, route, tablename, **kwargs):
 
     @rt(f"/{route}")
     def get():
-        va = NumericInput("vara", "Variable A?", min=0, max=100)
-        vb = NumericInput("varb", "Variable B", min=0, max=100)
+        va = NumericInput("vara", "Wie groß bist Du? (in cm)", min=100, max=250)
+        vb = NumericInput("varb", "Welche Schuhgröße hast Du?", min=30, max=60)
         
-        choiceus = Choice(
-            Radio("wahl_us", "harris", "Kamala Harris"),
-            Radio("wahl_us", "trump", "Donald Trump"),
-            title="Wen hättest du in den USA gewählt?",
+        choicemedia = Choice(
+            Radio("media","Social_Media", "Social Media (z.B. Instagram, TikTok, Facebook)"),
+            Radio("media","Zeitung_DE", "Deutschsprachige Zeitungen (z.B. FAZ, Zeit, Sueddeutsche, TAZ, NZZ)",),
+            Radio("media","Zeitung_Intnational", "Internationale Zeitungen (z.B. Guardian, NYT, Economist, LeMonde)",),
+            Radio("media","TV_Radio", "TV oder Radio"),
+            Radio("media","Andere", "Andere"),
+            title="Welche Quellen nutzt du primär, um dich über aktuelle Ereignisse zu informieren?",
         )
 
         choiced = Choice(
-            Radio("wahl_d", "union", "CSU/CDU"),
-            Radio("wahl_d", "spd", "SPD"),
-            Radio("wahl_d", "gr", "Grüne"),
-            Radio("wahl_d", "fdp", "FDP"),
-            Radio("wahl_d", "afd", "AfD"),
-            Radio("wahl_d", "sonstige", "Sonstige"),
-            title="Wen würdest du in D wählen?",
+            Radio("wahl_d", "Union", "CSU/CDU"),
+            Radio("wahl_d", "SPD", "SPD"),
+            Radio("wahl_d", "Gruene", "Grüne"),
+            Radio("wahl_d", "FDP", "FDP"),
+            Radio("wahl_d", "Afd", "AfD"),
+            Radio("wahl_d", "Sonstige", "Sonstige"),
+            title="Sonntagsfrage: Wen würdest Du wählen, wenn nächsten Sonntag Bundestagswahl wäre?",
         )
 
-        items = Items(va, vb, choiceus, choiced, hx_post=f"/{route}")
+        items = Items(va, vb, choicemedia, choiced, hx_post=f"/{route}")
         return Survey("Kurzumfrage", items)
         
 
@@ -55,37 +58,6 @@ def init_app(db, rt, route, tablename, **kwargs):
         table.insert(item)
         return Strong("Danke für deine Antwort!")
 
-    """
-    @rt(f"/{route}/data")
-    async def get():
-    # Step 1: Read the database and unpivot the table
-        df = pl.read_database("SELECT * FROM correlation", db).unpivot(index='id')
-    
-        # Step 2: Apply transformations only to columns that are not 'vara' or 'varb'
-        df = df.with_columns(
-            pl.when(~pl.col("variable").is_in(["vara", "varb"]))
-            .then(pl.col("variable").str.split("_"))
-            .otherwise(pl.col("variable").map_elements(lambda x: [x]))
-            .alias("split_variable")
-        )
-    
-    # Step 3: Extract components from 'split_variable' only for transformed columns
-        df = (
-            df.with_columns([
-                pl.when(~pl.col("variable").is_in(["vara", "varb"]))
-                .then(pl.col("split_variable").list.get(0))
-                .otherwise(pl.lit(None))
-                .alias("d"),
-
-                pl.when(~pl.col("variable").is_in(["vara", "varb"]))
-                .then(pl.col("split_variable").list.get(1))
-                .otherwise(pl.lit(None))
-                .alias("us")
-            ])
-            .drop("split_variable")
-        )
-        return df.write_json()
-    """
 
     @rt(f"/{route}/simulate")
     async def get():
@@ -134,7 +106,11 @@ def init_app(db, rt, route, tablename, **kwargs):
     @rt(f"/{route}/wahlen")
     async def get():
         wahlen = StyledCard(
-            PlotContainer(id="wahlen"),
+            Grid(
+                PlotContainer(id="wahlen"),
+                PlotContainer(id="wahlen_heat"),
+                style = f"grid-template-columns: 1fr 1fr; grid-template-rows: none; height: 100%;"
+            ),
             header=H2("Ergebnis"),
         )
         c2 = Card(Div(id="c2"), header=Strong("Kontingenzkoeffizient"))
@@ -154,6 +130,6 @@ db = database("surveys.db")
 
 app, rt = fast_app(live=True, hdrs=(leaflet_css, leaflet_js, pico_leaflet))
 
-init_app(db, rt, route, table, vara=float, varb=float, wahl_us=str, wahl_d=str)
+init_app(db, rt, route, table, vara=float, varb=float, media=str, wahl_d=str)
 
 serve(port=8081)
