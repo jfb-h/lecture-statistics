@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="multivariate-statistik_files/libs/clipboard/clipboard.min.js"></script>
-<script src="multivariate-statistik_files/libs/quarto-html/tabby.min.js"></script>
-<script src="multivariate-statistik_files/libs/quarto-html/popper.min.js"></script>
-<script src="multivariate-statistik_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="multivariate-statistik_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="multivariate-statistik_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="multivariate-statistik_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="multivariate-statistik_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="multivariate-statistik_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="multivariate-statistik_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="multivariate-statistik_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+<script src="zusammenhangsmasse_files/libs/clipboard/clipboard.min.js"></script>
+<script src="zusammenhangsmasse_files/libs/quarto-html/tabby.min.js"></script>
+<script src="zusammenhangsmasse_files/libs/quarto-html/popper.min.js"></script>
+<script src="zusammenhangsmasse_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="zusammenhangsmasse_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="zusammenhangsmasse_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="zusammenhangsmasse_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="zusammenhangsmasse_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="zusammenhangsmasse_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="zusammenhangsmasse_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="zusammenhangsmasse_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
@@ -18,8 +18,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="multivariate-statistik_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="multivariate-statistik_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="zusammenhangsmasse_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="zusammenhangsmasse_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -32,78 +32,13 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="multivariate-statistik_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="zusammenhangsmasse_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="multivariate-statistik_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="multivariate-statistik_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="multivariate-statistik_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="multivariate-statistik_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="zusammenhangsmasse_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="zusammenhangsmasse_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="zusammenhangsmasse_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="zusammenhangsmasse_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -389,8 +324,8 @@
       margin-right: 0; 
     }
   </style>
-  <script src="multivariate-statistik_files/libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="multivariate-statistik_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <script src="zusammenhangsmasse_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="zusammenhangsmasse_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -409,351 +344,6 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
-<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/measures/results" data-background-interactive="true" data-preload="true">
-<h2></h2>
-</section>
-<section>
-<section id="fallstudie" class="title-slide slide level1 center">
-<h1>Fallstudie</h1>
-<p>Vertrauen in Politik und Wissenschaft in Europa</p>
-</section>
-<section id="vertrauen-in-politik-und-wissenschaft" class="slide level2">
-<h2>Vertrauen in Politik und Wissenschaft</h2>
-<p><a href="images/trst-pol-sci.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/trst-pol-sci.png"></a></p>
-</section></section>
-<section>
-<section id="fallstudie-1" class="title-slide slide level1 center">
-<h1>Fallstudie</h1>
-<p>Temperaturen in München, 1973 - 2023</p>
-</section>
-<section id="daten" class="slide level2">
-<h2>Daten</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell">
-<div class="cell-output-display">
-<table class="table caption-top" data-quarto-postprocess="true" style="font-size: 24px; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: right;" data-quarto-table-cell-role="th">YEAR</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">MONTH</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">DAY</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">TEMP</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-2.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">-2.2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">-1.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">-2.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">-2.1</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">-2.1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">-2.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">-4.4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">-3.8</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1973</td>
-<td style="text-align: left;">Jan</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-3.3</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p>Temperaturdaten werden von tausenden Messstationen weltweit erfasst und in aggregierter Form veröffentlicht, wie z.B. in der Global Summary of the Day (GSOD).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">libary</span>(GSODR)</span>
-<span id="cb1-2"><a href=""></a></span>
-<span id="cb1-3"><a href=""></a><span class="fu">get_GSOD</span>(</span>
-<span id="cb1-4"><a href=""></a>  <span class="at">years=</span><span class="dv">2013</span><span class="sc">:</span><span class="dv">2023</span>,</span>
-<span id="cb1-5"><a href=""></a>  <span class="at">station=</span><span class="st">"108660-99999"</span></span>
-<span id="cb1-6"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div>
-</section>
-<section id="tagestemperaturen" class="slide level2">
-<h2>Tagestemperaturen</h2>
-<!-- <div style="width:11in; height:6in; background-color: rgba(0, 128, 0, 0.5)">test</div> -->
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="tagestemperaturen-1" class="slide level2">
-<h2>Tagestemperaturen</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="mittelwert-und-abweichung" class="slide level2">
-<h2>Mittelwert und Abweichung</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Der Punkt kann auch ein anderes Lagemaß darstellen, der Strich eine andere Form der Abweichung (z.B. Standardfehler).</p>
-</section>
-<section id="tagestemperaturen-2" class="slide level2">
-<h2>Tagestemperaturen</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-6-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="temperaturen" class="slide level2">
-<h2>Temperaturen</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-7-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="kerndichtediagramme" class="slide level2">
-<h2>Kerndichtediagramme</h2>
-<p>Kerndichtediagramme sind eine kontinuierliche Variante des diskreten Histogramms. Das KDD gibt relative Häufigkeiten statt absolute Häufigkeiten in einem Wertebereich an.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-8-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="tagestemperaturen-3" class="slide level2">
-<h2>Tagestemperaturen</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="deskriptive-statistik-ii" class="title-slide slide level1 center">
-<h1>Deskriptive Statistik II</h1>
-<p>Multivariate Visualisierung und Zusammenhangsmaße</p>
-</section>
-<section id="bisher-univariate-verteilungen" class="slide level2">
-<h2>Bisher: Univariate Verteilungen</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-10-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="jetzt-multivariate-verteilungen" class="slide level2">
-<h2>Jetzt: Multivariate Verteilungen</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-11-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="multivariate-statistik" class="slide level2">
-<h2>Multivariate Statistik</h2>
-<ul>
-<li><p>Die meisten wissenschaftlichen Fragestellungen betreffen das Zusammenspiel von zwei oder mehr Variablen.</p></li>
-<li><p>Multivariate Verfahren dienen der <em>Identifikation</em> von bisher unbekannten oder der <em>Überprüfung</em> von vermuteten statistischen Zusammenhängen zwischen Variablen.</p></li>
-<li><p>Die beteiligten Variablen spielen in multivariaten Verfahren oft (aber nicht immer) unterschiedliche Rollen (z.B. Explanans, Explanandum, Kontrollvariable).</p></li>
-</ul>
-</section>
-<section id="variablentypen" class="slide level2">
-<h2>Variablentypen</h2>
-<ul>
-<li><p>Die <strong>abhängige Variable</strong> und ihre Variation zu Verstehen ist das primäre Untersuchungsziel einer multivariaten Analyse.</p></li>
-<li><p><strong>Unabhängige Variablen</strong> dienen der Erklärung oder Vorhersage von Variation in der abhängigen Variable. Die Variation der unabhängigen Variable selbst wird i.d.R. als gegeben angesehen oder experimentell manipuliert.</p></li>
-<li><p><strong>Kontrollvariablen</strong> dienen der Vermeidung von verzerrten Schlussfolgerungen über den Zusammenhang zwischen unabhängigen und abhängigen Variablen.</p></li>
-</ul>
-</section>
-<section id="variablentypen-1" class="slide level2">
-<h2>Variablentypen</h2>
-<p><strong>Untersuchungsziel</strong>: Gender Pay Gap</p>
-<div class="cell" data-fig-width="10" data-fig-height="5" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<svg width="960" height="480" viewbox="0.00 0.00 335.97 149.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 145.6)">
-<title>G</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-145.6 331.97,-145.6 331.97,4 -4,4"></polygon>
-<!-- A -->
-<g id="node1" class="node">
-<title>A</title>
-<path fill="#ff8c00" stroke="#ff8c00" d="M143.18,-141.4C143.18,-141.4 11.94,-141.4 11.94,-141.4 5.94,-141.4 -0.06,-135.4 -0.06,-129.4 -0.06,-129.4 -0.06,-92.2 -0.06,-92.2 -0.06,-86.2 5.94,-80.2 11.94,-80.2 11.94,-80.2 143.18,-80.2 143.18,-80.2 149.18,-80.2 155.18,-86.2 155.18,-92.2 155.18,-92.2 155.18,-129.4 155.18,-129.4 155.18,-135.4 149.18,-141.4 143.18,-141.4"></path>
-<text text-anchor="middle" x="77.56" y="-115" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">Unabhängige Variable</text>
-<text text-anchor="middle" x="77.56" y="-98.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">(Geschlecht)</text>
-</g>
-<!-- B -->
-<g id="node2" class="node">
-<title>B</title>
-<path fill="#ff8c00" stroke="#ff8c00" d="M136.47,-61.4C136.47,-61.4 18.65,-61.4 18.65,-61.4 12.65,-61.4 6.65,-55.4 6.65,-49.4 6.65,-49.4 6.65,-12.2 6.65,-12.2 6.65,-6.2 12.65,-0.2 18.65,-0.2 18.65,-0.2 136.47,-0.2 136.47,-0.2 142.47,-0.2 148.47,-6.2 148.47,-12.2 148.47,-12.2 148.47,-49.4 148.47,-49.4 148.47,-55.4 142.47,-61.4 136.47,-61.4"></path>
-<text text-anchor="middle" x="77.56" y="-35" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">Abhängige Variable</text>
-<text text-anchor="middle" x="77.56" y="-18.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#ffffff">(Gehalt)</text>
-</g>
-<!-- A&#45;&gt;B -->
-<g id="edge1" class="edge">
-<title>A-&gt;B</title>
-<path fill="none" stroke="#555555" stroke-width="2" d="M77.56,-79.94C77.56,-77.14 77.56,-74.35 77.56,-71.55"></path>
-<polygon fill="#555555" stroke="#555555" stroke-width="2" points="81.06,-71.42 77.56,-61.43 74.06,-71.43 81.06,-71.42"></polygon>
-</g>
-<!-- C -->
-<g id="node3" class="node">
-<title>C</title>
-<path fill="lightgrey" stroke="lightgrey" d="M315.89,-101.4C315.89,-101.4 203.2,-101.4 203.2,-101.4 197.2,-101.4 191.2,-95.4 191.2,-89.4 191.2,-89.4 191.2,-52.2 191.2,-52.2 191.2,-46.2 197.2,-40.2 203.2,-40.2 203.2,-40.2 315.89,-40.2 315.89,-40.2 321.89,-40.2 327.89,-46.2 327.89,-52.2 327.89,-52.2 327.89,-89.4 327.89,-89.4 327.89,-95.4 321.89,-101.4 315.89,-101.4"></path>
-<text text-anchor="middle" x="259.55" y="-75" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#333333">Kontrollvariable(n)</text>
-<text text-anchor="middle" x="259.55" y="-58.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="#333333">(z.B. Beruf)</text>
-</g>
-<!-- A&#45;&gt;C -->
-<g id="edge2" class="edge">
-<title>A-&gt;C</title>
-<path fill="none" stroke="#555555" stroke-width="2" d="M155.15,-93.78C163.75,-91.87 172.51,-89.92 181.12,-88.01"></path>
-<polygon fill="#555555" stroke="#555555" stroke-width="2" points="182.13,-91.37 191.13,-85.78 180.61,-84.54 182.13,-91.37"></polygon>
-</g>
-<!-- C&#45;&gt;B -->
-<g id="edge3" class="edge">
-<title>C-&gt;B</title>
-<path fill="none" stroke="#555555" stroke-width="2" d="M191,-55.79C180.41,-53.43 169.38,-50.98 158.54,-48.57"></path>
-<polygon fill="#555555" stroke="#555555" stroke-width="2" points="159.18,-45.13 148.66,-46.38 157.67,-51.97 159.18,-45.13"></polygon>
-</g>
-</g>
-</svg>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="variablentypen-2" class="slide level2">
-<h2>Variablentypen</h2>
-<p>Wir beschreiben die abhängige Variable (AV, Output) auch oft als eine <em>Funktion</em> der unabhängigen Variable(UV, Input):</p>
-<p><span class="math display">\[\textrm{AV} = f(\textrm{UV}) \color{lightgrey}{+ \epsilon}\]</span></p>
-<p>bzw. mit Kontrollvariablen (KV):</p>
-<p><span class="math display">\[\textrm{AV} = f(\textrm{UV, KV}) \color{lightgrey}{+ \epsilon}\]</span></p>
-<p>Die exakte Spezifikation der Funktion <span class="math inline">\(f\)</span> hängt von den Daten, der Forschungsfrage und dem Forschungsdesign ab.</p>
-</section>
-<section id="was-ist-die-abhängige-variable" class="slide level2">
-<h2>Was ist die abhängige Variable?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-13-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="was-ist-die-abhängige-variable-1" class="slide level2">
-<h2>Was ist die abhängige Variable?</h2>
-<p><a href="images/trst-pol-sci.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/trst-pol-sci.png"></a></p>
-</section>
-<section id="unsupervised-learning" class="slide level2 smaller">
-<h2>(Un)supervised learning</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Nicht alle multivariaten Analysen haben asymmetrische Variablenrollen.</li>
-<li>Ein prominentes Beispiel ist die <em>Clusteranalyse</em>, die zum Ziel hat, latente (unbeobachtete) Gruppen zu identifizeren.</li>
-<li>Im Machine Learning wird zwischen <em>supervised learning</em> (Vorhersage einer bekannten und beobachteten Variable) und <em>unsupervised learning</em> (Identifikation von latenten Mustern) unterschieden.</li>
-</ul>
-</div></div>
-</section></section>
 <section>
 <section id="zusammenhangsmaße" class="title-slide slide level1 center">
 <h1>Zusammenhangsmaße</h1>
@@ -765,7 +355,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-15-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-2-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -777,7 +367,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-16-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -789,7 +379,7 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-17-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -840,7 +430,7 @@ r_{xy} = \frac{s_{xy}}{s_x s_y}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-19-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-6-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -852,7 +442,7 @@ r_{xy} = \frac{s_{xy}}{s_x s_y}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-20-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-7-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -864,7 +454,7 @@ r_{xy} = \frac{s_{xy}}{s_x s_y}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-21-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-21-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-8-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -876,7 +466,7 @@ r_{xy} = \frac{s_{xy}}{s_x s_y}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-22-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-22-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -888,7 +478,7 @@ r_{xy} = \frac{s_{xy}}{s_x s_y}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-23-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-10-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -900,7 +490,7 @@ r_{xy} = \frac{s_{xy}}{s_x s_y}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-24-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-24-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-11-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -946,81 +536,25 @@ r_s = \frac{ s_{x_r, y_r} }{ s_{x_r} s_{y_r} }
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-25-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-12-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="exkurs" class="title-slide slide level1 center">
-<h1>Exkurs</h1>
-<p>Räumliche Autokorrelation</p>
 </section>
-<section id="räumliche-autokorrelation" class="slide level2 smaller">
-<h2>Räumliche Autokorrelation</h2>
-<p>Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">↑</span> <span class="arrow-down">↓</span>)</p>
+<section id="körper--und-schuhgröße" class="slide level2">
+<h2>Körper- und Schuhgröße</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Einkommen in München (Quelle: Zeit.de)"><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png" class="shadow" height="400" alt="Einkommen in München (Quelle: Zeit.de)"></a></p>
-<figcaption>Einkommen in München (Quelle: Zeit.de)</figcaption>
-</figure>
-</div>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize" title="Survey preview">
+</iframe>
 </div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25" title="Einkommen in Köln (Quelle: Zeit.de)"><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png" class="shadow" height="400" alt="Einkommen in Köln (Quelle: Zeit.de)"></a></p>
-<figcaption>Einkommen in Köln (Quelle: Zeit.de)</figcaption>
-</figure>
-</div>
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize/qr" title="Survey link">
+</iframe>
 </div></div>
 </section>
-<section id="räumliche-autokorrelation-1" class="slide level2">
-<h2>Räumliche Autokorrelation</h2>
-<ul>
-<li><p><em>Autokorrelation</em> beschreibt die Korrelation einer Variablen mit sich selbst - d.h. den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben.</p></li>
-<li><p>Je nach Fragestellung kann eine andere Definition von Nachbarschaft angewandt werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).</p></li>
-</ul>
-</section>
-<section id="räumliche-autokorrelation-2" class="slide level2">
-<h2>Räumliche Autokorrelation</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/autocorr-maas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Quelle: Rikken &amp; Van Rijn (1993)"><img data-src="images/autocorr-maas.png" class="card" width="550" height="500" alt="Quelle: Rikken &amp; Van Rijn (1993)"></a></p>
-<figcaption>Quelle: Rikken &amp; Van Rijn (1993)</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Die Abbildung zeigt Messergebnisse der Schwermetallbelastung (Zink) entlang der Maas bei Stein.</li>
-<li>Folgt die Verteilung der Messwerte einem zufälligen Muster?</li>
-</ul>
-</div></div>
-</section>
-<section id="räumliche-gewichte" class="slide level2">
-<h2>Räumliche Gewichte</h2>
-<ul>
-<li>Voraussetzung der Berechnung räumlicher Autokorrelation ist eine Matrix <span class="math inline">\(w\)</span>, die die paarweisen Nachbarschaftsverhältnisse / Distanzen der Beobachtungen kodiert:</li>
-</ul>
-</section>
-<section id="nachbarschaften" class="slide level2">
-<h2>Nachbarschaften</h2>
-</section>
-<section id="morans-i" class="slide level2">
-<h2>Moran’s I</h2>
-<p>Moran’s <span class="math inline">\(I\)</span> misst die räumliche Autokorrelation einer Variable <span class="math inline">\(x\)</span> und Gewichten <span class="math inline">\(w\)</span> mit Summe <span class="math inline">\(S_w = \sum_{i=1}^n \sum_{j=1}^n w_{ij}\)</span> als:</p>
-<p><span class="math display">\[
-I = \frac{n}{S_w}
-\frac{\sum_{i=1}^n \sum_{j=1}^n w_{ij}(x_i - \bar{x})(x_j - \bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2}
-\]</span></p>
-<p>Moran’s I nimmt Werte im Bereich -1 (perfekte räumliche Antikorrelation) bis 1 (perfekte räumliche Korrelation) an. Neben dem globalen Index gibt es auch lokale Versionen des Maßes.</p>
-</section>
-<section id="zeitliche-autokorrelation" class="slide level2">
-<h2>Zeitliche Autokorrelation</h2>
+<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/bodysize/result" data-background-interactive="true" data-preload="true">
+<h2></h2>
 </section></section>
 <section>
 <section id="zusammenhangsmaße-1" class="title-slide slide level1 center">
@@ -1099,7 +633,7 @@ I = \frac{n}{S_w}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="multivariate-statistik_files/figure-revealjs/unnamed-chunk-28-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="multivariate-statistik_files/figure-revealjs/unnamed-chunk-28-1.png" width="1056"></a></p>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-15-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -1308,12 +842,171 @@ C =
 \sqrt{\frac{2025{,}8}{2025{,}8 + 25097}} = 0.27
 \]</span></p>
 </section>
+<section id="mediennutzung" class="slide level2">
+<h2>Mediennutzung</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news" title="Survey preview">
+</iframe>
+</div><div class="column" style="width:50%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news/qr" title="Survey link">
+</iframe>
+</div></div>
+</section>
+<section id="section-1" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/news/result" data-background-interactive="true" data-preload="true">
+<h2></h2>
+</section></section>
+<section>
+<section id="exkurs" class="title-slide slide level1 center">
+<h1>Exkurs</h1>
+<p>Autokorrelation</p>
+</section>
+<section id="räumliche-autokorrelation" class="slide level2 smaller">
+<h2>Räumliche Autokorrelation</h2>
+<p>Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">↑</span> <span class="arrow-down">↓</span>)</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Einkommen in München (Quelle: Zeit.de)"><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png" class="shadow" height="400" alt="Einkommen in München (Quelle: Zeit.de)"></a></p>
+<figcaption>Einkommen in München (Quelle: Zeit.de)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Einkommen in Köln (Quelle: Zeit.de)"><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png" class="shadow" height="400" alt="Einkommen in Köln (Quelle: Zeit.de)"></a></p>
+<figcaption>Einkommen in Köln (Quelle: Zeit.de)</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="räumliche-autokorrelation-1" class="slide level2">
+<h2>Räumliche Autokorrelation</h2>
+<ul>
+<li><p><em>Autokorrelation</em> beschreibt den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben (Korrelation mit sich selbst).</p></li>
+<li><p>Die Definition von Nachbarschaft kann je nach Fragestellung angepasst werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).</p></li>
+<li><p>Autokorrelation kann positiv (benachbarte Einheiten sind sich ähnlich) oder negativ (benachbarte Einheiten sind sich unähnlich) sein.</p></li>
+</ul>
+</section>
+<section id="räumliche-gewichte" class="slide level2 smaller">
+<h2>Räumliche Gewichte</h2>
+<p>Voraussetzung der Berechnung räumlicher Autokorrelation ist eine Matrix <span class="math inline">\(w\)</span>, die die paarweisen Nachbarschaftsverhältnisse / Distanzen der Werte <span class="math inline">\(x\)</span> kodiert:</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:58%;">
+<p><span class="math display">\[\tiny
+\begin{array}{c|cccccccccc}
+&amp; \text{DE} &amp; \text{FR} &amp; \text{NL} &amp; \text{BE} &amp; \text{LU} &amp; \text{PL} &amp; \text{CZ} &amp; \text{AT} &amp; \text{CH} &amp; \text{DK} \\
+\hline
+\text{DE} &amp; {0} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} \\
+\text{FR} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{1} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
+\text{NL} &amp; 1 &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} \\
+\text{BE} &amp; 1 &amp; \color{gray}{1} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
+\text{LU} &amp; 1 &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
+\text{PL} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
+\text{CZ} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
+\text{AT} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} \\
+\text{CH} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
+\text{DK} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
+\end{array}\]</span></p>
+</div></div>
+<p>Das Nachbarschaftsgewicht <span class="math inline">\(w_{ij}\)</span> von Beobachtung <span class="math inline">\(i\)</span> und Beobachtung <span class="math inline">\(j\)</span> steuert den Einfluss von <span class="math inline">\(i\)</span> und <span class="math inline">\(j\)</span> auf die Kovarianz von <span class="math inline">\(x\)</span> mit sich selbst: <span class="math inline">\(w_{ij}(x_i - \bar{x})(x_j - \bar{x})\)</span>.</p>
+</section>
+<section id="morans-i" class="slide level2">
+<h2>Moran’s I</h2>
+<p>Moran’s <span class="math inline">\(I\)</span> misst die räumliche Autokorrelation einer Variable <span class="math inline">\(x\)</span> mit Gewichten <span class="math inline">\(w\)</span> und Summe <span class="math inline">\(s_w = \sum_{i=1}^n \sum_{j=1}^n w_{ij}\)</span> als:</p>
+<p><span class="math display">\[
+I = \frac{n}{s_w}
+\frac{\sum_{i=1}^n \sum_{j=1}^n \color{orange}{w_{ij}(x_i - \bar{x})(x_j - \bar{x})}}{\sum_{i=1}^n (x_i-\bar{x})^2}
+\]</span></p>
+<p>Moran’s I nimmt Werte im Bereich -1 (perfekte räumliche Antikorrelation) bis 1 (perfekte räumliche Korrelation) an. Neben dem globalen Index gibt es auch lokale Versionen.</p>
+</section>
+<section id="schwermetallbelastung" class="slide level2">
+<h2>Schwermetallbelastung</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/autocorr-maas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Quelle: Rikken &amp; Van Rijn (1993)"><img data-src="images/autocorr-maas.png" class="card" width="550" height="500" alt="Quelle: Rikken &amp; Van Rijn (1993)"></a></p>
+<figcaption>Quelle: Rikken &amp; Van Rijn (1993)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Die Abbildung zeigt Messergebnisse der Schwermetallbelastung (Zink) entlang der Maas bei Stein, Niederlande.</li>
+<li>Folgt die Verteilung der Messwerte einem zufälligen Muster?</li>
+</ul>
+</div></div>
+</section>
+<section id="schwermetallbelastung-1" class="slide level2">
+<h2>Schwermetallbelastung</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/autocorr-maas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Quelle: Rikken &amp; Van Rijn (1993)"><img data-src="images/autocorr-maas.png" class="card" width="550" height="500" alt="Quelle: Rikken &amp; Van Rijn (1993)"></a></p>
+<figcaption>Quelle: Rikken &amp; Van Rijn (1993)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Gewichte <span class="math inline">\(w\)</span>: <em>k nearest neighbors</em> mit k=4</li>
+<li>Moran’s I: 0.47</li>
+<li>Es besteht eine positive räumliche Autokorrelation der Messwerte.</li>
+<li>Nächster Schritt: Lokale Hot-/Cold-Spots</li>
+</ul>
+</div></div>
+</section>
+<section id="zeitliche-autokorrelation" class="slide level2">
+<h2>Zeitliche Autokorrelation</h2>
+<p>Zeitlich angeordnete Daten weisen oft ein erhebliches Maß an Autokorrelation auf (oft über mehrere Zeitschritte).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-20-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="netzwerkautokorrelation" class="slide level2">
+<h2>Netzwerkautokorrelation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-21-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="zusammenhangsmasse_files/figure-revealjs/unnamed-chunk-21-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Vernetzte Beobachtungen sind ebenfalls häufig korreliert.</li>
+<li>Beispiel: Wahlverhalten und Freundschaftsnetzwerke</li>
+<li>Ignorieren von Autokorrelation führt zu verzerrten Inferenzen.</li>
+</ul>
+</div></div>
+</section>
 <section id="prüfungsfragen" class="slide level2">
 <h2>Prüfungsfragen</h2>
 <ul>
 <li><p>Welche Rolle spielen abhängige, unabhängige und Kontrollvariablen in multivariaten Analysen?</p></li>
 <li><p>Berechnen Sie den Korrelationskoeffizienten für die folgenden Datenreihen.</p></li>
-<li><p>Welches Zusammenhangsmaß nutzen Sie für zwei ordinale Variablen?</p></li>
+<li><p>Welches Zusammenhangsmaß nutzen Sie für zwei kategorisch-ordinale Variablen?</p></li>
 <li><p>Was ist der zentrale Vergleich der dem Kontingenzkoeffizienten zugrunde liegt?</p></li>
 </ul>
 <div class="quarto-auto-generated-content">
@@ -1326,19 +1019,19 @@ C =
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="multivariate-statistik_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="multivariate-statistik_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="zusammenhangsmasse_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1757,7 +1450,7 @@ C =
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

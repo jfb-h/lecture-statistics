@@ -53,519 +53,6 @@ theme_update(
 
 ```
 
-##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/measures/results" background-interactive="true" data-preload="true"}
-
-# Fallstudie
-Vertrauen in Politik und Wissenschaft in Europa
-
-## Vertrauen in Politik und Wissenschaft
-
-![](images/trst-pol-sci.png)
-
-# Fallstudie
-Temperaturen in München, 1973 - 2023
-
-## Daten
-
-:::: {.columns}
-::: {.column width="40%"}
-```{r}
-# library(GSODR)
-# data = get_GSOD(years=2013:2023, station="108660-99999") |> select(YEAR, MONTH, DAY, TEMP)
-# data$MONTH = lubridate::month(data$MONTH, label=T, abbr=T)
-# arrow::write_parquet(data, "data/temp_munich.parquet")
-
-data = arrow::read_parquet("data/temp_munich.parquet") |>
-  mutate(date = lubridate::make_date(YEAR, MONTH, DAY))
-
-data |>
-  select(YEAR:TEMP) |>
-  head(10) |>
-  knitr::kable() |>
-  kableExtra::kable_styling(font_size=24)
-
-```
-:::
-::: {.column width="60%"}
-Temperaturdaten werden von tausenden Messstationen weltweit erfasst und in aggregierter Form veröffentlicht, wie z.B. in der Global Summary of the Day (GSOD).
-
-```{.r}
-libary(GSODR)
-
-get_GSOD(
-  years=2013:2023,
-  station="108660-99999"
-)
-
-```
-:::
-::::
-
-## Tagestemperaturen
-
-<!-- <div style="width:11in; height:6in; background-color: rgba(0, 128, 0, 0.5)">test</div> -->
-
-```{r, fig.width=11, fig.height=6}
-cal = data |>
-  filter(year(date) == 2023) |>
-  mutate(
-    month = month(date, label=TRUE),
-    week = week(date),
-    day = day(date),
-    weekday = fct_inorder(weekdays(date, abbreviate=TRUE)),
-    ) |>
-  mutate(month=factor(month, levels=unique(month))) |>
-  group_by(month) |>
-  mutate(
-    weekmonth = data.table::frank(week, ties.method="dense")
-  )
-
-limit <- max(abs(cal$TEMP)) * c(-1, 1)
-
-ggplot(cal, aes(x = weekday, y = weekmonth, fill = TEMP)) +
-  geom_tile(color="white") +
-  geom_text(aes(label=day), size = 2) +
-  facet_wrap(~month, scales="free_x", ncol=3) +
-  scale_x_discrete() +
-  scale_y_reverse(breaks=NULL) +
-  scale_fill_distiller(palette="RdBu", type="div", limit = limit) +
-  guides(fill=guide_colorbar(barwidth=0.7, barheight=10)) +
-  labs(
-    title = "Temperaturen im Jahresverlauf, München 2023",
-    subtitle = "Durchschnittliche Tagestemperatur",
-    x=NULL,
-    y=NULL,
-    fill = "Temp.",
-    caption = "Datenquelle: GSOD"
-  ) +
-  theme(legend.position="right")
-```
-
-## Tagestemperaturen
-
-```{r, fig.width=11, fig.height=6}
-
-data |>
-  group_by(MONTH, DAY) |>
-  summarize(am=mean(TEMP), sd=sd(TEMP)) |>
-  arrange(MONTH, DAY) |>
-  ungroup() |>
-  mutate(x=1:n()) |>
-  ggplot(aes(x, am, color=am)) +
-  geom_hline(yintercept=0) +
-  geom_point(size=0.5) +
-  geom_linerange(aes(ymin=am - sd, ymax = am + sd)) +
-  scale_color_distiller(palette="RdBu", type="div", limit = limit) +
-  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
-  labs(
-    x = "Tag", y = "Temperatur (°C)", color = NULL,
-    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
-    subtitle = "Tagesweise aggregierte arithmetische Mittel ± Standardabweichungen",
-    caption = "Datenquelle: GSOD"
-    ) +
-  theme(
-    panel.background=element_rect(fill="grey30"),
-    # plot.background=element_rect(fill="grey90", color="transparent"),
-  )
-
-```
-
-## Mittelwert und Abweichung
-
-```{r, fig.width=10, fig.height=3}
-
-data |>
-  summarize(
-    am=mean(TEMP),
-    sd=sd(TEMP)
-  ) |>
-  ggplot() +
-  geom_linerange(
-    aes(y=1, x=am, xmin=am-sd, xmax=am+sd),
-    linewidth=2
-  ) +
-  geom_point(
-    aes(y=1, x=am),
-    size = 12
-  ) +
-  geom_text(
-    aes(x=am, y=1, label="Arithmetisches\nMittel (x̄)"),
-    nudge_y=-0.3, size=8, color="grey60", vjust=1
-  ) +
-  geom_text(
-    aes(x=am-sd, y=1, label="x̄ - s"),
-    nudge_y=-0.3, size=8, color="grey60", vjust=1
-  ) +
-  geom_text(
-    aes(x=am+sd, y=1, label="x̄ + s"),
-    nudge_y=-0.3, size=8, color="grey60", vjust=1
-  ) +
-  lims(
-    x=c(-3, 18),
-    y=c(0, 2)
-  ) +
-  theme_void()
-
-```
-
-Der Punkt kann auch ein anderes Lagemaß darstellen, der Strich eine andere Form der Abweichung (z.B. Standardfehler).
-
-
-## Tagestemperaturen
-
-```{r, fig.width=11, fig.height=6}
-
-data |>
-  ggplot(aes(x=factor(week(date)), y=TEMP)) +
-  geom_hline(yintercept=0) +
-  geom_boxplot(fill="tomato", outlier.size=0.6) +
-  scale_color_distiller(
-    palette="RdBu", type="div", limit = limit
-  ) +
-  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
-  labs(
-    x = "Woche", y = "Temperatur (°C)", color = NULL,
-    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
-    subtitle = "Wochenweise aggregierte Boxplots",
-    caption = "Datenquelle: GSOD"
-    )
-
-```
-
-## Temperaturen
-
-```{r, fig.width=11, fig.height=6}
-
-limit <- max(abs(data$TEMP)) * c(-1, 1)
-
-ggplot(data, aes(x = TEMP, y = fct_rev(MONTH), fill=stat(x))) +
-    geom_density_ridges_gradient(
-          scale=4, rel_min_height=0.01, gradient_lwd = 1.0
-      ) +
-    scale_y_discrete(expand=c(0,0)) +
-    scale_x_continuous(expand=c(0,0)) +
-    # scale_fill_viridis_c(name="Temp. (°C)") +
-    scale_fill_distiller(palette="RdBu", type="div", limit = limit) +
-    guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
-    coord_cartesian(clip="off") +
-    labs(
-      # title="Monatsweise Temperaturen in München",
-      title="Temperaturen im Jahresverlauf, München 1973 - 2023",
-      subtitle = "Monatsweise aggregierte Kerndichtediagramme",
-      y="",
-      x="Temperatur (°C)",
-      caption = "Datenquelle: GSOD"
-    ) +
-    theme_ridges() +
-    theme(legend.position="none")
-```
-
-## Kerndichtediagramme
-
-Kerndichtediagramme sind eine kontinuierliche Variante des diskreten Histogramms. Das KDD gibt relative Häufigkeiten statt absolute Häufigkeiten in einem Wertebereich an.
-
-```{r fig.width=11, fig.height=4}
-set.seed(321)
-
-sim = data.frame(
-  x = rnorm(10000, mean=170, sd=8)
-  )
-
-dens = density(sim$x)
-dens = tibble(x=dens$x, y=dens$y)
-
-ggplot(sim, aes(x=x, y=after_stat(density))) +
-  geom_histogram(fill="grey70", color="white", binwidth=2) +
-  geom_area(
-    data = filter(dens, x > 170),
-    aes(x=x, y=y),
-    fill = "tomato",
-    alpha = 0.5
-  ) +
-  geom_line(
-    data=dens,
-    aes(x=x, y=y),
-    linewidth=2
-    ) +
-  labs(
-    x=NULL, y="Dichte",
-  )
-```
-
-
-## Tagestemperaturen
-
-```{r fig.width=11, fig.height=6}
-
-td = data |>
-  group_by(YEAR, MONTH) |>
-  summarize(am=mean(TEMP))
-
-td |>
-  ggplot() +
-  geom_hline(yintercept=0) +
-  geom_line(
-    aes(x=MONTH, y=am, group=YEAR),
-    linewidth=0.1,
-    color="grey80",
-    alpha=0.7
-  ) +
-  geom_point(
-    aes(x=MONTH, y=am, group=YEAR, color=am),
-  ) +
-  geom_line(
-    aes(x=MONTH, y=am, group=YEAR, color=am),
-    data=filter(td, YEAR==2023),
-    color="grey20"
-  ) +
-  geom_point(
-    aes(x=MONTH, y=am, group=YEAR, color=am),
-    data=filter(td, YEAR==2023),
-    color="grey20",
-  ) +
-  geom_point(
-    data = summarize(group_by(td, MONTH), y=mean(am)),
-    aes(x=MONTH, y=y),
-    color = "grey20",
-    shape = "-",
-    size = 12
-    ) +
-  geom_text(
-    data=filter(td, YEAR == 2023, MONTH == "Dec"),
-    aes(x=MONTH, y=am, label="2023"), size=3, nudge_x=0.3) +
-  scale_color_distiller(
-    palette="RdBu", type="div", limit = limit
-  ) +
-  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
-  labs(
-    x = NULL, y = "Temperatur (°C)", color = NULL,
-    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
-    subtitle = "Verbundene Punkte zeigen mittlere Monatstemperaturen für jedes Jahr,\nMarkierungen die mittleren Monatstemperaturen über die letzten 50 Jahre.",
-    caption = "Datenquelle: GSOD"
-    )
-
-```
-
-# Deskriptive Statistik II
-Multivariate Visualisierung und Zusammenhangsmaße
-
-## Bisher: Univariate Verteilungen
-
-```{r, fig.width=11, fig.height=6}
-
-getmode <- function(v) {
-   uniqv <- unique(v)
-   uniqv[which.max(tabulate(match(v, uniqv)))]
-}
-
-d1 = tibble(
-  x=rlnorm(1000, meanlog = 8, sdlog = 0.3)
-)
-
-p1 = d1 |> ggplot(aes(x)) +
-  # geom_histogram(aes(y=..density..), fill="grey70") +
-  geom_hline(yintercept=0) +
-  geom_density(linewidth=1.5, color="grey40") +
-  geom_vline(xintercept=median(d1$x), color="tomato", linewidth=2) +
-  labs(y=NULL, x=NULL) +
-  theme(
-    axis.text.y = element_blank(),
-    axis.ticks.y = element_blank()
-  )
-
-d2 = tibble(
-  x = fct_infreq(sample(LETTERS[1:5], 100, replace=TRUE))
-)
-
-p2 = d2 |> ggplot(aes(x)) +
-  geom_bar(fill="grey70") +
-  geom_bar(data = filter(d2, x == getmode(x)), fill="tomato") +
-  geom_hline(yintercept=0) +
-  labs(y=NULL, x=NULL) +
-  theme(
-    axis.text.y = element_blank(),
-    axis.ticks.y = element_blank()
-  )
-
-p1 / p2
-```
-
-## Jetzt: Multivariate Verteilungen
-
-```{r, fig.width=11, fig.height=6}
-N <- 2000
-k <- 6
-
-g <- factor(sample(1:k, N, replace=T), labels=paste0("Gruppe ", 1:k))
-z <- factor(sample(1:2, N, replace=T), labels=LETTERS[25:26])
-x <- rnorm(N) + ifelse(z == "Z", rnorm(N, -1), rnorm(N, 1))
-
-a <- rnorm(k)
-b <- rnorm(k)
-d <- c(1,2)
-
-y <- a[g] + b[g]*x + d[z] + rnorm(N, sd=2)
-
-data_sim <- tibble(y, x, g, z)
-
-data_sim |>
-  ggplot(aes(x=x, y=y)) + 
-  geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
-  geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
-  geom_point(aes(color=z), shape=1) +
-  scale_color_tableau() +
-  geom_smooth(method="lm", color="grey20", se=FALSE, linewidth=1) +
-  facet_wrap(~g) +
-  labs(color=NULL, x="", y="") +
-  theme(legend.position="none")
-```
-
-
-## Multivariate Statistik
-
-- Die meisten wissenschaftlichen Fragestellungen betreffen das Zusammenspiel von zwei oder mehr Variablen.
-
-- Multivariate Verfahren dienen der *Identifikation* von bisher unbekannten oder der *Überprüfung* von vermuteten statistischen Zusammenhängen zwischen Variablen.
-
-- Die beteiligten Variablen spielen in multivariaten Verfahren oft (aber nicht immer) unterschiedliche Rollen (z.B. Explanans, Explanandum, Kontrollvariable).
-
-
-
-## Variablentypen
-
-- Die **abhängige Variable** und ihre Variation zu Verstehen ist das primäre Untersuchungsziel einer multivariaten Analyse.
-
-- **Unabhängige Variablen** dienen der Erklärung oder Vorhersage von Variation in der abhängigen Variable. Die Variation der
-unabhängigen Variable selbst wird i.d.R. als gegeben angesehen oder experimentell manipuliert.
-
-- **Kontrollvariablen** dienen der Vermeidung von verzerrten Schlussfolgerungen über den Zusammenhang zwischen unabhängigen und abhängigen Variablen.
-
-
-## Variablentypen
-
-**Untersuchungsziel**: Gender Pay Gap
-
-```{dot}
-//| fig-width: 10
-//| fig-height: 5
-
-digraph G {
-  layout=dot
-  rankdir=LR
-
-  node [
-    shape=rect
-    color="#FF8C00"
-    style="filled,rounded"
-    fontname="Helvetica,Arial,sans-serif"
-    fontcolor="#FFFFFF"
-    width=1.2
-    height=0.6
-    margin=0.2
-  ]
-
-  edge [
-    color="#555555"
-    penwidth=2
-  ]
-
-  {
-    rank=same;
-    A[label="Unabhängige Variable\n(Geschlecht)"];
-    B[label="Abhängige Variable\n(Gehalt)"];
-  }
-  C[label="Kontrollvariable(n)\n(z.B. Beruf)" color=lightgrey fontcolor="#333333"];
-
-  A -> B;
-  A -> C;
-  C -> B;
-}
-```
-
-## Variablentypen
-
-Wir beschreiben die abhängige Variable (AV, Output) auch oft als eine *Funktion* der unabhängigen Variable(UV, Input):
-
-$$\textrm{AV} = f(\textrm{UV}) \color{lightgrey}{+ \epsilon}$$
-
-bzw. mit Kontrollvariablen (KV):
-
-$$\textrm{AV} = f(\textrm{UV, KV}) \color{lightgrey}{+ \epsilon}$$
-
-Die exakte Spezifikation der Funktion $f$ hängt von den Daten, der Forschungsfrage und dem Forschungsdesign ab.
-
-
-## Was ist die abhängige Variable?
-
-```{r, fig.width=11, fig.height=6}
-
-data |>
-  ggplot(aes(x=factor(week(date)), y=TEMP)) +
-  geom_hline(yintercept=0) +
-  geom_boxplot(fill="tomato", outlier.size=0.6) +
-  scale_color_distiller(
-    palette="RdBu", type="div", limit = limit
-  ) +
-  guides(color=guide_colorbar(barwidth=10, barheight=0.5)) +
-  labs(
-    x = "Woche", y = "Temperatur (°C)", color = NULL,
-    title = "Temperaturen im Jahresverlauf, München 1973 - 2023",
-    subtitle = "Wochenweise aggregierte Boxplots",
-    caption = "Datenquelle: GSOD"
-    )
-
-```
-
-## Was ist die abhängige Variable?
-
-![](images/trst-pol-sci.png)
-
-
-## (Un)supervised learning {.smaller}
-
-::::: columns
-::: {.column width="50%"}
-
-```{r, fig.width=5, fig.height=6}
-
-library(mvtnorm)
-library(ggforce)
-library(purrr)
-
-set.seed(123)
-
-S = list(
-  list(id = "a", n=500, s=c(20, 15)),
-  list(id = "b", n=900, s=c(10, 10)),
-  list(id = "c", n=700, s=c(12, 25))
-)
-
-df_clust = map(S, function(s) {
-  x = rmvnorm(s$n, s$s, sigma=diag(c(3,2)))
-  colnames(x) = c("x", "y")
-  as_tibble(x) |> mutate(g = s$id)
-}) |> list_rbind()
-
-df_clust |>
-ggplot(aes(x, y, color=g)) +
-  geom_point(color="grey20", alpha=0.5, size=0.5) +
-  geom_mark_hull(
-    concavity = 100
-  ) +
-  lims(x=c(0, 30), y=c(0, 30)) +
-  labs(x=NULL, y=NULL) +
-  theme(legend.position = "none")
-
-```
-
-:::
-::: {.column width="50%"}
-- Nicht alle multivariaten Analysen haben asymmetrische Variablenrollen.
-- Ein prominentes Beispiel ist die *Clusteranalyse*, die zum Ziel hat, latente (unbeobachtete) Gruppen zu identifizeren.
-- Im Machine Learning wird zwischen *supervised learning* (Vorhersage einer bekannten und beobachteten Variable) und *unsupervised learning* (Identifikation von latenten Mustern) unterschieden.
-:::
-:::::
-
 # Zusammenhangsmaße
 Numerische Variablen
 
@@ -1050,62 +537,19 @@ p1 | p2 | p3
 
 ```
 
-# Exkurs 
-Räumliche Autokorrelation
-
-## Räumliche Autokorrelation {.smaller}
-
-Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191;</span> <span class="arrow-down">&#x2193;</span>)
+## Körper- und Schuhgröße
 
 ::::: columns
 ::: {.column width="50%"}
-![Einkommen in München (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png){.shadow height="400px"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize" title="Survey preview"> </iframe>
 :::
+
 ::: {.column width="50%"}
-![Einkommen in Köln (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png){.shadow height="400px"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize/qr" title="Survey link"> </iframe>
 :::
 :::::
 
-
-## Räumliche Autokorrelation
-
-- *Autokorrelation* beschreibt die Korrelation einer Variablen mit sich selbst - d.h. den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben.
-
-- Je nach Fragestellung kann eine andere Definition von Nachbarschaft angewandt werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).
-
-
-## Räumliche Autokorrelation
-
-::::: columns
-::: {.column width="50%"}
-![Quelle: Rikken & Van Rijn (1993)](images/autocorr-maas.png){.card height="500px" width="550px"}
-
-:::
-::: {.column width="50%"}
-- Die Abbildung zeigt Messergebnisse der Schwermetallbelastung (Zink) entlang der Maas bei Stein.
-- Folgt die Verteilung der Messwerte einem zufälligen Muster?
-:::
-:::::
-
-
-## Räumliche Gewichte
-
-- Voraussetzung der Berechnung räumlicher Autokorrelation ist eine Matrix $w$, die die paarweisen Nachbarschaftsverhältnisse / Distanzen der Beobachtungen kodiert:
-
-## Nachbarschaften
-
-## Moran's I
-
-Moran's $I$ misst die räumliche Autokorrelation einer Variable $x$ und Gewichten $w$ mit Summe $S_w = \sum_{i=1}^n \sum_{j=1}^n w_{ij}$ als:
-
-$$
-I = \frac{n}{S_w}
-\frac{\sum_{i=1}^n \sum_{j=1}^n w_{ij}(x_i - \bar{x})(x_j - \bar{x})}{\sum_{i=1}^n (x_i-\bar{x})^2}
-$$
-
-Moran's I nimmt Werte im Bereich -1 (perfekte räumliche Antikorrelation) bis 1 (perfekte räumliche Korrelation) an. Neben dem globalen Index gibt es auch lokale Versionen des Maßes.
-
-## Zeitliche Autokorrelation
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/bodysize/result" background-interactive="true" data-preload="true"}
 
 
 # Zusammenhangsmaße
@@ -1323,6 +767,264 @@ C =
 \sqrt{\frac{2025{,}8}{2025{,}8 + 25097}} = 0.27
 $$
 
+## Mediennutzung
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news" title="Survey preview"> </iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news/qr" title="Survey link"> </iframe>
+:::
+:::::
+
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/news/result" background-interactive="true" data-preload="true"}
+
+
+# Exkurs
+Autokorrelation
+
+## Räumliche Autokorrelation {.smaller}
+
+Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191;</span> <span class="arrow-down">&#x2193;</span>)
+
+::::: columns
+::: {.column width="50%"}
+![Einkommen in München (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png){.shadow height="400px"}
+:::
+::: {.column width="50%"}
+![Einkommen in Köln (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png){.shadow height="400px"}
+:::
+:::::
+
+
+## Räumliche Autokorrelation
+
+- *Autokorrelation* beschreibt den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben (Korrelation mit sich selbst).
+
+- Die Definition von Nachbarschaft kann je nach Fragestellung angepasst werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).
+
+- Autokorrelation kann positiv (benachbarte Einheiten sind sich ähnlich) oder negativ (benachbarte Einheiten sind sich unähnlich) sein.
+
+
+## Räumliche Gewichte {.smaller}
+
+Voraussetzung der Berechnung räumlicher Autokorrelation ist eine Matrix $w$, die die paarweisen Nachbarschaftsverhältnisse / Distanzen der Werte $x$ kodiert:
+
+::::: columns
+::: {.column width="42%"}
+```{r, fig.height=8}
+library(sf)
+library(ggplot2)
+library(dplyr)
+library(eurostat)
+
+europe <- get_eurostat_geospatial(
+    output_class = "sf",
+    resolution = "10",
+    nuts_level = "0",
+    crs = "4326",
+  )
+
+capitals <- data.frame(
+  code = c("FR", "NL", "BE", "LU", "PL", "CZ", "AT", "CH", "DK"),
+  country = c("France", "Netherlands", "Belgium", "Luxembourg", "Poland",
+              "Czech Republic", "Austria", "Switzerland", "Denmark"),
+  capital = c("Paris", "Amsterdam", "Brussels", "Luxembourg City", "Warsaw",
+              "Prague", "Vienna", "Bern", "Copenhagen"),
+  lng = c(2.3522, 4.9041, 4.3517, 6.1319, 21.0122, 14.4378, 16.3738, 7.4474, 12.5683),
+  lat = c(48.8566, 52.3676, 50.8503, 49.6117, 52.2297, 50.0755, 48.2082, 46.9481, 55.6761)
+) # |> st_as_sf(coords=c("lng", "lat"), crs=4326)
+
+neighbors = filter(europe, CNTR_CODE %in% capitals$code)
+germany = filter(europe, CNTR_CODE == "DE")
+
+berlin = c(13.405, 52.520)
+
+ggplot() +
+  geom_sf(
+    data = europe,
+    aes(geometry = geometry),
+    color = "grey70"
+  ) +
+  geom_sf(
+    data = neighbors,
+    aes(geometry = geometry),
+    fill = "cornflower blue",
+    color = "white",
+    linewidth = 0.4
+  ) +
+  geom_sf(
+    data = germany,
+    aes(geometry = geometry),
+    fill = "tomato",
+    color = "white",
+  ) +
+  geom_segment(
+    data = capitals,
+    color = "grey20",
+    aes(x=berlin[1], xend=lng, y=berlin[2], yend=lat)
+  ) +
+  geom_point(
+    data = capitals,
+    color = "grey20",
+    size = 4,
+    aes(lng, lat)
+  ) +
+  annotate(
+    "point",
+    size = 4,
+    color="grey20",
+    x=berlin[1], y=berlin[2]
+  ) +
+  coord_sf(
+    crs=st_crs(4326),
+    xlim=c(-8.6, 25),
+    ylim=c(42, 62)
+  ) +
+  theme_void()
+```
+
+:::
+::: {.column width="58%"}
+```{=latex}
+\[
+\tiny
+\begin{array}{c|cccccccccc}
+ & \text{DE} & \text{FR} & \text{NL} & \text{BE} & \text{LU} & \text{PL} & \text{CZ} & \text{AT} & \text{CH} & \text{DK} \\
+\hline
+\text{DE} & {0} & {1} & {1} & {1} & {1} & {1} & {1} & {1} & {1} & {1} \\
+\text{FR} & 1 & \color{gray}{0} & \color{gray}{1} & \color{gray}{1} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{NL} & 1 & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} \\
+\text{BE} & 1 & \color{gray}{1} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{LU} & 1 & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{PL} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{CZ} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} \\
+\text{AT} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} \\
+\text{CH} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} \\
+\text{DK} & 1 & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\end{array}
+\]
+
+```
+:::
+:::::
+
+Das Nachbarschaftsgewicht $w_{ij}$ von Beobachtung $i$ und Beobachtung $j$ steuert den Einfluss von $i$ und $j$ auf die Kovarianz von $x$ mit sich selbst: $w_{ij}(x_i - \bar{x})(x_j - \bar{x})$.
+
+
+## Moran's I
+
+Moran's $I$ misst die räumliche Autokorrelation einer Variable $x$ mit Gewichten $w$ und Summe $s_w = \sum_{i=1}^n \sum_{j=1}^n w_{ij}$ als:
+
+$$
+I = \frac{n}{s_w}
+\frac{\sum_{i=1}^n \sum_{j=1}^n \color{orange}{w_{ij}(x_i - \bar{x})(x_j - \bar{x})}}{\sum_{i=1}^n (x_i-\bar{x})^2}
+$$
+
+Moran's I nimmt Werte im Bereich -1 (perfekte räumliche Antikorrelation) bis 1 (perfekte räumliche Korrelation) an. Neben dem globalen Index gibt es auch lokale Versionen.
+
+
+## Schwermetallbelastung
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Rikken & Van Rijn (1993)](images/autocorr-maas.png){.card height="500px" width="550px"}
+
+:::
+::: {.column width="50%"}
+- Die Abbildung zeigt Messergebnisse der Schwermetallbelastung (Zink) entlang der Maas bei Stein, Niederlande.
+- Folgt die Verteilung der Messwerte einem zufälligen Muster?
+:::
+:::::
+
+
+## Schwermetallbelastung
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Rikken & Van Rijn (1993)](images/autocorr-maas.png){.card height="500px" width="550px"}
+
+:::
+::: {.column width="50%"}
+- Gewichte $w$: *k nearest neighbors* mit k=4
+- Moran's I: 0.47
+- Es besteht eine positive räumliche Autokorrelation der Messwerte.
+- Nächster Schritt: Lokale Hot-/Cold-Spots
+:::
+:::::
+
+
+## Zeitliche Autokorrelation
+
+Zeitlich angeordnete Daten weisen oft  ein erhebliches Maß an Autokorrelation auf (oft über mehrere Zeitschritte).
+
+```{r, fig.width=11, fig.height=4}
+
+d = tibble(
+  x = 1980:2020,
+  y = cumsum(rnorm(length(x)))
+)
+
+a = acf(d$y, lag.max=5, plot=FALSE)[[1]]
+
+d |>
+  ggplot(aes(x, y)) +
+  geom_line() +
+  labs(
+    title = paste0(
+        "Autokorrelation: ",
+         "| lag 1: ", round(a[2], 2), " ",
+         "| lag 2: ", round(a[3], 2), " ",
+         "| lag 3: ", round(a[4], 2), " ",
+         "| lag 4: ", round(a[5], 2), ""
+    ),
+    x=NULL,
+    y=NULL
+  )
+```
+
+
+## Netzwerkautokorrelation
+
+::::: columns
+::: {.column width="50%"}
+```{r, fig.height=6, fig.width=6}
+library(igraph)
+library(ggraph)
+library(tidygraph)
+
+set.seed(123)
+g <- sample_gnp(50, p = 0.1, directed = FALSE)
+A <- as.matrix(as_adjacency_matrix(g))
+W <- A / rowSums(A)
+
+epsilon <- rnorm(50, mean = 0, sd = 1)
+
+rho <- 0.9
+I <- diag(50)
+y <- solve(I - rho * W) %*% epsilon
+
+as_tbl_graph(g) |>
+  mutate(v=y) |>
+  ggraph() +
+  geom_edge_link(color="grey70") +
+  geom_node_point(aes(color=v), size = 8) +
+  scale_color_viridis() +
+  labs(color=NULL) +
+  theme_graph() +
+  theme(legend.position="none")
+```
+:::
+::: {.column width="50%"}
+- Vernetzte Beobachtungen sind ebenfalls häufig korreliert.
+- Beispiel: Wahlverhalten und Freundschaftsnetzwerke
+- Ignorieren von Autokorrelation führt zu verzerrten Inferenzen.
+:::
+:::::
+
 
 ## Prüfungsfragen
 
@@ -1330,7 +1032,7 @@ $$
 
 - Berechnen Sie den Korrelationskoeffizienten für die folgenden Datenreihen.
 
-- Welches Zusammenhangsmaß nutzen Sie für zwei ordinale Variablen?
+- Welches Zusammenhangsmaß nutzen Sie für zwei kategorisch-ordinale Variablen?
 
 - Was ist der zentrale Vergleich der dem Kontingenzkoeffizienten zugrunde liegt?
 
