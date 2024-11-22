@@ -18,7 +18,7 @@ function updateData(data) {
     answers = data;
 }
 
-function correctedContingencyCoefficient(data) {
+function chiSquared(data) {
     const usCategories = [...new Set(data.map(d => d.media))];
     const dCategories = [...new Set(data.map(d => d.wahl_d))];
 
@@ -56,49 +56,35 @@ function correctedContingencyCoefficient(data) {
         });
     });
 
-    const correctedCoefficient = Math.sqrt(chiSquared / (chiSquared + total));
-    return correctedCoefficient;
+    return chiSquared
 }
 
-function createSummary(data) {
-    const ftm = d3.format(".2f");
-    const pcor = correctedContingencyCoefficient(answers)
-    return `Pearson korrigiert: <strong>${ftm(pcor)}</strong><br>`
+function contingencyCoefficient(data) {
+    const n = data.length
+    const chiSq = chiSquared(data);
+    return Math.sqrt(chiSq / (chiSq + n))
 }
 
 function plot() {
     const container = document.getElementById('wahlen');
-    const container_heat = document.getElementById('wahlen_heat');
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;
+
+    const container_heat = document.getElementById('wahlen_heat');
     const container_heatWidth = container_heat.offsetWidth;
     const container_heatHeight = container_heat.offsetHeight;
 
-    document.getElementById('c2').innerHTML = createSummary(answers);
+    const chi = chiSquared(answers);
+    const con = contingencyCoefficient(answers);
 
-    const media_counts = answers.reduce((acc, curr) => {
-        acc[curr.media] = (acc[curr.media] || 0) + 1;
-        return acc;
-    }, {});
+    const fmt = d3.format(".2f");
 
-    const media_data = Object.entries(media_counts).map(([media, count]) => ({
-        media,
-        count,
-    }));
-
-    const d_counts = answers.reduce((acc, curr) => {
-        acc[curr.wahl_d] = (acc[curr.wahl_d] || 0) + 1;
-        return acc;
-    }, {});
-
-
-    const d_data = Object.entries(d_counts).map(([party, count]) => ({
-        party,
-        count,
-    }));
+    document.getElementById('c4').innerHTML = `<strong>${fmt(chi)}</strong><br>`;
+    document.getElementById('c5').innerHTML = `<strong>${fmt(con)}</strong><br>`;
 
     const media_plot = Plot.plot({
         height: 300,
+        marginBottom: 50,
         width: containerWidth,
         x: {
             label: null,
@@ -108,9 +94,8 @@ function plot() {
             label: "Anzahl",
         },
         marks: [
-            Plot.barY(media_data, { x: "media", y: "count", fill: "steelblue" })
+            Plot.barY(answers, Plot.groupX({ y: "count" }, { x: "media" }))
         ],
-        color: { legend: true }
     });
 
     const d_plot = Plot.plot({
@@ -124,9 +109,8 @@ function plot() {
             label: "Anzahl",
         },
         marks: [
-            Plot.barY(d_data, { x: "party", y: "count", fill: "orange" })
+            Plot.barY(answers, Plot.groupX({ y: "count" }, { x: "wahl_d" }))
         ],
-        color: { legend: true }
     });
 
 

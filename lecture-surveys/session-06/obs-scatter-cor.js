@@ -25,10 +25,9 @@ function pearsonCorrelation(x, y) {
         throw new Error("Arrays müssen die gleiche Länge haben");
     }
     const n = x.length;
-    // Mittelwerte berechnen
-    const meanX = x.reduce((acc, val) => acc + val, 0) / n;
-    const meanY = y.reduce((acc, val) => acc + val, 0) / n;
-    // Variablen initialisieren
+    const meanX = d3.mean(x);
+    const meanY = d3.mean(x);
+
     let numerator = 0;
     let denominatorX = 0;
     let denominatorY = 0;
@@ -46,11 +45,7 @@ function pearsonCorrelation(x, y) {
 }
 
 function spearmanRankCorrelation(x, y) {
-    if (x.length !== y.length) {
-        throw new Error("Arrays müssen die gleiche Länge haben");
-    }
     const n = x.length;
-    // Funktion, um Ränge zu berechnen
     const getRanks = (arr) => {
         const sorted = [...arr].map((val, index) => ({ val, index }));
         sorted.sort((a, b) => a.val - b.val);
@@ -66,7 +61,6 @@ function spearmanRankCorrelation(x, y) {
     };
     const rankX = getRanks(x);
     const rankY = getRanks(y);
-    // Differenzen der Ränge und deren Quadrate berechnen
     let sumD2 = 0;
     for (let i = 0; i < n; i++) {
         const d = rankX[i] - rankY[i];
@@ -76,25 +70,31 @@ function spearmanRankCorrelation(x, y) {
     return spearmanCoefficient;
 }
 
-function createSummary(data) {
-    const ftm = d3.format(".2f");
-    const vra = data.map(d => d.vara);
-    const vrb = data.map(d => d.varb);
-    const pcor = pearsonCorrelation(vra, vrb)
-    const scor = spearmanRankCorrelation(vra, vrb)
-    return `Pearson: <strong>${ftm(pcor)}</strong><br>
-            Spearman: <strong>${ftm(scor)}</strong><br>`
-}
-
-
 
 function scatter() {
     const containerScatter = document.getElementById('scatter');
     const containerScatterWidth = containerScatter.offsetWidth;
     const containerScatterHeight = containerScatter.offsetHeight;
 
-    document.getElementById('c1').innerHTML = createSummary(vars);
+    const x = vars.map(d => d.vara);
+    const y = vars.map(d => d.varb);
 
+    const pcor = pearsonCorrelation(x, y)
+    const scor = spearmanRankCorrelation(x, y)
+
+    const meanX = d3.mean(x);
+    const meanY = d3.mean(y);
+
+    const fmt = d3.format(".2f");
+
+    const summaryCorr = `<strong>${fmt(pcor)}</strong><br>`
+    const summaryRank = `<strong>${fmt(scor)}</strong><br>`
+    const summaryMeans = `Körpergröße: <strong>${fmt(meanX)}</strong><br>
+                          Schuhgröße: <strong>${fmt(meanY)}</strong><br>`
+
+    document.getElementById('c1').innerHTML = summaryMeans;
+    document.getElementById('c2').innerHTML = summaryCorr;
+    document.getElementById('c3').innerHTML = summaryRank;
 
     const plotScatter = Plot.plot({
         width: containerScatterWidth,
@@ -109,8 +109,6 @@ function scatter() {
         marks: [
             Plot.dot(vars, { y: "vara", x: "varb" }),
             Plot.crosshair(vars, { y: "vara", x: "varb", color: "blue" }),
-            isoline.checked ? Plot.link({ length: 1 }, { x1: 0, x2: 500, y1: 0, y2: 500, stroke: "black", strokeOpacity: 0.2 }) : [],
-            regression.checked ? Plot.linearRegressionY(vars, { y: "vara", x: "varb", stroke: "blue" }) : []
         ],
         x: { label: "Schuhgroesse", domain: [30, 60] },
         y: { label: "Koerpergroesse", domain: [100, 250] },
@@ -119,14 +117,6 @@ function scatter() {
     containerScatter.innerHTML = "";
     containerScatter.appendChild(plotScatter);
 }
-
-const regression = document.getElementById('check-regression');
-document.getElementById('check-regression')
-    .addEventListener('change', () => { scatter(); });
-
-const isoline = document.getElementById('check-isoline');
-document.getElementById('check-isoline')
-    .addEventListener('change', () => { scatter(); });
 
 window.addEventListener('resize', debounce(() => { scatter(); }, 100));
 
