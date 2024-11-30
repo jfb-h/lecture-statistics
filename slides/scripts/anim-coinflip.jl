@@ -14,7 +14,7 @@ function simulate(N, p)
     )
 end
 
-N, p1, p2 = 200, 0.5, 0.7
+N, p1, p2 = 100, 0.5, 0.7
 
 i = Observable(1)
 
