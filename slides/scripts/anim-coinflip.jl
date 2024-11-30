@@ -14,7 +14,7 @@ function simulate(N, p)
     )
 end
 
-N, p1, p2 = 100, 0.5, 0.7
+N, p1, p2 = 80, 0.5, 0.7
 
 i = Observable(1)
 
@@ -58,7 +58,7 @@ end
 
 fig, ax1, ax2, ax3, ax4 = plot_coinflip(y1, y2)
 nframes = N
-framerate = 3
+framerate = 2
 
 record(fig, "coinflip.gif", 1:N;
        framerate=framerate, compression = 10) do n
@@ -66,15 +66,9 @@ record(fig, "coinflip.gif", 1:N;
     ax1.title = "Münze 1 ($n Würfe)"
     ax2.title = "Münze 2 ($n Würfe)"
 
-    m = n < 50 ? 40 : n < 100 ? 80 : n < 150 ? 120 : 160
-    ax1.limits = (nothing, nothing, 0, m)
-    ax2.limits = (nothing, nothing, 0, m)
+    ax1.limits = (nothing, nothing, 0, 61)
+    ax2.limits = (nothing, nothing, 0, 61)
 
-    m = max(
-        maximum(pd(y1[n])(0:0.01:1)),
-        maximum(pd(y2[n])(0:0.01:1))
-        ) + 0.2
-
-    ax3.limits = (0, 1, 0, m < 5 ? 5 : m < 10 ? 10 : 13)
-    ax4.limits = (0, 1, 0, m < 5 ? 5 : m < 10 ? 10 : 13)
+    ax3.limits = (0, 1, 0, 10)
+    ax4.limits = (0, 1, 0, 10)
 end
