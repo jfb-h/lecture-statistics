@@ -14,10 +14,6 @@ format:
         css: custom.css
         controls: true
         slide-number: true
-        # embed-resources: true
-        # chalkboard:
-        #     theme: whiteboard
-        #     boardmarker-width: 2
 ---
 
 ```{r}
@@ -50,504 +46,6 @@ theme_update(
   legend.position = "top",
   legend.justification.top = "left"
 )
-
-```
-
-# Zusammenhangsmaße
-Numerische Variablen
-
-## Streudiagramm
-
-```{r, fig.width=11, fig.height=6}
-library(gapminder)
-
-gapminder |>
-  filter(year==2007) |>
-  ggplot(aes(log10(gdpPercap), lifeExp)) +
-  # geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
-  # geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
-  geom_point(shape=1, color="tomato") +
-  scale_x_continuous(
-      breaks = c(1,2,3,4,5),
-      labels = scales::math_format(10^.x)
-  ) +
-  labs(
-    x = "BIP (Log-Skala)",
-    y = "Lebenserwartung (Jahre)",
-    title = "Lebenserwartung und BIP",
-    subtitle = "Daten für 142 Länder im Jahr 2007",
-    caption = "Datenquelle: gampinder.org"
-  )
-
-```
-
-## Kovarianz
-
-```{r, fig.width=11, fig.height=6}
-set.seed(123)
-
-set.seed(123)
-d_cov = tibble(
-  x = rnorm(10),
-  y = x + rnorm(10)
-)
-pts = tibble(
-  x = c(1.0),
-  y = c(2.5)
-)
-
-dat = rbind(d_cov, pts)
-x_mean <- mean(dat$x)
-y_mean <- mean(dat$y)
-dat$color = factor(
-  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
-  levels = c(TRUE, FALSE),
-  labels=c("pos", "neg")
-)
-
-dat |>
-  ggplot(aes(x, y)) +
-  geom_hline(yintercept = y_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
-  geom_vline(xintercept = x_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
-  annotate("text",
-    x = x_mean + 0.05, y = max(dat$y), label = "x̄",
-    size = 6, color = "grey60", vjust = 1
-  ) +
-  annotate("text",
-    y = y_mean - 0.05, x = max(dat$x), label = "ȳ",
-    size = 6, color = "grey60", vjust = 1
-  ) +
-  annotate("segment",
-    x = x_mean, xend = pts$x, y = pts$y, yend = pts$y, color = "cornflower blue"
-  ) +
-  annotate("segment",
-    y = y_mean, yend = pts$y, x = pts$x, xend = pts$x, color = "cornflower blue"
-  ) +
-  annotate("text",
-    x = 0.55, y = 2.7, label = "(xᵢ - x̄)", color = "cornflower blue", size = 6
-  ) +
-  annotate("text",
-    x = 1.12, y = 1.3, label = "(yᵢ - ȳ)", color = "cornflower blue", size = 6
-  ) +
-  geom_point(shape = 1, color = "black", stroke = 2) +
-  labs(x = NULL, y = NULL)
-
-```
-
-## Kovarianz
-
-```{r, fig.width=11, fig.height=6}
-set.seed(123)
-d_cov = tibble(
-  x = rnorm(10),
-  y = x + rnorm(10)
-)
-pts = tibble(
-  x = c(1.0),
-  y = c(2.5)
-)
-
-dat = rbind(d_cov, pts)
-x_mean <- mean(dat$x)
-y_mean <- mean(dat$y)
-dat$color = factor(
-  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
-  levels = c(TRUE, FALSE),
-  labels=c("pos", "neg")
-)
-
-dat |>
-  ggplot(aes(x, y)) +
-  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = y_mean, ymax = Inf,  fill = "#dce8f5") +
-  annotate("rect", xmin = x_mean, xmax = Inf, ymin = -Inf, ymax = y_mean,  fill = "#dce8f5") +
-  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = -Inf, ymax = y_mean, fill = "#f5e1dc") +
-  annotate("rect", xmin = x_mean, xmax = Inf, ymin = y_mean, ymax = Inf,   fill = "#f5e1dc") +
-  geom_hline(yintercept = y_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
-  geom_vline(xintercept = x_mean, color = "grey60", linetype = "dashed", linewidth = 0.3) +
-  annotate("text",
-    x = -0.6, y = -1.8,
-    label = "(xᵢ - x̄)(yᵢ - ȳ)\nist positiv",
-    size = 6, color = "darkred", vjust = 1
-  ) +
-  annotate("text",
-    x = -0.6, y = 2.4,
-    label = "(xᵢ - x̄)(yᵢ - ȳ)\nist negativ",
-    size = 6, color = "navyblue", vjust = 1
-  ) +
-  annotate("text",
-    x = x_mean + 0.05, y = max(dat$y), label = "x̄",
-    size = 6, color = "grey60", vjust = 1
-  ) +
-  annotate("text",
-    y = y_mean - 0.05, x = max(dat$x), label = "ȳ",
-    size = 6, color = "grey60", vjust = 1
-  ) +
-  geom_point(aes(color = color), shape = 1,  stroke = 2) +
-  scale_color_manual(values=c("darkred", "navyblue")) +
-  labs(x = NULL, y = NULL) +
-  theme(legend.position="none")
-
-```
-
-## Kovarianz
-
-Analog zur Varianz ist die *Kovarianz* zweier Variablen $x$ und $y$ definiert als der Mittelwert der Produkte der Abweichungen von den jeweiligen Mittelwerten:
-
-$$s_{xy} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})$$
-
-Die Kovarianz ist positiv (negativ) wenn höhere Werte von $x$ mit höheren (niedrigeren) Werten von $y$ einhergehen.
-
-## Kovarianz
-
-Die Kovarianz zweier Variablen $x$ und $y$ ist symmetrisch (d.h. es gibt keine abhängige und unabhängige Variable):
-
-$$s_{xy} = s_{yx}$$
-
-Die Kovarianz ist zwar invariant unter der Addition von Konstanten, wird aber durch Faktoren der Variablen skaliert:
-
-$$s_{ax + b, cy + d} = a \cdot c \cdot s_{xy}$$
-
-Abhängigkeit von der Skalierung der Variablen macht die Kovarianz schwierig zu interpretieren / zu vergleichen.
-
-
-## Korrelationskoeffizient
-
-Normalisierung der Kovarianz durch das 'Herausteilen' der Standardabweichungen der beiden Variablen gibt uns den *Korrelationskoeffizienten* mit Wertebereich -1 bis 1:
-
-$$
-r_{xy} = \frac{s_{xy}}{s_x s_y}
-$$
-
-Die Normalisierung auf den Bereich -1 bis 1 kann durch die Cauchy-Schwarz-Ungleichung oder durch Anwendung der Kosinusdefinition des Skalarprodukts bewiesen werden.
-
-
-## Korrelationskoeffizient
-
-Für die beiden Datenreihen
-
-$$
-\begin{align}
-\color{orange}{x = 1{,}4 \quad 2{,}3 \quad 1{,}1 \quad 2{,}7 \quad}
-\color{cornflowerblue}{y = 5{,}3 \quad 4{,}3 \quad 0{,}4 \quad 4{,}8}
-\end{align}
-$$
-
-ist die Kovarianz:
-$\color{green}{s_{xy}} = \frac{1}{n}
-\sum_{i=1}^n \color{orange}{(x_i - \bar{x})} \color{cornflowerblue}{(y_i - \bar{y})} = 1{,}04$
-
-<br>
-
-:::{.fragment}
-Mit Standardabweichungen $\color{orange}{s_x = 0{,}75}$ und $\color{cornflowerblue}{s_y = 2{,}28}$ ist der Korrelationskoeffizient:
-
-$$r_{xy} = \frac{\color{green}{s_{xy}}}{\color{orange}{s_x} \color{cornflowerblue}{s_y}} = 0.61$$
-:::
-
-
-## Körper- und Schuhgröße
-
-::::: columns
-::: {.column width="50%"}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize" title="Survey preview"> </iframe>
-:::
-
-::: {.column width="50%"}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize/qr" title="Survey link"> </iframe>
-:::
-:::::
-
-##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/bodysize/result" background-interactive="true" data-preload="true"}
-
-## Korrelationskoeffizient
-
-```{r, fig.width=11, fig.height=6}
-set.seed(123)
-n = 2000
-rdf = rbind(
-  tibble(g = LETTERS[1], x=rnorm(n, mean = 170, sd = 5), y=rnorm(n, mean = 170, sd = 5)),
-  tibble(g = LETTERS[2], x=rnorm(n, mean = 170, sd = 5), y= 1.0 * x + rnorm(n, sd = 5)),
-  tibble(g = LETTERS[3], x=rnorm(n, mean = 170, sd = 5), y=-1.0 * x + rnorm(n, sd = 5)),
-  tibble(g = LETTERS[4], x=rnorm(n, mean = 170, sd = 5), y= 0.4 * x + rnorm(n, sd = 5))
-) |>
-  mutate(
-    mx = mean(x),
-    my=mean(y),
-    color = factor(
-      ((x - mean(x)) * (y - mean(y)) > 0),
-      levels = c(TRUE, FALSE),
-      labels=c("pos", "neg")
-    ),
-    .by=g
-  )
-
-cov_sum = function(df) {
-  x = df$x
-  y = df$y
-  paste0(
-    "Kovarianz = ",
-    round(cov(x, y), digits=2), " | ",
-    "Korrelation = ",
-    round(cor(x, y), digits=2)
-  )
-}
-
-labels = c(
-  "A" = filter(rdf, g == "A") |> cov_sum(),
-  "B" = filter(rdf, g == "B") |> cov_sum(),
-  "C" = filter(rdf, g == "C") |> cov_sum(),
-  "D" = filter(rdf, g == "D") |> cov_sum()
-  )
-```
-
-```{r, fig.width=11, fig.height=6}
-rdf |>
-  ggplot(aes(x, y)) +
-  geom_point(color="tomato", size=0.4, alpha=0.3) +
-  facet_wrap(~g, labeller = as_labeller(labels), scales="free") +
-  labs(x = NULL, y = NULL) +
-  theme(legend.position="none")
-```
-
-## Korrelationskoeffizient
-
-```{r, fig.width=11, fig.height=6}
-rdf |>
-  ggplot(aes(x, y)) +
-  geom_rect(aes(xmin = -Inf, xmax = mx, ymin = my, ymax = Inf),  fill = "#dce8f5") +
-  geom_rect(aes(xmin = mx, xmax = Inf, ymin = -Inf, ymax = my),  fill = "#dce8f5") +
-  geom_rect(aes(xmin = -Inf, xmax = mx, ymin = -Inf, ymax = my), fill = "#f5e1dc") +
-  geom_rect(aes(xmin = mx, xmax = Inf, ymin = my, ymax = Inf),   fill = "#f5e1dc") +
-  geom_point(aes(color=color), size=0.4, alpha=0.3) +
-  scale_color_manual(values=c("darkred", "navyblue")) +
-  facet_wrap(~g, labeller = as_labeller(labels), scales="free") +
-  labs(x = NULL, y = NULL) +
-  theme(legend.position="none")
-```
-
-
-## Nichtlineare Zusammenhänge
-
-```{r, fig.width=11, fig.height=6}
-set.seed(123)
-n = 30
-d_cov = tibble(
-  x = seq(-1, 1, length.out=n),
-  y = -x^2 + rnorm(n, sd=0.2)
-)
-
-dat = d_cov
-x_mean <- mean(dat$x)
-y_mean <- mean(dat$y)
-dat$color = factor(
-  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
-  levels = c(TRUE, FALSE),
-  labels=c("pos", "neg")
-)
-
-dat |>
-  ggplot(aes(x, y)) +
-  geom_point(color="black", shape = 1,  stroke = 2) +
-  labs(x = NULL, y = NULL) +
-  theme(legend.position="none")
-
-```
-
-
-## Nichtlineare Zusammenhänge
-
-```{r, fig.width=11, fig.height=6}
-set.seed(123)
-n = 30
-d_cov = tibble(
-  x = seq(-1, 1, length.out=n),
-  y = -x^2 + rnorm(n, sd=0.2)
-)
-
-dat = d_cov
-x_mean <- mean(dat$x)
-y_mean <- mean(dat$y)
-dat$color = factor(
-  ((dat$x - x_mean) * (dat$y - y_mean)) > 0,
-  levels = c(TRUE, FALSE),
-  labels=c("pos", "neg")
-)
-
-dat |>
-  ggplot(aes(x, y)) +
-  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = y_mean, ymax = Inf,  fill = "#dce8f5") +
-  annotate("rect", xmin = x_mean, xmax = Inf, ymin = -Inf, ymax = y_mean,  fill = "#dce8f5") +
-  annotate("rect", xmin = -Inf, xmax = x_mean, ymin = -Inf, ymax = y_mean, fill = "#f5e1dc") +
-  annotate("rect", xmin = x_mean, xmax = Inf, ymin = y_mean, ymax = Inf,   fill = "#f5e1dc") +
-  geom_point(aes(color = color), shape = 1,  stroke = 2) +
-  scale_color_manual(values=c("darkred", "navyblue")) +
-  labs(x = NULL, y = NULL) +
-  theme(legend.position="none")
-
-```
-
-
-## Nichtlineare Zusammenhänge
-
-```{r, fig.width=11, fig.height=6}
-library(gapminder)
-
-gapminder |>
-  filter(year==2007) |>
-  ggplot(aes(gdpPercap, lifeExp)) +
-  # geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
-  # geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
-  geom_point(shape=1, color="tomato") +
-  labs(
-    x = "BIP",
-    y = "Lebenserwartung (Jahre)",
-    title = "Lebenserwartung und BIP",
-    subtitle = "Daten für 142 Länder im Jahr 2007",
-    caption = "Datenquelle: gampinder.org"
-  )
-
-```
-
-## Transformationen
-
-```{r, fig.width=11, fig.height=6}
-d1 = gapminder |>
-  filter(year==2007) 
-
-p1 = d1|>
-  ggplot(aes(gdpPercap, lifeExp)) +
-  geom_point(shape=1, color="tomato") +
-  labs(
-    x = "BIP",
-    y = "Lebenserwartung (Jahre)",
-    title = "Ohne Log-Transformation",
-    subtitle = paste(
-      "r = ",
-      round(cor(d1$gdpPercap, d1$lifeExp), digits=2),
-      " | rₛ = ",
-      round(cor(d1$gdpPercap, d1$lifeExp, method="spearman"), digits=2)
-    ),
-    x = NULL, y = NULL
-  )
-
-p2 = d1 |>
-  ggplot(aes(log10(gdpPercap), lifeExp)) +
-  geom_point(shape=1, color="tomato") +
-  scale_x_continuous(
-      breaks = c(1,2,3,4,5),
-      labels = scales::math_format(10^.x)
-  ) +
-  labs(
-    x = "BIP (Log-Skala)",
-    y = NULL,
-    title = "Mit Log-Transformation",
-    subtitle = paste(
-      "r = ",
-      round(cor(log10(d1$gdpPercap), d1$lifeExp), digits=2),
-      " | rₛ = ",
-      round(cor(log10(d1$gdpPercap), d1$lifeExp, method="spearman"), digits=2)
-    ),
-    caption = "Datenquelle: gampinder.org"
-  )
-
-p1 | p2
-```
-
-## Rangkorrelationskoeffizient
-
-Der *Rangkorrelationskoeffizient* ist der Korrelationskoeffizient der *Ränge* zweier Variablen. Für rangtransformierte Variablen $x_r$ und $y_r$ gilt also wie zuvor:
-
-<!-- \textrm{cov}(\textrm{rang(x)}, \textrm{rang(y)}) -->
-$$
-r_s = \frac{
-    s_{x_r, y_r}
-  }{
-    s_{x_r} s_{y_r}
-}
-$$
-
-Der Rangkorrelationskoeffizient erfasst nicht nur lineare sondern auch nichtlineare aber monotone Zusammenhänge und kann auch für ordinale Variablen eingesetzt werden.
-
-## Rangkorrelationskoeffizient
-
-Die beiden Datenreihen
-
-$$
-\begin{align}
-\color{orange}{x = 1{,}4 \quad 2{,}3 \quad 1{,}1 \quad 2{,}7 \quad}
-\color{cornflowerblue}{y = 5{,}3 \quad 4{,}3 \quad 0{,}4 \quad 4{,}8}
-\end{align}
-$$
-
-werden rangtransformiert zu:
-$$
-\begin{align}
-\color{orange}{x_r = 3 \quad 2 \quad 4 \quad 1 \quad}
-\color{cornflowerblue}{y_r = 1 \quad 3 \quad 4 \quad 2}
-\end{align}
-$$
-
-Damit ergibt sich unter Anwendung der gleichen Schritte:
-
-$$
-r_s = \frac{ s_{x_r, y_r} }{ s_{x_r} s_{y_r} }
-= \frac{0.67}{1.29 \times 1.29} = 0.4
-$$
-
-
-## Rangkorrelationskoeffizient
-
-```{r, fig.width=11, fig.height=6}
-set.seed(123)
-n = 1000
-d1 = tibble(
-  x = seq(0.001, 0.5, length.out=n),
-  x2 = seq(-1, 1, length.out=n),
-  y1 = x + rnorm(n, sd=0.1),
-  y2 = log(x) + rnorm(n, sd=0.1),
-  y3 = -x2^2 + rnorm(n, sd=0.1)
-)
-
-p1 = d1 |>
-  ggplot(aes(x, y1)) +
-  geom_point(color="tomato", shape=1) +
-  labs(
-    title = paste(
-      "r = ",
-      round(cor(d1$x, d1$y1), digits=2),
-      " | rₛ = ",
-      round(cor(d1$x, d1$y1, method="spearman"), digits=2)
-    ),
-    x = NULL, y = NULL
-  )
-
-p2 = d1 |>
-  ggplot(aes(x, y=y2)) +
-  geom_point(color="cornflower blue", shape=1) +
-  labs(
-    title = paste(
-      "r = ",
-      round(cor(d1$x, d1$y2), digits=2),
-      " | rₛ = ",
-      round(cor(d1$x, d1$y2, method="spearman"), digits=2)
-    ),
-    x = NULL, y = NULL
-  )
-
-p3 = d1 |>
-  ggplot(aes(x2, y=y3)) +
-  geom_point(color="orange", shape=1) +
-  labs(
-    title = paste(
-      "r = ",
-      round(cor(d1$x2, d1$y3), digits=2),
-      " | rₛ = ",
-      round(cor(d1$x2, d1$y3, method="spearman"), digits=2)
-    ),
-    x = NULL, y = NULL
-  )
-
-p1 | p2 | p3
 
 ```
 
@@ -1020,18 +518,149 @@ as_tbl_graph(g) |>
 ::: {.column width="50%"}
 - Vernetzte Beobachtungen sind ebenfalls häufig korreliert.
 - Beispiel: Wahlverhalten und Freundschaftsnetzwerke
-- Ignorieren von Autokorrelation führt zu verzerrten Inferenzen.
+- Ignorieren von Autokorrelation kann zu Fehlschlüssen führen.
 :::
 :::::
 
 
-## Prüfungsfragen
+# Statistische Modelle
 
-- Welche Rolle spielen abhängige, unabhängige und Kontrollvariablen in multivariaten Analysen?
 
-- Berechnen Sie den Korrelationskoeffizienten für die folgenden Datenreihen.
+## Statistische Modelle
 
-- Welches Zusammenhangsmaß nutzen Sie für zwei kategorisch-ordinale Variablen?
+- *Theoretische Modelle* beschreiben die kausalen Mechanismen, die einem Sachverhalt zugrundeliegen (z.B. Wirtschaftswachstum, Klimaerwärmung).
 
-- Was ist der zentrale Vergleich der dem Kontingenzkoeffizienten zugrunde liegt?
+- *Statistische Modelle* approximieren in stilisierter (mathematischer) Form den *datengenerierenden Prozess (DGP)*, der empirischen Beobachtungen zugrunde liegt.
+
+- Statistische Modelle werden mithilfe von Beobachtungen kalibriert (d.h., sie 'lernen' aus Daten).
+
+## Der datengenerierende Prozess {.smaller}
+
+Der datengenerierende Prozess umfasst systematische Zusammenhänge (kausale Effekte, Störfaktoren oder Effekte der Datenerhebung) und unmodellierte Variation.
+
+![](images/dgp.png)
+
+Statistische Inferenz hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.
+
+## Ist die 1-Euro Münze fair?
+
+<hr>
+
+**Datengenerierender Prozess**: Wiederholter Münzwurf
+
+  - Faktoren: Eigenschaften der Münze, Wurftechnik, chaotischer physikalischer Prozess
+
+<hr>
+
+**Statistisches Modell**: Binomialverteilung
+
+  - Zufallsprozess mit $\textrm{Pr}(K) = p$ und $\textrm{Pr}(Z) = 1 - p$
+  - Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik
+
+## Wozu Modellieren?
+
+- **Vorhersagen**:
+
+- **Testen**:
+
+- **Simulation**:
+
+## Zwei Quellen von Unsicherheit
+
+- **Aleatorische Unsicherheit** beschreibt systemische Unsicherheit, die nicht durch mehr Beobachtungen aber evtl. durch ein besseres Modell reduziert werden kann (z.B. begrenzte Vorhersagekraft von Wohnungsgröße als einzigem Prädiktor für Mietpreise).
+
+- **Epistemische Unsicherheit** beschreibt Unsicherheit, die aus der begrenzten Verfügbarkeit von Informationen resultiert, und kann durch mehr/bessere Beobachtungen reduziert werden (z.B. Stichprobengröße, Messfehler).
+
+## Struktur eines statistischen Modells
+- Beobachtete (Daten) und unbeobachtete (Parameter) Variablen
+- Struktur und Annahmen
+
+## Beispiel aleatorisch vs. epistemisch
+
+
+
+
+
+# Exkurs
+Wahrscheinlichkeitstheorie
+
+## Wahrscheinlichkeit
+
+- Die *Wahrscheinlichkeit* eines unsicheren Ereignisses (d.h. eines Prozesses mit mehreren möglichen Ergebnissen) ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).
+
+
+## Wahrscheinlichkeitsverteilungen
+
+::::: columns
+::: {.column width="45%"}
+![](images/verteilung.png)
+:::
+
+::: {.column width="55%"}
+- Die Gesamtwahrscheinlichkeit aller möglichen *Ergebnisse* ist auf 1 normiert, d.h. 'irgendwas muss passieren'.
+
+- Eine Wahrscheinlichkeits-verteilung ordnet jedem möglichen *Ereignis* eines Zufallsprozesses eine Zahl zwischen 0 und 1 zu. 
+
+
+:::
+:::::
+
+## Wahrscheinlichkeitsverteilungen
+
+$$
+x = \{⚀, ⚁, ⚂, ⚃, ⚄, ⚅\} \\
+P(⚀) = P(⚁) = \ldots =\frac{1}{6} \\
+\sum_x = 1
+$$
+
+## Bernoulliverteilung
+
+<!-- ```{ojs} -->
+<!-- //| panel: sidebar -->
+<!-- viewof prob = Inputs.range([0, 1], { value: 0.5, step: 0.01, label: "p" }) -->
+<!-- viewof rand = Inputs.button("Münze") -->
+<!-- ``` -->
+
+```{r}
+library(gganimate)
+library(rstanarm)
+library(posterior)
+library(tidybayes)
+
+df = tibble(
+  x = rnorm(10),
+  y = x + rnorm(10)
+)
+
+fit = stan_glm(y ~ x, data=df)
+reg = fit |> as_draws_df() |>
+  slice_head(n=50) |>
+  select(a=`(Intercept)`, b = x) |>
+  mutate(frame = row_number())
+
+p = ggplot() +
+  geom_point(
+    data = df,
+    aes(x, y),
+    shape = 1,
+    size = 3,
+    color = "tomato"
+    ) +
+  geom_abline(
+    data = reg,
+    aes(slope=b, intercept=a),
+    color = "cornflowerblue"
+    ) +
+  transition_states(
+    frame,
+    transition_length = 3,
+    state_length = 1
+  )
+
+animate(p, nframes = 50, fps = 10, width = 11, height = 6)
+```
+
+
+## Münzwurf
+
 
