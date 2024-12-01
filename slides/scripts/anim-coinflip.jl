@@ -26,7 +26,7 @@ pd(ht) = x -> pd(x, ht[1], ht[2])
 
 function plot_coinflip(y1, y2)
     N = length(y1)
-    fig = Figure(size=(900, 500))
+    fig = Figure(;size=(900, 500), backgroundcolor=:white)
     
     xticks = ([1,2], ["Kopf", "Zahl"])
 
@@ -60,8 +60,8 @@ fig, ax1, ax2, ax3, ax4 = plot_coinflip(y1, y2)
 nframes = N
 framerate = 2
 
-record(fig, "coinflip.mp4", 1:N; loop=0,
-       framerate=framerate, compression = 10) do n
+record(fig, "coinflip.gif", 1:N;
+       loop=0, framerate=framerate) do n
     i[] = n
     ax1.title = "Münze 1 ($n Würfe)"
     ax2.title = "Münze 2 ($n Würfe)"
