@@ -10,7 +10,7 @@ function simulate(N, p)
     t = collect(1:N) .- h
     vcat(
         [[0,0]],
-        map(x -> [x[1], x[2]], zip(t, h))
+        map(x -> [x[1], x[2]], zip(h, t))
     )
 end
 
@@ -25,7 +25,6 @@ pd(x, h, t; α=1, β=1) = pdf.(Beta(α + h, β + t), x);
 pd(ht) = x -> pd(x, ht[1], ht[2])
 
 function plot_coinflip(y1, y2)
-    N = length(y1)
     fig = Figure(;size=(900, 500), backgroundcolor=:white)
     
     xticks = ([1,2], ["Kopf", "Zahl"])
@@ -33,7 +32,7 @@ function plot_coinflip(y1, y2)
     ax1 = Axis(fig[1, 1]; xticks,  ylabel = "Häufigkeit")
     ax2 = Axis(fig[1, 2]; xticks)
     ax3 = Axis(fig[2, 1]; xlabel = "p (W'keit Kopf)", ylabel = "Dichte")
-    ax4 = Axis(fig[2, 2]; xlabel = "p (W'keit Kopf)", ylabel = "Dichte")
+    ax4 = Axis(fig[2, 2]; xlabel = "p (W'keit Kopf)")
     
     xlims!(ax3, 0, 1)
     xlims!(ax4, 0, 1)
@@ -50,6 +49,9 @@ function plot_coinflip(y1, y2)
     barplot!(ax1, [1, 2], y1_curr; color = "tomato")
     barplot!(ax2, [1, 2], y2_curr; color = "cornflowerblue")
     
+    vlines!(ax3, 0.5; color = "black", linestyle = :dash)
+    vlines!(ax4, 0.7; color = "black", linestyle = :dash)
+    
     lines!(ax3, 0:0.01:1, p1_curr; color = "tomato")
     lines!(ax4, 0:0.01:1, p2_curr; color = "cornflowerblue")
     
@@ -63,8 +65,8 @@ framerate = 2
 record(fig, "coinflip.gif", 1:N;
        loop=0, framerate=framerate) do n
     i[] = n
-    ax1.title = "Münze 1 ($n Würfe)"
-    ax2.title = "Münze 2 ($n Würfe)"
+    ax1.title = "Faire Münze ($n Würfe)"
+    ax2.title = "Unfaire Münze ($n Würfe)"
 
     ax1.limits = (nothing, nothing, 0, 40)
     ax2.limits = (nothing, nothing, 0, 40)
