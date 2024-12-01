@@ -542,6 +542,7 @@ Der datengenerierende Prozess umfasst systematische Zusammenhänge (kausale Effe
 
 Statistische Inferenz hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.
 
+
 ## Ist die 1-Euro Münze fair?
 
 <hr>
@@ -557,13 +558,21 @@ Statistische Inferenz hat das Ziel, auf Basis von Beobachtungen und unter bestim
   - Zufallsprozess mit $\textrm{Pr}(K) = p$ und $\textrm{Pr}(Z) = 1 - p$
   - Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik
 
-## Wozu Modellieren?
 
-- **Vorhersagen**:
+## Struktur eines statistischen Modells
+Ein statistisches Modell kombiniert beobachtete ([*Daten*]{style="color: orange"}) und unbeobachtete Variablen ([*Parameter*]{style="color: cornflowerblue"}) in einem mathemat. Modell, das bestimmte *Annahmen* verkörpert:
 
-- **Testen**:
+$$
+\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{p})
+$$
 
-- **Simulation**:
+> Wir modellieren die Anzahl Würfe mit Ergebnis *Kopf* aus $n$ Münzwürfen als generiert durch eine Binomialverteilung mit unbekanntem Parameter $p$. Die Tilde $a \sim b$ liest sich als '$a$ *folgt Verteilung* $b$'.
+
+
+## Simulation Münzwurf
+
+![](coinflip.gif){.card}
+
 
 ## Zwei Quellen von Unsicherheit
 
@@ -571,23 +580,9 @@ Statistische Inferenz hat das Ziel, auf Basis von Beobachtungen und unter bestim
 
 - **Epistemische Unsicherheit** beschreibt Unsicherheit, die aus der begrenzten Verfügbarkeit von Informationen resultiert, und kann durch mehr/bessere Beobachtungen reduziert werden (z.B. Stichprobengröße, Messfehler).
 
-## Struktur eines statistischen Modells
-- Beobachtete (Daten) und unbeobachtete (Parameter) Variablen
-- Struktur und Annahmen
 
-## Beispiel aleatorisch vs. epistemisch
-
-
-
-
-
-# Exkurs
+# Exkurs: Unsicherheit
 Wahrscheinlichkeitstheorie
-
-## Wahrscheinlichkeit
-
-- Die *Wahrscheinlichkeit* eines unsicheren Ereignisses (d.h. eines Prozesses mit mehreren möglichen Ergebnissen) ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).
-
 
 ## Wahrscheinlichkeitsverteilungen
 
@@ -597,70 +592,30 @@ Wahrscheinlichkeitstheorie
 :::
 
 ::: {.column width="55%"}
+- Die *Wahrscheinlichkeit* eines unsicheren Ereignisses (d.h. eines Prozesses mit mehreren möglichen Ergebnissen) ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).
 - Die Gesamtwahrscheinlichkeit aller möglichen *Ergebnisse* ist auf 1 normiert, d.h. 'irgendwas muss passieren'.
-
-- Eine Wahrscheinlichkeits-verteilung ordnet jedem möglichen *Ereignis* eines Zufallsprozesses eine Zahl zwischen 0 und 1 zu. 
-
 
 :::
 :::::
 
 ## Wahrscheinlichkeitsverteilungen
+![](images/prob-1.png)
 
-$$
-x = \{⚀, ⚁, ⚂, ⚃, ⚄, ⚅\} \\
-P(⚀) = P(⚁) = \ldots =\frac{1}{6} \\
-\sum_x = 1
-$$
+## Wahrscheinlichkeitsverteilungen
+![](images/prob-2.png)
 
-## Bernoulliverteilung
+## Wahrscheinlichkeitsverteilungen
+![](images/prob-3.png)
+
+## Wahrscheinlichkeitsverteilungen
+![](images/prob-4.png)
+
+## Binomialverteilung
 
 <!-- ```{ojs} -->
 <!-- //| panel: sidebar -->
 <!-- viewof prob = Inputs.range([0, 1], { value: 0.5, step: 0.01, label: "p" }) -->
 <!-- viewof rand = Inputs.button("Münze") -->
 <!-- ``` -->
-
-```{r}
-library(gganimate)
-library(rstanarm)
-library(posterior)
-library(tidybayes)
-
-df = tibble(
-  x = rnorm(10),
-  y = x + rnorm(10)
-)
-
-fit = stan_glm(y ~ x, data=df)
-reg = fit |> as_draws_df() |>
-  slice_head(n=50) |>
-  select(a=`(Intercept)`, b = x) |>
-  mutate(frame = row_number())
-
-p = ggplot() +
-  geom_point(
-    data = df,
-    aes(x, y),
-    shape = 1,
-    size = 3,
-    color = "tomato"
-    ) +
-  geom_abline(
-    data = reg,
-    aes(slope=b, intercept=a),
-    color = "cornflowerblue"
-    ) +
-  transition_states(
-    frame,
-    transition_length = 3,
-    state_length = 1
-  )
-
-animate(p, nframes = 50, fps = 10, width = 11, height = 6)
-```
-
-
-## Münzwurf
 
 

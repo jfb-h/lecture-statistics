@@ -822,13 +822,19 @@ I = \frac{n}{s_w}
 <li>Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik</li>
 </ul>
 </section>
-<section id="wozu-modellieren" class="slide level2">
-<h2>Wozu Modellieren?</h2>
-<ul>
-<li><p><strong>Vorhersagen</strong>:</p></li>
-<li><p><strong>Testen</strong>:</p></li>
-<li><p><strong>Simulation</strong>:</p></li>
-</ul>
+<section id="struktur-eines-statistischen-modells" class="slide level2">
+<h2>Struktur eines statistischen Modells</h2>
+<p>Ein statistisches Modell kombiniert beobachtete (<span style="color: orange"><em>Daten</em></span>) und unbeobachtete Variablen (<span style="color: cornflowerblue"><em>Parameter</em></span>) in einem mathemat. Modell, das bestimmte <em>Annahmen</em> verkörpert:</p>
+<p><span class="math display">\[
+\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{p})
+\]</span></p>
+<blockquote>
+<p>Wir modellieren die Anzahl Würfe mit Ergebnis <em>Kopf</em> aus <span class="math inline">\(n\)</span> Münzwürfen als generiert durch eine Binomialverteilung mit unbekanntem Parameter <span class="math inline">\(p\)</span>. Die Tilde <span class="math inline">\(a \sim b\)</span> liest sich als ‘<span class="math inline">\(a\)</span> <em>folgt Verteilung</em> <span class="math inline">\(b\)</span>’.</p>
+</blockquote>
+</section>
+<section id="simulation-münzwurf" class="slide level2">
+<h2>Simulation Münzwurf</h2>
+<p><a href="coinflip.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="coinflip.gif" class="card"></a></p>
 </section>
 <section id="zwei-quellen-von-unsicherheit" class="slide level2">
 <h2>Zwei Quellen von Unsicherheit</h2>
@@ -836,162 +842,47 @@ I = \frac{n}{s_w}
 <li><p><strong>Aleatorische Unsicherheit</strong> beschreibt systemische Unsicherheit, die nicht durch mehr Beobachtungen aber evtl. durch ein besseres Modell reduziert werden kann (z.B. begrenzte Vorhersagekraft von Wohnungsgröße als einzigem Prädiktor für Mietpreise).</p></li>
 <li><p><strong>Epistemische Unsicherheit</strong> beschreibt Unsicherheit, die aus der begrenzten Verfügbarkeit von Informationen resultiert, und kann durch mehr/bessere Beobachtungen reduziert werden (z.B. Stichprobengröße, Messfehler).</p></li>
 </ul>
-</section>
-<section id="struktur-eines-statistischen-modells" class="slide level2">
-<h2>Struktur eines statistischen Modells</h2>
-<ul>
-<li>Beobachtete (Daten) und unbeobachtete (Parameter) Variablen</li>
-<li>Struktur und Annahmen</li>
-</ul>
-</section>
-<section id="beispiel-aleatorisch-vs.-epistemisch" class="slide level2">
-<h2>Beispiel aleatorisch vs.&nbsp;epistemisch</h2>
 </section></section>
 <section>
-<section id="exkurs-1" class="title-slide slide level1 center">
-<h1>Exkurs</h1>
+<section id="exkurs-unsicherheit" class="title-slide slide level1 center">
+<h1>Exkurs: Unsicherheit</h1>
 <p>Wahrscheinlichkeitstheorie</p>
-</section>
-<section id="wahrscheinlichkeit" class="slide level2">
-<h2>Wahrscheinlichkeit</h2>
-<ul>
-<li>Die <em>Wahrscheinlichkeit</em> eines unsicheren Ereignisses (d.h. eines Prozesses mit mehreren möglichen Ergebnissen) ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).</li>
-</ul>
 </section>
 <section id="wahrscheinlichkeitsverteilungen" class="slide level2">
 <h2>Wahrscheinlichkeitsverteilungen</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<p><a href="images/verteilung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="images/verteilung.png"></a></p>
+<p><a href="images/verteilung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/verteilung.png"></a></p>
 </div><div class="column" style="width:55%;">
 <ul>
-<li><p>Die Gesamtwahrscheinlichkeit aller möglichen <em>Ergebnisse</em> ist auf 1 normiert, d.h. ‘irgendwas muss passieren’.</p></li>
-<li><p>Eine Wahrscheinlichkeits-verteilung ordnet jedem möglichen <em>Ereignis</em> eines Zufallsprozesses eine Zahl zwischen 0 und 1 zu.</p></li>
+<li>Die <em>Wahrscheinlichkeit</em> eines unsicheren Ereignisses (d.h. eines Prozesses mit mehreren möglichen Ergebnissen) ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).</li>
+<li>Die Gesamtwahrscheinlichkeit aller möglichen <em>Ergebnisse</em> ist auf 1 normiert, d.h. ‘irgendwas muss passieren’.</li>
 </ul>
 </div></div>
 </section>
 <section id="wahrscheinlichkeitsverteilungen-1" class="slide level2">
 <h2>Wahrscheinlichkeitsverteilungen</h2>
-<p><span class="math display">\[
-x = \{⚀, ⚁, ⚂, ⚃, ⚄, ⚅\} \\
-P(⚀) = P(⚁) = \ldots =\frac{1}{6} \\
-\sum_x = 1
-\]</span></p>
+<p><a href="images/prob-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/prob-1.png"></a></p>
 </section>
-<section id="bernoulliverteilung" class="slide level2">
-<h2>Bernoulliverteilung</h2>
+<section id="wahrscheinlichkeitsverteilungen-2" class="slide level2">
+<h2>Wahrscheinlichkeitsverteilungen</h2>
+<p><a href="images/prob-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/prob-2.png"></a></p>
+</section>
+<section id="wahrscheinlichkeitsverteilungen-3" class="slide level2">
+<h2>Wahrscheinlichkeitsverteilungen</h2>
+<p><a href="images/prob-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/prob-3.png"></a></p>
+</section>
+<section id="wahrscheinlichkeitsverteilungen-4" class="slide level2">
+<h2>Wahrscheinlichkeitsverteilungen</h2>
+<p><a href="images/prob-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/prob-4.png"></a></p>
+</section>
+<section id="binomialverteilung" class="slide level2">
+<h2>Binomialverteilung</h2>
 <!-- ```{ojs} -->
 <!-- //| panel: sidebar -->
 <!-- viewof prob = Inputs.range([0, 1], { value: 0.5, step: 0.01, label: "p" }) -->
 <!-- viewof rand = Inputs.button("Münze") -->
 <!-- ``` -->
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
-Chain 1: 
-Chain 1: Gradient evaluation took 0.000328 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3.28 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
-Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 1: 
-Chain 1:  Elapsed Time: 0.02 seconds (Warm-up)
-Chain 1:                0.02 seconds (Sampling)
-Chain 1:                0.04 seconds (Total)
-Chain 1: 
-
-SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
-Chain 2: 
-Chain 2: Gradient evaluation took 9e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
-Chain 2: Adjust your expectations accordingly!
-Chain 2: 
-Chain 2: 
-Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 2: 
-Chain 2:  Elapsed Time: 0.021 seconds (Warm-up)
-Chain 2:                0.02 seconds (Sampling)
-Chain 2:                0.041 seconds (Total)
-Chain 2: 
-
-SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
-Chain 3: 
-Chain 3: Gradient evaluation took 1.5e-05 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.15 seconds.
-Chain 3: Adjust your expectations accordingly!
-Chain 3: 
-Chain 3: 
-Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 3: 
-Chain 3:  Elapsed Time: 0.021 seconds (Warm-up)
-Chain 3:                0.022 seconds (Sampling)
-Chain 3:                0.043 seconds (Total)
-Chain 3: 
-
-SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
-Chain 4: 
-Chain 4: Gradient evaluation took 1.3e-05 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.13 seconds.
-Chain 4: Adjust your expectations accordingly!
-Chain 4: 
-Chain 4: 
-Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 4: 
-Chain 4:  Elapsed Time: 0.02 seconds (Warm-up)
-Chain 4:                0.025 seconds (Sampling)
-Chain 4:                0.045 seconds (Total)
-Chain 4: </code></pre>
-</div>
-</div>
-</section>
-<section id="münzwurf" class="slide level2">
-<h2>Münzwurf</h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -1433,7 +1324,7 @@ Chain 4: </code></pre>
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
