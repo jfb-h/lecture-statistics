@@ -60,7 +60,7 @@ fig, ax1, ax2, ax3, ax4 = plot_coinflip(y1, y2)
 nframes = N
 framerate = 2
 
-record(fig, "coinflip.gif", 1:N;
+record(fig, "coinflip.webm", 1:N;
        framerate=framerate, compression = 10) do n
     i[] = n
     ax1.title = "Münze 1 ($n Würfe)"
