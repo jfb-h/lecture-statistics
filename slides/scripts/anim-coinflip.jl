@@ -25,7 +25,7 @@ pd(x, h, t; α=1, β=1) = pdf.(Beta(α + h, β + t), x);
 pd(ht) = x -> pd(x, ht[1], ht[2])
 
 function plot_coinflip(y1, y2)
-    fig = Figure(;size=(900, 500), backgroundcolor=:white)
+    fig = Figure(;size=(900, 500), padding=0)
     
     xticks = ([1,2], ["Kopf", "Zahl"])
 
