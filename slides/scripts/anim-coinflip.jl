@@ -14,25 +14,15 @@ function simulate(N, p)
     )
 end
 
-N, p1, p2 = 50, 0.5, 0.7
-
-i = Observable(1)
-
-y1 = simulate(N, p1)
-y2 = simulate(N, p2)
-
-pd(x, h, t; α=1, β=1) = pdf.(Beta(α + h, β + t), x);
-pd(ht) = x -> pd(x, ht[1], ht[2])
-
 function plot_coinflip(y1, y2)
     fig = Figure(;size=(900, 500), padding=0)
     
     xticks = ([1,2], ["Kopf", "Zahl"])
-
+    
     ax1 = Axis(fig[1, 1]; xticks,  ylabel = "Häufigkeit")
     ax2 = Axis(fig[1, 2]; xticks)
-    ax3 = Axis(fig[2, 1]; xlabel = "p (W'keit Kopf)", ylabel = "Dichte")
-    ax4 = Axis(fig[2, 2]; xlabel = "p (W'keit Kopf)")
+    ax3 = Axis(fig[2, 1]; xlabel = "θ", ylabel = "Dichte")
+    ax4 = Axis(fig[2, 2]; xlabel = "θ")
     
     xlims!(ax3, 0, 1)
     xlims!(ax4, 0, 1)
@@ -58,12 +48,20 @@ function plot_coinflip(y1, y2)
     return fig, ax1, ax2, ax3, ax4
 end
 
+N, p1, p2 = 50, 0.5, 0.7
+
+i = Observable(1)
+
+y1 = simulate(N, p1)
+y2 = simulate(N, p2)
+
+pd(x, h, t; α=1, β=1) = pdf.(Beta(α + h, β + t), x);
+pd(ht) = x -> pd(x, ht[1], ht[2])
+
 fig, ax1, ax2, ax3, ax4 = plot_coinflip(y1, y2)
-nframes = N
-framerate = 2
 
 record(fig, "coinflip.gif", 1:N;
-       loop=0, framerate=framerate) do n
+       loop=0, framerate=2) do n
     i[] = n
     ax1.title = "Faire Münze ($n Würfe)"
     ax2.title = "Unfaire Münze ($n Würfe)"
