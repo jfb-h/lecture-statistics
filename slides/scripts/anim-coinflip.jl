@@ -14,7 +14,7 @@ function simulate(N, p)
     )
 end
 
-N, p1, p2 = 80, 0.5, 0.7
+N, p1, p2 = 50, 0.5, 0.7
 
 i = Observable(1)
 
@@ -66,8 +66,8 @@ record(fig, "coinflip.gif", 1:N;
     ax1.title = "Münze 1 ($n Würfe)"
     ax2.title = "Münze 2 ($n Würfe)"
 
-    ax1.limits = (nothing, nothing, 0, 61)
-    ax2.limits = (nothing, nothing, 0, 61)
+    ax1.limits = (nothing, nothing, 0, 40)
+    ax2.limits = (nothing, nothing, 0, 40)
 
     ax3.limits = (0, 1, 0, 10)
     ax4.limits = (0, 1, 0, 10)
