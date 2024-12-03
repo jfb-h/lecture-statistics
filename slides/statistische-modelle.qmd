@@ -1,6 +1,6 @@
 ---
 title: "Einführung in die Statistik"
-subtitle: "Zusammenhangsmaße"
+subtitle: "Statistische Modelle"
 author: Dr. Jakob Hoffmann, Economic Geography Group
 lightbox: true
 execute:
@@ -301,9 +301,10 @@ Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191
 
 - *Autokorrelation* beschreibt den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben (Korrelation mit sich selbst).
 
+- Autokorrelation kann positiv (benachbarte Einheiten sind sich ähnlich) oder negativ (benachbarte Einheiten sind sich unähnlich) sein.
+
 - Die Definition von Nachbarschaft kann je nach Fragestellung angepasst werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).
 
-- Autokorrelation kann positiv (benachbarte Einheiten sind sich ähnlich) oder negativ (benachbarte Einheiten sind sich unähnlich) sein.
 
 
 ## Räumliche Gewichte {.smaller}
@@ -540,7 +541,7 @@ Der datengenerierende Prozess umfasst systematische Zusammenhänge (kausale Effe
 
 ![](images/dgp.png)
 
-Statistische Inferenz hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.
+*Statistische Inferenz* hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.
 
 
 ## Ist die 1-Euro Münze fair?
@@ -555,23 +556,52 @@ Statistische Inferenz hat das Ziel, auf Basis von Beobachtungen und unter bestim
 
 **Statistisches Modell**: Binomialverteilung
 
-  - Zufallsprozess mit $\textrm{Pr}(K) = p$ und $\textrm{Pr}(Z) = 1 - p$
+  - Zufallsprozess mit $\textrm{Pr}(K) = \theta$ und $\textrm{Pr}(Z) = 1 - \theta$
   - Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik
 
 
 ## Struktur eines statistischen Modells
-Ein statistisches Modell kombiniert beobachtete ([*Daten*]{style="color: orange"}) und unbeobachtete Variablen ([*Parameter*]{style="color: cornflowerblue"}) in einem mathemat. Modell, das bestimmte *Annahmen* verkörpert:
+Ein statistisches Modell kombiniert beobachtete Variablen ([*Daten*]{style="color: orange"}) und unbeobachtete Variablen ([*Parameter*]{style="color: cornflowerblue"}) in einem mathemat. Modell, das bestimmte *Annahmen* verkörpert:
 
 $$
-\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{p})
+\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{\theta})
 $$
 
-> Wir modellieren die Anzahl Würfe mit Ergebnis *Kopf* aus $n$ Münzwürfen als generiert durch eine Binomialverteilung mit unbekanntem Parameter $p$. Die Tilde $a \sim b$ liest sich als '$a$ *folgt Verteilung* $b$'.
+> Wir modellieren die Anzahl Würfe mit Ergebnis 'Kopf' aus insgesamt $n$ Würfen durch eine Binomialverteilung mit unbekanntem Parameter $\theta$. Die Tilde $a \sim b$ liest sich als '$a$ *folgt Verteilung* $b$'.
+
+## Ziel statistischer Inferenz
+
+::::: columns
+::: {.column width="45%"}
+```{r, fig.width=5, fig.height=6}
+size <- 50
+
+df = rbind(
+  tibble(x = 1:50, y = dbinom(x, size, 0.5), g = "Binomial(n = 50, θ = 0,5)"),
+  tibble(x = 1:50, y = dbinom(x, size, 0.7), g = "Binomial(n = 50, θ = 0,7)")
+  )
+
+df |> ggplot(aes(x, y)) +
+  geom_col(color="white", fill="grey30") +
+  geom_hline(yintercept=0) +
+  labs(x = "x", y = "p(x)") +
+  theme(legend.position="none") +
+  facet_wrap(~g, ncol=1)
+
+```
+:::
+
+::: {.column width="55%"}
+- Das Ziel statistischer Inferenz sind Aussagen über den datengenerierenden Prozess und seine Bestandteile.
+- Hier: Die Antwort auf die Frage nach der Fairness der 1-Euro Münze steckt im *unbekannten* Parameter $\theta$: Die Münze ist fair, wenn $\theta = 0.5$.
+:::
+:::::
+
 
 
 ## Simulation Münzwurf
 
-![](coinflip.gif){.card}
+![](images/coinflip.gif){.card}
 
 
 ## Zwei Quellen von Unsicherheit
@@ -581,41 +611,92 @@ $$
 - **Epistemische Unsicherheit** beschreibt Unsicherheit, die aus der begrenzten Verfügbarkeit von Informationen resultiert, und kann durch mehr/bessere Beobachtungen reduziert werden (z.B. Stichprobengröße, Messfehler).
 
 
-# Exkurs: Unsicherheit
-Wahrscheinlichkeitstheorie
+# Wahrscheinlichkeit
+Quantifizierung von Unsicherheit
 
-## Wahrscheinlichkeitsverteilungen
+## Wahrscheinlichkeit {.smaller}
 
 ::::: columns
 ::: {.column width="45%"}
 ![](images/verteilung.png)
 :::
-
 ::: {.column width="55%"}
-- Die *Wahrscheinlichkeit* eines unsicheren Ereignisses (d.h. eines Prozesses mit mehreren möglichen Ergebnissen) ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).
-- Die Gesamtwahrscheinlichkeit aller möglichen *Ergebnisse* ist auf 1 normiert, d.h. 'irgendwas muss passieren'.
+
+- Eine *Wahrscheinlichkeitsverteilung* verteilt eine auf 1 normierte Quantität über die möglichen Resultate eines Zufallsprozesses.
+
+- Die W'keit eines Ereignisses ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).
+
+- **Frequentistische Interpretation:** W'keit ist die relative Häufigkeit in einem unendlich wiederholten Experiment (z.B. Münzwurf).
+
+- **Bayesianische Interpretation:** W'keit ist ein konsistentes Maß für Unsicherheit (z.B. W'keit, dass Bayern gegen Donezk gewinnt).
 
 :::
 :::::
 
-## Wahrscheinlichkeitsverteilungen
+## Wahrscheinlichkeit
 ![](images/prob-1.png)
 
-## Wahrscheinlichkeitsverteilungen
+## Wahrscheinlichkeit
 ![](images/prob-2.png)
 
-## Wahrscheinlichkeitsverteilungen
+## Wahrscheinlichkeit
 ![](images/prob-3.png)
 
-## Wahrscheinlichkeitsverteilungen
+## Wahrscheinlichkeit
 ![](images/prob-4.png)
+
+## Wahrscheinlichkeit
+![](images/prob-6.png)
+
+## Wahrscheinlichkeit
+![](images/prob-5.png)
+
+## Zufallsvariablen
+
+Eine *Zufallsvariable* $X(E)$ ordnet jedem Ergebnis $E$ im Ergebnisraum eines Zufallsprozesses eine Zahl zu.
+
+Für das Beispiel des Münzwurfs:
+
+$$
+X(E) = \begin{cases}
+  0, & \text{wenn } E = \textrm{Kopf} \\
+  1, & \text{wenn } E = \textrm{Zahl}
+\end{cases}
+$$
+
+Die Zahlen haben nicht immer eine inheränte Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.
+
+Statt mit $X(E)$ wird eine Zufallsvariable häufig auch einfach mit $X$ bezeichnet.
+
+
+## Bernoulliverteilung
+
+Eine der bekanntesten W'keitsverteilungen ist die *Bernoulli-verteilung* für eine binäre Zufallsvariable $X$ (Wertebereich 0 oder 1) mit Wahrscheinlichkeitsfunktion:
+
+$$
+\textrm{Ber}(X = \color{cornflowerblue}{x} | \color{orange}{\theta}) =
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{1-\color{cornflowerblue}{x}} \\
+$$
+
+zum Beispiel mit $\theta = 0{,}7$:
+
+$$
+\begin{align}
+\textrm{Ber}(X = \color{cornflowerblue}{1} | \color{orange}{0{,}7}) &=
+\color{orange}{0{,}7}^\color{cornflowerblue}{1} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{1}} = 0{,}7 \\
+\textrm{Ber}(X = \color{cornflowerblue}{0} | \color{orange}{0{,}7}) &=
+\color{orange}{0{,}7}^\color{cornflowerblue}{0} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{0}} = 1 - 0{,}7
+\end{align}
+$$
 
 ## Binomialverteilung
 
-<!-- ```{ojs} -->
-<!-- //| panel: sidebar -->
-<!-- viewof prob = Inputs.range([0, 1], { value: 0.5, step: 0.01, label: "p" }) -->
-<!-- viewof rand = Inputs.button("Münze") -->
-<!-- ``` -->
+Die *Binomialverteilung* modelliert das Ergebnis einer Reihe von $n$ unabhängigen Bernoulli-Experimenten und hat für eine Zufallsvariable $X$ mit Wertebereich 0 bis $n$ die W'keitsfunktion:
 
+$$
+\textrm{Bin}(X = \color{cornflowerblue}{x} | n, \color{orange}{\theta}) =
+\binom{n}{x}
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{n-\color{cornflowerblue}{x}} \\
+$$
 
+Der Faktor $\binom{n}{x}$ ist der *Binomialkoeffizient* und zählt, wie viele unterschiedliche Möglichkeiten es gibt, aus $n$ Elementen genau $x$ auszuwählen.

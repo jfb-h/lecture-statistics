@@ -333,7 +333,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Zusammenhangsmaße</p>
+  <p class="subtitle">Statistische Modelle</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -673,8 +673,8 @@ C =
 <h2>Räumliche Autokorrelation</h2>
 <ul>
 <li><p><em>Autokorrelation</em> beschreibt den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben (Korrelation mit sich selbst).</p></li>
-<li><p>Die Definition von Nachbarschaft kann je nach Fragestellung angepasst werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).</p></li>
 <li><p>Autokorrelation kann positiv (benachbarte Einheiten sind sich ähnlich) oder negativ (benachbarte Einheiten sind sich unähnlich) sein.</p></li>
+<li><p>Die Definition von Nachbarschaft kann je nach Fragestellung angepasst werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).</p></li>
 </ul>
 </section>
 <section id="räumliche-gewichte" class="slide level2 smaller">
@@ -806,7 +806,7 @@ I = \frac{n}{s_w}
 <h2>Der datengenerierende Prozess</h2>
 <p>Der datengenerierende Prozess umfasst systematische Zusammenhänge (kausale Effekte, Störfaktoren oder Effekte der Datenerhebung) und unmodellierte Variation.</p>
 <p><a href="images/dgp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/dgp.png"></a></p>
-<p>Statistische Inferenz hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.</p>
+<p><em>Statistische Inferenz</em> hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.</p>
 </section>
 <section id="ist-die-1-euro-münze-fair" class="slide level2">
 <h2>Ist die 1-Euro Münze fair?</h2>
@@ -818,23 +818,43 @@ I = \frac{n}{s_w}
 <hr>
 <p><strong>Statistisches Modell</strong>: Binomialverteilung</p>
 <ul>
-<li>Zufallsprozess mit <span class="math inline">\(\textrm{Pr}(K) = p\)</span> und <span class="math inline">\(\textrm{Pr}(Z) = 1 - p\)</span></li>
+<li>Zufallsprozess mit <span class="math inline">\(\textrm{Pr}(K) = \theta\)</span> und <span class="math inline">\(\textrm{Pr}(Z) = 1 - \theta\)</span></li>
 <li>Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik</li>
 </ul>
 </section>
 <section id="struktur-eines-statistischen-modells" class="slide level2">
 <h2>Struktur eines statistischen Modells</h2>
-<p>Ein statistisches Modell kombiniert beobachtete (<span style="color: orange"><em>Daten</em></span>) und unbeobachtete Variablen (<span style="color: cornflowerblue"><em>Parameter</em></span>) in einem mathemat. Modell, das bestimmte <em>Annahmen</em> verkörpert:</p>
+<p>Ein statistisches Modell kombiniert beobachtete Variablen (<span style="color: orange"><em>Daten</em></span>) und unbeobachtete Variablen (<span style="color: cornflowerblue"><em>Parameter</em></span>) in einem mathemat. Modell, das bestimmte <em>Annahmen</em> verkörpert:</p>
 <p><span class="math display">\[
-\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{p})
+\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{\theta})
 \]</span></p>
 <blockquote>
-<p>Wir modellieren die Anzahl Würfe mit Ergebnis <em>Kopf</em> aus <span class="math inline">\(n\)</span> Münzwürfen als generiert durch eine Binomialverteilung mit unbekanntem Parameter <span class="math inline">\(p\)</span>. Die Tilde <span class="math inline">\(a \sim b\)</span> liest sich als ‘<span class="math inline">\(a\)</span> <em>folgt Verteilung</em> <span class="math inline">\(b\)</span>’.</p>
+<p>Wir modellieren die Anzahl Würfe mit Ergebnis ‘Kopf’ aus insgesamt <span class="math inline">\(n\)</span> Würfen durch eine Binomialverteilung mit unbekanntem Parameter <span class="math inline">\(\theta\)</span>. Die Tilde <span class="math inline">\(a \sim b\)</span> liest sich als ‘<span class="math inline">\(a\)</span> <em>folgt Verteilung</em> <span class="math inline">\(b\)</span>’.</p>
 </blockquote>
+</section>
+<section id="ziel-statistischer-inferenz" class="slide level2">
+<h2>Ziel statistischer Inferenz</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="statistische-modelle_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="statistische-modelle_files/figure-revealjs/unnamed-chunk-11-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:55%;">
+<ul>
+<li>Das Ziel statistischer Inferenz sind Aussagen über den datengenerierenden Prozess und seine Bestandteile.</li>
+<li>Hier: Die Antwort auf die Frage nach der Fairness der 1-Euro Münze steckt im <em>unbekannten</em> Parameter <span class="math inline">\(\theta\)</span>: Die Münze ist fair, wenn <span class="math inline">\(\theta = 0.5\)</span>.</li>
+</ul>
+</div></div>
 </section>
 <section id="simulation-münzwurf" class="slide level2">
 <h2>Simulation Münzwurf</h2>
-<p><a href="coinflip.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="coinflip.gif" class="card"></a></p>
+<p><a href="images/coinflip.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/coinflip.gif" class="card"></a></p>
 </section>
 <section id="zwei-quellen-von-unsicherheit" class="slide level2">
 <h2>Zwei Quellen von Unsicherheit</h2>
@@ -844,45 +864,87 @@ I = \frac{n}{s_w}
 </ul>
 </section></section>
 <section>
-<section id="exkurs-unsicherheit" class="title-slide slide level1 center">
-<h1>Exkurs: Unsicherheit</h1>
-<p>Wahrscheinlichkeitstheorie</p>
+<section id="wahrscheinlichkeit" class="title-slide slide level1 center">
+<h1>Wahrscheinlichkeit</h1>
+<p>Quantifizierung von Unsicherheit</p>
 </section>
-<section id="wahrscheinlichkeitsverteilungen" class="slide level2">
-<h2>Wahrscheinlichkeitsverteilungen</h2>
+<section id="wahrscheinlichkeit-1" class="slide level2 smaller">
+<h2>Wahrscheinlichkeit</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<p><a href="images/verteilung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/verteilung.png"></a></p>
+<p><a href="images/verteilung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/verteilung.png"></a></p>
 </div><div class="column" style="width:55%;">
 <ul>
-<li>Die <em>Wahrscheinlichkeit</em> eines unsicheren Ereignisses (d.h. eines Prozesses mit mehreren möglichen Ergebnissen) ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).</li>
-<li>Die Gesamtwahrscheinlichkeit aller möglichen <em>Ergebnisse</em> ist auf 1 normiert, d.h. ‘irgendwas muss passieren’.</li>
+<li><p>Eine <em>Wahrscheinlichkeitsverteilung</em> verteilt eine auf 1 normierte Quantität über die möglichen Resultate eines Zufallsprozesses.</p></li>
+<li><p>Die W’keit eines Ereignisses ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).</p></li>
+<li><p><strong>Frequentistische Interpretation:</strong> W’keit ist die relative Häufigkeit in einem unendlich wiederholten Experiment (z.B. Münzwurf).</p></li>
+<li><p><strong>Bayesianische Interpretation:</strong> W’keit ist ein konsistentes Maß für Unsicherheit (z.B. W’keit, dass Bayern gegen Donezk gewinnt).</p></li>
 </ul>
 </div></div>
 </section>
-<section id="wahrscheinlichkeitsverteilungen-1" class="slide level2">
-<h2>Wahrscheinlichkeitsverteilungen</h2>
-<p><a href="images/prob-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/prob-1.png"></a></p>
+<section id="wahrscheinlichkeit-2" class="slide level2">
+<h2>Wahrscheinlichkeit</h2>
+<p><a href="images/prob-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/prob-1.png"></a></p>
 </section>
-<section id="wahrscheinlichkeitsverteilungen-2" class="slide level2">
-<h2>Wahrscheinlichkeitsverteilungen</h2>
-<p><a href="images/prob-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/prob-2.png"></a></p>
+<section id="wahrscheinlichkeit-3" class="slide level2">
+<h2>Wahrscheinlichkeit</h2>
+<p><a href="images/prob-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/prob-2.png"></a></p>
 </section>
-<section id="wahrscheinlichkeitsverteilungen-3" class="slide level2">
-<h2>Wahrscheinlichkeitsverteilungen</h2>
-<p><a href="images/prob-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/prob-3.png"></a></p>
+<section id="wahrscheinlichkeit-4" class="slide level2">
+<h2>Wahrscheinlichkeit</h2>
+<p><a href="images/prob-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/prob-3.png"></a></p>
 </section>
-<section id="wahrscheinlichkeitsverteilungen-4" class="slide level2">
-<h2>Wahrscheinlichkeitsverteilungen</h2>
-<p><a href="images/prob-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/prob-4.png"></a></p>
+<section id="wahrscheinlichkeit-5" class="slide level2">
+<h2>Wahrscheinlichkeit</h2>
+<p><a href="images/prob-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/prob-4.png"></a></p>
+</section>
+<section id="wahrscheinlichkeit-6" class="slide level2">
+<h2>Wahrscheinlichkeit</h2>
+<p><a href="images/prob-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="images/prob-6.png"></a></p>
+</section>
+<section id="wahrscheinlichkeit-7" class="slide level2">
+<h2>Wahrscheinlichkeit</h2>
+<p><a href="images/prob-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="images/prob-5.png"></a></p>
+</section>
+<section id="zufallsvariablen" class="slide level2">
+<h2>Zufallsvariablen</h2>
+<p>Eine <em>Zufallsvariable</em> <span class="math inline">\(X(E)\)</span> ordnet jedem Ergebnis <span class="math inline">\(E\)</span> im Ergebnisraum eines Zufallsprozesses eine Zahl zu.</p>
+<p>Für das Beispiel des Münzwurfs:</p>
+<p><span class="math display">\[
+X(E) = \begin{cases}
+  0, &amp; \text{wenn } E = \textrm{Kopf} \\
+  1, &amp; \text{wenn } E = \textrm{Zahl}
+\end{cases}
+\]</span></p>
+<p>Die Zahlen haben nicht immer eine inheränte Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.</p>
+<p>Statt mit <span class="math inline">\(X(E)\)</span> wird eine Zufallsvariable häufig auch einfach mit <span class="math inline">\(X\)</span> bezeichnet.</p>
+</section>
+<section id="bernoulliverteilung" class="slide level2">
+<h2>Bernoulliverteilung</h2>
+<p>Eine der bekanntesten W’keitsverteilungen ist die <em>Bernoulli-verteilung</em> für eine binäre Zufallsvariable <span class="math inline">\(X\)</span> (Wertebereich 0 oder 1) mit Wahrscheinlichkeitsfunktion:</p>
+<p><span class="math display">\[
+\textrm{Ber}(X = \color{cornflowerblue}{x} | \color{orange}{\theta}) =
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{1-\color{cornflowerblue}{x}} \\
+\]</span></p>
+<p>zum Beispiel mit <span class="math inline">\(\theta = 0{,}7\)</span>:</p>
+<p><span class="math display">\[
+\begin{align}
+\textrm{Ber}(X = \color{cornflowerblue}{1} | \color{orange}{0{,}7}) &amp;=
+\color{orange}{0{,}7}^\color{cornflowerblue}{1} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{1}} = 0{,}7 \\
+\textrm{Ber}(X = \color{cornflowerblue}{0} | \color{orange}{0{,}7}) &amp;=
+\color{orange}{0{,}7}^\color{cornflowerblue}{0} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{0}} = 1 - 0{,}7
+\end{align}
+\]</span></p>
 </section>
 <section id="binomialverteilung" class="slide level2">
 <h2>Binomialverteilung</h2>
-<!-- ```{ojs} -->
-<!-- //| panel: sidebar -->
-<!-- viewof prob = Inputs.range([0, 1], { value: 0.5, step: 0.01, label: "p" }) -->
-<!-- viewof rand = Inputs.button("Münze") -->
-<!-- ``` -->
+<p>Die <em>Binomialverteilung</em> modelliert das Ergebnis einer Reihe von <span class="math inline">\(n\)</span> unabhängigen Bernoulli-Experimenten und hat für eine Zufallsvariable <span class="math inline">\(X\)</span> mit Wertebereich 0 bis <span class="math inline">\(n\)</span> die W’keitsfunktion:</p>
+<p><span class="math display">\[
+\textrm{Bin}(X = \color{cornflowerblue}{x} | n, \color{orange}{\theta}) =
+\binom{n}{x}
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{n-\color{cornflowerblue}{x}} \\
+\]</span></p>
+<p>Der Faktor <span class="math inline">\(\binom{n}{x}\)</span> ist der <em>Binomialkoeffizient</em> und zählt, wie viele unterschiedliche Möglichkeiten es gibt, aus <span class="math inline">\(n\)</span> Elementen genau <span class="math inline">\(x\)</span> auszuwählen.</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -1324,7 +1386,7 @@ I = \frac{n}{s_w}
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
