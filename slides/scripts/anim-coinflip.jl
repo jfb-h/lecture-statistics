@@ -56,5 +56,5 @@ record(fig, "coinflip.mp4", 1:N;
     ax3.title = "Inferenz für θ"
 end
 
-resize!(fig, 800, 300)
+resize!(fig, 800, 200)
 save("coinflip.png", fig; px_per_unit = 3)
