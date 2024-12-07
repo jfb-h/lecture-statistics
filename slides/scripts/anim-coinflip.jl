@@ -14,61 +14,44 @@ function simulate(N, p)
     )
 end
 
-function plot_coinflip(y1, y2)
+function plot_coinflip(y1)
     fig = Figure(;size=(900, 500), padding=0)
     
     xticks = ([1,2], ["Kopf", "Zahl"])
     
     ax1 = Axis(fig[1, 1]; xticks,  ylabel = "Häufigkeit")
-    ax2 = Axis(fig[1, 2]; xticks)
-    ax3 = Axis(fig[2, 1]; xlabel = "θ", ylabel = "Dichte")
-    ax4 = Axis(fig[2, 2]; xlabel = "θ")
+    ax3 = Axis(fig[1, 2]; xlabel = "θ", ylabel = "Dichte")
     
+    ax1.limits = (nothing, nothing, 0, 40)
+    ax3.limits = (0, 1, 0, 10)
+
     xlims!(ax3, 0, 1)
-    xlims!(ax4, 0, 1)
-    
-    ylims!(ax3, 0, 4)
-    ylims!(ax4, 0, 4)
+    ylims!(ax3, 0, 6)
     
     y1_curr = @lift(y1[$i])
-    y2_curr = @lift(y2[$i])
-    
     p1_curr = @lift(pd(y1[$i]))
-    p2_curr = @lift(pd(y2[$i]))
     
     barplot!(ax1, [1, 2], y1_curr; color = "tomato")
-    barplot!(ax2, [1, 2], y2_curr; color = "cornflowerblue")
-    
     vlines!(ax3, 0.5; color = "black", linestyle = :dash)
-    vlines!(ax4, 0.7; color = "black", linestyle = :dash)
-    
     lines!(ax3, 0:0.01:1, p1_curr; color = "tomato")
-    lines!(ax4, 0:0.01:1, p2_curr; color = "cornflowerblue")
     
-    return fig, ax1, ax2, ax3, ax4
+    return fig, ax1, ax3
 end
 
-N, p1, p2 = 50, 0.5, 0.7
-
-i = Observable(1)
-
+N, p1 = 50, 0.5
 y1 = simulate(N, p1)
-y2 = simulate(N, p2)
 
 pd(x, h, t; α=1, β=1) = pdf.(Beta(α + h, β + t), x);
 pd(ht) = x -> pd(x, ht[1], ht[2])
 
-fig, ax1, ax2, ax3, ax4 = plot_coinflip(y1, y2)
+i = Observable(1)
 
-record(fig, "coinflip.gif", 1:N;
+fig, ax1, ax3 = plot_coinflip(y1)
+
+record(fig, "coinflip.mp4", 1:N;
        loop=0, framerate=2) do n
     i[] = n
-    ax1.title = "Faire Münze ($n Würfe)"
-    ax2.title = "Unfaire Münze ($n Würfe)"
 
-    ax1.limits = (nothing, nothing, 0, 40)
-    ax2.limits = (nothing, nothing, 0, 40)
-
-    ax3.limits = (0, 1, 0, 10)
-    ax4.limits = (0, 1, 0, 10)
+    ax1.title = "Beobachtungen (nach $n Würfen)"
+    ax3.title = "Inferenz für θ"
 end
