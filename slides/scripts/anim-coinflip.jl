@@ -55,3 +55,6 @@ record(fig, "coinflip.mp4", 1:N;
     ax1.title = "Beobachtungen (nach $n Würfen)"
     ax3.title = "Inferenz für θ"
 end
+
+resize!(fig, 800, 300)
+save("coinflip.png", fig; px_per_unit = 3)
