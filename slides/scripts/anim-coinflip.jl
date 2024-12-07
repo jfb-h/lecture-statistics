@@ -15,7 +15,7 @@ function simulate(N, p)
 end
 
 function plot_coinflip(y1)
-    fig = Figure(;size=(900, 500), padding=0)
+    fig = Figure(;size=(1280, 720), padding=0)
     
     xticks = ([1,2], ["Kopf", "Zahl"])
     
