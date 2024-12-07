@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="statistische-modelle_files/libs/clipboard/clipboard.min.js"></script>
-<script src="statistische-modelle_files/libs/quarto-html/tabby.min.js"></script>
-<script src="statistische-modelle_files/libs/quarto-html/popper.min.js"></script>
-<script src="statistische-modelle_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="statistische-modelle_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="statistische-modelle_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="statistische-modelle_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="statistische-modelle_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="statistische-modelle_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="statistische-modelle_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="statistische-modelle_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+<script src="wahrscheinlichkeitstheorie_files/libs/clipboard/clipboard.min.js"></script>
+<script src="wahrscheinlichkeitstheorie_files/libs/quarto-html/tabby.min.js"></script>
+<script src="wahrscheinlichkeitstheorie_files/libs/quarto-html/popper.min.js"></script>
+<script src="wahrscheinlichkeitstheorie_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="wahrscheinlichkeitstheorie_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="wahrscheinlichkeitstheorie_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="wahrscheinlichkeitstheorie_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
@@ -18,8 +18,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="statistische-modelle_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="statistische-modelle_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -33,12 +33,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="statistische-modelle_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="statistische-modelle_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="statistische-modelle_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="statistische-modelle_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="statistische-modelle_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -324,8 +324,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="statistische-modelle_files/libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="statistische-modelle_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -344,517 +342,92 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
-<section>
-<section id="zusammenhangsmaße" class="title-slide slide level1 center">
-<h1>Zusammenhangsmaße</h1>
-<p>Kategorische Variablen</p>
+<section id="scheinkorrelationen" class="slide level2">
+<h2>Scheinkorrelationen</h2>
+<p><a href="https://www.tylervigen.com/spurious/correlation/image/2794_popularity-of-the-first-name-margarita_correlates-with_motor-vehicle-thefts-in-indiana.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://www.tylervigen.com/spurious/correlation/image/2794_popularity-of-the-first-name-margarita_correlates-with_motor-vehicle-thefts-in-indiana.svg" width="900"></a></p>
 </section>
-<section id="die-kontingenztabelle" class="slide level2">
-<h2>Die Kontingenztabelle</h2>
-<div class="cell">
-<div class="cell-output-display">
-<table class="lightable-classic lightable-hover table caption-top" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;border-bottom: 0; font-size: 28px; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Bildung</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">leave</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">stay</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Gesamt</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Keine Qualifikation</td>
-<td style="text-align: right;">1 356 (73.1%)</td>
-<td style="text-align: right;">498 (26.9%)</td>
-<td style="text-align: right;">1 854 (100.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Realschulabschluss</td>
-<td style="text-align: right;">3 388 (65.8%)</td>
-<td style="text-align: right;">1 763 (34.2%)</td>
-<td style="text-align: right;">5 151 (100.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Abitur</td>
-<td style="text-align: right;">2 685 (47.1%)</td>
-<td style="text-align: right;">3 014 (52.9%)</td>
-<td style="text-align: right;">5 699 (100.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Bachelor</td>
-<td style="text-align: right;">3 783 (38.4%)</td>
-<td style="text-align: right;">6 081 (61.6%)</td>
-<td style="text-align: right;">9 864 (100.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Master</td>
-<td style="text-align: right;">631 (25.0%)</td>
-<td style="text-align: right;">1 898 (75.0%)</td>
-<td style="text-align: right;">2 529 (100.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Gesamt</td>
-<td style="text-align: right;">11 843 (47.2%)</td>
-<td style="text-align: right;">13 254 (52.8%)</td>
-<td style="text-align: right;">25 097 (100.0%)</td>
-</tr>
-</tbody><tfoot>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><span style="font-style: italic;">Quelle:</span> <sup></sup> 2016 BES Brexit Survey</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tfoot>
-
-</table>
-
-
-</div>
-</div>
-<p>Eine Kontingenztabelle zeigt Beobachtungshäufigkeiten und Randhäufigkeiten (Reihen- und Spaltensummen) für alle Ausprägungskombinationen zweier kategorialer Variablen.</p>
+<section id="scheinkorrelationen-1" class="slide level2">
+<h2>Scheinkorrelationen</h2>
+<p><a href="https://www.tylervigen.com/spurious/correlation/image/2052_gmo-use-in-corn-grown-in-minnesota_correlates-with_pirate-attacks-globally.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="https://www.tylervigen.com/spurious/correlation/image/2052_gmo-use-in-corn-grown-in-minnesota_correlates-with_pirate-attacks-globally.svg" width="900"></a></p>
 </section>
-<section id="die-kontingenztabelle-1" class="slide level2">
-<h2>Die Kontingenztabelle</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="statistische-modelle_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="statistische-modelle_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="die-indifferenztabelle" class="slide level2">
-<h2>Die Indifferenztabelle</h2>
-<div class="cell">
-<div class="cell-output-display">
-<table class="lightable-classic lightable-hover table caption-top" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;border-bottom: 0; font-size: 28px; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Bildung</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">leave</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">stay</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Gesamt</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Keine Qualifikation</td>
-<td style="text-align: right;">874.9 (47.2%)</td>
-<td style="text-align: right;">979.1 (52.8%)</td>
-<td style="text-align: right;">1 854 (100.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Realschulabschluss</td>
-<td style="text-align: right;">2 430.7 (47.2%)</td>
-<td style="text-align: right;">2 720.3 (52.8%)</td>
-<td style="text-align: right;">5 151 (100.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Abitur</td>
-<td style="text-align: right;">2 689.3 (47.2%)</td>
-<td style="text-align: right;">3 009.7 (52.8%)</td>
-<td style="text-align: right;">5 699 (100.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Bachelor</td>
-<td style="text-align: right;">4 654.7 (47.2%)</td>
-<td style="text-align: right;">5 209.3 (52.8%)</td>
-<td style="text-align: right;">9 864 (100.0%)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Master</td>
-<td style="text-align: right;">1 193.4 (47.2%)</td>
-<td style="text-align: right;">1 335.6 (52.8%)</td>
-<td style="text-align: right;">2 529 (100.0%)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Gesamt</td>
-<td style="text-align: right;">11 843.0 (47.2%)</td>
-<td style="text-align: right;">13 254.0 (52.8%)</td>
-<td style="text-align: right;">25 097 (100.0%)</td>
-</tr>
-</tbody><tfoot>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><span style="font-style: italic;">Quelle:</span> <sup></sup> 2016 BES Brexit Survey</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tfoot>
-
-</table>
-
-
-</div>
-</div>
-<p>Die Indifferenztabelle bildet theoretische Häufigkeiten unter der Annahme von Unabhängigkeit der beiden Variablen ab.</p>
-</section>
-<section id="theoretische-häufigkeiten" class="slide level2">
-<h2>Theoretische Häufigkeiten</h2>
-<p>Die theoretische Häufikgeit <span class="math inline">\(H_{ij}^{(T)}\)</span> für Reihe <span class="math inline">\(i\)</span> und Spalte <span class="math inline">\(j\)</span> ist bei <span class="math inline">\(n\)</span> Beobachtungen und mit Reihensumme <span class="math inline">\(H_i^{(R)}\)</span> und Spaltensumme <span class="math inline">\(H_j^{(C)}\)</span> gegeben durch:</p>
-<p><span class="math display">\[
-H_{ij}^{(T)} = \frac{H_i^{(R)} H_j^{(C)}}{n}
-\]</span></p>
-<p>Theoretische Häufikgeiten stellen eine Gleichverteilung unter Präservation der Randhäufigkeiten der beiden Variablen dar.</p>
-</section>
-<section id="chi-quadrat-chi2" class="slide level2">
-<h2>Chi-Quadrat (<span class="math inline">\(\chi^2\)</span>)</h2>
-<p>Der Chi-Quadrat-Koeffizient misst die Abweichungen der beobachteten von den theoretischen Häufigkeiten:</p>
-<p><span class="math display">\[
-\chi^2 = \sum_{i=1}^r \sum_{j=1}^c \frac{(H_{ij} - H_{ij}^{(T)})^2}{H_{ij}^{(T)}}
-\]</span></p>
-<p><span class="math inline">\(\chi^2\)</span> ist abhängig von der Beobachtungsanzahl <span class="math inline">\(n\)</span> und weicht bei unterschiedlichen <span class="math inline">\(n\)</span> selbst bei identischen relativen Verteilungen ab.</p>
-</section>
-<section id="kontingenzkoeffizient" class="slide level2">
-<h2>Kontingenzkoeffizient</h2>
-<p>Der <em>Kontingenzkoeffizient</em> <span class="math inline">\(C\)</span> normalisiert <span class="math inline">\(\chi^2\)</span> für beliebige <span class="math inline">\(n\)</span>:</p>
-<p><span class="math display">\[
-C = \sqrt{\frac{\chi^2}{\chi^2 + n}}
-\]</span></p>
-<p>Wenn die theoretische und die beobachtete Verteilung identisch sind, ist <span class="math inline">\(C=0\)</span>. Das Maximum ist immer &lt; 1, der genaue Wert hängt aber von den Dimensionen der Tabelle ab. <!-- Um ein oberes Limit von 1 zu erhalten, kann $C$ nochmals normalisiert werden: --> <!----> <!-- $$C_{korr} = \frac{C}{\sqrt{(k - 1)/k}}$$ --></p>
-</section>
-<section id="brexit-und-bildung" class="slide level2 smaller">
-<h2>Brexit und Bildung</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<div class="cell">
-<div class="cell-output-display">
-<table class="lightable-classic lightable-hover table caption-top" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;border-bottom: 0; font-size: 28px; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Bildung</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">leave</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">stay</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Keine Qualifikation</td>
-<td style="text-align: right;">1356</td>
-<td style="text-align: right;">498</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Realschulabschluss</td>
-<td style="text-align: right;">3388</td>
-<td style="text-align: right;">1763</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Abitur</td>
-<td style="text-align: right;">2685</td>
-<td style="text-align: right;">3014</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Bachelor</td>
-<td style="text-align: right;">3783</td>
-<td style="text-align: right;">6081</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Master</td>
-<td style="text-align: right;">631</td>
-<td style="text-align: right;">1898</td>
-</tr>
-</tbody><tfoot>
-<tr class="even">
-<td style="text-align: left; padding: 0;"><sup></sup> Beobachtet</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tfoot>
-
-</table>
-
-
-</div>
-</div>
-</div><div class="column" style="width:55%;">
-<div class="cell">
-<div class="cell-output-display">
-<table class="lightable-classic lightable-hover table caption-top" data-quarto-postprocess="true" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;border-bottom: 0; font-size: 28px; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Bildung</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">leave</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">stay</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Keine Qualifikation</td>
-<td style="text-align: right;">874.9</td>
-<td style="text-align: right;">979.1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Realschulabschluss</td>
-<td style="text-align: right;">2430.7</td>
-<td style="text-align: right;">2720.3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Abitur</td>
-<td style="text-align: right;">2689.3</td>
-<td style="text-align: right;">3009.7</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Bachelor</td>
-<td style="text-align: right;">4654.7</td>
-<td style="text-align: right;">5209.3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Master</td>
-<td style="text-align: right;">1193.4</td>
-<td style="text-align: right;">1335.6</td>
-</tr>
-</tbody><tfoot>
-<tr class="even">
-<td style="text-align: left; padding: 0;"><sup></sup> Theoretisch</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tfoot>
-
-</table>
-
-
-</div>
-</div>
-</div></div>
-<p><span class="math display">\[
-\chi^2 =
-\frac{(1356 - 874{,}9)^2}{847{,}9} + \ldots +
-\frac{(1898 - 1335{,}6)^2}{1335{,}6}
-= 2025{,}8 \\
-C =
-\sqrt{\frac{2025{,}8}{2025{,}8 + 25097}} = 0.27
-\]</span></p>
-</section>
-<section id="mediennutzung" class="slide level2">
-<h2>Mediennutzung</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news" title="Survey preview">
+<section id="scheinkorrelationen-2" class="slide level2">
+<h2>Scheinkorrelationen</h2>
+<iframe width="780" height="500" src="https://www.tylervigen.com/spurious/correlation/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates" title="Survey preview">
 </iframe>
-</div><div class="column" style="width:50%;">
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news/qr" title="Survey link">
-</iframe>
-</div></div>
 </section>
-<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/news/result" data-background-interactive="true" data-preload="true">
-<h2></h2>
-</section></section>
-<section>
-<section id="exkurs" class="title-slide slide level1 center">
-<h1>Exkurs</h1>
-<p>Autokorrelation</p>
-</section>
-<section id="räumliche-autokorrelation" class="slide level2 smaller">
-<h2>Räumliche Autokorrelation</h2>
-<p>Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">↑</span> <span class="arrow-down">↓</span>)</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Einkommen in München (Quelle: Zeit.de)"><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png" class="shadow" height="400" alt="Einkommen in München (Quelle: Zeit.de)"></a></p>
-<figcaption>Einkommen in München (Quelle: Zeit.de)</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Einkommen in Köln (Quelle: Zeit.de)"><img data-src="https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png" class="shadow" height="400" alt="Einkommen in Köln (Quelle: Zeit.de)"></a></p>
-<figcaption>Einkommen in Köln (Quelle: Zeit.de)</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="räumliche-autokorrelation-1" class="slide level2">
-<h2>Räumliche Autokorrelation</h2>
-<ul>
-<li><p><em>Autokorrelation</em> beschreibt den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben (Korrelation mit sich selbst).</p></li>
-<li><p>Autokorrelation kann positiv (benachbarte Einheiten sind sich ähnlich) oder negativ (benachbarte Einheiten sind sich unähnlich) sein.</p></li>
-<li><p>Die Definition von Nachbarschaft kann je nach Fragestellung angepasst werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).</p></li>
-</ul>
-</section>
-<section id="räumliche-gewichte" class="slide level2 smaller">
-<h2>Räumliche Gewichte</h2>
-<p>Voraussetzung der Berechnung räumlicher Autokorrelation ist eine Matrix <span class="math inline">\(w\)</span>, die die paarweisen Nachbarschaftsverhältnisse / Distanzen der Werte <span class="math inline">\(x\)</span> kodiert:</p>
-<div class="columns">
-<div class="column" style="width:42%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="statistische-modelle_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="statistische-modelle_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:58%;">
-<p><span class="math display">\[\tiny
-\begin{array}{c|cccccccccc}
-&amp; \text{DE} &amp; \text{FR} &amp; \text{NL} &amp; \text{BE} &amp; \text{LU} &amp; \text{PL} &amp; \text{CZ} &amp; \text{AT} &amp; \text{CH} &amp; \text{DK} \\
-\hline
-\text{DE} &amp; {0} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} &amp; {1} \\
-\text{FR} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} \\
-\text{NL} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
-\text{BE} &amp; 1 &amp; \color{gray}{1} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
-\text{LU} &amp; 1 &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
-\text{PL} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
-\text{CZ} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
-\text{AT} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} \\
-\text{CH} &amp; 1 &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{1} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
-\text{DK} &amp; 1 &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} &amp; \color{gray}{0} \\
-\end{array}\]</span></p>
-</div></div>
-<p>Das Nachbarschaftsgewicht <span class="math inline">\(w_{ij}\)</span> von Beobachtung <span class="math inline">\(i\)</span> und Beobachtung <span class="math inline">\(j\)</span> steuert den Einfluss von <span class="math inline">\(i\)</span> und <span class="math inline">\(j\)</span> auf die Kovarianz von <span class="math inline">\(x\)</span> mit sich selbst: <span class="math inline">\(w_{ij}(x_i - \bar{x})(x_j - \bar{x})\)</span>.</p>
-</section>
-<section id="morans-i" class="slide level2">
-<h2>Moran’s I</h2>
-<p>Moran’s <span class="math inline">\(I\)</span> misst die räumliche Autokorrelation einer Variable <span class="math inline">\(x\)</span> mit Gewichten <span class="math inline">\(w\)</span> und Summe <span class="math inline">\(s_w = \sum_{i=1}^n \sum_{j=1}^n w_{ij}\)</span> als:</p>
-<p><span class="math display">\[
-I = \frac{n}{s_w}
-\frac{\sum_{i=1}^n \sum_{j=1}^n \color{orange}{w_{ij}(x_i - \bar{x})(x_j - \bar{x})}}{\sum_{i=1}^n (x_i-\bar{x})^2}
-\]</span></p>
-<p>Moran’s I nimmt Werte im Bereich -1 (perfekte räumliche Antikorrelation) bis 1 (perfekte räumliche Korrelation) an. Neben dem globalen Index gibt es auch lokale Versionen.</p>
-</section>
-<section id="schwermetallbelastung" class="slide level2">
-<h2>Schwermetallbelastung</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/autocorr-maas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Quelle: Rikken &amp; Van Rijn (1993)"><img data-src="images/autocorr-maas.png" class="card" width="550" height="500" alt="Quelle: Rikken &amp; Van Rijn (1993)"></a></p>
-<figcaption>Quelle: Rikken &amp; Van Rijn (1993)</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Die Abbildung zeigt Messergebnisse der Schwermetallbelastung (Zink) entlang der Maas bei Stein, Niederlande.</li>
-<li>Folgt die Verteilung der Messwerte einem zufälligen Muster?</li>
-</ul>
-</div></div>
-</section>
-<section id="schwermetallbelastung-1" class="slide level2">
-<h2>Schwermetallbelastung</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/autocorr-maas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Quelle: Rikken &amp; Van Rijn (1993)"><img data-src="images/autocorr-maas.png" class="card" width="550" height="500" alt="Quelle: Rikken &amp; Van Rijn (1993)"></a></p>
-<figcaption>Quelle: Rikken &amp; Van Rijn (1993)</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Gewichte <span class="math inline">\(w\)</span>: <em>k nearest neighbors</em> mit k=4</li>
-<li>Moran’s I: 0.47</li>
-<li>Es besteht eine positive räumliche Autokorrelation der Messwerte.</li>
-<li>Nächster Schritt: Lokale Hot-/Cold-Spots</li>
-</ul>
-</div></div>
-</section>
-<section id="zeitliche-autokorrelation" class="slide level2">
-<h2>Zeitliche Autokorrelation</h2>
-<p>Zeitlich angeordnete Daten weisen oft ein erhebliches Maß an Autokorrelation auf (oft über mehrere Zeitschritte).</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="statistische-modelle_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="statistische-modelle_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="netzwerkautokorrelation" class="slide level2">
-<h2>Netzwerkautokorrelation</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="statistische-modelle_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="statistische-modelle_files/figure-revealjs/unnamed-chunk-10-1.png" width="576"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Vernetzte Beobachtungen sind ebenfalls häufig korreliert.</li>
-<li>Beispiel: Wahlverhalten und Freundschaftsnetzwerke</li>
-<li>Ignorieren von Autokorrelation kann zu Fehlschlüssen führen.</li>
-</ul>
-</div></div>
-</section></section>
 <section>
 <section id="statistische-modelle" class="title-slide slide level1 center">
 <h1>Statistische Modelle</h1>
 
 </section>
-<section id="statistische-modelle-1" class="slide level2">
-<h2>Statistische Modelle</h2>
-<ul>
-<li><p><em>Theoretische Modelle</em> beschreiben die kausalen Mechanismen, die einem Sachverhalt zugrundeliegen (z.B. Wirtschaftswachstum, Klimaerwärmung).</p></li>
-<li><p><em>Statistische Modelle</em> approximieren in stilisierter (mathematischer) Form den <em>datengenerierenden Prozess (DGP)</em>, der empirischen Beobachtungen zugrunde liegt.</p></li>
-<li><p>Statistische Modelle werden mithilfe von Beobachtungen kalibriert (d.h., sie ‘lernen’ aus Daten).</p></li>
-</ul>
+<section id="statistische-modellierung" class="slide level2 smaller">
+<h2>Statistische Modellierung</h2>
+<p>Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.</p>
+<p><a href="images/statmodels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/statmodels.png" width="1000"></a></p>
 </section>
-<section id="der-datengenerierende-prozess" class="slide level2 smaller">
-<h2>Der datengenerierende Prozess</h2>
-<p>Der datengenerierende Prozess umfasst systematische Zusammenhänge (kausale Effekte, Störfaktoren oder Effekte der Datenerhebung) und unmodellierte Variation.</p>
-<p><a href="images/dgp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/dgp.png"></a></p>
-<p><em>Statistische Inferenz</em> hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.</p>
-</section>
-<section id="ist-die-1-euro-münze-fair" class="slide level2">
-<h2>Ist die 1-Euro Münze fair?</h2>
+<section id="modellkonstruktion" class="slide level2">
+<h2><span style="color: #46b1e1">①</span> Modellkonstruktion</h2>
 <hr>
 <p><strong>Datengenerierender Prozess</strong>: Wiederholter Münzwurf</p>
 <ul>
 <li>Faktoren: Eigenschaften der Münze, Wurftechnik, chaotischer physikalischer Prozess</li>
 </ul>
 <hr>
-<p><strong>Statistisches Modell</strong>: Binomialverteilung</p>
+<p><strong>Modell des DGP</strong>: Binomialverteilung</p>
 <ul>
-<li>Zufallsprozess mit <span class="math inline">\(\textrm{Pr}(K) = \theta\)</span> und <span class="math inline">\(\textrm{Pr}(Z) = 1 - \theta\)</span></li>
-<li>Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik</li>
+<li>Zufallsprozess mit <span class="math inline">\(\textrm{P}(K) = \theta\)</span> und <span class="math inline">\(\textrm{P}(Z) = 1 - \theta\)</span></li>
+<li>Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik, <span class="math inline">\(\theta\)</span> über Würfe konstant</li>
 </ul>
 </section>
-<section id="struktur-eines-statistischen-modells" class="slide level2">
-<h2>Struktur eines statistischen Modells</h2>
+<section id="modellstruktur" class="slide level2">
+<h2><span style="color: #46b1e1">①</span> Modellstruktur</h2>
 <p>Ein statistisches Modell kombiniert beobachtete Variablen (<span style="color: orange"><em>Daten</em></span>) und unbeobachtete Variablen (<span style="color: cornflowerblue"><em>Parameter</em></span>) in einem mathemat. Modell, das bestimmte <em>Annahmen</em> verkörpert:</p>
 <p><span class="math display">\[
 \color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{\theta})
 \]</span></p>
 <blockquote>
-<p>Wir modellieren die Anzahl Würfe mit Ergebnis ‘Kopf’ aus insgesamt <span class="math inline">\(n\)</span> Würfen durch eine Binomialverteilung mit unbekanntem Parameter <span class="math inline">\(\theta\)</span>. Die Tilde <span class="math inline">\(a \sim b\)</span> liest sich als ‘<span class="math inline">\(a\)</span> <em>folgt Verteilung</em> <span class="math inline">\(b\)</span>’.</p>
+<p>Wir modellieren die Anzahl Würfe mit Ergebnis ‘Kopf’ aus insgesamt <span class="math inline">\(n\)</span> Würfen durch eine Binomialverteilung mit unbekanntem Parameter <span class="math inline">\(\theta\)</span> (sprich: Theta). Die Tilde <span class="math inline">\(a \sim b\)</span> liest sich als ‘<span class="math inline">\(a\)</span> <em>folgt Verteilung</em> <span class="math inline">\(b\)</span>’.</p>
 </blockquote>
 </section>
-<section id="ziel-statistischer-inferenz" class="slide level2">
-<h2>Ziel statistischer Inferenz</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
+<section id="statistische-inferenz" class="slide level2">
+<h2><span style="color: #47D45A">②</span> Statistische Inferenz</h2>
+<ul>
+<li>Das Ziel statistischer Inferenz ist, unbekannte Variablen in einem statistischen Modell (welches den DGP repräsentiert) auf Basis von Beobachtungen des DGP zu schätzen.</li>
+<li>Je mehr Evidenz (d.h. Beobachtungen / Daten) wir haben, desto mehr reduzieren wir die Unsicherheit über die unbekannten Variablen in unserem Modell.</li>
+<li>Im Falle des Münzwurfs interessieren wir uns für den Paramter <span class="math inline">\(\theta\)</span>, welcher (unter bestimmten Annahmen) die Fairness der Münze repräsentiert.</li>
+</ul>
+</section>
+<section id="statistische-inferenz-1" class="slide level2">
+<h2><span style="color: #47D45A">②</span> Statistische Inferenz</h2>
+<p><a href="images/coinflip.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="images/coinflip.gif" class="card"></a></p>
+</section>
+<section id="überprüfung-durch-simulation" class="slide level2">
+<h2><span style="color: #F2AA84">③</span> Überprüfung durch Simulation</h2>
+<p>Entsprechen die Modellvorhersagen den beobachteten Daten?</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="statistische-modelle_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="statistische-modelle_files/figure-revealjs/unnamed-chunk-11-1.png" width="480"></a></p>
+<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:55%;">
-<ul>
-<li>Das Ziel statistischer Inferenz sind Aussagen über den datengenerierenden Prozess und seine Bestandteile.</li>
-<li>Hier: Die Antwort auf die Frage nach der Fairness der 1-Euro Münze steckt im <em>unbekannten</em> Parameter <span class="math inline">\(\theta\)</span>: Die Münze ist fair, wenn <span class="math inline">\(\theta = 0.5\)</span>.</li>
-</ul>
-</div></div>
 </section>
-<section id="simulation-münzwurf" class="slide level2">
-<h2>Simulation Münzwurf</h2>
-<p><a href="images/coinflip.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/coinflip.gif" class="card"></a></p>
+<section id="ist-die-münze-fair" class="slide level2">
+<h2><span style="color: #D86ECC">④</span> Ist die Münze fair?</h2>
+</section>
+<section id="brexit-und-bildungsabschluss" class="slide level2">
+<h2>Brexit und Bildungsabschluss</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="zwei-quellen-von-unsicherheit" class="slide level2">
 <h2>Zwei Quellen von Unsicherheit</h2>
@@ -872,7 +445,7 @@ I = \frac{n}{s_w}
 <h2>Wahrscheinlichkeit</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<p><a href="images/verteilung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/verteilung.png"></a></p>
+<p><a href="images/verteilung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="images/verteilung.png"></a></p>
 </div><div class="column" style="width:55%;">
 <ul>
 <li><p>Eine <em>Wahrscheinlichkeitsverteilung</em> verteilt eine auf 1 normierte Quantität über die möglichen Resultate eines Zufallsprozesses.</p></li>
@@ -882,29 +455,35 @@ I = \frac{n}{s_w}
 </ul>
 </div></div>
 </section>
+<section id="der-ergebnisraum" class="slide level2">
+<h2>Der Ergebnisraum</h2>
+<p><a href="images/prob-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="images/prob-1.png"></a></p>
+</section>
+<section id="ereignisse" class="slide level2">
+<h2>Ereignisse</h2>
+<p><a href="images/prob-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/prob-2.png"></a></p>
+</section>
 <section id="wahrscheinlichkeit-2" class="slide level2">
 <h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/prob-1.png"></a></p>
+<p><a href="images/prob-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="images/prob-3.png"></a></p>
 </section>
 <section id="wahrscheinlichkeit-3" class="slide level2">
 <h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/prob-2.png"></a></p>
+<p><a href="images/prob-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/prob-4.png"></a></p>
 </section>
 <section id="wahrscheinlichkeit-4" class="slide level2">
 <h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/prob-3.png"></a></p>
+<p><a href="images/prob-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/prob-5.png"></a></p>
 </section>
 <section id="wahrscheinlichkeit-5" class="slide level2">
 <h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/prob-4.png"></a></p>
+<p><a href="images/prob-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/prob-6.png"></a></p>
 </section>
-<section id="wahrscheinlichkeit-6" class="slide level2">
-<h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="images/prob-6.png"></a></p>
-</section>
-<section id="wahrscheinlichkeit-7" class="slide level2">
-<h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="images/prob-5.png"></a></p>
+<section id="multiplikationsregel" class="slide level2">
+<h2>Multiplikationsregel</h2>
+<ul>
+<li>Zwei Würfel</li>
+</ul>
 </section>
 <section id="zufallsvariablen" class="slide level2">
 <h2>Zufallsvariablen</h2>
@@ -945,6 +524,80 @@ X(E) = \begin{cases}
 \color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{n-\color{cornflowerblue}{x}} \\
 \]</span></p>
 <p>Der Faktor <span class="math inline">\(\binom{n}{x}\)</span> ist der <em>Binomialkoeffizient</em> und zählt, wie viele unterschiedliche Möglichkeiten es gibt, aus <span class="math inline">\(n\)</span> Elementen genau <span class="math inline">\(x\)</span> auszuwählen.</p>
+</section>
+<section id="zufällige-realisierungen" class="slide level2">
+<h2>Zufällige Realisierungen</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/julia-rand.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Generieren von zufälligen Werten aus einer Binomialverteilung mit n = 20 und θ = 0.3 mit der Programmiersprache Julia."><img data-src="images/julia-rand.png" alt="Generieren von zufälligen Werten aus einer Binomialverteilung mit n = 20 und θ = 0.3 mit der Programmiersprache Julia."></a></p>
+<figcaption>Generieren von zufälligen Werten aus einer Binomialverteilung mit n = 20 und θ = 0.3 mit der Programmiersprache Julia.</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Mit einem Computer können Realisierungen von Zufalls-prozessen generiert werden, die bestimmten Verteilungen (wie der Binomialverteilung) entsprechen.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-5-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="statistische-inferenz-2" class="title-slide slide level1 center">
+<h1>Statistische Inferenz</h1>
+
+</section>
+<section id="statistische-modellierung-1" class="slide level2 smaller">
+<h2>Statistische Modellierung</h2>
+<p>Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.</p>
+<p><a href="images/statmodels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/statmodels.png" width="1000"></a></p>
+<div class="fragment fade-in-then-out">
+<div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;">
+
+</div>
+</div>
+<div class="fragment">
+<div class="rectangle" style="top: 530px; left: 530px; width: 340px; height: 100px;">
+
+</div>
+</div>
+</section>
+<section id="gemeinsame-wkeit" class="slide level2">
+<h2>Gemeinsame W’keit</h2>
+<p>Die gemeinsame W’keit zweier Zufallsereignisse ist die W’keit, dass beide Ereignisse eintreten.</p>
+<p>Tabelle: Geograph sein und Grün wählen</p>
+</section>
+<section id="bedingte-wkeit" class="slide level2">
+<h2>Bedingte W’keit</h2>
+<p>P(Grün) vs.&nbsp;P(Grün | Studierend/e) vs.&nbsp;P(Grün | Geograph/in)</p>
+<ul>
+<li>“Conditioning is the soul of statistics”</li>
+</ul>
+</section>
+<section id="bayes-regel" class="slide level2">
+<h2>Bayes’ Regel</h2>
+<p><span class="math display">\[
+p(A | B) = \frac{p(B | A) p(A)}{p(B)}
+\]</span></p>
+</section>
+<section id="bayesianische-modelle" class="slide level2">
+<h2>Bayesianische Modelle</h2>
+<p>Ziel: Aussage über unbekannte Variablen <span class="math inline">\(\theta\)</span> <em>gegeben</em> Daten <span class="math inline">\(D\)</span>, d.h. wie wahrscheinlich ist ein bestimmter Wert für <span class="math inline">\(\theta\)</span> unter der Voraussetzung, dass die Daten <span class="math inline">\(D\)</span> beobachtet wurden?</p>
+<p><span class="math display">\[
+p(\theta | D) = \frac{p(D | \theta) p(\theta)}{p(D)}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(p(\theta | D)\)</span> : a-posteriori-W’keit von <span class="math inline">\(\theta\)</span></li>
+<li><span class="math inline">\(p(\theta)\)</span> : a-priori-W’keit von <span class="math inline">\(\theta\)</span></li>
+<li><span class="math inline">\(p(D | \theta)\)</span> : Likelihood (das Modell des DGP)</li>
+<li><span class="math inline">\(p(D)\)</span> : Evidenz (Normierungsfaktor)</li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -955,19 +608,19 @@ X(E) = \begin{cases}
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="statistische-modelle_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="statistische-modelle_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="statistische-modelle_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="statistische-modelle_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="statistische-modelle_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="statistische-modelle_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="statistische-modelle_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="statistische-modelle_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="statistische-modelle_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="statistische-modelle_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1386,7 +1039,7 @@ X(E) = \begin{cases}
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
