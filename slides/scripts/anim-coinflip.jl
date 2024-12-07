@@ -48,7 +48,7 @@ i = Observable(1)
 
 fig, ax1, ax3 = plot_coinflip(y1)
 
-record(fig, "coinflip.mp4", 1:N;
+record(fig, "images/coinflip.mp4", 1:N;
        loop=0, framerate=2) do n
     i[] = n
 
@@ -57,4 +57,4 @@ record(fig, "coinflip.mp4", 1:N;
 end
 
 resize!(fig, 800, 200)
-save("coinflip.png", fig; px_per_unit = 3)
+save("images/coinflip.png", fig; px_per_unit = 3)
