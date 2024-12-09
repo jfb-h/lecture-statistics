@@ -1,0 +1,382 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Statistische Modelle"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
+execute:
+    cache: true
+    keep-ipynb: false
+    keep-md: false
+filters:
+    - parse-latex
+format:
+    revealjs:
+        css: custom.css
+        controls: true
+        slide-number: true
+---
+
+```{r}
+#| cache: false
+
+library(rlang)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(lubridate)
+library(stringr)
+library(forcats)
+library(ggplot2)
+library(ggthemes)
+library(ggridges)
+library(viridis)
+library(patchwork)
+library(srvyr)
+library(posterior)
+
+theme_set(theme_tufte(base_family="Arial"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+
+```
+
+## Scheinkorrelationen
+
+![](https://www.tylervigen.com/spurious/correlation/image/2794_popularity-of-the-first-name-margarita_correlates-with_motor-vehicle-thefts-in-indiana.svg){width=900}
+
+## Scheinkorrelationen
+
+![](https://www.tylervigen.com/spurious/correlation/image/2052_gmo-use-in-corn-grown-in-minnesota_correlates-with_pirate-attacks-globally.svg){width=900}
+
+## Scheinkorrelationen
+<iframe width="780" height="500" src="https://www.tylervigen.com/spurious/correlation/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates" title="Survey preview"> </iframe>
+
+
+# Statistische Modelle
+
+
+## Statistische Modellierung {.smaller}
+
+Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.
+
+![](images/statmodels.png){width=1000}
+
+
+## [①]{style="color: #46b1e1"} Modellkonstruktion
+
+<hr>
+
+**Datengenerierender Prozess**: Wiederholter Münzwurf
+
+  - Faktoren: Eigenschaften der Münze, Wurftechnik, chaotischer physikalischer Prozess
+
+<hr>
+
+**Modell des DGP**: Binomialverteilung
+
+  - Zufallsprozess mit $\textrm{P}(K) = \theta$ und $\textrm{P}(Z) = 1 - \theta$
+  - Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik, $\theta$ über Würfe konstant
+
+
+## [①]{style="color: #46b1e1"} Modellstruktur
+
+Ein statistisches Modell kombiniert beobachtete Variablen ([*Daten*]{style="color: orange"}) und unbeobachtete Variablen ([*Parameter*]{style="color: cornflowerblue"}) in einem mathemat. Modell, das bestimmte *Annahmen* verkörpert:
+
+$$
+\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{\theta})
+$$
+
+> Wir modellieren die Anzahl Würfe mit Ergebnis 'Kopf' aus insgesamt $n$ Würfen durch eine Binomialverteilung mit unbekanntem Parameter $\theta$ (sprich: Theta). Die Tilde $a \sim b$ liest sich als '$a$ *folgt Verteilung* $b$'.
+
+
+## [②]{style="color: #47D45A"} Statistische Inferenz
+
+- Das Ziel statistischer Inferenz ist, unbekannte Variablen in einem statistischen Modell (welches den DGP repräsentiert) auf Basis von Beobachtungen des DGP zu schätzen.
+- Je mehr Evidenz (d.h. Beobachtungen / Daten) wir haben, desto mehr reduzieren wir die Unsicherheit über die unbekannten Variablen in unserem Modell.
+- Im Falle des Münzwurfs interessieren wir uns für den Paramter $\theta$, welcher (unter bestimmten Annahmen) die Fairness der Münze repräsentiert.
+
+## [②]{style="color: #47D45A"} Statistische Inferenz
+
+![](images/coinflip.gif){.card}
+
+
+## [③]{style="color: #F2AA84"} Überprüfung durch Simulation
+
+Entsprechen die Modellvorhersagen den beobachteten Daten?
+
+
+```{r}
+set.seed(123)
+dat_coin = tibble(n = 50, zahl = 27, kopf = n - zahl)
+fit_coin = stan_glm(cbind(zahl, kopf) ~ 1,
+  family=binomial(), data = dat_coin, refresh=0)
+
+pred = predicted_rvars(fit_coin, dat_coin)
+
+pred |> ggplot(aes(xdist = .prediction)) +
+  stat_slab(fill="grey70", slab_color="black") +
+  geom_vline(xintercept=dat_coin$zahl, linewidth=1.5, color="tomato") +
+  annotate("text", x=27.5, y=0.97, label="Beobachtet: #Zahl = 27", color="tomato", size=6, hjust=0) +
+  labs(
+    x = "# Zahl in 50 Würfen",
+    y = "# Simulationen (normalisiert)"
+  )
+
+```
+
+
+## [④]{style="color: #D86ECC"} Ist die Münze fair?
+
+
+## Brexit und Bildungsabschluss
+
+
+```{r}
+library(rstanarm)
+library(posterior)
+library(tidybayes)
+library(ggdist)
+
+bes = readr::read_csv("data/BES.csv")
+bes$education = factor(
+  bes$education,
+  levels = 1:5,
+  labels = c(
+    "Keine Qualifikation",
+    "Realschulabschluss",
+    "Abitur",
+    "Bachelor",
+    "Master"
+  )
+)
+
+dat = bes |>
+  summarize(n=n(), .by = c(vote, education)) |>
+  mutate(total = sum(n), .by=education) |> drop_na() |>
+  filter(vote %in% c("stay", "leave"))
+
+dat_wide = dat |> pivot_wider(names_from=vote, values_from=n)
+
+fit = stan_glmer(
+  cbind(stay, leave) ~ -1 + (1|education),
+  family=binomial(), data = dat_wide, refresh=0)
+```
+
+```{r, fig.width=11, fig.height=6}
+p1 = ggplot(dat, aes(x = vote, y = n, fill = education)) +
+  geom_col() +
+  facet_wrap(~fct_rev(education), ncol=1, scales="free_y") +
+  scale_fill_tableau() +
+  labs(x=NULL, y="Häufigkeit") +
+  theme(legend.position = "none")
+
+p2 = epred_rvars(fit, dat_wide) |>
+  ggplot(aes(y = 1, xdist = .epred, color=education)) +
+  stat_pointinterval(.width=0.99) +
+  geom_vline(xintercept=0.5, linetype = "dashed") +
+  facet_wrap(~fct_rev(education), ncol=1, scales="free_y") +
+  xlim(0, 1) +
+  labs(
+    x = "θ", y = NULL,
+  ) +
+  scale_color_tableau() +
+  theme(
+    legend.position = "none",
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    strip.text.y = element_blank(),
+    strip.text.x = element_blank()
+  )
+
+(p1 | p2) +
+  plot_layout(widths = c(0.2, 0.8)) +
+  plot_annotation(
+    tag_levels = "A",
+    tag_prefix = "(",
+    tag_suffix = ")",
+    title = "Zustimmung zum Brexit und Bildungsabschluss",
+    subtitle = "Umfrageergebnisse (A) und geschätzte Wahrscheinlichket, den Brexit abzulehnen (B). Das eingesetzte Modell ist #stayₑ ∼ Binomial(θₑ, nₑ),\nwobei e den Bildungsstand indiziert. Dargestellte Intervalle zeigen Schätzunsicherheit.",
+    caption = "Datenquelle: BES Survey"
+  )
+```
+
+
+## Zwei Quellen von Unsicherheit
+
+- **Aleatorische Unsicherheit** beschreibt systemische Unsicherheit, die nicht durch mehr Beobachtungen aber evtl. durch ein besseres Modell reduziert werden kann (z.B. begrenzte Vorhersagekraft von Wohnungsgröße als einzigem Prädiktor für Mietpreise).
+
+- **Epistemische Unsicherheit** beschreibt Unsicherheit, die aus der begrenzten Verfügbarkeit von Informationen resultiert, und kann durch mehr/bessere Beobachtungen reduziert werden (z.B. Stichprobengröße, Messfehler).
+
+
+# Wahrscheinlichkeit
+Quantifizierung von Unsicherheit
+
+## Wahrscheinlichkeit {.smaller}
+
+::::: columns
+::: {.column width="45%"}
+![](images/verteilung.png)
+:::
+::: {.column width="55%"}
+
+- Eine *Wahrscheinlichkeitsverteilung* verteilt eine auf 1 normierte Quantität über die möglichen Resultate eines Zufallsprozesses.
+
+- Die W'keit eines Ereignisses ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).
+
+- **Frequentistische Interpretation:** W'keit ist die relative Häufigkeit in einem unendlich wiederholten Experiment (z.B. Münzwurf).
+
+- **Bayesianische Interpretation:** W'keit ist ein konsistentes Maß für Unsicherheit (z.B. W'keit, dass Bayern gegen Donezk gewinnt).
+
+:::
+:::::
+
+## Der Ergebnisraum
+![](images/prob-1.png)
+
+## Ereignisse
+![](images/prob-2.png)
+
+## Wahrscheinlichkeit
+![](images/prob-3.png)
+
+## Wahrscheinlichkeit
+![](images/prob-4.png)
+
+## Wahrscheinlichkeit
+![](images/prob-5.png)
+
+## Wahrscheinlichkeit
+![](images/prob-6.png)
+
+## Multiplikationsregel
+
+- Zwei Würfel
+
+
+## Zufallsvariablen
+
+Eine *Zufallsvariable* $X(E)$ ordnet jedem Ergebnis $E$ im Ergebnisraum eines Zufallsprozesses eine Zahl zu.
+
+Für das Beispiel des Münzwurfs:
+
+$$
+X(E) = \begin{cases}
+  0, & \text{wenn } E = \textrm{Kopf} \\
+  1, & \text{wenn } E = \textrm{Zahl}
+\end{cases}
+$$
+
+Die Zahlen haben nicht immer eine inheränte Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.
+
+Statt mit $X(E)$ wird eine Zufallsvariable häufig auch einfach mit $X$ bezeichnet.
+
+
+## Bernoulliverteilung
+
+Eine der bekanntesten W'keitsverteilungen ist die *Bernoulli-verteilung* für eine binäre Zufallsvariable $X$ (Wertebereich 0 oder 1) mit Wahrscheinlichkeitsfunktion:
+
+$$
+\textrm{Ber}(X = \color{cornflowerblue}{x} | \color{orange}{\theta}) =
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{1-\color{cornflowerblue}{x}} \\
+$$
+
+zum Beispiel mit $\theta = 0{,}7$:
+
+$$
+\begin{align}
+\textrm{Ber}(X = \color{cornflowerblue}{1} | \color{orange}{0{,}7}) &=
+\color{orange}{0{,}7}^\color{cornflowerblue}{1} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{1}} = 0{,}7 \\
+\textrm{Ber}(X = \color{cornflowerblue}{0} | \color{orange}{0{,}7}) &=
+\color{orange}{0{,}7}^\color{cornflowerblue}{0} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{0}} = 1 - 0{,}7
+\end{align}
+$$
+
+## Binomialverteilung
+
+Die *Binomialverteilung* modelliert das Ergebnis einer Reihe von $n$ unabhängigen Bernoulli-Experimenten und hat für eine Zufallsvariable $X$ mit Wertebereich 0 bis $n$ die W'keitsfunktion:
+
+$$
+\textrm{Bin}(X = \color{cornflowerblue}{x} | n, \color{orange}{\theta}) =
+\binom{n}{x}
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{n-\color{cornflowerblue}{x}} \\
+$$
+
+Der Faktor $\binom{n}{x}$ ist der *Binomialkoeffizient* und zählt, wie viele unterschiedliche Möglichkeiten es gibt, aus $n$ Elementen genau $x$ auszuwählen.
+
+## Zufällige Realisierungen
+
+::::: columns
+::: {.column width="50%"}
+![Generieren von zufälligen Werten aus einer Binomialverteilung mit n = 20 und θ = 0.3 mit der Programmiersprache Julia.](images/julia-rand.png)
+:::
+::: {.column width="50%"}
+Mit einem Computer können Realisierungen von Zufalls-prozessen generiert werden, die bestimmten Verteilungen (wie der Binomialverteilung) entsprechen.
+
+```{r, fig.width=5, fig.height=2}
+d = tibble(x=rbinom(1000, 20, 0.3))
+
+d |> summarize(n=n(), .by=x) |>
+ggplot(aes(x=x, y=n)) +
+  geom_col(fill="grey70", color="grey20") +
+  labs(x="x", y="Häufigkeit", subtitle="1 000 Realisierungen aus X ~ Binom(20, 0.3)")
+
+```
+:::
+:::::
+
+# Statistische Inferenz
+
+## Statistische Modellierung {.smaller}
+
+Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.
+
+![](images/statmodels.png){width=1000}
+
+::: {.fragment .fade-in-then-out}
+<div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;"></div>
+:::
+
+::: {.fragment}
+<div class="rectangle" style="top: 530px; left: 530px; width: 340px; height: 100px;"></div>
+:::
+
+
+## Gemeinsame W'keit
+
+Die gemeinsame W'keit zweier Zufallsereignisse ist die W'keit, dass beide Ereignisse eintreten.
+
+Tabelle: Geograph sein und Grün wählen
+
+## Bedingte W'keit
+
+P(Grün) vs. P(Grün | Studierend/e) vs. P(Grün | Geograph/in)
+
+- "Conditioning is the soul of statistics"
+
+## Bayes' Regel
+
+$$
+p(A | B) = \frac{p(B | A) p(A)}{p(B)}
+$$
+
+## Bayesianische Modelle
+
+Ziel: Aussage über unbekannte Variablen $\theta$ *gegeben* Daten $D$, d.h. wie wahrscheinlich ist ein bestimmter Wert für $\theta$ unter der Voraussetzung, dass die Daten $D$ beobachtet wurden?
+
+$$
+p(\theta | D) = \frac{p(D | \theta) p(\theta)}{p(D)}
+$$
+
+- $p(\theta | D)$ : a-posteriori-W'keit von $\theta$
+- $p(\theta)$ : a-priori-W'keit von $\theta$
+- $p(D | \theta)$ : Likelihood (das Modell des DGP)
+- $p(D)$ : Evidenz (Normierungsfaktor)
