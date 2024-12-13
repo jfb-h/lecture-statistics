@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="wahrscheinlichkeitstheorie_files/libs/clipboard/clipboard.min.js"></script>
-<script src="wahrscheinlichkeitstheorie_files/libs/quarto-html/tabby.min.js"></script>
-<script src="wahrscheinlichkeitstheorie_files/libs/quarto-html/popper.min.js"></script>
-<script src="wahrscheinlichkeitstheorie_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="wahrscheinlichkeitstheorie_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="wahrscheinlichkeitstheorie_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="wahrscheinlichkeitstheorie_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="wahrscheinlichkeitstheorie_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+<script src="lineare-regression_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lineare-regression_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lineare-regression_files/libs/quarto-html/popper.min.js"></script>
+<script src="lineare-regression_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lineare-regression_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lineare-regression_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="lineare-regression_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lineare-regression_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lineare-regression_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="lineare-regression_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="lineare-regression_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.4">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
@@ -18,8 +18,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="lineare-regression_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lineare-regression_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -33,12 +33,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="lineare-regression_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="custom.css">
-  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="lineare-regression_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lineare-regression_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lineare-regression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lineare-regression_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -331,7 +331,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Statistische Modelle</p>
+  <p class="subtitle">Lineare Regressionsmodelle</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,472 +342,96 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
-<section id="scheinkorrelationen" class="slide level2">
-<h2>Scheinkorrelationen</h2>
-<p><a href="https://www.tylervigen.com/spurious/correlation/image/2794_popularity-of-the-first-name-margarita_correlates-with_motor-vehicle-thefts-in-indiana.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://www.tylervigen.com/spurious/correlation/image/2794_popularity-of-the-first-name-margarita_correlates-with_motor-vehicle-thefts-in-indiana.svg" width="900"></a></p>
-</section>
-<section id="scheinkorrelationen-1" class="slide level2">
-<h2>Scheinkorrelationen</h2>
-<p><a href="https://www.tylervigen.com/spurious/correlation/image/2052_gmo-use-in-corn-grown-in-minnesota_correlates-with_pirate-attacks-globally.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="https://www.tylervigen.com/spurious/correlation/image/2052_gmo-use-in-corn-grown-in-minnesota_correlates-with_pirate-attacks-globally.svg" width="900"></a></p>
-</section>
-<section id="scheinkorrelationen-2" class="slide level2">
-<h2>Scheinkorrelationen</h2>
-<p><img data-src="https://www.tylervigen.com/spurious/correlation/image/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates.svg" width="900"> <!-- <iframe width="780" height="500" src="https://www.tylervigen.com/spurious/correlation/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates" title="Survey preview"> </iframe> --></p>
-</section>
-<section>
-<section id="statistische-modelle" class="title-slide slide level1 center">
-<h1>Statistische Modelle</h1>
-
-</section>
-<section id="statistische-modellierung" class="slide level2 smaller">
-<h2>Statistische Modellierung</h2>
+<section id="statistische-modelle" class="slide level2 smaller">
+<h2>Statistische Modelle</h2>
 <p>Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.</p>
-<p><a href="images/statmodels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/statmodels.png" width="1000"></a></p>
-</section>
-<section id="modellkonstruktion" class="slide level2">
-<h2><span style="color: #46b1e1">①</span> Modellkonstruktion</h2>
-<hr>
-<p><strong>Datengenerierender Prozess</strong>: Wiederholter Münzwurf</p>
-<ul>
-<li>Faktoren: Eigenschaften der Münze, Wurftechnik, chaotischer physikalischer Prozess</li>
-</ul>
-<hr>
-<p><strong>Modell des DGP</strong>: Binomialverteilung</p>
-<ul>
-<li>Zufallsprozess mit <span class="math inline">\(\textrm{P}(K) = \theta\)</span> und <span class="math inline">\(\textrm{P}(Z) = 1 - \theta\)</span></li>
-<li>Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik, <span class="math inline">\(\theta\)</span> über Würfe konstant</li>
-</ul>
-</section>
-<section id="modellstruktur" class="slide level2">
-<h2><span style="color: #46b1e1">①</span> Modellstruktur</h2>
-<p>Ein statistisches Modell kombiniert beobachtete Variablen (<span style="color: orange"><em>Daten</em></span>) und unbeobachtete Variablen (<span style="color: cornflowerblue"><em>Parameter</em></span>) in einem mathemat. Modell, das bestimmte <em>Annahmen</em> verkörpert:</p>
-<p><span class="math display">\[
-\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{\theta})
-\]</span></p>
-<blockquote>
-<p>Wir modellieren die Anzahl Würfe mit Ergebnis ‘Kopf’ aus insgesamt <span class="math inline">\(n\)</span> Würfen durch eine Binomialverteilung mit unbekanntem Parameter <span class="math inline">\(\theta\)</span> (sprich: Theta). Die Tilde <span class="math inline">\(a \sim b\)</span> liest sich als ‘<span class="math inline">\(a\)</span> <em>folgt Verteilung</em> <span class="math inline">\(b\)</span>’.</p>
-</blockquote>
-</section>
-<section id="statistische-inferenz" class="slide level2">
-<h2><span style="color: #47D45A">②</span> Statistische Inferenz</h2>
-<ul>
-<li>Das Ziel statistischer Inferenz ist, unbekannte Variablen in einem statistischen Modell (welches den DGP repräsentiert) auf Basis von Beobachtungen des DGP zu schätzen.</li>
-<li>Je mehr Evidenz (d.h. Beobachtungen / Daten) wir haben, desto mehr reduzieren wir die Unsicherheit über die unbekannten Variablen in unserem Modell.</li>
-<li>Im Falle des Münzwurfs interessieren wir uns für den Paramter <span class="math inline">\(\theta\)</span>, welcher (unter bestimmten Annahmen) die Fairness der Münze repräsentiert.</li>
-</ul>
-</section>
-<section id="statistische-inferenz-1" class="slide level2">
-<h2><span style="color: #47D45A">②</span> Statistische Inferenz</h2>
-<video src="images/coinflip.mp4" width="1000" controls="" autoplay="" loop="" muted="">
-</video>
-</section>
-<section id="überprüfung-durch-simulation" class="slide level2">
-<h2><span style="color: #F2AA84">③</span> Überprüfung durch Simulation</h2>
-<p>Entsprechen die Modellvorhersagen den beobachteten Daten?</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ist-die-münze-fair" class="slide level2">
-<h2><span style="color: #D86ECC">④</span> Ist die Münze fair?</h2>
-<p>Gegeben der Ergebnisse der 50 beobachteten Münzwürfe hält das Modell Werte für <span class="math inline">\(\theta\)</span> im Bereich 0.3 bis 0.55 für plausibel.</p>
-<p><a href="images/coinflip.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/coinflip.png"></a></p>
-<p>Damit ist nicht auszuschließen, dass die Münze fair ist (<span class="math inline">\(\theta=0.5\)</span>), allerdings besteht auch die Möglichkeit eines (geringfügigen) Bias.</p>
-</section>
-<section id="brexit-und-bildungsabschluss" class="slide level2">
-<h2>Brexit und Bildungsabschluss</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="zwei-quellen-von-unsicherheit" class="slide level2">
-<h2>Zwei Quellen von Unsicherheit</h2>
-<ul>
-<li><p><strong>Aleatorische Unsicherheit</strong> beschreibt systemische Unsicherheit, die nicht durch mehr Beobachtungen aber evtl. durch ein besseres Modell reduziert werden kann (z.B. begrenzte Vorhersagekraft von Wohnungsgröße als einzigem Prädiktor für Mietpreise).</p></li>
-<li><p><strong>Epistemische Unsicherheit</strong> beschreibt Unsicherheit, die aus der begrenzten Verfügbarkeit von Informationen resultiert, und kann durch mehr/bessere Beobachtungen reduziert werden (z.B. Stichprobengröße, Messfehler).</p></li>
-</ul>
-</section></section>
-<section>
-<section id="wahrscheinlichkeit" class="title-slide slide level1 center">
-<h1>Wahrscheinlichkeit</h1>
-<p>Quantifizierung von Unsicherheit</p>
-</section>
-<section id="wahrscheinlichkeit-1" class="slide level2 smaller">
-<h2>Wahrscheinlichkeit</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<p><a href="images/verteilung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="images/verteilung.png"></a></p>
-</div><div class="column" style="width:55%;">
-<ul>
-<li><p>Eine <em>Wahrscheinlichkeitsverteilung</em> verteilt eine auf 1 normierte Quantität über die möglichen Resultate eines Zufallsprozesses.</p></li>
-<li><p>Die W’keit eines Ereignisses ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).</p></li>
-<li><p><strong>Frequentistische Interpretation:</strong> W’keit ist die relative Häufigkeit in einem unendlich wiederholten Experiment (z.B. Münzwurf).</p></li>
-<li><p><strong>Bayesianische Interpretation:</strong> W’keit ist ein konsistentes Maß für ‘Grad der Plausibilität’ (z.B. W’keit, dass Bayern gegen Donezk gewinnt).</p></li>
-</ul>
-</div></div>
-</section>
-<section id="der-ergebnisraum" class="slide level2">
-<h2>Der Ergebnisraum</h2>
-<p><a href="images/prob-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="images/prob-1.png"></a></p>
-</section>
-<section id="ereignisse" class="slide level2">
-<h2>Ereignisse</h2>
-<p><a href="images/prob-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="images/prob-2.png"></a></p>
-</section>
-<section id="wahrscheinlichkeit-2" class="slide level2">
-<h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="images/prob-3.png"></a></p>
-</section>
-<section id="wahrscheinlichkeit-3" class="slide level2">
-<h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="images/prob-4.png"></a></p>
-</section>
-<section id="wahrscheinlichkeit-4" class="slide level2">
-<h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="images/prob-5.png"></a></p>
-</section>
-<section id="wahrscheinlichkeit-5" class="slide level2">
-<h2>Wahrscheinlichkeit</h2>
-<p><a href="images/prob-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="images/prob-6.png"></a></p>
-</section>
-<section id="multiplikationsregel" class="slide level2">
-<h2>Multiplikationsregel</h2>
-<p><a href="images/prob-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/prob-7.png"></a></p>
-</section>
-<section id="multiplikationsregel-1" class="slide level2">
-<h2>Multiplikationsregel</h2>
-<p><a href="images/prob-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="images/prob-8.png"></a></p>
-</section>
-<section id="multiplikationsregel-2" class="slide level2">
-<h2>Multiplikationsregel</h2>
-<p><a href="images/prob-9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="images/prob-9.png"></a></p>
-</section>
-<section id="zufallsvariablen" class="slide level2">
-<h2>Zufallsvariablen</h2>
-<p>Eine <em>Zufallsvariable</em> <span class="math inline">\(X(E)\)</span> ordnet jedem Ergebnis <span class="math inline">\(E\)</span> im Ergebnisraum eines Zufallsprozesses eine Zahl zu.</p>
-<p>Für das Beispiel des Münzwurfs:</p>
-<p><span class="math display">\[
-X(E) = \begin{cases}
-  0, &amp; \text{wenn } E = \textrm{Kopf} \\
-  1, &amp; \text{wenn } E = \textrm{Zahl}
-\end{cases}
-\]</span></p>
-<p>Die Zahlen haben nicht immer eine inheränte Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.</p>
-<p>Statt mit <span class="math inline">\(X(E)\)</span> wird eine Zufallsvariable häufig auch einfach mit <span class="math inline">\(X\)</span> bezeichnet.</p>
-</section>
-<section id="bernoulliverteilung" class="slide level2">
-<h2>Bernoulliverteilung</h2>
-<p>Eine der bekanntesten W’keitsverteilungen ist die <em>Bernoulli-verteilung</em> für eine binäre Zufallsvariable <span class="math inline">\(X\)</span> (Wertebereich 0 oder 1) mit Wahrscheinlichkeitsfunktion:</p>
-<p><span class="math display">\[
-\textrm{Ber}(X = \color{cornflowerblue}{x} | \color{orange}{\theta}) =
-\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{1-\color{cornflowerblue}{x}} \\
-\]</span></p>
-<p>zum Beispiel mit <span class="math inline">\(\theta = 0{,}7\)</span>:</p>
-<p><span class="math display">\[
-\begin{align}
-\textrm{Ber}(X = \color{cornflowerblue}{1} | \color{orange}{0{,}7}) &amp;=
-\color{orange}{0{,}7}^\color{cornflowerblue}{1} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{1}} = 0{,}7 \\
-\textrm{Ber}(X = \color{cornflowerblue}{0} | \color{orange}{0{,}7}) &amp;=
-\color{orange}{0{,}7}^\color{cornflowerblue}{0} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{0}} = 1 - 0{,}7
-\end{align}
-\]</span></p>
-</section>
-<section id="binomialverteilung" class="slide level2">
-<h2>Binomialverteilung</h2>
-<p>Die <em>Binomialverteilung</em> modelliert das Ergebnis einer Reihe von <span class="math inline">\(n\)</span> unabhängigen Bernoulli-Experimenten und hat für eine Zufallsvariable <span class="math inline">\(X\)</span> mit Wertebereich 0 bis <span class="math inline">\(n\)</span> die W’keitsfunktion:</p>
-<p><span class="math display">\[
-\textrm{Bin}(X = \color{cornflowerblue}{x} | n, \color{orange}{\theta}) =
-\binom{n}{x}
-\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{n-\color{cornflowerblue}{x}} \\
-\]</span></p>
-<p>Der Faktor <span class="math inline">\(\binom{n}{x}\)</span> ist der <em>Binomialkoeffizient</em> und zählt, wie viele unterschiedliche Möglichkeiten es gibt, aus <span class="math inline">\(n\)</span> Elementen genau <span class="math inline">\(x\)</span> auszuwählen.</p>
-</section>
-<section id="binomialverteilung-1" class="slide level2">
-<h2>Binomialverteilung</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-5-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="fragment smaller">
-<div class="annotation" style="color: cornflowerblue; top: 170px; left: 410px">
-<p><span class="math inline">\(\tiny P(X=7|20, 0{,}3) = {7 \choose 20} 0{,}3^7 (1 -0{,}3)^{20-7} = 0.164\)</span></p>
-</div>
-</div>
-</section>
-<section id="binomialverteilung-2" class="slide level2">
-<h2>Binomialverteilung</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-6-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="zufällige-realisierungen" class="slide level2">
-<h2>Zufällige Realisierungen</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="images/julia-rand.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Generieren von zufälligen Werten aus einer Binomialverteilung mit n = 20 und θ = 0.3 mit der Programmiersprache Julia."><img data-src="images/julia-rand.png" alt="Generieren von zufälligen Werten aus einer Binomialverteilung mit n = 20 und θ = 0.3 mit der Programmiersprache Julia."></a></p>
-<figcaption>Generieren von zufälligen Werten aus einer Binomialverteilung mit n = 20 und θ = 0.3 mit der Programmiersprache Julia.</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<p>Mit einem Computer können Realisierungen von Zufalls-prozessen generiert werden, die bestimmten Verteilungen (wie der Binomialverteilung) entsprechen.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="wahrscheinlichkeitstheorie_files/figure-revealjs/unnamed-chunk-7-1.png" width="480"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section></section>
-<section>
-<section id="statistische-inferenz-2" class="title-slide slide level1 center">
-<h1>Statistische Inferenz</h1>
-<p>Schätzen unbekannter Parameter</p>
-</section>
-<section id="statistische-modellierung-1" class="slide level2 smaller">
-<h2>Statistische Modellierung</h2>
-<p>Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.</p>
-<p><a href="images/statmodels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="images/statmodels.png" width="1000"></a></p>
-<div class="fragment fade-in-then-out">
+<p><a href="images/statmodels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/statmodels.png" width="1000"></a></p>
+<div class="fragment">
 <div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;">
 
 </div>
 </div>
-<div class="fragment">
-<div class="rectangle" style="top: 530px; left: 530px; width: 340px; height: 100px;">
-
-</div>
-</div>
 </section>
-<section id="statistische-inferenz-3" class="slide level2">
-<h2>Statistische Inferenz</h2>
-<p>Wir suchen für unbekannte Parameter <span class="math inline">\(\theta\)</span> Werte, die im Angesicht der beobachteten Daten <span class="math inline">\(D\)</span> plausibel sind. Wir suchen nach der <em>bedingten Verteilung</em> von <span class="math inline">\(\theta\)</span> <em>gegeben</em> <span class="math inline">\(D\)</span>:</p>
-<p><span class="math display">\[p(\theta|D)\]</span></p>
-<div class="fragment">
-<p>Im Falle eines wiederholten Münzwurfes mit <span class="math inline">\(D = 90K, 10Z\)</span> und <span class="math inline">\(P(K)=\theta\)</span>, was ist plausibler: <span class="math inline">\(\theta = 0.2\)</span> oder <span class="math inline">\(\theta = 0.8\)</span>?</p>
-<p><span class="math display">\[p(\theta = 0.2 |D) \quad \textrm{vs.} \quad p(\theta = 0.8 |D)\]</span></p>
-</div>
-</section>
-<section id="gemeinsame-wahrscheinlichkeit" class="slide level2">
-<h2>Gemeinsame Wahrscheinlichkeit</h2>
-<p>Die gemeinsame W’keit <span class="math inline">\(P(A, B)\)</span> zweier Zufallsereignisse ist die W’keit, dass sowohl <span class="math inline">\(A\)</span> als auch <span class="math inline">\(B\)</span> eintreten.</p>
-<p>Beispiel: W’keit, Geographie zu studieren und Grün zu wählen:</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>Grün</th>
-<th>Andere</th>
-<th>Gesamt</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Geograph</td>
-<td>0.10</td>
-<td>0.05</td>
-<td>0.15</td>
-</tr>
-<tr class="even">
-<td>nicht Geograph</td>
-<td>0.30</td>
-<td>0.55</td>
-<td>0.85</td>
-</tr>
-<tr class="odd">
-<td>Gesamt</td>
-<td>0.40</td>
-<td>0.60</td>
-<td>1.00</td>
-</tr>
-</tbody>
-</table>
-<p>Reihen-/Spaltensummen sind <em>Randverteilungen</em> von <span class="math inline">\(A\)</span> und <span class="math inline">\(B\)</span>.</p>
-</section>
-<section id="bedingte-wahrscheinlichkeit" class="slide level2">
-<h2>Bedingte Wahrscheinlichkeit</h2>
-<p>Die <em>bedingte W’keit</em> von <span class="math inline">\(A\)</span> gegeben <span class="math inline">\(B\)</span> ist definiert als die gemeinsame W’keit von <span class="math inline">\(A\)</span> und <span class="math inline">\(B\)</span> normiert durch die W’keit von <span class="math inline">\(B\)</span>:</p>
+<section id="zusammenhänge-modellieren" class="slide level2">
+<h2>Zusammenhänge modellieren</h2>
+<p>In vielen Situationen modellieren wir eine abhängige Variable <span class="math inline">\(y\)</span> als eine Funktion <span class="math inline">\(f\)</span> einer unabhängigen Variable <span class="math inline">\(x\)</span>:</p>
 <p><span class="math display">\[
-P(A|B) = \frac{P(A, B)}{P(B)}
+y = f(x) + \epsilon
 \]</span></p>
-<!-- Konditionieren auf bereits erlangte Information ist ein zentrales Instrument zur systematischen Integration von Evidenz in unsere Modelle. -->
-<div class="fragment">
-<p>Zusätzlich gilt das <em>Gesetz totaler W’keit</em>: <span class="math display">\[
-P(A) = P(A|B)P(B) + P(A|B^c)P(B^c)
-\]</span></p>
-<p>wobei <span class="math inline">\(B^c\)</span>, das Ereignis bezeichnet, dass <span class="math inline">\(B\)</span> <em>nicht</em> eintritt.</p>
-</div>
+<p>Da statistische Modelle Zusammenhänge i.d.R. nicht perfekt abbilden, enthält das Modell mit <span class="math inline">\(\epsilon\)</span> (<em>Epsilon</em>) einen un-beobachteten und als zufällig modellierten <em>Fehlerterm</em>.</p>
+<p>Die Funktion <span class="math inline">\(f\)</span> bildet die Form des Zusammenhangs zwischen <span class="math inline">\(x\)</span> und <span class="math inline">\(y\)</span> ab und ist aktuell noch unspezifiziert.</p>
 </section>
-<section id="bedingte-wahrscheinlichkeit-1" class="slide level2">
-<h2>Bedingte Wahrscheinlichkeit</h2>
-<p>Was ist die W’keit, dass eine Geographin Grün wählt?</p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 42%">
-<col style="width: 15%">
-<col style="width: 21%">
-<col style="width: 21%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Grün</th>
-<th>Andere</th>
-<th>Gesamt</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span style="color: tomato">Geograph</span></td>
-<td><span style="color: tomato">0.10</span></td>
-<td><span style="color: tomato">0.05</span></td>
-<td><span style="color: tomato">0.15</span></td>
-</tr>
-<tr class="even">
-<td>nicht Geograph</td>
-<td>0.30</td>
-<td>0.55</td>
-<td>0.85</td>
-</tr>
-<tr class="odd">
-<td>Gesamt</td>
-<td>0.40</td>
-<td>0.60</td>
-<td>1.00</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math display">\[
-P(\textrm{Grün} | \textrm{Geo}) =
-\frac{P(\textrm{Grün}, \textrm{Geo})}{P(\textrm{Geo})} =
-\frac{0.10}{0.15} = \frac{2}{3}
-\]</span></p>
+<section id="einfache-lineare-regression" class="slide level2">
+<h2>Einfache Lineare Regression</h2>
+<p>Hauspreise</p>
 </section>
-<section id="unabhängigkeit" class="slide level2">
-<h2>Unabhängigkeit</h2>
-<p>Zwei Ereignisse <span class="math inline">\(A\)</span> und <span class="math inline">\(B\)</span> sind formell <em>unabhängig</em>, wenn konditionieren auf <span class="math inline">\(B\)</span> an unseren Informationen über <span class="math inline">\(A\)</span> nichts ändert, d.h. wenn:</p>
+<section id="einfache-lineare-regression-1" class="slide level2">
+<h2>Einfache Lineare Regression</h2>
+<p>Eine simple aber nützliche Spezifikation für <span class="math inline">\(f\)</span> ist als Geradengleichung:</p>
 <p><span class="math display">\[
-P(A|B) = P(A)
+f(x) = \alpha + x\beta
 \]</span></p>
-<p>(Un)abhängigkeit ist <em>symmetrisch</em>, d.h. <span class="math inline">\(P(A|B) = P(A)\)</span> impliziert auch <span class="math inline">\(P(B|A) = P(B)\)</span>.</p>
-</section>
-<section id="bayes-regel" class="slide level2">
-<h2>Bayes’ Regel</h2>
-<p>Eine Erweiterung bedingter W’keit ist <em>Bayes’ Regel</em>, die das Kernstück <em>Bayesianischer Inferenz</em> bildet:</p>
-<p><span class="math display">\[
-P(A | B) = \frac{P(A,B)}{P(B)} = \frac{P(B | A) P(A)}{P(B)}
-\]</span></p>
-<p>Bayes’ Regel folgt direkt durch Umstellen der Definition bedingter W’keit:</p>
-<p><span class="math display">\[
-P(A,B) = P(A|B)P(B) = P(B|A) P(A)
-\]</span></p>
-</section>
-<section id="pkrankheit-test-positiv" class="slide level2">
-<h2>P(Krankheit | Test positiv)</h2>
-<p><span class="math inline">\(K\)</span> ist das Ereignis, an einer seltenen Krankheit erkrankt zu sein und <span class="math inline">\(T\)</span> das Ereignis, positiv auf die Krankheit getestet zu werden. Wir interessieren uns für <span class="math inline">\(P(K|T)\)</span>: die W’keit erkrankt zu sein, gegeben dass ein positives Testergebnis vorliegt.</p>
-<hr>
-<p><strong>Vorhandene Informationen:</strong></p>
+<p><span class="math inline">\(\alpha\)</span> und <span class="math inline">\(\beta\)</span> sind Modellparameter:</p>
 <ul>
-<li>Inzidenz der Krankheit: <span class="math inline">\(P(K) = 0{,}01\)</span></li>
-<li>Genauigkeit des Tests: <span class="math inline">\(P(T|K) = P(T^c|K^c) = 0{,}95\)</span></li>
+<li><span class="math inline">\(\alpha\)</span> ist der y-Achsenabschnitt, d.h. der Wert von <span class="math inline">\(y\)</span> wenn <span class="math inline">\(x=0\)</span></li>
+<li><span class="math inline">\(\beta\)</span> gibt die Steigung der Gerade an, d.h. <span class="math inline">\(\beta\)</span> zeigt, um wie viel <span class="math inline">\(f(x)\)</span> steigt wenn <span class="math inline">\(x\)</span> um 1 steigt</li>
 </ul>
 </section>
-<section id="pkrankheit-test-positiv-1" class="slide level2">
-<h2>P(Krankheit | Test positiv)</h2>
-<p>Anwenden von Bayes’ Regel ergibt:</p>
+<section id="einfache-lineare-regression-2" class="slide level2">
+<h2>Einfache Lineare Regression</h2>
+<p><span class="math display">\[
+\epsilon \sim \textrm{Normal}(0, \sigma)
+\]</span></p>
+</section>
+<section id="die-normalverteilung" class="slide level2">
+<h2>Die Normalverteilung</h2>
+</section>
+<section id="residuen" class="slide level2">
+<h2>Residuen</h2>
+</section>
+<section id="einfache-lineare-regression-3" class="slide level2">
+<h2>Einfache Lineare Regression</h2>
+<p>Zusammengefügt ist das einfache lineare Regressionsmodell:</p>
 <p><span class="math display">\[
 \begin{align}
-P(K | T) &amp;= \frac{P(T | K) P(K)}{P(T)} \\[8pt]
-&amp;= \frac{P(T | K) P(K)}{P(T|K)P(K) + P(T|K^c)P(K^c)} \\[8pt]
-&amp;= \frac{0{,}95 \times 0{,}01}{0{,}95 \times 0{,}01 + 0{,}05 \times 0{,}99} = 0{,}16
+y &amp;= \alpha + x\beta + \epsilon \\
+\epsilon &amp;\sim \textrm{Normal}(0, \sigma)
+\end{align}
+\]</span></p>
+<p>Diese Formulierung ist äquivalent zu:</p>
+<p><span class="math display">\[
+\begin{align}
+y &amp;\sim \textrm{Normal}(\mu, \sigma) \\
+\mu &amp;= \alpha + x\beta
 \end{align}
 \]</span></p>
 </section>
-<section id="bayesianische-inferenz" class="slide level2">
-<h2>Bayesianische Inferenz</h2>
-<p>Bayes’ Regel kann für statistische Inferenz unbekannter Parameter <span class="math inline">\(\theta\)</span> im Angesicht von Daten <span class="math inline">\(D\)</span> eingesetzt werden:</p>
-<p><span class="math display">\[
-\color{tomato}{p(\theta | D)} = \frac{\color{orange}{p(D | \theta)} \color{cornflowerblue}{p(\theta)}}{p(D)}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(\color{tomato}{p(\theta | D)}\)</span> ist die <em>a-posteriori-Verteilung</em> von <span class="math inline">\(\theta\)</span></li>
-<li><span class="math inline">\(\color{cornflowerblue}{p(\theta)}\)</span> ist die <em>a-priori-Verteilung</em> von <span class="math inline">\(\theta\)</span></li>
-<li><span class="math inline">\(\color{orange}{p(D | \theta)}\)</span> ist die <em>Likelihood</em> (das Modell des DGP)</li>
-<li><span class="math inline">\(p(D)\)</span> : ist ein Normierungsfaktor</li>
-</ul>
-</section>
-<section id="bayesianische-inferenz-1" class="slide level2">
-<h2>Bayesianische Inferenz</h2>
-<p>Die Kurve im Bild rechts zeigt die <em>a-posteriori-Verteilung</em> <span class="math inline">\(\color{tomato}{p(\theta | \textrm{K} = 21)}\)</span> des unbekannten Parameters <span class="math inline">\(\theta\)</span> nach 50 beobachteten Münzwürfen mit 21 mal <span class="math inline">\(K\)</span>:</p>
-<p><a href="images/coinflip.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="images/coinflip.png"></a></p>
-<p>Die eingesetzte Likelihood <span class="math inline">\(\color{orange}{p(K | \theta)} = \textrm{Bin}(K|n, \theta)\)</span> ist die schon besprochene Binomialverteilung als Modell des DGP.</p>
-</section>
-<section id="bayesianisches-updating" class="slide level2">
-<h2>Bayesianisches Updating</h2>
-<ul>
-<li><p>Bayesianische Inferenz kann verstanden werden als ein systematisches <em>Updaten</em> der <em>a-priori-Verteilung</em> <span class="math inline">\(\color{cornflowerblue}{p(\theta)}\)</span> durch das Konditionieren auf beobachtete Daten <span class="math inline">\(D\)</span>.</p></li>
-<li><p>Die <em>a-priori-Verteilung</em> selbst hängt nicht von den Daten ab, sondern verkörpert die ‘subjektive’ Einschätzung der Analystin vor Durchführung der Untersuchung.</p></li>
-<li><p>Die <em>a-priori-Verteilung</em> kann eingesetzt werden um Vorwissen der Forschenden einzubeziehen und das Modell auf plausible Werte für <span class="math inline">\(\theta\)</span> zu beschränken.</p></li>
-</ul>
-</section>
-<section id="prüfungsfragen" class="slide level2">
-<h2>Prüfungsfragen</h2>
-<ul>
-<li>Was ist ein Nachteil der frequentistischen Definition von Wahrscheinlichkeit?</li>
-<li>Berechnen Sie die bedingte W’keit auf Basis der untentstehenden Tabelle für folgende Ereignisse.</li>
-<li>Was ist das Ziel statistischer Inferenz?</li>
-<li>Sie Befragen 1000 Personen dazu, ob sie planen, bei der nächsten Bundestagswahl zu wählen. Was könnte ein geeignetes Modell für den Datengenerierenden Prozess sein? Welche Annahmen verkörpert das Modell?</li>
-</ul>
+<section id="survey" class="slide level2">
+<h2>Survey</h2>
+<p>Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen?</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="wahrscheinlichkeitstheorie_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lineare-regression_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1226,7 +850,7 @@ P(K | T) &amp;= \frac{P(T | K) P(K)}{P(T)} \\[8pt]
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

@@ -1,0 +1,133 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Lineare Regressionsmodelle"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
+execute:
+    cache: true
+    keep-ipynb: false
+    keep-md: false
+filters:
+    - parse-latex
+format:
+    revealjs:
+        css: custom.css
+        controls: true
+        slide-number: true
+---
+
+```{r}
+#| cache: false
+
+library(rlang)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(lubridate)
+library(stringr)
+library(forcats)
+library(ggplot2)
+library(ggthemes)
+library(ggridges)
+library(viridis)
+library(patchwork)
+library(srvyr)
+library(posterior)
+
+theme_set(theme_tufte(base_family="Arial"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+
+```
+
+## Statistische Modelle {.smaller}
+
+Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.
+
+![](images/statmodels.png){width=1000}
+
+::: {.fragment}
+<div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;"></div>
+:::
+
+
+## Zusammenhänge modellieren
+
+In vielen Situationen modellieren wir eine abhängige Variable $y$ als eine Funktion $f$ einer unabhängigen Variable $x$:
+
+$$
+y = f(x) + \epsilon
+$$
+
+Da statistische Modelle Zusammenhänge i.d.R. nicht perfekt abbilden, enthält das Modell mit $\epsilon$ (*Epsilon*) einen un-beobachteten und als zufällig modellierten *Fehlerterm*.
+
+Die Funktion $f$ bildet die Form des Zusammenhangs zwischen $x$ und $y$ ab und ist aktuell noch unspezifiziert.
+
+
+## Einfache Lineare Regression
+
+Hauspreise
+
+
+## Einfache Lineare Regression
+
+Eine simple aber nützliche Spezifikation für $f$ ist als Geradengleichung:
+
+$$
+f(x) = \alpha + x\beta
+$$
+
+$\alpha$ und $\beta$ sind Modellparameter:
+
+- $\alpha$ ist der y-Achsenabschnitt, d.h. der Wert von $y$ wenn $x=0$
+- $\beta$ gibt die Steigung der Gerade an, d.h. $\beta$ zeigt, um wie viel $f(x)$ steigt wenn $x$ um 1 steigt
+
+
+## Einfache Lineare Regression
+
+$$
+\epsilon \sim \textrm{Normal}(0, \sigma)
+$$
+
+## Die Normalverteilung
+
+
+## Residuen
+
+
+## Einfache Lineare Regression
+
+Zusammengefügt ist das einfache lineare Regressionsmodell:
+
+$$
+\begin{align}
+y &= \alpha + x\beta + \epsilon \\
+\epsilon &\sim \textrm{Normal}(0, \sigma)
+\end{align}
+$$
+
+Diese Formulierung ist äquivalent zu:
+
+$$
+\begin{align}
+y &\sim \textrm{Normal}(\mu, \sigma) \\
+\mu &= \alpha + x\beta
+\end{align}
+$$
+
+
+
+## Survey
+
+Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen?
+
+

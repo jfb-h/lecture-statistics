@@ -58,7 +58,8 @@ theme_update(
 ![](https://www.tylervigen.com/spurious/correlation/image/2052_gmo-use-in-corn-grown-in-minnesota_correlates-with_pirate-attacks-globally.svg){width=900}
 
 ## Scheinkorrelationen
-<iframe width="780" height="500" src="https://www.tylervigen.com/spurious/correlation/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates" title="Survey preview"> </iframe>
+![](https://www.tylervigen.com/spurious/correlation/image/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates.svg){width=900}
+<!-- <iframe width="780" height="500" src="https://www.tylervigen.com/spurious/correlation/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates" title="Survey preview"> </iframe> -->
 
 
 # Statistische Modelle
@@ -106,7 +107,9 @@ $$
 
 ## [②]{style="color: #47D45A"} Statistische Inferenz
 
-![](images/coinflip.gif){.card}
+<video src="images/coinflip.mp4" width="1000" controls autoplay loop muted>
+</video>
+
 
 
 ## [③]{style="color: #F2AA84"} Überprüfung durch Simulation
@@ -116,7 +119,7 @@ Entsprechen die Modellvorhersagen den beobachteten Daten?
 
 ```{r}
 set.seed(123)
-dat_coin = tibble(n = 50, zahl = 27, kopf = n - zahl)
+dat_coin = tibble(n = 50, zahl = 29, kopf = n - zahl)
 fit_coin = stan_glm(cbind(zahl, kopf) ~ 1,
   family=binomial(), data = dat_coin, refresh=0)
 
@@ -125,7 +128,7 @@ pred = predicted_rvars(fit_coin, dat_coin)
 pred |> ggplot(aes(xdist = .prediction)) +
   stat_slab(fill="grey70", slab_color="black") +
   geom_vline(xintercept=dat_coin$zahl, linewidth=1.5, color="tomato") +
-  annotate("text", x=27.5, y=0.97, label="Beobachtet: #Zahl = 27", color="tomato", size=6, hjust=0) +
+  annotate("text", x=29.5, y=0.97, label="Beobachtet: #Zahl = 29", color="tomato", size=6, hjust=0) +
   labs(
     x = "# Zahl in 50 Würfen",
     y = "# Simulationen (normalisiert)"
@@ -136,6 +139,11 @@ pred |> ggplot(aes(xdist = .prediction)) +
 
 ## [④]{style="color: #D86ECC"} Ist die Münze fair?
 
+Gegeben der Ergebnisse der 50 beobachteten Münzwürfe hält das Modell Werte für $\theta$ im Bereich 0.3 bis 0.55 für plausibel.
+
+![](images/coinflip.png)
+
+Damit ist nicht auszuschließen, dass die Münze fair ist ($\theta=0.5$), allerdings besteht auch die Möglichkeit eines (geringfügigen) Bias.
 
 ## Brexit und Bildungsabschluss
 
@@ -184,7 +192,7 @@ p2 = epred_rvars(fit, dat_wide) |>
   stat_pointinterval(.width=0.99) +
   geom_vline(xintercept=0.5, linetype = "dashed") +
   facet_wrap(~fct_rev(education), ncol=1, scales="free_y") +
-  xlim(0, 1) +
+  # xlim(0, 1) +
   labs(
     x = "θ", y = NULL,
   ) +
@@ -192,19 +200,35 @@ p2 = epred_rvars(fit, dat_wide) |>
   theme(
     legend.position = "none",
     axis.text.y = element_blank(),
-    axis.ticks = element_blank(),
+    axis.ticks.y = element_blank(),
     strip.text.y = element_blank(),
     strip.text.x = element_blank()
   )
 
-(p1 | p2) +
-  plot_layout(widths = c(0.2, 0.8)) +
+p3 = predicted_rvars(fit, dat_wide) |>
+  # mutate(share = .prediction / total) |>
+  ggplot(aes(xdist = .prediction, fill=education)) +
+  stat_slab(normalize="panels") +
+  geom_vline(dat=dat_wide, aes(xintercept=stay), color = "black") +
+  facet_wrap(~fct_rev(education), ncol=1, scales="free_x") +
+  scale_fill_tableau() +
+  labs(x = "# stay", y="# Simulationen") +
+  theme(
+    legend.position = "none",
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    strip.text.y = element_blank(),
+    strip.text.x = element_blank()
+  )
+
+(p1 | p2 | p3) +
+  plot_layout(widths = c(0.2, 0.6, 0.2)) +
   plot_annotation(
     tag_levels = "A",
     tag_prefix = "(",
     tag_suffix = ")",
     title = "Zustimmung zum Brexit und Bildungsabschluss",
-    subtitle = "Umfrageergebnisse (A) und geschätzte Wahrscheinlichket, den Brexit abzulehnen (B). Das eingesetzte Modell ist #stayₑ ∼ Binomial(θₑ, nₑ),\nwobei e den Bildungsstand indiziert. Dargestellte Intervalle zeigen Schätzunsicherheit.",
+    subtitle = "Umfrageergebnisse (A), geschätzte Wahrscheinlichket, den Brexit abzulehnen (B) und Modellsimulationen (C).\nDas eingesetzte Modell ist # stayₑ ∼ Binomial(θₑ, nₑ),wobei e den Bildungsstand indiziert.",
     caption = "Datenquelle: BES Survey"
   )
 ```
@@ -234,7 +258,7 @@ Quantifizierung von Unsicherheit
 
 - **Frequentistische Interpretation:** W'keit ist die relative Häufigkeit in einem unendlich wiederholten Experiment (z.B. Münzwurf).
 
-- **Bayesianische Interpretation:** W'keit ist ein konsistentes Maß für Unsicherheit (z.B. W'keit, dass Bayern gegen Donezk gewinnt).
+- **Bayesianische Interpretation:** W'keit ist ein konsistentes Maß für 'Grad der Plausibilität' (z.B. W'keit, dass Bayern gegen Donezk gewinnt).
 
 :::
 :::::
@@ -258,9 +282,13 @@ Quantifizierung von Unsicherheit
 ![](images/prob-6.png)
 
 ## Multiplikationsregel
+![](images/prob-7.png)
 
-- Zwei Würfel
+## Multiplikationsregel
+![](images/prob-8.png)
 
+## Multiplikationsregel
+![](images/prob-9.png)
 
 ## Zufallsvariablen
 
@@ -312,6 +340,47 @@ $$
 
 Der Faktor $\binom{n}{x}$ ist der *Binomialkoeffizient* und zählt, wie viele unterschiedliche Möglichkeiten es gibt, aus $n$ Elementen genau $x$ auszuwählen.
 
+
+## Binomialverteilung
+
+```{r, fig.width=11, fig.height=6}
+d = tibble(x=0:20,  y=dbinom(x, 20, 0.3))
+
+d |> ggplot(aes(x=x, y=0, xend=x, yend=y)) +
+  geom_hline(yintercept=0) +
+  geom_point(aes(y=y), color="tomato", size=3) +
+  geom_segment(color="tomato") +
+  # X = 7
+  geom_point(dat=filter(d, x==7), aes(y=y), color="cornflowerblue", size=3.5) +
+  geom_segment(dat=filter(d, x==7), color="cornflowerblue", linewidth=1.2) +
+  labs(x="x", y="P(X=x)", title = "Bin(X = x | 20, 0.3)")
+```
+
+::: {.fragment .smaller}
+<div class="annotation" style="color: cornflowerblue; top: 170px; left: 410px">
+  $\tiny P(X=7|20, 0{,}3) = {7 \choose 20} 0{,}3^7 (1 -0{,}3)^{20-7} = 0.164$
+</div>
+:::
+
+
+## Binomialverteilung
+
+```{r, fig.width=11, fig.height=6}
+d = rbind(
+  tibble(x=0:20, p="Bin(X=x | n= 20, θ = 0.3)",  y=dbinom(x, 20, 0.3)),
+  tibble(x=0:20, p="Bin(X=x | n= 20, θ = 0.5)",  y=dbinom(x, 20, 0.5)),
+  tibble(x=0:20, p="Bin(X=x | n= 20, θ = 0.7)",  y=dbinom(x, 20, 0.7))
+)
+
+d |> ggplot(aes(x=x, y=0, xend=x, yend=y, color=as.factor(p))) +
+  geom_hline(yintercept=0) +
+  geom_point(aes(y=y), size=3) +
+  geom_segment() +
+  facet_wrap(~as.factor(p), ncol=1) +
+  theme(legend.position="none") +
+  labs(x="x", y="P(X=x)")
+```
+
 ## Zufällige Realisierungen
 
 ::::: columns
@@ -334,6 +403,7 @@ ggplot(aes(x=x, y=n)) +
 :::::
 
 # Statistische Inferenz
+Schätzen unbekannter Parameter
 
 ## Statistische Modellierung {.smaller}
 
@@ -350,33 +420,156 @@ Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Mode
 :::
 
 
-## Gemeinsame W'keit
+## Statistische Inferenz
 
-Die gemeinsame W'keit zweier Zufallsereignisse ist die W'keit, dass beide Ereignisse eintreten.
+Wir suchen für unbekannte Parameter $\theta$ Werte, die im Angesicht der beobachteten Daten $D$ plausibel sind. Wir suchen nach der *bedingten Verteilung* von $\theta$ *gegeben* $D$:
 
-Tabelle: Geograph sein und Grün wählen
+$$p(\theta|D)$$
 
-## Bedingte W'keit
+:::{.fragment}
+Im Falle eines wiederholten Münzwurfes mit $D = 90K, 10Z$ und $P(K)=\theta$, was ist plausibler: $\theta = 0.2$ oder $\theta = 0.8$?
 
-P(Grün) vs. P(Grün | Studierend/e) vs. P(Grün | Geograph/in)
+$$p(\theta = 0.2 |D) \quad \textrm{vs.} \quad p(\theta = 0.8 |D)$$
+:::
 
-- "Conditioning is the soul of statistics"
+## Gemeinsame Wahrscheinlichkeit
+
+Die gemeinsame W'keit $P(A, B)$ zweier Zufallsereignisse ist die W'keit, dass sowohl $A$ als auch $B$ eintreten.
+
+Beispiel: W'keit, Geographie zu studieren und Grün zu wählen:
+
+|                | Grün | Andere | Gesamt |
+|----------------|------|--------|--------|
+| Geograph       | 0.10 | 0.05   | 0.15   |
+| nicht Geograph | 0.30 | 0.55   | 0.85   |
+| Gesamt         | 0.40 | 0.60   | 1.00   |
+
+Reihen-/Spaltensummen sind *Randverteilungen* von $A$ und $B$.
+
+
+## Bedingte Wahrscheinlichkeit
+
+Die *bedingte W'keit* von $A$ gegeben $B$ ist definiert als die gemeinsame W'keit von $A$ und $B$ normiert durch die W'keit von $B$:
+
+$$
+P(A|B) = \frac{P(A, B)}{P(B)}
+$$
+
+<!-- Konditionieren auf bereits erlangte Information ist ein zentrales Instrument zur systematischen Integration von Evidenz in unsere Modelle. -->
+
+:::{.fragment}
+Zusätzlich gilt das *Gesetz totaler W'keit*:
+$$
+P(A) = P(A|B)P(B) + P(A|B^c)P(B^c)
+$$
+
+wobei $B^c$, das Ereignis bezeichnet, dass $B$ *nicht* eintritt.
+:::
+
+
+## Bedingte Wahrscheinlichkeit
+
+Was ist die W'keit, dass eine Geographin Grün wählt?
+
+|                | Grün | Andere | Gesamt |
+|----------------|------|--------|--------|
+| [Geograph]{style="color: tomato"}       | [0.10]{style="color: tomato"} | [0.05]{style="color: tomato"} | [0.15]{style="color: tomato"} |
+| nicht Geograph | 0.30 | 0.55   | 0.85   |
+| Gesamt         | 0.40 | 0.60   | 1.00   |
+
+$$
+P(\textrm{Grün} | \textrm{Geo}) =
+\frac{P(\textrm{Grün}, \textrm{Geo})}{P(\textrm{Geo})} =
+\frac{0.10}{0.15} = \frac{2}{3}
+$$
+
+
+
+## Unabhängigkeit
+
+Zwei Ereignisse $A$ und $B$ sind formell *unabhängig*, wenn konditionieren auf $B$ an unseren Informationen über $A$ nichts ändert, d.h. wenn:
+
+$$
+P(A|B) = P(A)
+$$
+
+(Un)abhängigkeit ist *symmetrisch*, d.h. $P(A|B) = P(A)$ impliziert auch $P(B|A) = P(B)$.
+
 
 ## Bayes' Regel
 
-$$
-p(A | B) = \frac{p(B | A) p(A)}{p(B)}
-$$
-
-## Bayesianische Modelle
-
-Ziel: Aussage über unbekannte Variablen $\theta$ *gegeben* Daten $D$, d.h. wie wahrscheinlich ist ein bestimmter Wert für $\theta$ unter der Voraussetzung, dass die Daten $D$ beobachtet wurden?
+Eine Erweiterung bedingter W'keit ist *Bayes' Regel*, die das Kernstück *Bayesianischer Inferenz* bildet:
 
 $$
-p(\theta | D) = \frac{p(D | \theta) p(\theta)}{p(D)}
+P(A | B) = \frac{P(A,B)}{P(B)} = \frac{P(B | A) P(A)}{P(B)}
 $$
 
-- $p(\theta | D)$ : a-posteriori-W'keit von $\theta$
-- $p(\theta)$ : a-priori-W'keit von $\theta$
-- $p(D | \theta)$ : Likelihood (das Modell des DGP)
-- $p(D)$ : Evidenz (Normierungsfaktor)
+Bayes' Regel folgt direkt durch Umstellen der Definition bedingter W'keit:
+
+$$
+P(A,B) = P(A|B)P(B) = P(B|A) P(A) 
+$$
+
+## P(Krankheit | Test positiv)
+
+$K$ ist das Ereignis, an einer seltenen Krankheit erkrankt zu sein und $T$ das Ereignis, positiv auf die Krankheit getestet zu werden. Wir interessieren uns für $P(K|T)$: die W'keit erkrankt zu sein, gegeben dass ein positives Testergebnis vorliegt.
+
+<hr>
+
+**Vorhandene Informationen:**
+
+- Inzidenz der Krankheit: $P(K) = 0{,}01$
+- Genauigkeit des Tests: $P(T|K) = P(T^c|K^c) = 0{,}95$
+
+## P(Krankheit | Test positiv)
+
+Anwenden von Bayes' Regel ergibt:
+
+$$
+\begin{align}
+P(K | T) &= \frac{P(T | K) P(K)}{P(T)} \\[8pt]
+&= \frac{P(T | K) P(K)}{P(T|K)P(K) + P(T|K^c)P(K^c)} \\[8pt]
+&= \frac{0{,}95 \times 0{,}01}{0{,}95 \times 0{,}01 + 0{,}05 \times 0{,}99} = 0{,}16
+\end{align}
+$$
+
+
+## Bayesianische Inferenz
+
+Bayes' Regel kann für statistische Inferenz unbekannter Parameter $\theta$ im Angesicht von Daten $D$ eingesetzt werden:
+
+$$
+\color{tomato}{p(\theta | D)} = \frac{\color{orange}{p(D | \theta)} \color{cornflowerblue}{p(\theta)}}{p(D)}
+$$
+
+- $\color{tomato}{p(\theta | D)}$ ist die *a-posteriori-Verteilung* von $\theta$
+- $\color{cornflowerblue}{p(\theta)}$ ist die *a-priori-Verteilung* von $\theta$
+- $\color{orange}{p(D | \theta)}$ ist die *Likelihood* (das Modell des DGP)
+- $p(D)$ : ist ein Normierungsfaktor
+
+## Bayesianische Inferenz
+
+Die Kurve im Bild rechts zeigt die *a-posteriori-Verteilung*  $\color{tomato}{p(\theta | \textrm{K} = 21)}$ des unbekannten Parameters $\theta$ nach 50 beobachteten Münzwürfen mit 21 mal $K$:
+
+![](images/coinflip.png)
+
+Die eingesetzte Likelihood $\color{orange}{p(K | \theta)} = \textrm{Bin}(K|n, \theta)$ ist die schon besprochene Binomialverteilung als Modell des DGP.
+
+## Bayesianisches Updating
+
+- Bayesianische Inferenz kann verstanden werden als ein systematisches *Updaten* der *a-priori-Verteilung* $\color{cornflowerblue}{p(\theta)}$ durch das Konditionieren auf beobachtete Daten $D$.
+
+- Die *a-priori-Verteilung* selbst hängt nicht von den Daten ab, sondern verkörpert die 'subjektive' Einschätzung der Analystin vor Durchführung der Untersuchung.
+
+- Die *a-priori-Verteilung* kann eingesetzt werden um Vorwissen der Forschenden einzubeziehen und das Modell auf plausible Werte für $\theta$ zu beschränken.
+
+
+
+## Prüfungsfragen
+
+- Was ist ein Nachteil der frequentistischen Definition von Wahrscheinlichkeit?
+- Berechnen Sie die bedingte W'keit auf Basis der untentstehenden Tabelle für folgende Ereignisse.
+- Was ist das Ziel statistischer Inferenz?
+- Sie Befragen 1000 Personen dazu, ob sie planen, bei der nächsten Bundestagswahl zu wählen. Was könnte ein geeignetes Modell für den Datengenerierenden Prozess sein? Welche Annahmen verkörpert das Modell?
+
+
