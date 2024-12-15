@@ -303,7 +303,7 @@ X(E) = \begin{cases}
 \end{cases}
 $$
 
-Die Zahlen haben nicht immer eine inheränte Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.
+Die Zahlen haben nicht immer eine inhärente Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.
 
 Statt mit $X(E)$ wird eine Zufallsvariable häufig auch einfach mit $X$ bezeichnet.
 
@@ -376,6 +376,7 @@ d |> ggplot(aes(x=x, y=0, xend=x, yend=y, color=as.factor(p))) +
   geom_hline(yintercept=0) +
   geom_point(aes(y=y), size=3) +
   geom_segment() +
+  scale_color_tableau() +
   facet_wrap(~as.factor(p), ncol=1) +
   theme(legend.position="none") +
   labs(x="x", y="P(X=x)")
@@ -422,15 +423,15 @@ Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Mode
 
 ## Statistische Inferenz
 
-Wir suchen für unbekannte Parameter $\theta$ Werte, die im Angesicht der beobachteten Daten $D$ plausibel sind. Wir suchen nach der *bedingten Verteilung* von $\theta$ *gegeben* $D$:
+Wir suchen Werte für unbekannte Parameter $\theta$, die im Angesicht der beobachteten Daten $D$ plausibel sind. Wir suchen nach der *bedingten Verteilung* von $\theta$ *gegeben* $D$:
 
 $$p(\theta|D)$$
 
 :::{.fragment}
-Im Falle eines wiederholten Münzwurfes mit $D = 90K, 10Z$ und $P(K)=\theta$, was ist plausibler: $\theta = 0.2$ oder $\theta = 0.8$?
-
-$$p(\theta = 0.2 |D) \quad \textrm{vs.} \quad p(\theta = 0.8 |D)$$
+> Beim wiederholten Münzwurf mit $D = 90K, 10Z$ und $P(K)=\theta$, was ist plausibler: $\theta = 0.2$ oder $\theta = 0.8$?
+> $$p(\theta = 0.2 |D) \quad \textrm{vs.} \quad p(\theta = 0.8 |D)$$
 :::
+
 
 ## Gemeinsame Wahrscheinlichkeit
 
@@ -484,16 +485,15 @@ P(\textrm{Grün} | \textrm{Geo}) =
 $$
 
 
-
-## Unabhängigkeit
-
-Zwei Ereignisse $A$ und $B$ sind formell *unabhängig*, wenn konditionieren auf $B$ an unseren Informationen über $A$ nichts ändert, d.h. wenn:
-
-$$
-P(A|B) = P(A)
-$$
-
-(Un)abhängigkeit ist *symmetrisch*, d.h. $P(A|B) = P(A)$ impliziert auch $P(B|A) = P(B)$.
+<!-- ## Unabhängigkeit -->
+<!---->
+<!-- Zwei Ereignisse $A$ und $B$ sind formell *unabhängig*, wenn konditionieren auf $B$ an unseren Informationen über $A$ nichts ändert, d.h. wenn: -->
+<!---->
+<!-- $$ -->
+<!-- P(A|B) = P(A) -->
+<!-- $$ -->
+<!---->
+<!-- (Un)abhängigkeit ist *symmetrisch*, d.h. $P(A|B) = P(A)$ impliziert auch $P(B|A) = P(B)$. -->
 
 
 ## Bayes' Regel
@@ -543,9 +543,13 @@ $$
 $$
 
 - $\color{tomato}{p(\theta | D)}$ ist die *a-posteriori-Verteilung* von $\theta$
+
 - $\color{cornflowerblue}{p(\theta)}$ ist die *a-priori-Verteilung* von $\theta$
+
 - $\color{orange}{p(D | \theta)}$ ist die *Likelihood* (das Modell des DGP)
-- $p(D)$ : ist ein Normierungsfaktor
+
+- $p(D)$ ist ein Normierungsfaktor (s. Gesetz totaler W'keit)
+
 
 ## Bayesianische Inferenz
 
@@ -555,6 +559,16 @@ Die Kurve im Bild rechts zeigt die *a-posteriori-Verteilung*  $\color{tomato}{p(
 
 Die eingesetzte Likelihood $\color{orange}{p(K | \theta)} = \textrm{Bin}(K|n, \theta)$ ist die schon besprochene Binomialverteilung als Modell des DGP.
 
+
+## Die a-posteriori-Verteilung
+
+- Die a-posteriori-Verteilung $p(\theta|D)$ fasst unser Wissen über die unbekannten Parameter $\theta$ nach Beobachten der Daten $D$ zusammen.
+
+- Für einfache Modelle kann die a-posteriori-Verteilung analytisch ermittelt werden.
+
+- Für komplexere Modelle gibt es unterschiedliche Algorithmen, die die a-posteriori-Verteilung numerisch approximieren (z.B. *Markov-Chain-Monte-Carlo-Verfahren*).
+
+
 ## Bayesianisches Updating
 
 - Bayesianische Inferenz kann verstanden werden als ein systematisches *Updaten* der *a-priori-Verteilung* $\color{cornflowerblue}{p(\theta)}$ durch das Konditionieren auf beobachtete Daten $D$.
@@ -562,8 +576,6 @@ Die eingesetzte Likelihood $\color{orange}{p(K | \theta)} = \textrm{Bin}(K|n, \t
 - Die *a-priori-Verteilung* selbst hängt nicht von den Daten ab, sondern verkörpert die 'subjektive' Einschätzung der Analystin vor Durchführung der Untersuchung.
 
 - Die *a-priori-Verteilung* kann eingesetzt werden um Vorwissen der Forschenden einzubeziehen und das Modell auf plausible Werte für $\theta$ zu beschränken.
-
-
 
 ## Prüfungsfragen
 

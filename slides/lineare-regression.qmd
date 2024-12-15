@@ -1,6 +1,6 @@
 ---
 title: "Einführung in die Statistik"
-subtitle: "Lineare Regressionsmodelle"
+subtitle: "Regressionsmodelle"
 author: Dr. Jakob Hoffmann, Economic Geography Group
 lightbox: true
 execute:
@@ -65,17 +65,45 @@ Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Mode
 In vielen Situationen modellieren wir eine abhängige Variable $y$ als eine Funktion $f$ einer unabhängigen Variable $x$:
 
 $$
-y = f(x) + \epsilon
+y = \color{orange}{f}(x) + \color{cornflowerblue}{\epsilon}
 $$
 
-Da statistische Modelle Zusammenhänge i.d.R. nicht perfekt abbilden, enthält das Modell mit $\epsilon$ (*Epsilon*) einen un-beobachteten und als zufällig modellierten *Fehlerterm*.
+<!-- Da statistische Modelle Zusammenhänge i.d.R. nicht perfekt abbilden, enthält das Modell mit $\epsilon$ (*Epsilon*) einen un-beobachteten und als zufällig modellierten *Fehlerterm*. -->
 
-Die Funktion $f$ bildet die Form des Zusammenhangs zwischen $x$ und $y$ ab und ist aktuell noch unspezifiziert.
+<!-- Das Modell enthält einen *Fehlerterm* $\color{cornflowerblue}{\epsilon}$ (*Epsilon*), der Ergebnis eines unbekannten Zufallsprozesses ist. -->
+
+- Der *Fehlerterm* $\color{cornflowerblue}{\epsilon}$ (*Epsilon*) ist Ergebnis eines unbekannten Zufallsprozesses.
+
+- Die Funktion $\color{orange}{f}$ bildet die Form des Zusammenhangs zwischen $x$ und $y$ ab.
+
+- Wie modellieren wir $\color{orange}{f}$ und $\color{cornflowerblue}{\epsilon}$?
 
 
 ## Einfache Lineare Regression
 
-Hauspreise
+```{r, fig.width=11, fig.height=6}
+library(gapminder)
+
+gapminder |>
+  filter(year==2007) |>
+  ggplot(aes(log10(gdpPercap), lifeExp)) +
+  # geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
+  # geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
+  geom_point(shape=1, color="black") +
+  geom_smooth(color="tomato", method="lm", se=FALSE) +
+  scale_x_continuous(
+      breaks = c(1,2,3,4,5),
+      labels = scales::math_format(10^.x)
+  ) +
+  labs(
+    x = "BIP (Log-Skala)",
+    y = "Lebenserwartung (Jahre)",
+    title = "Lebenserwartung und BIP",
+    subtitle = "Daten für 142 Länder im Jahr 2007",
+    caption = "Datenquelle: gampinder.org"
+  )
+
+```
 
 
 ## Einfache Lineare Regression
@@ -83,25 +111,124 @@ Hauspreise
 Eine simple aber nützliche Spezifikation für $f$ ist als Geradengleichung:
 
 $$
-f(x) = \alpha + x\beta
+f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 $$
 
-$\alpha$ und $\beta$ sind Modellparameter:
+$\color{orange}{\alpha}$ und $\color{cornflowerblue}{\beta}$ sind Modellparameter:
 
-- $\alpha$ ist der y-Achsenabschnitt, d.h. der Wert von $y$ wenn $x=0$
-- $\beta$ gibt die Steigung der Gerade an, d.h. $\beta$ zeigt, um wie viel $f(x)$ steigt wenn $x$ um 1 steigt
+- $\color{orange}{\alpha}$ ist der y-Achsenabschnitt, d.h. der Wert von $y$ wenn $x=0$
+- $\color{cornflowerblue}{\beta}$ gibt die Steigung der Gerade an. D.h. $\color{cornflowerblue}{\beta}$ zeigt, um wie viel $f(x)$ steigt wenn $x$ um 1 steigt.
 
 
 ## Einfache Lineare Regression
 
+```{r, fig.width=11, fig.height=6}
+d = tribble(
+    ~a, ~b, ~g,
+    0,  0, "α = 0, β = 0",
+    1,  0, "α = 1, β = 0",
+    0,  1, "α = 0, β = 1",
+    1, -1, "α = 1, β = -1"
+)
+
+d$g = factor(d$g, levels = d$g)
+
+d |> ggplot() +
+    geom_hline(yintercept=0) +
+    geom_vline(xintercept=0) +
+    geom_abline(aes(slope = b, intercept = a, color = g), linewidth=1.5) +
+    scale_color_tableau() +
+    facet_wrap(~g) +
+    lims(x = c(0, 1), y = c(0, 1)) +
+    theme(legend.position = "none", panel.spacing = unit(2, "lines"))
+```
+
+
+## Einfache Lineare Regression
+
+Der Fehlerterm $\epsilon$ ist Ergebnis eines Zufallsprozesses, den wir hier mit einer *Normalverteilung* modellieren:
+
 $$
-\epsilon \sim \textrm{Normal}(0, \sigma)
+\epsilon \sim \textrm{Normal}(\color{orange}{\mu}, \color{cornflowerblue}{\sigma})
 $$
+
+Die Normalverteilung hat zwei Parameter:
+
+- Den Mittelwert $\color{orange}{\mu}$, der die Lage der Verteilung bestimmt. Da $\epsilon$ die Abweichung von $f(x)$ darstellt, setzen wir hier $\color{orange}{\mu = 0}$.
+- Die Standardabweichung $\color{cornflowerblue}{\sigma}$, die die Streuung bestimmt. $\color{cornflowerblue}{\sigma}$ ist im Modell eine Unbekannte und muss geschätzt werden.
+
 
 ## Die Normalverteilung
 
+- Die *Normalverteilung* ist eine W'keitsverteilung für eine numerisch-kontinuierliche Variable mit möglichem Wertebereich -∞ bis ∞.
+
+- Da es für kontinuierliche Zufallsvariablen eine unendliche Menge möglicher Ergebnisse gibt, ist die W'keit jedes Einzelergebnisses notwendigerweise 0.
+
+- Wir spezifizieren daher statt einer W'keitsfunktion eine *W'keitsdichtefunktion*, deren Integral auf 1 normiert ist.
+
+
+## Die Normalverteilung
+
+Die W'keitsdichtefunktion der Normalverteilung ist:
+
+$$
+\textrm{Normal}(X=x | \mu, \sigma) = \frac{1}{ \sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x-\mu)^2}{ 2\sigma^2}\right)
+$$
+
+<hr>
+
+Der Kern der Normalverteilung ist $\exp(-x^2)$. Die restlichen Komponenten dienen dazu, die Verteilung zu verschieben (via $\mu$), die Streuung zu skalieren (via $\sigma$), und sicherzustellen, dass das Integral der Funktion über den Wertebereich 1 ist.
+
+
+## Die Normalverteilung
+
+```{r, fig.width=11, fig.height=6}
+d1 = rbind(
+   tibble(x=seq(10, 100, length.out=1000), y = dnorm(x, mean = 20, sd = 2), g = "μ = 20, σ = 5"),
+   tibble(x=seq(10, 100, length.out=1000), y = dnorm(x, mean = 40, sd = 5), g = "μ = 40, σ = 5"),
+   tibble(x=seq(10, 100, length.out=1000), y = dnorm(x, mean = 60, sd = 10), g = "μ = 60, σ = 5")
+)
+
+d1 |>
+    ggplot(aes(x, y, color=g)) +
+    geom_line(linewidth=1.5) +
+    scale_color_tableau() +
+    labs(y="Normal(X=x | μ, σ)", color=NULL)
+
+```
 
 ## Residuen
+
+Die Abweichung der Beobachtungen von der Regressionsgerade bezeichnet man als *Residuen*.
+
+```{r, fig.width=11, fig.height=5}
+set.seed(109)
+
+d = tibble(x = rnorm(10), y = x + rnorm(10))
+
+fit = lm(y ~ x, data = d)
+d$f = predict(fit, d)
+
+d |> ggplot(aes(x, y)) +
+    geom_segment(
+     aes(x = x, xend = x, y = y, yend = f),
+     linetype="dashed", color = "orange"
+    ) +
+    geom_point(size=3) +
+    annotate(
+        "text",
+        x = 0.55, y = 3,
+        size = 6, color = "orange", hjust = 0,
+        label = "\u03b5\u1d62 = y\u1d62 - f(x\u1d62)",
+    ) +
+    geom_smooth(color = "tomato", method="lm", se=FALSE)
+
+```
+
+## Residuen
+
+![](images/regression-residuals.png){width=1000}
+
 
 
 ## Einfache Lineare Regression
@@ -110,24 +237,35 @@ Zusammengefügt ist das einfache lineare Regressionsmodell:
 
 $$
 \begin{align}
-y &= \alpha + x\beta + \epsilon \\
+y_i &= \alpha + x_i\beta + \epsilon \\
 \epsilon &\sim \textrm{Normal}(0, \sigma)
 \end{align}
 $$
 
-Diese Formulierung ist äquivalent zu:
+Wir modellieren eine kontinuierliche Variable $y$ als lineare Funktion eines Prädiktors $x$ plus einer normalverteilten zufälligen Abweichung $\epsilon$ mit Streuung $\sigma$.
+
+$\alpha$, $\beta$ und $\sigma$ sind unbekannte Modellparameter und müssen auf Basis von Daten gelernt/geschätzt werden.
+
+
+## Einfache Lineare Regression
+
+Äquivalent zur bisherigen Formulierung via $\epsilon$ kann das Regressionsmodell auch wie folgt spezifiziert werden:
 
 $$
 \begin{align}
-y &\sim \textrm{Normal}(\mu, \sigma) \\
-\mu &= \alpha + x\beta
+y_i &\sim \textrm{Normal}(\mu_i, \sigma) \\
+\mu_i &= \alpha + x_i\beta
 \end{align}
 $$
 
+<!-- Diese Darstellung verdeutlicht, dass $y$ als Realisierung einer Normalverteilung modelliert wird, deren Mittelwert eine Funktion der unabhängigen Variable $x$ ist. -->
 
+D.h. $y$ wird als Realisierung einer Normalverteilung modelliert, deren Mittelwert eine Funktion von $x$ ist.
 
-## Survey
+Die Formulierungen sind äquivalent da für $x \sim N(\mu, \sigma)$ und eine Zahl $c$ gilt dass $x + c \sim \textrm{N}(\mu + c, \sigma)$.
 
-Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen?
+<!-- ## Survey -->
+<!---->
+<!-- Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen? -->
 
 

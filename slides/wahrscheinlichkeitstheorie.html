@@ -504,7 +504,7 @@ X(E) = \begin{cases}
   1, &amp; \text{wenn } E = \textrm{Zahl}
 \end{cases}
 \]</span></p>
-<p>Die Zahlen haben nicht immer eine inheränte Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.</p>
+<p>Die Zahlen haben nicht immer eine inhärente Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.</p>
 <p>Statt mit <span class="math inline">\(X(E)\)</span> wird eine Zufallsvariable häufig auch einfach mit <span class="math inline">\(X\)</span> bezeichnet.</p>
 </section>
 <section id="bernoulliverteilung" class="slide level2">
@@ -608,11 +608,12 @@ X(E) = \begin{cases}
 </section>
 <section id="statistische-inferenz-3" class="slide level2">
 <h2>Statistische Inferenz</h2>
-<p>Wir suchen für unbekannte Parameter <span class="math inline">\(\theta\)</span> Werte, die im Angesicht der beobachteten Daten <span class="math inline">\(D\)</span> plausibel sind. Wir suchen nach der <em>bedingten Verteilung</em> von <span class="math inline">\(\theta\)</span> <em>gegeben</em> <span class="math inline">\(D\)</span>:</p>
+<p>Wir suchen Werte für unbekannte Parameter <span class="math inline">\(\theta\)</span>, die im Angesicht der beobachteten Daten <span class="math inline">\(D\)</span> plausibel sind. Wir suchen nach der <em>bedingten Verteilung</em> von <span class="math inline">\(\theta\)</span> <em>gegeben</em> <span class="math inline">\(D\)</span>:</p>
 <p><span class="math display">\[p(\theta|D)\]</span></p>
 <div class="fragment">
-<p>Im Falle eines wiederholten Münzwurfes mit <span class="math inline">\(D = 90K, 10Z\)</span> und <span class="math inline">\(P(K)=\theta\)</span>, was ist plausibler: <span class="math inline">\(\theta = 0.2\)</span> oder <span class="math inline">\(\theta = 0.8\)</span>?</p>
-<p><span class="math display">\[p(\theta = 0.2 |D) \quad \textrm{vs.} \quad p(\theta = 0.8 |D)\]</span></p>
+<blockquote>
+<p>Beim wiederholten Münzwurf mit <span class="math inline">\(D = 90K, 10Z\)</span> und <span class="math inline">\(P(K)=\theta\)</span>, was ist plausibler: <span class="math inline">\(\theta = 0.2\)</span> oder <span class="math inline">\(\theta = 0.8\)</span>? <span class="math display">\[p(\theta = 0.2 |D) \quad \textrm{vs.} \quad p(\theta = 0.8 |D)\]</span></p>
+</blockquote>
 </div>
 </section>
 <section id="gemeinsame-wahrscheinlichkeit" class="slide level2">
@@ -709,14 +710,15 @@ P(\textrm{Grün} | \textrm{Geo}) =
 \frac{P(\textrm{Grün}, \textrm{Geo})}{P(\textrm{Geo})} =
 \frac{0.10}{0.15} = \frac{2}{3}
 \]</span></p>
-</section>
-<section id="unabhängigkeit" class="slide level2">
-<h2>Unabhängigkeit</h2>
-<p>Zwei Ereignisse <span class="math inline">\(A\)</span> und <span class="math inline">\(B\)</span> sind formell <em>unabhängig</em>, wenn konditionieren auf <span class="math inline">\(B\)</span> an unseren Informationen über <span class="math inline">\(A\)</span> nichts ändert, d.h. wenn:</p>
-<p><span class="math display">\[
-P(A|B) = P(A)
-\]</span></p>
-<p>(Un)abhängigkeit ist <em>symmetrisch</em>, d.h. <span class="math inline">\(P(A|B) = P(A)\)</span> impliziert auch <span class="math inline">\(P(B|A) = P(B)\)</span>.</p>
+<!-- ## Unabhängigkeit -->
+<!---->
+<!-- Zwei Ereignisse $A$ und $B$ sind formell *unabhängig*, wenn konditionieren auf $B$ an unseren Informationen über $A$ nichts ändert, d.h. wenn: -->
+<!---->
+<!-- $$ -->
+<!-- P(A|B) = P(A) -->
+<!-- $$ -->
+<!---->
+<!-- (Un)abhängigkeit ist *symmetrisch*, d.h. $P(A|B) = P(A)$ impliziert auch $P(B|A) = P(B)$. -->
 </section>
 <section id="bayes-regel" class="slide level2">
 <h2>Bayes’ Regel</h2>
@@ -757,10 +759,10 @@ P(K | T) &amp;= \frac{P(T | K) P(K)}{P(T)} \\[8pt]
 \color{tomato}{p(\theta | D)} = \frac{\color{orange}{p(D | \theta)} \color{cornflowerblue}{p(\theta)}}{p(D)}
 \]</span></p>
 <ul>
-<li><span class="math inline">\(\color{tomato}{p(\theta | D)}\)</span> ist die <em>a-posteriori-Verteilung</em> von <span class="math inline">\(\theta\)</span></li>
-<li><span class="math inline">\(\color{cornflowerblue}{p(\theta)}\)</span> ist die <em>a-priori-Verteilung</em> von <span class="math inline">\(\theta\)</span></li>
-<li><span class="math inline">\(\color{orange}{p(D | \theta)}\)</span> ist die <em>Likelihood</em> (das Modell des DGP)</li>
-<li><span class="math inline">\(p(D)\)</span> : ist ein Normierungsfaktor</li>
+<li><p><span class="math inline">\(\color{tomato}{p(\theta | D)}\)</span> ist die <em>a-posteriori-Verteilung</em> von <span class="math inline">\(\theta\)</span></p></li>
+<li><p><span class="math inline">\(\color{cornflowerblue}{p(\theta)}\)</span> ist die <em>a-priori-Verteilung</em> von <span class="math inline">\(\theta\)</span></p></li>
+<li><p><span class="math inline">\(\color{orange}{p(D | \theta)}\)</span> ist die <em>Likelihood</em> (das Modell des DGP)</p></li>
+<li><p><span class="math inline">\(p(D)\)</span> ist ein Normierungsfaktor (s. Gesetz totaler W’keit)</p></li>
 </ul>
 </section>
 <section id="bayesianische-inferenz-1" class="slide level2">
@@ -768,6 +770,14 @@ P(K | T) &amp;= \frac{P(T | K) P(K)}{P(T)} \\[8pt]
 <p>Die Kurve im Bild rechts zeigt die <em>a-posteriori-Verteilung</em> <span class="math inline">\(\color{tomato}{p(\theta | \textrm{K} = 21)}\)</span> des unbekannten Parameters <span class="math inline">\(\theta\)</span> nach 50 beobachteten Münzwürfen mit 21 mal <span class="math inline">\(K\)</span>:</p>
 <p><a href="images/coinflip.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="images/coinflip.png"></a></p>
 <p>Die eingesetzte Likelihood <span class="math inline">\(\color{orange}{p(K | \theta)} = \textrm{Bin}(K|n, \theta)\)</span> ist die schon besprochene Binomialverteilung als Modell des DGP.</p>
+</section>
+<section id="die-a-posteriori-verteilung" class="slide level2">
+<h2>Die a-posteriori-Verteilung</h2>
+<ul>
+<li><p>Die a-posteriori-Verteilung <span class="math inline">\(p(\theta|D)\)</span> fasst unser Wissen über die unbekannten Parameter <span class="math inline">\(\theta\)</span> nach Beobachten der Daten <span class="math inline">\(D\)</span> zusammen.</p></li>
+<li><p>Für einfache Modelle kann die a-posteriori-Verteilung analytisch ermittelt werden.</p></li>
+<li><p>Für komplexere Modelle gibt es unterschiedliche Algorithmen, die die a-posteriori-Verteilung numerisch approximieren (z.B. <em>Markov-Chain-Monte-Carlo-Verfahren</em>).</p></li>
+</ul>
 </section>
 <section id="bayesianisches-updating" class="slide level2">
 <h2>Bayesianisches Updating</h2>
@@ -1226,7 +1236,7 @@ P(K | T) &amp;= \frac{P(T | K) P(K)}{P(T)} \\[8pt]
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

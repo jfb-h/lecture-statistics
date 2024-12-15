@@ -331,7 +331,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Lineare Regressionsmodelle</p>
+  <p class="subtitle">Regressionsmodelle</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -356,59 +356,137 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 <h2>Zusammenhänge modellieren</h2>
 <p>In vielen Situationen modellieren wir eine abhängige Variable <span class="math inline">\(y\)</span> als eine Funktion <span class="math inline">\(f\)</span> einer unabhängigen Variable <span class="math inline">\(x\)</span>:</p>
 <p><span class="math display">\[
-y = f(x) + \epsilon
+y = \color{orange}{f}(x) + \color{cornflowerblue}{\epsilon}
 \]</span></p>
-<p>Da statistische Modelle Zusammenhänge i.d.R. nicht perfekt abbilden, enthält das Modell mit <span class="math inline">\(\epsilon\)</span> (<em>Epsilon</em>) einen un-beobachteten und als zufällig modellierten <em>Fehlerterm</em>.</p>
-<p>Die Funktion <span class="math inline">\(f\)</span> bildet die Form des Zusammenhangs zwischen <span class="math inline">\(x\)</span> und <span class="math inline">\(y\)</span> ab und ist aktuell noch unspezifiziert.</p>
+<!-- Da statistische Modelle Zusammenhänge i.d.R. nicht perfekt abbilden, enthält das Modell mit $\epsilon$ (*Epsilon*) einen un-beobachteten und als zufällig modellierten *Fehlerterm*. -->
+<!-- Das Modell enthält einen *Fehlerterm* $\color{cornflowerblue}{\epsilon}$ (*Epsilon*), der Ergebnis eines unbekannten Zufallsprozesses ist. -->
+<ul>
+<li><p>Der <em>Fehlerterm</em> <span class="math inline">\(\color{cornflowerblue}{\epsilon}\)</span> (<em>Epsilon</em>) ist Ergebnis eines unbekannten Zufallsprozesses.</p></li>
+<li><p>Die Funktion <span class="math inline">\(\color{orange}{f}\)</span> bildet die Form des Zusammenhangs zwischen <span class="math inline">\(x\)</span> und <span class="math inline">\(y\)</span> ab.</p></li>
+<li><p>Wie modellieren wir <span class="math inline">\(\color{orange}{f}\)</span> und <span class="math inline">\(\color{cornflowerblue}{\epsilon}\)</span>?</p></li>
+</ul>
 </section>
 <section id="einfache-lineare-regression" class="slide level2">
 <h2>Einfache Lineare Regression</h2>
-<p>Hauspreise</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-2-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="einfache-lineare-regression-1" class="slide level2">
 <h2>Einfache Lineare Regression</h2>
 <p>Eine simple aber nützliche Spezifikation für <span class="math inline">\(f\)</span> ist als Geradengleichung:</p>
 <p><span class="math display">\[
-f(x) = \alpha + x\beta
+f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 \]</span></p>
-<p><span class="math inline">\(\alpha\)</span> und <span class="math inline">\(\beta\)</span> sind Modellparameter:</p>
+<p><span class="math inline">\(\color{orange}{\alpha}\)</span> und <span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> sind Modellparameter:</p>
 <ul>
-<li><span class="math inline">\(\alpha\)</span> ist der y-Achsenabschnitt, d.h. der Wert von <span class="math inline">\(y\)</span> wenn <span class="math inline">\(x=0\)</span></li>
-<li><span class="math inline">\(\beta\)</span> gibt die Steigung der Gerade an, d.h. <span class="math inline">\(\beta\)</span> zeigt, um wie viel <span class="math inline">\(f(x)\)</span> steigt wenn <span class="math inline">\(x\)</span> um 1 steigt</li>
+<li><span class="math inline">\(\color{orange}{\alpha}\)</span> ist der y-Achsenabschnitt, d.h. der Wert von <span class="math inline">\(y\)</span> wenn <span class="math inline">\(x=0\)</span></li>
+<li><span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> gibt die Steigung der Gerade an. D.h. <span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> zeigt, um wie viel <span class="math inline">\(f(x)\)</span> steigt wenn <span class="math inline">\(x\)</span> um 1 steigt.</li>
 </ul>
 </section>
 <section id="einfache-lineare-regression-2" class="slide level2">
 <h2>Einfache Lineare Regression</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="einfache-lineare-regression-3" class="slide level2">
+<h2>Einfache Lineare Regression</h2>
+<p>Der Fehlerterm <span class="math inline">\(\epsilon\)</span> ist Ergebnis eines Zufallsprozesses, den wir hier mit einer <em>Normalverteilung</em> modellieren:</p>
 <p><span class="math display">\[
-\epsilon \sim \textrm{Normal}(0, \sigma)
+\epsilon \sim \textrm{Normal}(\color{orange}{\mu}, \color{cornflowerblue}{\sigma})
 \]</span></p>
+<p>Die Normalverteilung hat zwei Parameter:</p>
+<ul>
+<li>Den Mittelwert <span class="math inline">\(\color{orange}{\mu}\)</span>, der die Lage der Verteilung bestimmt. Da <span class="math inline">\(\epsilon\)</span> die Abweichung von <span class="math inline">\(f(x)\)</span> darstellt, setzen wir hier <span class="math inline">\(\color{orange}{\mu = 0}\)</span>.</li>
+<li>Die Standardabweichung <span class="math inline">\(\color{cornflowerblue}{\sigma}\)</span>, die die Streuung bestimmt. <span class="math inline">\(\color{cornflowerblue}{\sigma}\)</span> ist im Modell eine Unbekannte und muss geschätzt werden.</li>
+</ul>
 </section>
 <section id="die-normalverteilung" class="slide level2">
 <h2>Die Normalverteilung</h2>
+<ul>
+<li><p>Die <em>Normalverteilung</em> ist eine W’keitsverteilung für eine numerisch-kontinuierliche Variable mit möglichem Wertebereich -∞ bis ∞.</p></li>
+<li><p>Da es für kontinuierliche Zufallsvariablen eine unendliche Menge möglicher Ergebnisse gibt, ist die W’keit jedes Einzelergebnisses notwendigerweise 0.</p></li>
+<li><p>Wir spezifizieren daher statt einer W’keitsfunktion eine <em>W’keitsdichtefunktion</em>, deren Integral auf 1 normiert ist.</p></li>
+</ul>
+</section>
+<section id="die-normalverteilung-1" class="slide level2">
+<h2>Die Normalverteilung</h2>
+<p>Die W’keitsdichtefunktion der Normalverteilung ist:</p>
+<p><span class="math display">\[
+\textrm{Normal}(X=x | \mu, \sigma) = \frac{1}{ \sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x-\mu)^2}{ 2\sigma^2}\right)
+\]</span></p>
+<hr>
+<p>Der Kern der Normalverteilung ist <span class="math inline">\(\exp(-x^2)\)</span>. Die restlichen Komponenten dienen dazu, die Verteilung zu verschieben (via <span class="math inline">\(\mu\)</span>), die Streuung zu skalieren (via <span class="math inline">\(\sigma\)</span>), und sicherzustellen, dass das Integral der Funktion über den Wertebereich 1 ist.</p>
+</section>
+<section id="die-normalverteilung-2" class="slide level2">
+<h2>Die Normalverteilung</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="residuen" class="slide level2">
 <h2>Residuen</h2>
+<p>Die Abweichung der Beobachtungen von der Regressionsgerade bezeichnet man als <em>Residuen</em>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-5-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="einfache-lineare-regression-3" class="slide level2">
+<section id="residuen-1" class="slide level2">
+<h2>Residuen</h2>
+<p><a href="images/regression-residuals.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="images/regression-residuals.png" width="1000"></a></p>
+</section>
+<section id="einfache-lineare-regression-4" class="slide level2">
 <h2>Einfache Lineare Regression</h2>
 <p>Zusammengefügt ist das einfache lineare Regressionsmodell:</p>
 <p><span class="math display">\[
 \begin{align}
-y &amp;= \alpha + x\beta + \epsilon \\
+y_i &amp;= \alpha + x_i\beta + \epsilon \\
 \epsilon &amp;\sim \textrm{Normal}(0, \sigma)
 \end{align}
 \]</span></p>
-<p>Diese Formulierung ist äquivalent zu:</p>
+<p>Wir modellieren eine kontinuierliche Variable <span class="math inline">\(y\)</span> als lineare Funktion eines Prädiktors <span class="math inline">\(x\)</span> plus einer normalverteilten zufälligen Abweichung <span class="math inline">\(\epsilon\)</span> mit Streuung <span class="math inline">\(\sigma\)</span>.</p>
+<p><span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> und <span class="math inline">\(\sigma\)</span> sind unbekannte Modellparameter und müssen auf Basis von Daten gelernt/geschätzt werden.</p>
+</section>
+<section id="einfache-lineare-regression-5" class="slide level2">
+<h2>Einfache Lineare Regression</h2>
+<p>Äquivalent zur bisherigen Formulierung via <span class="math inline">\(\epsilon\)</span> kann das Regressionsmodell auch wie folgt spezifiziert werden:</p>
 <p><span class="math display">\[
 \begin{align}
-y &amp;\sim \textrm{Normal}(\mu, \sigma) \\
-\mu &amp;= \alpha + x\beta
+y_i &amp;\sim \textrm{Normal}(\mu_i, \sigma) \\
+\mu_i &amp;= \alpha + x_i\beta
 \end{align}
 \]</span></p>
-</section>
-<section id="survey" class="slide level2">
-<h2>Survey</h2>
-<p>Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen?</p>
+<!-- Diese Darstellung verdeutlicht, dass $y$ als Realisierung einer Normalverteilung modelliert wird, deren Mittelwert eine Funktion der unabhängigen Variable $x$ ist. -->
+<p>D.h. <span class="math inline">\(y\)</span> wird als Realisierung einer Normalverteilung modelliert, deren Mittelwert eine Funktion von <span class="math inline">\(x\)</span> ist.</p>
+<p>Die Formulierungen sind äquivalent da für <span class="math inline">\(x \sim N(\mu, \sigma)\)</span> und eine Zahl <span class="math inline">\(c\)</span> gilt dass <span class="math inline">\(x + c \sim \textrm{N}(\mu + c, \sigma)\)</span>.</p>
+<!-- ## Survey -->
+<!---->
+<!-- Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen? -->
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -850,7 +928,7 @@ y &amp;\sim \textrm{Normal}(\mu, \sigma) \\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
