@@ -49,6 +49,9 @@ theme_update(
 
 ```
 
+## {background-image="images/Powerpoint_Pitch.png" background-size="contain"}
+
+
 ## Scheinkorrelationen
 
 ![](https://www.tylervigen.com/spurious/correlation/image/2794_popularity-of-the-first-name-margarita_correlates-with_motor-vehicle-thefts-in-indiana.svg){width=900}
