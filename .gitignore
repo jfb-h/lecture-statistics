@@ -8,6 +8,7 @@ slides/.Rproj.user/
 slides/*_cache/
 slides/data/
 slides/.quarto
+exam.md
 .Rproj.user
 
 /.luarc.json
