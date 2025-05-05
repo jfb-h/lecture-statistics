@@ -1,0 +1,146 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Zusammenfassung & Klausurfragen"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
+execute:
+    cache: true
+    keep-ipynb: false
+    keep-md: false
+filters:
+    - parse-latex
+format:
+    revealjs:
+        css: custom.css
+        controls: true
+        slide-number: true
+---
+
+
+# Überblick
+
+## Ziele der Statistik
+
+Erkenntnis aus Daten gewinnen
+
+# Fragen
+
+## Ungeordnet {.smaller}
+
+
+
+## Allgemein / Organisatorisches {.smaller}
+
+- Inwiefern wird die Klausur gehandhabt in puncto Fragenanzahl und Ablauf - Lehrämtler schreiben ja eine Kombiklausur mit UFE, Bachelorleute nur die einfach Statistikklausur?
+
+- Können wir den Schwierigkeitsgrad der Klausurfragen mit den Prüfungsfragen auf Ihren Folien vergleichen?
+
+- benötigen wir die Formeln; müssen wir was berechnen?
+
+- Inwiefern müssen diejenigen, die die Übung nicht besuchen mussten, bestimmte Berechnungen durchführen und wird dafür eine Formelsammlung zur Verfügung gestellt?
+
+- Wäre es möglich exemplarische Single-Choice-Fragen am Montag durchzugehen, um sich an das Fragenniveau der Klausur orientieren zu können?
+
+- Sehr geehrter Herr Dr. Hoffmann, ich möchte Sie fragen, ob es möglich wäre, für die Rechenaufgaben in Ihren Prüfungsfragen am Ende der Präsentationsfolien (03 Lagemaße: gewichtetes Geometrische Mittel der Rendite, 05 Beispiele Lage und Streuung: Entropie der Nebenfach-Wahl) die Ergebnisse zur Kontrolle anzugeben. Das wäre für die Prüfungsvorbereitung und zur Eigenkontrolle eine wirklich große Hilfe! Ich danke Ihnen bereits im Voraus! Mit freundlichen Grüßen
+
+- Sind "Daten" und "Beobachtungen" das gleiche?
+
+- wie genau ist der begriff bias zu verstehen
+
+
+## Datentypen / Skalenniveaus
+
+- Können sie nochmal an Beispielen den genauen Unterschied zwischen nominalen und ordinalen Variablen erklären ?
+
+
+## Lagemaße
+
+- das geometrische mittel kann wahrscheinlich nicht negativ sein, weil unter der Wurzel nichts negatives stehen darf. Aber wie kann ich dann das geo. mittel dann berechnen, wenn ich beispielsweise eine ungerade Anzahl an negativen Wachstumsraten habe
+
+
+## Streuungsmaße
+
+- Können Sie bitte noch einmal den Unterschied zwischen Entropie und Dissens erklären?
+
+- Quantile & Perzentile
+
+
+## Zusammenhangsmaße
+
+- Was ist der grundlegende Unterschied zwischen Korrelation, linearer Zusammenhang und kausaler Zusammenhang?
+
+- Weil ich mir noch nicht genau erschließen konnte, in welchen Fällen man welchen Zusammenhangskoeffizienten verwendet, würde mir eine Übersicht über die Koeffizienten und ihre jeweilige praktische Anwendung sehr helfen. Vielen Dank, dass sie uns so zum Fragen ermutigen!
+
+- gehören Zusammenhangsmaße zur multivariaten Statistik (sowohl numerisch als auch kategorisch)?
+
+- kommt t-Test & U-Test dran?
+
+
+## Rangkorrelation
+
+- Wie genau berechnet man den Rangkorrelationskoeffizienten?
+
+- Könnten Sie das Konzept der Rangkorrelation an einem alltäglichen Beispiel erklären, damit klar wird in welchen Situation und warum die Rangkorrelation verwendet wird?
+
+- Ich bin mir noch etwas unsicher bei der Berechnung und Benutzung des Rangkorrelationskoeffizienten. Deshalb wäre es super, wenn Sie die Formel nochmal erklären könnten, vielleicht auch anhand eines Beispiels.
+
+
+## Kontingenzkoeffizent
+
+- Wieso kann der Kontigenzkoeffizient nie 1 werden, bzw. was  bedeutet es, dass er von der Dimension der Kontigenztabelle abhängig ist?
+
+- können chi-quadrat und kontigenzkoeffizient nur für kategorische daten berechnet werden oder auch für numerische?
+
+- Bitte nochmal das Zusammenhangsmaß der kategorischen Variablen erklären. (Haben ordninalen und nominalen Variablen verschiedene Zusammenhangsmaße? Baut die Indifferenztabelle auf die Kondingenztabelle auf? Wie ordne ich hier Chi- Quadrat und den Kontigenzkoeffizient ein?
+
+- was bringt die Indifferenztabbelle und wie wendet man sie an und was bringt sie einem wie rechnet man theoretische Häufigkeiten aus
+
+- In welchen Situationen würde man eine Indifferenztabelle verwenden und warum? 
+
+- Können Sie näher erklären, warum der Kontigenzkoeffizient nie den Wert 1 erreichen kann?
+
+- Könnten Sie die Folien 49 und 50 im Foliensatz zu multivariaten Statistik und Zusammenhangsmaßen nochmal erklären, also die Themen Indifferenztabelle und Theoretische Häufigkeiten
+
+
+## Autokorrelation
+
+- Auf den Vorlesungsslides steht, dass das ignorieren der Autokorrelation zu verzerrten Inferenzen führen kann- können Sie ein konkretes Beispiel dafür geben? 
+
+- wie gut müssen wir das Konzept der Autokorrelation kennen?
+
+- wie Klausurrelevant ist die Autokorrelation?
+
+
+## Statistische Modelle {.smaller}
+
+- Was ist der Unterschied zwischen " Likelihood" und Wahrscheinlichkeit 
+
+- Kann man bei der Regressiongerade von einem kausalen Zusammenhang ausgehen
+
+was ist die Bayes Regel mit richtigen werten durchgerechnet Normalverteilung müssen wir die Formel wissen was ist das bestimmungsmaß r^2 und was macht man mit dem und wie rechnet man damit mit richtigen werten was sagt die moddelvorhersage aus
+
+- Könnten Sie bitte die statistische Inferenz und v.a. das Diagramm aus der 9. Vorlesung (statistische modelle 2) auf Folie 10 nochmal erklären? (konkrete Frage dazu: zeigt die rechte Hälfte des Diagramms die Inferenz für "theta" bevor wir Beobachtungen machen?)
+
+- Könnten Sie ein weiteres Beispiel für eine statistische Modellierung zeigen/ rechnen? (Statistische Inferenz ist hier noch nicht ganz klar)
+
+- Gibt es eine Vertiefung zu dem Punkt 3 der Statistische Modelle Grafik  (Foliensatz 9/10)
+
+- Wo ist die Bayesianische Infernez einzuordnen?
+
+- Frage zur statistischen Modellierung: Warum erfolgt als erster Schritt gleich die Modellkonstruktion? Müssen nicht zuerst die Daten und Parameter bekannt sein ("gelernt" werden), um überhaupt zu wissen, welches Modell in Frage kommen könnte? Oder geht es bei Schritt 2. alleine darum, die Wahrscheinlichkeiten für die Parameter zu schätzen und in das vorhandene Modell zu übertragen? 
+
+
+## Wahrscheinlichkeitstheorie
+
+- Wie relevant sind die Wahrscheinlichkeitstheorien ( bedingte, gemeinsame, totale, unabhängige) für die Klausur? 
+
+- Müssen wir die Bayes Regel anwenden können? 
+
+- Was sind die spezifischen Vor- und Nachteile der bayesianischen und frequentistischen Interpretation? 
+
+
+## Lineare Regression
+
+Frage zur linearen Regression: Müssen wir mit Bestimmtheitsmaß oder Modellvorhersage rechnen können?
+
+
