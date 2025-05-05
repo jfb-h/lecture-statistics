@@ -6,12 +6,11 @@
 <script src="lineare-regression_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="lineare-regression_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lineare-regression_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="lineare-regression_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="lineare-regression_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="lineare-regression_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="lineare-regression_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="lineare-regression_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="lineare-regression_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.4">
+  <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Dr.&nbsp;Jakob Hoffmann, Economic Geography Group">
   <title>Einführung in die Statistik</title>
@@ -33,210 +32,12 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="lineare-regression_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="lineare-regression_files/libs/revealjs/dist/theme/quarto-bbe7401fe57d4b791b917637bb662036.css">
   <link rel="stylesheet" href="custom.css">
   <link href="lineare-regression_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="lineare-regression_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="lineare-regression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="lineare-regression_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -331,7 +132,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Einführung in die Statistik</h1>
-  <p class="subtitle">Regressionsmodelle</p>
+  <p class="subtitle">Lineare Regression</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,15 +143,63 @@ Dr.&nbsp;Jakob Hoffmann, Economic Geography Group
 </div>
 
 </section>
+<section id="themen-der-vorlesung" class="slide level2">
+<h2>Themen der Vorlesung</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/examquestions" title="Survey preview">
+</iframe>
+</div><div class="column" style="width:50%;">
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/examquestions/qr" title="Survey link">
+</iframe>
+</div></div>
+</section>
+<section id="section" class="slide level2" data-background-iframe="https://surveys.eggroup-lmu.de/statlecture/examquestions/results" data-background-interactive="true" data-preload="true">
+<h2></h2>
+</section>
 <section id="statistische-modelle" class="slide level2 smaller">
 <h2>Statistische Modelle</h2>
 <p>Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.</p>
 <p><a href="images/statmodels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/statmodels.png" width="1000"></a></p>
-<div class="fragment">
-<div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;">
+</section>
+<section id="bayesianische-inferenz" class="slide level2">
+<h2>Bayesianische Inferenz</h2>
+<p>Bayes’ Regel kann für statistische Inferenz unbekannter Parameter <span class="math inline">\(\theta\)</span> im Angesicht von Daten <span class="math inline">\(D\)</span> eingesetzt werden:</p>
+<p><span class="math display">\[
+\color{tomato}{p(\theta | D)} = \frac{\color{orange}{p(D | \theta)} \color{cornflowerblue}{p(\theta)}}{p(D)}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\color{tomato}{p(\theta | D)}\)</span> ist die <em>a-posteriori-Verteilung</em> von <span class="math inline">\(\theta\)</span></p></li>
+<li><p><span class="math inline">\(\color{cornflowerblue}{p(\theta)}\)</span> ist die <em>a-priori-Verteilung</em> von <span class="math inline">\(\theta\)</span></p></li>
+<li><p><span class="math inline">\(\color{orange}{p(D | \theta)}\)</span> ist die <em>Likelihood</em> (das Modell des DGP)</p></li>
+<li><p><span class="math inline">\(p(D)\)</span> ist ein Normierungsfaktor (s. Gesetz totaler W’keit)</p></li>
+</ul>
+</section>
+<section id="bayesianische-inferenz-1" class="slide level2">
+<h2>Bayesianische Inferenz</h2>
+<p>Die Kurve im Bild rechts zeigt die <em>a-posteriori-Verteilung</em> <span class="math inline">\(\color{tomato}{p(\theta | \textrm{K} = 21)}\)</span> des unbekannten Parameters <span class="math inline">\(\theta\)</span> nach 50 beobachteten Münzwürfen mit 21 mal <span class="math inline">\(K\)</span>:</p>
+<p><a href="images/coinflip.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/coinflip.png"></a></p>
+<p>Die eingesetzte Likelihood <span class="math inline">\(\color{orange}{p(K | \theta)} = \textrm{Bin}(K|n, \theta)\)</span> ist die schon besprochene Binomialverteilung als Modell des DGP.</p>
+</section>
+<section id="die-a-posteriori-verteilung" class="slide level2">
+<h2>Die a-posteriori-Verteilung</h2>
+<ul>
+<li><p>Die a-posteriori-Verteilung <span class="math inline">\(p(\theta|D)\)</span> fasst unser Wissen über die unbekannten Parameter <span class="math inline">\(\theta\)</span> <em>nach</em> Beobachten der Daten <span class="math inline">\(D\)</span> zusammen.</p></li>
+<li><p>Für einfache Modelle kann die a-posteriori-Verteilung analytisch ermittelt werden.</p></li>
+<li><p>Für komplexere Modelle gibt es unterschiedliche Algorithmen, die die a-posteriori-Verteilung numerisch approximieren (z.B. <em>Markov-Chain-Monte-Carlo-Verfahren</em>).</p></li>
+</ul>
+</section>
+<section id="bayesianisches-updating" class="slide level2">
+<h2>Bayesianisches Updating</h2>
+<ul>
+<li><p>Bayesianische Inferenz kann verstanden werden als ein systematisches <em>Updaten</em> der <em>a-priori-Verteilung</em> <span class="math inline">\(\color{cornflowerblue}{p(\theta)}\)</span> durch das Konditionieren auf beobachtete Daten <span class="math inline">\(D\)</span> um die <em>a-posteriori-Verteilung</em> <span class="math inline">\(\color{tomato}{p(\theta | D)}\)</span> zu erhalten.</p></li>
+<li><p>Die <em>a-priori-Verteilung</em> hängt nicht von den Daten ab kann eingesetzt werden um Vorwissen der Forschenden einzubeziehen und das Modell auf plausible Werte für <span class="math inline">\(\theta\)</span> zu beschränken.</p></li>
+</ul>
+</section>
+<section>
+<section id="lineare-regression" class="title-slide slide level1 center">
+<h1>Lineare Regression</h1>
 
-</div>
-</div>
 </section>
 <section id="zusammenhänge-modellieren" class="slide level2">
 <h2>Zusammenhänge modellieren</h2>
@@ -372,7 +221,7 @@ y = \color{orange}{f}(x) + \color{cornflowerblue}{\epsilon}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-2-1.png" width="1056"></a></p>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-2-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -387,7 +236,7 @@ f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 <p><span class="math inline">\(\color{orange}{\alpha}\)</span> und <span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> sind Modellparameter:</p>
 <ul>
 <li><span class="math inline">\(\color{orange}{\alpha}\)</span> ist der y-Achsenabschnitt, d.h. der Wert von <span class="math inline">\(y\)</span> wenn <span class="math inline">\(x=0\)</span></li>
-<li><span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> gibt die Steigung der Gerade an. D.h. <span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> zeigt, um wie viel <span class="math inline">\(f(x)\)</span> steigt wenn <span class="math inline">\(x\)</span> um 1 steigt.</li>
+<li><span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> gibt die Steigung der Geraden an. D.h., <span class="math inline">\(\color{cornflowerblue}{\beta}\)</span> zeigt, um wie viel <span class="math inline">\(f(x)\)</span> steigt wenn <span class="math inline">\(x\)</span> um 1 steigt.</li>
 </ul>
 </section>
 <section id="einfache-lineare-regression-2" class="slide level2">
@@ -396,7 +245,7 @@ f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-3-1.png" width="1056"></a></p>
 </figure>
 </div>
 </div>
@@ -404,14 +253,14 @@ f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 </section>
 <section id="einfache-lineare-regression-3" class="slide level2">
 <h2>Einfache Lineare Regression</h2>
-<p>Der Fehlerterm <span class="math inline">\(\epsilon\)</span> ist Ergebnis eines Zufallsprozesses, den wir hier mit einer <em>Normalverteilung</em> modellieren:</p>
+<p>Der Fehlerterm <span class="math inline">\(\epsilon\)</span> wird mit einer <em>Normalverteilung</em> modelliert:</p>
 <p><span class="math display">\[
 \epsilon \sim \textrm{Normal}(\color{orange}{\mu}, \color{cornflowerblue}{\sigma})
 \]</span></p>
 <p>Die Normalverteilung hat zwei Parameter:</p>
 <ul>
-<li>Den Mittelwert <span class="math inline">\(\color{orange}{\mu}\)</span>, der die Lage der Verteilung bestimmt. Da <span class="math inline">\(\epsilon\)</span> die Abweichung von <span class="math inline">\(f(x)\)</span> darstellt, setzen wir hier <span class="math inline">\(\color{orange}{\mu = 0}\)</span>.</li>
-<li>Die Standardabweichung <span class="math inline">\(\color{cornflowerblue}{\sigma}\)</span>, die die Streuung bestimmt. <span class="math inline">\(\color{cornflowerblue}{\sigma}\)</span> ist im Modell eine Unbekannte und muss geschätzt werden.</li>
+<li>Den Mittelwert <span class="math inline">\(\color{orange}{\mu}\)</span>, der die Lage der Verteilung bestimmt. Da <span class="math inline">\(\epsilon\)</span> die Abweichung von <span class="math inline">\(f(x)\)</span> darstellt, setzen wir im Kontext linearer Regression <span class="math inline">\(\color{orange}{\mu = 0}\)</span>.</li>
+<li>Die Standardabweichung <span class="math inline">\(\color{cornflowerblue}{\sigma}\)</span>, die den Streuungsgrad um <span class="math inline">\(f(x)\)</span> bestimmt. <span class="math inline">\(\color{cornflowerblue}{\sigma}\)</span> ist ein unbekannter Modellparameter.</li>
 </ul>
 </section>
 <section id="die-normalverteilung" class="slide level2">
@@ -424,6 +273,18 @@ f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 </section>
 <section id="die-normalverteilung-1" class="slide level2">
 <h2>Die Normalverteilung</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="die-normalverteilung-2" class="slide level2">
+<h2>Die Normalverteilung</h2>
 <p>Die W’keitsdichtefunktion der Normalverteilung ist:</p>
 <p><span class="math display">\[
 \textrm{Normal}(X=x | \mu, \sigma) = \frac{1}{ \sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x-\mu)^2}{ 2\sigma^2}\right)
@@ -431,33 +292,8 @@ f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 <hr>
 <p>Der Kern der Normalverteilung ist <span class="math inline">\(\exp(-x^2)\)</span>. Die restlichen Komponenten dienen dazu, die Verteilung zu verschieben (via <span class="math inline">\(\mu\)</span>), die Streuung zu skalieren (via <span class="math inline">\(\sigma\)</span>), und sicherzustellen, dass das Integral der Funktion über den Wertebereich 1 ist.</p>
 </section>
-<section id="die-normalverteilung-2" class="slide level2">
-<h2>Die Normalverteilung</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="residuen" class="slide level2">
-<h2>Residuen</h2>
-<p>Die Abweichung der Beobachtungen von der Regressionsgerade bezeichnet man als <em>Residuen</em>.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-5-1.png" width="1056"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="residuen-1" class="slide level2">
-<h2>Residuen</h2>
+<section id="normalverteilte-residuen" class="slide level2">
+<h2>Normalverteilte Residuen</h2>
 <p><a href="images/regression-residuals.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="images/regression-residuals.png" width="1000"></a></p>
 </section>
 <section id="einfache-lineare-regression-4" class="slide level2">
@@ -465,36 +301,208 @@ f(x) = \color{orange}{\alpha} + x \color{cornflowerblue}{\beta}
 <p>Zusammengefügt ist das einfache lineare Regressionsmodell:</p>
 <p><span class="math display">\[
 \begin{align}
-y_i &amp;= \alpha + x_i\beta + \epsilon \\
-\epsilon &amp;\sim \textrm{Normal}(0, \sigma)
+y_i &amp;= \alpha + x_i\beta + \epsilon_i \\
+\epsilon_i &amp;\sim \textrm{Normal}(0, \sigma)
 \end{align}
 \]</span></p>
 <p>Wir modellieren eine kontinuierliche Variable <span class="math inline">\(y\)</span> als lineare Funktion eines Prädiktors <span class="math inline">\(x\)</span> plus einer normalverteilten zufälligen Abweichung <span class="math inline">\(\epsilon\)</span> mit Streuung <span class="math inline">\(\sigma\)</span>.</p>
-<p><span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> und <span class="math inline">\(\sigma\)</span> sind unbekannte Modellparameter und müssen auf Basis von Daten gelernt/geschätzt werden.</p>
-</section>
-<section id="einfache-lineare-regression-5" class="slide level2">
-<h2>Einfache Lineare Regression</h2>
-<p>Äquivalent zur bisherigen Formulierung via <span class="math inline">\(\epsilon\)</span> kann das Regressionsmodell auch wie folgt spezifiziert werden:</p>
-<p><span class="math display">\[
-\begin{align}
-y_i &amp;\sim \textrm{Normal}(\mu_i, \sigma) \\
-\mu_i &amp;= \alpha + x_i\beta
-\end{align}
-\]</span></p>
+<p><span class="math inline">\(x\)</span> und <span class="math inline">\(y\)</span> sind beobachtete Werte der abhängigen und unabhängigen Variable, <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> und <span class="math inline">\(\sigma\)</span> sind unbekannte Modellparameter.</p>
+<!-- ## Einfache Lineare Regression -->
+<!-- Äquivalent zur bisherigen Formulierung via $\epsilon$ kann das Regressionsmodell auch wie folgt spezifiziert werden: -->
+<!-- $$ -->
+<!-- \begin{align} -->
+<!-- y_i &\sim \textrm{Normal}(\mu_i, \sigma) \\ -->
+<!-- \mu_i &= \alpha + x_i\beta -->
+<!-- \end{align} -->
+<!-- $$ -->
 <!-- Diese Darstellung verdeutlicht, dass $y$ als Realisierung einer Normalverteilung modelliert wird, deren Mittelwert eine Funktion der unabhängigen Variable $x$ ist. -->
-<p>D.h. <span class="math inline">\(y\)</span> wird als Realisierung einer Normalverteilung modelliert, deren Mittelwert eine Funktion von <span class="math inline">\(x\)</span> ist.</p>
-<p>Die Formulierungen sind äquivalent da für <span class="math inline">\(x \sim N(\mu, \sigma)\)</span> und eine Zahl <span class="math inline">\(c\)</span> gilt dass <span class="math inline">\(x + c \sim \textrm{N}(\mu + c, \sigma)\)</span>.</p>
-<!-- ## Survey -->
-<!---->
-<!-- Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen? -->
-<div class="quarto-auto-generated-content">
-<div class="footer footer-default">
+<!-- D.h. $y$ wird als Realisierung einer Normalverteilung modelliert, deren Mittelwert eine Funktion von $x$ ist. -->
+<!-- Die Formulierungen sind äquivalent da für $x \sim N(\mu, \sigma)$ und eine Zahl $c$ gilt dass $x + c \sim \textrm{N}(\mu + c, \sigma)$. -->
+</section>
+<section id="statistische-modelle-1" class="slide level2 smaller">
+<h2>Statistische Modelle</h2>
+<p>Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.</p>
+<p><a href="images/statmodels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="images/statmodels.png" width="1000"></a></p>
+<div class="fragment fade-in-then-out">
+<div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;">
+
+</div>
+</div>
+<div class="fragment">
+<div class="rectangle" style="top: 530px; left: 530px; width: 340px; height: 100px;">
 
 </div>
 </div>
 </section>
+<section id="schätzunsicherheit" class="slide level2">
+<h2>Schätzunsicherheit</h2>
+<p>Aufgrund von epistemischer Unsicherheit über die Parameter <span class="math inline">\(\alpha\)</span> und <span class="math inline">\(\beta\)</span> gibt es für einen Datensatz viele plausible Regressionsgeraden.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-5-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="schätzunsicherheit-1" class="slide level2">
+<h2>Schätzunsicherheit</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-6-1.png" width="528"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<p>Wie zuvor könnnen wir Intervalle berechnen, die den wahrscheinlichen Wertebereich (z.B. 95%) eines Parameters gegeben der verfügbaren Daten angeben.</p>
+</div></div>
+</section>
+<section id="hypothesentests" class="slide level2 smaller">
+<h2>Hypothesentests</h2>
+<p>Die Schätzunsicherheit von Modellparametern gibt darüber Aufschluss, zu welchem Grad das Modell im Einklang mit unseren Hypothesen ist, diesen widerspricht, oder auf Basis der verfügbaren Daten keine klare Aussage zulässt.</p>
+<p><strong>Hypothese</strong>: <span class="math inline">\(x\)</span> hat einen positiven Effekt auf <span class="math inline">\(y\)</span> (d.h., <span class="math inline">\(\beta &gt; 0\)</span>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-7-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="modellvorhersage" class="slide level2">
+<h2>Modellvorhersage</h2>
+<p>Wir können das Modell mit geschätzten Parametern <span class="math inline">\(\hat{\alpha}, \hat{\beta}\)</span> nutzen, um eine Vorhersage <span class="math inline">\(\hat{y}\)</span> für <span class="math inline">\(y\)</span> gegeben <span class="math inline">\(x\)</span> zu machen.</p>
+<p>Eine sinnvolle Vorhersage ist <span class="math inline">\(\mu_y | x\)</span>, der Mittelwert von <span class="math inline">\(y\)</span> für ein bestimmtes Level von <span class="math inline">\(x\)</span> (gegeben d.&nbsp;die Regressionsgerade):</p>
+<p><span class="math display">\[ \hat{y} = \mu_y | x = \hat{\alpha} + x \hat{\beta} \]</span></p>
+<p>Wir können die Unsicherheit über <span class="math inline">\(\alpha\)</span> und <span class="math inline">\(\beta\)</span> in der Vorhersage übertragen oder eine ‘beste’ Vorhersage mit den plausibelsten Parameterwerten machen.</p>
+</section>
+<section id="modellvorhersage-1" class="slide level2">
+<h2>Modellvorhersage</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-8-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="das-bestimmtheitsmaß-r2" class="slide level2">
+<h2>Das Bestimmtheitsmaß <span class="math inline">\(R^2\)</span></h2>
+<p>Das <em>Bestimmtheitsmaß</em> <span class="math inline">\(R^2\)</span> nimmt Werte zwischen 0 und 1 an und gibt den Anteil der durch das Regressionsmodell ‘erklärten’ Variation der abhängigen Variablen <span class="math inline">\(y\)</span> an.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-9-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="das-bestimmtheitsmaß-r2-1" class="slide level2">
+<h2>Das Bestimmtheitsmaß <span class="math inline">\(R^2\)</span></h2>
+<p><span class="math inline">\(R^2\)</span> ist definiert als <span class="math inline">\(1 - \frac{RSS}{TSS}\)</span>, mit:</p>
+<p><span class="math display">\[
+\begin{align}
+RSS = \sum_{=1}^n (y_i - \hat{y_i})^2 \quad \textrm{und} \quad TSS = \sum_{=1}^n (y_i - \bar{y})^2
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(R^2\)</span> setzt die Modellvorhersagen des Regressionsmodells ins Verhältnis zu einem Nullmodell, welches für alle Beobachtungen den Mittelwert von <span class="math inline">\(y\)</span> vorhersagt.</p>
+<p>Im hier besprochenen Fall ist <span class="math inline">\(R^2\)</span> gleich dem quadrierten Korrelationskoeffizienten von <span class="math inline">\(x\)</span> und <span class="math inline">\(y\)</span> (daher der Name).</p>
+</section>
+<section id="lebenserwartung-fbip-ε" class="slide level2">
+<h2>Lebenserwartung = f(BIP) + ε</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="lineare-regression_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="lineare-regression_files/figure-revealjs/unnamed-chunk-10-1.png" width="1056"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="lebenserwartung-fbip-ε-1" class="slide level2 smaller">
+<h2>Lebenserwartung = f(BIP) + ε</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Info:
+ function:     stan_lm
+ family:       gaussian [identity]
+ formula:      lifeExp ~ log10(gdpPercap)
+ algorithm:    sampling
+ sample:       4000 (posterior sample size)
+ priors:       see help('prior_summary')
+ observations: 1704
+ predictors:   2
+
+Estimates:
+                   mean   sd    10%   50%   90%
+(Intercept)       -9.1    1.2 -10.6  -9.1  -7.5
+log10(gdpPercap)  19.3    0.3  18.9  19.3  19.8
+sigma              7.6    0.1   7.5   7.6   7.8
+log-fit_ratio      0.1    0.0   0.1   0.1   0.1
+R2                 0.5    0.0   0.5   0.5   0.5
+
+Fit Diagnostics:
+           mean   sd   10%   50%   90%
+mean_PPD 59.5    0.3 59.1  59.5  59.8 
+
+The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
+
+MCMC diagnostics
+                 mcse Rhat n_eff
+(Intercept)      0.0  1.0   990 
+log10(gdpPercap) 0.0  1.0   988 
+sigma            0.0  1.0  1506 
+log-fit_ratio    0.0  1.0  1101 
+R2               0.0  1.0  1265 
+mean_PPD         0.0  1.0  3412 
+log-posterior    0.0  1.0  1185 
+
+For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
+</div>
+</div>
+<p>Output Lineare Regression in <code>R</code></p>
+</div><div class="column" style="width:45%;">
+<p>‘Best guesses’ für die Parameter:</p>
+<p><span class="math inline">\(\alpha = -9{,}1\)</span> | <span class="math inline">\(\beta = 19{,}4\)</span> | <span class="math inline">\(\sigma = 7{,}6\)</span></p>
+<p>Werte für <span class="math inline">\(\beta\)</span> im Bereich 18,9 bis 19,8 sind plausibel, d.h. die Daten unterstützen einen deutlichen positiven Zus’hang von GDP und Lebenserwartung (kein oder sogar ein negative Zus’hang sind wären unplausibel).</p>
+<p>Etwa 50% der Variation (<span class="math inline">\(R^2 = 0{,}5\)</span>) von Lebenserwartung lässt sich durch GDP ‘erklären’.</p>
+</div></div>
+</section>
+<section id="evaluierung-der-vorlesung" class="slide level2">
+<h2>Evaluierung der Vorlesung</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Die jährliche Evaluation der Lehrveranstaltungen ermöglicht die laufende Verbesserung der Veranstaltungen auf Basis eures Feedbacks!</p>
+<p><br> Losung zur Vorlesung: <strong>SPE5H</strong></p>
+<p>Vielen Dank für das Feedback!</p>
+</div><div class="column" style="width:45%;">
+<p><a href="images/qr-evaluierung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="images/qr-evaluierung.png" width="550"></a></p>
+</div></div>
+
+</section></section>
     </div>
-  </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="lineare-regression_files/libs/revealjs/dist/reveal.js"></script>
@@ -523,7 +531,8 @@ y_i &amp;\sim \textrm{Normal}(\mu_i, \sigma) \\
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -677,7 +686,7 @@ y_i &amp;\sim \textrm{Normal}(\mu_i, \sigma) \\
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -820,8 +829,6 @@ y_i &amp;\sim \textrm{Normal}(\mu_i, \sigma) \\
       });
       clipboard.on('success', onCopySuccess);
       if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
         const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
           text: getTextToCopy,
           container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -928,7 +935,7 @@ y_i &amp;\sim \textrm{Normal}(\mu_i, \sigma) \\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

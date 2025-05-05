@@ -1,6 +1,6 @@
 ---
 title: "Einführung in die Statistik"
-subtitle: "Regressionsmodelle"
+subtitle: "Lineare Regression"
 author: Dr. Jakob Hoffmann, Economic Geography Group
 lightbox: true
 execute:
@@ -49,16 +49,70 @@ theme_update(
 
 ```
 
+## Themen der Vorlesung
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/examquestions" title="Survey preview"> </iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/examquestions/qr" title="Survey link"> </iframe>
+:::
+:::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/examquestions/results" background-interactive="true" data-preload="true"}
+
 ## Statistische Modelle {.smaller}
 
 Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.
 
 ![](images/statmodels.png){width=1000}
 
-::: {.fragment}
-<div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;"></div>
-:::
 
+## Bayesianische Inferenz
+
+Bayes' Regel kann für statistische Inferenz unbekannter Parameter $\theta$ im Angesicht von Daten $D$ eingesetzt werden:
+
+$$
+\color{tomato}{p(\theta | D)} = \frac{\color{orange}{p(D | \theta)} \color{cornflowerblue}{p(\theta)}}{p(D)}
+$$
+
+- $\color{tomato}{p(\theta | D)}$ ist die *a-posteriori-Verteilung* von $\theta$
+
+- $\color{cornflowerblue}{p(\theta)}$ ist die *a-priori-Verteilung* von $\theta$
+
+- $\color{orange}{p(D | \theta)}$ ist die *Likelihood* (das Modell des DGP)
+
+- $p(D)$ ist ein Normierungsfaktor (s. Gesetz totaler W'keit)
+
+
+## Bayesianische Inferenz
+
+Die Kurve im Bild rechts zeigt die *a-posteriori-Verteilung*  $\color{tomato}{p(\theta | \textrm{K} = 21)}$ des unbekannten Parameters $\theta$ nach 50 beobachteten Münzwürfen mit 21 mal $K$:
+
+![](images/coinflip.png)
+
+Die eingesetzte Likelihood $\color{orange}{p(K | \theta)} = \textrm{Bin}(K|n, \theta)$ ist die schon besprochene Binomialverteilung als Modell des DGP.
+
+
+## Die a-posteriori-Verteilung
+
+- Die a-posteriori-Verteilung $p(\theta|D)$ fasst unser Wissen über die unbekannten Parameter $\theta$ *nach* Beobachten der Daten $D$ zusammen.
+
+- Für einfache Modelle kann die a-posteriori-Verteilung analytisch ermittelt werden.
+
+- Für komplexere Modelle gibt es unterschiedliche Algorithmen, die die a-posteriori-Verteilung numerisch approximieren (z.B. *Markov-Chain-Monte-Carlo-Verfahren*).
+
+
+## Bayesianisches Updating
+
+- Bayesianische Inferenz kann verstanden werden als ein systematisches *Updaten* der *a-priori-Verteilung* $\color{cornflowerblue}{p(\theta)}$ durch das Konditionieren auf beobachtete Daten $D$ um die *a-posteriori-Verteilung*  $\color{tomato}{p(\theta | D)}$ zu erhalten.
+
+- Die *a-priori-Verteilung* hängt nicht von den Daten ab kann eingesetzt werden um Vorwissen der Forschenden einzubeziehen und das Modell auf plausible Werte für $\theta$ zu beschränken.
+
+
+# Lineare Regression
 
 ## Zusammenhänge modellieren
 
@@ -117,7 +171,7 @@ $$
 $\color{orange}{\alpha}$ und $\color{cornflowerblue}{\beta}$ sind Modellparameter:
 
 - $\color{orange}{\alpha}$ ist der y-Achsenabschnitt, d.h. der Wert von $y$ wenn $x=0$
-- $\color{cornflowerblue}{\beta}$ gibt die Steigung der Gerade an. D.h. $\color{cornflowerblue}{\beta}$ zeigt, um wie viel $f(x)$ steigt wenn $x$ um 1 steigt.
+- $\color{cornflowerblue}{\beta}$ gibt die Steigung der Geraden an. D.h., $\color{cornflowerblue}{\beta}$ zeigt, um wie viel $f(x)$ steigt wenn $x$ um 1 steigt.
 
 
 ## Einfache Lineare Regression
@@ -146,7 +200,7 @@ d |> ggplot() +
 
 ## Einfache Lineare Regression
 
-Der Fehlerterm $\epsilon$ ist Ergebnis eines Zufallsprozesses, den wir hier mit einer *Normalverteilung* modellieren:
+Der Fehlerterm $\epsilon$ wird mit einer *Normalverteilung* modelliert:
 
 $$
 \epsilon \sim \textrm{Normal}(\color{orange}{\mu}, \color{cornflowerblue}{\sigma})
@@ -154,8 +208,8 @@ $$
 
 Die Normalverteilung hat zwei Parameter:
 
-- Den Mittelwert $\color{orange}{\mu}$, der die Lage der Verteilung bestimmt. Da $\epsilon$ die Abweichung von $f(x)$ darstellt, setzen wir hier $\color{orange}{\mu = 0}$.
-- Die Standardabweichung $\color{cornflowerblue}{\sigma}$, die die Streuung bestimmt. $\color{cornflowerblue}{\sigma}$ ist im Modell eine Unbekannte und muss geschätzt werden.
+- Den Mittelwert $\color{orange}{\mu}$, der die Lage der Verteilung bestimmt. Da $\epsilon$ die Abweichung von $f(x)$ darstellt, setzen wir im Kontext linearer Regression $\color{orange}{\mu = 0}$.
+- Die Standardabweichung $\color{cornflowerblue}{\sigma}$, die den Streuungsgrad um $f(x)$ bestimmt. $\color{cornflowerblue}{\sigma}$ ist ein unbekannter Modellparameter.
 
 
 ## Die Normalverteilung
@@ -165,20 +219,6 @@ Die Normalverteilung hat zwei Parameter:
 - Da es für kontinuierliche Zufallsvariablen eine unendliche Menge möglicher Ergebnisse gibt, ist die W'keit jedes Einzelergebnisses notwendigerweise 0.
 
 - Wir spezifizieren daher statt einer W'keitsfunktion eine *W'keitsdichtefunktion*, deren Integral auf 1 normiert ist.
-
-
-## Die Normalverteilung
-
-Die W'keitsdichtefunktion der Normalverteilung ist:
-
-$$
-\textrm{Normal}(X=x | \mu, \sigma) = \frac{1}{ \sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x-\mu)^2}{ 2\sigma^2}\right)
-$$
-
-<hr>
-
-Der Kern der Normalverteilung ist $\exp(-x^2)$. Die restlichen Komponenten dienen dazu, die Verteilung zu verschieben (via $\mu$), die Streuung zu skalieren (via $\sigma$), und sicherzustellen, dass das Integral der Funktion über den Wertebereich 1 ist.
-
 
 ## Die Normalverteilung
 
@@ -197,35 +237,20 @@ d1 |>
 
 ```
 
-## Residuen
+## Die Normalverteilung
 
-Die Abweichung der Beobachtungen von der Regressionsgerade bezeichnet man als *Residuen*.
+Die W'keitsdichtefunktion der Normalverteilung ist:
 
-```{r, fig.width=11, fig.height=5}
-set.seed(109)
+$$
+\textrm{Normal}(X=x | \mu, \sigma) = \frac{1}{ \sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x-\mu)^2}{ 2\sigma^2}\right)
+$$
 
-d = tibble(x = rnorm(10), y = x + rnorm(10))
+<hr>
 
-fit = lm(y ~ x, data = d)
-d$f = predict(fit, d)
+Der Kern der Normalverteilung ist $\exp(-x^2)$. Die restlichen Komponenten dienen dazu, die Verteilung zu verschieben (via $\mu$), die Streuung zu skalieren (via $\sigma$), und sicherzustellen, dass das Integral der Funktion über den Wertebereich 1 ist.
 
-d |> ggplot(aes(x, y)) +
-    geom_segment(
-     aes(x = x, xend = x, y = y, yend = f),
-     linetype="dashed", color = "orange"
-    ) +
-    geom_point(size=3) +
-    annotate(
-        "text",
-        x = 0.55, y = 3,
-        size = 6, color = "orange", hjust = 0,
-        label = "\u03b5\u1d62 = y\u1d62 - f(x\u1d62)",
-    ) +
-    geom_smooth(color = "tomato", method="lm", se=FALSE)
 
-```
-
-## Residuen
+## Normalverteilte Residuen
 
 ![](images/regression-residuals.png){width=1000}
 
@@ -237,35 +262,295 @@ Zusammengefügt ist das einfache lineare Regressionsmodell:
 
 $$
 \begin{align}
-y_i &= \alpha + x_i\beta + \epsilon \\
-\epsilon &\sim \textrm{Normal}(0, \sigma)
+y_i &= \alpha + x_i\beta + \epsilon_i \\
+\epsilon_i &\sim \textrm{Normal}(0, \sigma)
 \end{align}
 $$
 
 Wir modellieren eine kontinuierliche Variable $y$ als lineare Funktion eines Prädiktors $x$ plus einer normalverteilten zufälligen Abweichung $\epsilon$ mit Streuung $\sigma$.
 
-$\alpha$, $\beta$ und $\sigma$ sind unbekannte Modellparameter und müssen auf Basis von Daten gelernt/geschätzt werden.
+$x$ und $y$ sind beobachtete Werte der abhängigen und unabhängigen Variable, $\alpha$, $\beta$ und $\sigma$ sind unbekannte Modellparameter.
 
+<!-- ## Einfache Lineare Regression -->
 
-## Einfache Lineare Regression
+<!-- Äquivalent zur bisherigen Formulierung via $\epsilon$ kann das Regressionsmodell auch wie folgt spezifiziert werden: -->
 
-Äquivalent zur bisherigen Formulierung via $\epsilon$ kann das Regressionsmodell auch wie folgt spezifiziert werden:
-
-$$
-\begin{align}
-y_i &\sim \textrm{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + x_i\beta
-\end{align}
-$$
+<!-- $$ -->
+<!-- \begin{align} -->
+<!-- y_i &\sim \textrm{Normal}(\mu_i, \sigma) \\ -->
+<!-- \mu_i &= \alpha + x_i\beta -->
+<!-- \end{align} -->
+<!-- $$ -->
 
 <!-- Diese Darstellung verdeutlicht, dass $y$ als Realisierung einer Normalverteilung modelliert wird, deren Mittelwert eine Funktion der unabhängigen Variable $x$ ist. -->
 
-D.h. $y$ wird als Realisierung einer Normalverteilung modelliert, deren Mittelwert eine Funktion von $x$ ist.
+<!-- D.h. $y$ wird als Realisierung einer Normalverteilung modelliert, deren Mittelwert eine Funktion von $x$ ist. -->
 
-Die Formulierungen sind äquivalent da für $x \sim N(\mu, \sigma)$ und eine Zahl $c$ gilt dass $x + c \sim \textrm{N}(\mu + c, \sigma)$.
+<!-- Die Formulierungen sind äquivalent da für $x \sim N(\mu, \sigma)$ und eine Zahl $c$ gilt dass $x + c \sim \textrm{N}(\mu + c, \sigma)$. -->
 
-<!-- ## Survey -->
-<!---->
-<!-- Wie sicher fühlt ihr euch stand jetzt in den folgenden Themenbereichen? -->
+## Statistische Modelle {.smaller}
+
+Statistische Modellierung umfasst (1) die Spezifikation eines mathematische Modells des DGP, (2) das Lernen von unbekannten Variablen (Parametern), (3) das Überprüfen des Modells, und (4) das Testen von Hypothesen oder das Erstellen von Prognosen.
+
+![](images/statmodels.png){width=1000}
+
+::: {.fragment .fade-in-then-out}
+<div class="rectangle" style="top: 200px; left: 170px; width: 280px; height: 100px;"></div>
+:::
+
+::: {.fragment}
+<div class="rectangle" style="top: 530px; left: 530px; width: 340px; height: 100px;"></div>
+:::
 
 
+## Schätzunsicherheit
+
+Aufgrund von epistemischer Unsicherheit über die Parameter $\alpha$ und $\beta$ gibt es für einen Datensatz viele plausible Regressionsgeraden.
+
+
+```{r, fig.height=4, fig.width=11}
+
+simulate <- function(n, a, b, s=1) {
+    x <- rnorm(n)
+    y <- a + x * b + rnorm(n, sd=s)
+
+    data <- data.frame(x, y)
+
+    m <- lm(y~x, data=data)
+    f <- summary(m)$coefficients
+    e <- f[,1]
+    se <- f[,2]
+
+    coef <- data.frame(
+        i = 1:20,
+        a = rnorm(20, e[1], se[1]),
+        b = rnorm(20, e[2], se[2])
+    )
+
+    list(data=data, coef=coef, model=m)
+}
+
+sim <- simulate(20, 0, 1)
+
+ggplot() + 
+    geom_point(data=sim$data, aes(x, y)) +
+    geom_abline(data=sim$coef, aes(intercept=a, slope=b, group=factor(i)), color="tomato", alpha=0.4)
+
+```
+
+## Schätzunsicherheit
+
+
+::::: columns
+::: {.column width="55%"}
+
+```{r, fig.width=5.5, fig.height=4}
+broom::tidy(sim$model) |>
+    mutate(term = c("α", "β")) |>
+    ggplot(aes(y = term, x = estimate, xmin = estimate - 2*std.error, xmax = estimate + 2*std.error)) +
+    geom_vline(xintercept = 0, color="grey70") +
+    geom_point() +
+    geom_linerange() +
+    xlim(-0.7, 1.5) +
+    labs(x = NULL, y = NULL)
+```
+
+:::
+::: {.column width="45%"}
+
+Wie zuvor könnnen wir Intervalle berechnen, die den wahrscheinlichen Wertebereich (z.B. 95%) eines Parameters gegeben der verfügbaren Daten angeben.
+
+
+:::
+:::::
+
+
+## Hypothesentests {.smaller}
+
+Die Schätzunsicherheit von Modellparametern gibt darüber Aufschluss, zu welchem Grad das Modell im Einklang mit unseren Hypothesen ist, diesen widerspricht, oder auf Basis der verfügbaren Daten keine klare Aussage zulässt.
+
+**Hypothese**: $x$ hat einen positiven Effekt auf $y$ (d.h., $\beta > 0$).
+
+```{r, fig.height=4, fig.width=11}
+sim1 <- simulate(500, 0, 1)
+sim2 <- simulate(500, 0, 0)
+sim3 <- simulate(5, 0, 1, s=2)
+
+p1 = ggplot() + 
+    geom_point(data=sim1$data, aes(x, y), size=0.5, alpha=0.5) +
+    geom_abline(data=sim1$coef, aes(intercept=a, slope=b, group=factor(i)), color="tomato", alpha=0.4)
+
+p2 = ggplot() + 
+    geom_point(data=sim2$data, aes(x, y), size=0.5, alpha=0.5) +
+    geom_abline(data=sim2$coef, aes(intercept=a, slope=b, group=factor(i)), color="tomato", alpha=0.4)
+
+p3 = ggplot() + 
+    geom_point(data=sim3$data, aes(x, y)) +
+    geom_abline(data=sim3$coef, aes(intercept=a, slope=b, group=factor(i)), color="tomato", alpha=0.4)
+
+p1 | p2 | p3
+```
+
+
+## Modellvorhersage
+
+Wir können das Modell mit geschätzten Parametern $\hat{\alpha}, \hat{\beta}$ nutzen, um eine Vorhersage $\hat{y}$ für $y$ gegeben $x$ zu machen.
+
+Eine sinnvolle Vorhersage ist $\mu_y | x$, der Mittelwert von $y$ für ein bestimmtes Level von $x$ (gegeben d. die Regressionsgerade):
+
+$$ \hat{y} = \mu_y | x = \hat{\alpha} + x \hat{\beta} $$
+
+Wir können die Unsicherheit über $\alpha$ und $\beta$ in der Vorhersage übertragen oder eine 'beste' Vorhersage mit den plausibelsten Parameterwerten machen.
+
+
+## Modellvorhersage
+
+```{r, fig.width=11, fig.height=6}
+a = mean(sim$coef$a)
+b = mean(sim$coef$b)
+mt = broom::tidy(sim$model)
+
+a1 = mt$estimate[1] + mt$std.error[1]
+a2 = mt$estimate[1] - mt$std.error[1]
+b1 = mt$estimate[2] + mt$std.error[2]
+b2 = mt$estimate[2] - mt$std.error[2]
+x2 = 1.5
+
+ggplot() + 
+    geom_point(data=sim$data, aes(x, y)) +
+    geom_abline(data=sim$coef, aes(intercept=a, slope=b, group=factor(i)), color="grey70", alpha=0.4) +
+    geom_abline(intercept=a, slope=b, color = "cornflowerblue", lwd=1.5) +
+    geom_segment(aes(x = x2, xend = x2, y = -Inf, yend = Inf), color="tomato") +
+    geom_segment(aes(x = -Inf, xend = x2, y = a + b * x2, yend = a + b * x2), color="tomato") +
+
+    geom_segment(aes(x = x2, xend = x2, y = -Inf, yend = a1 + b1 * x2), color="tomato") +
+    geom_segment(aes(x = x2, xend = x2, y = -Inf, yend = a2 + b2 * x2), color="tomato") +
+    geom_segment(aes(x = -Inf, xend = x2, y = a1 + b1 * x2, yend = a1 + b1 * x2), color="tomato", linetype = "dashed") +
+    geom_segment(aes(x = -Inf, xend = x2, y = a2 + b2 * x2, yend = a2 + b2 * x2), color="tomato", linetype = "dashed")
+```
+
+## Das Bestimmtheitsmaß $R^2$
+
+Das *Bestimmtheitsmaß* $R^2$ nimmt Werte zwischen 0 und 1 an und gibt den Anteil der durch das Regressionsmodell 'erklärten' Variation der abhängigen Variablen $y$ an.
+
+```{r, fig.height=4, fig.width=11}
+set.seed(321)
+
+sim1 <- simulate(500, 0, 1, s=0.5)
+sim2 <- simulate(500, 0, 1, s=2)
+
+r2_1 <-  round(summary(lm(y ~ x, sim1$data))$r.squared, digits=3)
+r2_2 <-  round(summary(lm(y ~ x, sim2$data))$r.squared, digits=3)
+
+p1 = ggplot() + 
+    geom_point(data=sim1$data, aes(x, y), size=0.5, alpha=0.5) +
+    geom_abline(data=sim1$coef, aes(intercept=a, slope=b, group=factor(i)), color="tomato", alpha=0.4) +
+    lims(x=c(-3, 3), y=c(-5, 5)) +
+    labs( title = paste0("R² = ", r2_1) )
+
+p2 = ggplot() + 
+    geom_point(data=sim2$data, aes(x, y), size=0.5, alpha=0.5) +
+    geom_abline(data=sim2$coef, aes(intercept=a, slope=b, group=factor(i)), color="tomato", alpha=0.4) +
+    lims(x=c(-3, 3), y=c(-5, 5)) +
+    labs( title = paste0("R² = ", r2_2) )
+
+p1 | p2
+```
+
+## Das Bestimmtheitsmaß $R^2$
+
+$R^2$ ist definiert als $1 - \frac{RSS}{TSS}$, mit:
+
+$$
+\begin{align}
+RSS = \sum_{=1}^n (y_i - \hat{y_i})^2 \quad \textrm{und} \quad TSS = \sum_{=1}^n (y_i - \bar{y})^2
+\end{align}
+$$
+
+$R^2$ setzt die Modellvorhersagen des Regressionsmodells ins Verhältnis zu einem Nullmodell, welches für alle Beobachtungen den Mittelwert von $y$ vorhersagt.
+
+Im hier besprochenen Fall ist $R^2$ gleich dem quadrierten Korrelationskoeffizienten von $x$ und $y$ (daher der Name).
+
+
+## Lebenserwartung = f(BIP) + ε
+
+```{r, fig.width=11, fig.height=6}
+
+# m <- lm(lifeExp ~ log10(gdpPercap), data=gapminder)
+# f <- summary(m)$coefficients
+# e <- f[,1]
+# se <- f[,2]
+# 
+# coef <- data.frame(
+    # i = 1:20,
+    # a = rnorm(20, e[1], se[1]),
+    # b = rnorm(20, e[2], se[2])
+# )
+
+library(gapminder)
+
+gapminder |>
+    filter(year==2007) |>
+    ggplot(aes(log10(gdpPercap), lifeExp)) +
+    # geom_hline(yintercept=0, color="grey60", linewidth=0.3) +
+    # geom_vline(xintercept=0, color="grey60", linewidth=0.3) +
+    geom_point(shape=1, color="black") +
+    geom_smooth(method="lm", color="tomato") +
+    scale_x_continuous(
+        breaks = c(1,2,3,4,5),
+        labels = scales::math_format(10^.x)
+    ) +
+    labs(
+    x = "BIP (Log-Skala)",
+    y = "Lebenserwartung (Jahre)",
+    title = "Lebenserwartung und BIP",
+    subtitle = "Daten für 142 Länder im Jahr 2007",
+    caption = "Datenquelle: gampinder.org"
+    )
+
+```
+
+## Lebenserwartung = f(BIP) + ε {.smaller}
+::::: columns
+::: {.column width="55%"}
+
+```{r}
+library(rstanarm)
+m <- stan_lm(lifeExp ~ log10(gdpPercap), data=gapminder, prior=R2(0.6, what="median"), refresh=0, seed=123)
+summary(m)
+```
+Output Lineare Regression in `R`
+
+:::
+::: {.column width="45%"}
+
+'Best guesses' für die Parameter:
+
+$\alpha = -9{,}1$ | $\beta = 19{,}4$ | $\sigma = 7{,}6$
+
+Werte für $\beta$ im Bereich 18,9 bis 19,8 sind plausibel, d.h. die Daten unterstützen einen deutlichen positiven Zus'hang von GDP und Lebenserwartung (kein oder sogar ein negative Zus'hang sind wären unplausibel).
+
+Etwa 50% der Variation ($R^2 = 0{,}5$) von Lebenserwartung lässt sich durch GDP 'erklären'.
+
+:::
+:::::
+
+
+## Evaluierung der Vorlesung
+
+::::: columns
+::: {.column width="55%"}
+
+Die jährliche Evaluation der Lehrveranstaltungen ermöglicht die laufende Verbesserung der Veranstaltungen auf Basis eures Feedbacks!
+
+<br>
+Losung zur Vorlesung: **SPE5H**
+
+Vielen Dank für das Feedback!
+
+:::
+
+::: {.column width="45%"}
+![](images/qr-evaluierung.png){width="550px"}
+:::
+:::::
