@@ -11,5 +11,6 @@ slides/.quarto
 exam.md
 exam
 .Rproj.user
+nginx.conf
 
 /.luarc.json
