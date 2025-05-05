@@ -39,9 +39,9 @@ def StyledGrid(*items, columns="1fr"):
 
 # Numeric input
 
-def NumericInput(name, title, min, max):
+def NumericInput(name, title, min, max, step=1, placeholder=None):
     tit = Legend(Strong(title))
-    inp = Input(type="number", name=name, min=min, max=max)
+    inp = Input(type="number", name=name, min=min, max=max, step=step, placeholder=placeholder)
     return Card(Group(tit, inp))
 
 # Time input

@@ -27,8 +27,8 @@ def init_sizes(db, rt, route, tablename, **kwargs):
 
     @rt(f"/{route}")
     def get():
-        va = NumericInput("vara", "Wie groß bist du (z.B. 180 cm)?", min=100, max=250)
-        vb = NumericInput("varb", "Was ist deine Schuhgröße (z.B. 43)?", min=30, max=60)
+        va = NumericInput("vara", "Wie groß bist du (in cm)?", min=120, max=220, step=1, placeholder="z.B. 180")
+        vb = NumericInput("varb", "Was ist deine Schuhgröße?", min=30, max=60, step=0.5, placeholder="z.B. 43")
         
         items = Items(va, vb, hx_post=f"/statlecture/{route}")
         return Survey("Kurzumfrage", items)

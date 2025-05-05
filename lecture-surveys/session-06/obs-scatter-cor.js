@@ -1,5 +1,6 @@
 import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+import * as math from "https://www.jsdelivr.com/package/npm/mathjs";
 
 
 // Dont change this
@@ -79,7 +80,7 @@ function scatter() {
     const x = vars.map(d => d.vara);
     const y = vars.map(d => d.varb);
 
-    const pcor = pearsonCorrelation(x, y)
+    const pcor = math.corr(x, y) // pearsonCorrelation(x, y)
     const scor = spearmanRankCorrelation(x, y)
 
     const meanX = d3.mean(x);
@@ -110,8 +111,8 @@ function scatter() {
             Plot.dot(vars, { y: "vara", x: "varb" }),
             Plot.crosshair(vars, { y: "vara", x: "varb", color: "blue" }),
         ],
-        x: { label: "Schuhgroesse", domain: [30, 60] },
-        y: { label: "Koerpergroesse", domain: [100, 250] },
+        x: { label: "Schuhgröße" },
+        y: { label: "Körpergröße" },
     });
 
     containerScatter.innerHTML = "";
