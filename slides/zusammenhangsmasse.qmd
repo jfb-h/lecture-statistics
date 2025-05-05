@@ -245,6 +245,20 @@ $$r_{xy} = \frac{\color{green}{s_{xy}}}{\color{orange}{s_x} \color{cornflowerblu
 :::
 
 
+## Körper- und Schuhgröße
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize" title="Survey preview"> </iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize/qr" title="Survey link"> </iframe>
+:::
+:::::
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/bodysize/result" background-interactive="true" data-preload="true"}
+
 ## Korrelationskoeffizient
 
 ```{r, fig.width=11, fig.height=6}
@@ -536,21 +550,6 @@ p3 = d1 |>
 p1 | p2 | p3
 
 ```
-
-## Körper- und Schuhgröße
-
-::::: columns
-::: {.column width="50%"}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize" title="Survey preview"> </iframe>
-:::
-
-::: {.column width="50%"}
-<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/bodysize/qr" title="Survey link"> </iframe>
-:::
-:::::
-
-##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/bodysize/result" background-interactive="true" data-preload="true"}
-
 
 # Zusammenhangsmaße
 Kategorische Variablen
@@ -896,15 +895,15 @@ ggplot() +
  & \text{DE} & \text{FR} & \text{NL} & \text{BE} & \text{LU} & \text{PL} & \text{CZ} & \text{AT} & \text{CH} & \text{DK} \\
 \hline
 \text{DE} & {0} & {1} & {1} & {1} & {1} & {1} & {1} & {1} & {1} & {1} \\
-\text{FR} & 1 & \color{gray}{0} & \color{gray}{1} & \color{gray}{1} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
-\text{NL} & 1 & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} \\
+\text{FR} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} \\
+\text{NL} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
 \text{BE} & 1 & \color{gray}{1} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
 \text{LU} & 1 & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
 \text{PL} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
 \text{CZ} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} \\
 \text{AT} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} \\
-\text{CH} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} \\
-\text{DK} & 1 & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{CH} & 1 & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} \\
+\text{DK} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
 \end{array}
 \]
 

@@ -72,3 +72,14 @@
   color: red;
   font-size: 30px;
 }
+
+.rectangle {
+  position: absolute;
+  border: 8px solid darkred;
+  background: none;
+}
+
+.annotation {
+  position: absolute;
+  background: none;
+}

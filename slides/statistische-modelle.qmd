@@ -1,0 +1,702 @@
+---
+title: "Einführung in die Statistik"
+subtitle: "Statistische Modelle"
+author: Dr. Jakob Hoffmann, Economic Geography Group
+lightbox: true
+execute:
+    cache: true
+    keep-ipynb: false
+    keep-md: false
+filters:
+    - parse-latex
+format:
+    revealjs:
+        css: custom.css
+        controls: true
+        slide-number: true
+---
+
+```{r}
+#| cache: false
+
+library(rlang)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(lubridate)
+library(stringr)
+library(forcats)
+library(ggplot2)
+library(ggthemes)
+library(ggridges)
+library(viridis)
+library(patchwork)
+library(srvyr)
+library(posterior)
+
+theme_set(theme_tufte(base_family="Arial"))
+
+theme_update(
+  axis.title.x = element_text(hjust = 0.99),
+  axis.title.y = element_text(hjust = 0.99),
+  plot.title = element_text(face = "bold"),
+  plot.caption = element_text(face="italic"),
+  strip.text.x = element_text(hjust = 0.01, face = "bold"),
+  strip.text.y = element_text(vjust = 0.01, face = "bold"),
+  legend.position = "top",
+  legend.justification.top = "left"
+)
+
+```
+
+# Zusammenhangsmaße
+Kategorische Variablen
+
+## Die Kontingenztabelle
+
+```{r}
+bes = readr::read_csv("data/BES.csv")
+bes$education = factor(
+  bes$education,
+  levels = 1:5,
+  labels = c(
+    "Keine Qualifikation",
+    "Realschulabschluss",
+    "Abitur",
+    "Bachelor",
+    "Master"
+  )
+)
+```
+
+```{r}
+library(janitor)
+library(knitr)
+library(kableExtra)
+
+f = function(x) format(x, big.mark = " ")
+
+bes |>
+  rename(Bildung = education) |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  tabyl(Bildung, vote) |>
+  adorn_totals(where = "both", name="Gesamt") |>
+  adorn_percentages("row") |>
+  adorn_pct_formatting(digits = 1) |>
+  adorn_ns(position = "front", format_func = f) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="2016 BES Brexit Survey",
+    general_title = "Quelle:",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28)
+```
+
+Eine Kontingenztabelle zeigt Beobachtungshäufigkeiten und Randhäufigkeiten (Reihen- und Spaltensummen) für alle Ausprägungskombinationen zweier kategorialer Variablen.
+
+## Die Kontingenztabelle
+
+```{r, fig.height=6, fig.width=11}
+bes_p = bes |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na()
+
+p1 = bes_p |>
+  ggplot(aes(vote, education)) +
+  geom_jitter(alpha=0.3, size=0.3) +
+  labs(x=NULL, y=NULL)
+
+p2 = bes_p |>
+  summarize(n=n(), .by=c(vote, education)) |>
+  mutate(s = n / sum(n), .by=education) |>
+  ggplot(aes(vote, education, fill=s)) +
+  geom_tile(color="white", linewidth=5) +
+  geom_text(aes(label=format(n, big.mark=" ")), size=4, color="grey40") +
+  scale_fill_distiller(
+    palette="RdBu",
+    type="div",
+    limit = c(0.0, 1.0),
+    breaks = c(0.0, 0.5, 1.0),
+    labels = scales::percent,
+    guide = guide_colourbar(nbin = 100, draw.ulim = FALSE, draw.llim = FALSE)
+  ) +
+  guides(fill=guide_colorbar(barwidth=10, barheight=0.7)) +
+  labs(x=NULL, y=NULL, fill=NULL)
+
+p1 | p2
+```
+
+## Die Indifferenztabelle
+
+```{r}
+fr = function(x) format(x, big.mark = " ")
+
+bes |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  summarize(n=n(), .by=c(education, vote)) |>
+  mutate(Hg=sum(n)) |>
+  mutate(Hr = sum(n), .by=education) |>
+  mutate(Hc = sum(n), .by=vote) |>
+  mutate(TH = round(Hr * Hc / Hg, 1)) |>
+  arrange(education, vote) |>
+  pivot_wider(
+    id_cols=education,
+    names_from = vote,
+    values_from = TH
+  ) |>
+  rename(Bildung = education) |>
+  adorn_totals(where = "both", name="Gesamt") |>
+  adorn_percentages("row") |>
+  adorn_pct_formatting(digits = 1) |>
+  adorn_ns(position = "front", format_func = fr) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="2016 BES Brexit Survey",
+    general_title = "Quelle:",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28)
+
+```
+
+Die Indifferenztabelle bildet theoretische Häufigkeiten unter der Annahme von Unabhängigkeit der beiden Variablen ab.
+
+## Theoretische Häufigkeiten
+
+Die theoretische Häufikgeit $H_{ij}^{(T)}$ für Reihe $i$ und Spalte $j$ ist bei $n$ Beobachtungen und mit Reihensumme $H_i^{(R)}$ und Spaltensumme $H_j^{(C)}$ gegeben durch:
+
+$$
+H_{ij}^{(T)} = \frac{H_i^{(R)} H_j^{(C)}}{n}
+$$
+
+Theoretische Häufikgeiten stellen eine Gleichverteilung unter Präservation der Randhäufigkeiten der beiden Variablen dar.
+
+
+## Chi-Quadrat ($\chi^2$)
+
+Der Chi-Quadrat-Koeffizient misst die Abweichungen der beobachteten von den theoretischen Häufigkeiten:
+
+$$
+\chi^2 = \sum_{i=1}^r \sum_{j=1}^c \frac{(H_{ij} - H_{ij}^{(T)})^2}{H_{ij}^{(T)}}
+$$
+
+$\chi^2$ ist abhängig von der Beobachtungsanzahl $n$ und weicht bei unterschiedlichen $n$ selbst bei identischen relativen Verteilungen ab.
+
+
+## Kontingenzkoeffizient
+
+Der *Kontingenzkoeffizient* $C$ normalisiert $\chi^2$ für beliebige $n$:
+
+$$
+C = \sqrt{\frac{\chi^2}{\chi^2 + n}}
+$$
+
+Wenn die theoretische und die beobachtete Verteilung identisch sind, ist $C=0$. Das Maximum ist immer < 1, der genaue Wert hängt aber von den Dimensionen der Tabelle ab.
+<!-- Um ein oberes Limit von 1 zu erhalten, kann $C$ nochmals normalisiert werden: -->
+<!---->
+<!-- $$C_{korr} = \frac{C}{\sqrt{(k - 1)/k}}$$ -->
+
+## Brexit und Bildung {.smaller}
+
+:::: {.columns}
+::: {.column width="45%"}
+```{r}
+f = function(x) format(x, big.mark = " ")
+
+bes |>
+  rename(Bildung = education) |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  tabyl(Bildung, vote) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="Beobachtet",
+    general_title = "",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28)
+
+```
+:::
+::: {.column width="55%"}
+```{r}
+bes |>
+  filter(vote %in% c("stay", "leave")) |>
+  drop_na() |>
+  summarize(n=n(), .by=c(education, vote)) |>
+  mutate(Hg=sum(n)) |>
+  mutate(Hr = sum(n), .by=education) |>
+  mutate(Hc = sum(n), .by=vote) |>
+  mutate(TH = round(Hr * Hc / Hg, 1)) |>
+  mutate(diff = n - TH) |>
+  arrange(education, vote) |>
+  pivot_wider(
+    id_cols=education,
+    names_from = vote,
+    values_from = TH
+  ) |>
+  rename(Bildung = education) |>
+  kable(align=c("l", "r", "r", "r")) |>
+  kable_classic("hover") |>
+  footnote(
+    general="Theoretisch",
+    general_title = "",
+    footnote_as_chunk=T
+  ) |>
+  kable_styling(font_size=28, full_width=FALSE)
+```
+
+:::
+::::
+
+$$
+\chi^2 =
+\frac{(1356 - 874{,}9)^2}{847{,}9} + \ldots +
+\frac{(1898 - 1335{,}6)^2}{1335{,}6}
+= 2025{,}8 \\
+C =
+\sqrt{\frac{2025{,}8}{2025{,}8 + 25097}} = 0.27
+$$
+
+## Mediennutzung
+
+::::: columns
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news" title="Survey preview"> </iframe>
+:::
+
+::: {.column width="50%"}
+<iframe width="780" height="500" src="https://surveys.eggroup-lmu.de/statlecture/news/qr" title="Survey link"> </iframe>
+:::
+:::::
+
+
+##  {background-iframe="https://surveys.eggroup-lmu.de/statlecture/news/result" background-interactive="true" data-preload="true"}
+
+
+# Exkurs
+Autokorrelation
+
+## Räumliche Autokorrelation {.smaller}
+
+Einkommsensverteilung in deutschen Großstädten (<span class="arrow-up">&#x2191;</span> <span class="arrow-down">&#x2193;</span>)
+
+::::: columns
+::: {.column width="50%"}
+![Einkommen in München (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/09162000.5ef64850.png){.shadow height="400px"}
+:::
+::: {.column width="50%"}
+![Einkommen in Köln (Quelle: Zeit.de)](https://interactive.zeit.de/g/2022/stadtdaten/static/assets/koeln-closeup.ad0efbdb.png){.shadow height="400px"}
+:::
+:::::
+
+
+## Räumliche Autokorrelation
+
+- *Autokorrelation* beschreibt den Grad zu dem Beobachtungen Aufschluss über benachbarte Beobachtungen der gleichen Variablen geben (Korrelation mit sich selbst).
+
+- Autokorrelation kann positiv (benachbarte Einheiten sind sich ähnlich) oder negativ (benachbarte Einheiten sind sich unähnlich) sein.
+
+- Die Definition von Nachbarschaft kann je nach Fragestellung angepasst werden (z.B. angrenzende Raumeinheiten, räumliche Distanz, Reisedauer).
+
+
+
+## Räumliche Gewichte {.smaller}
+
+Voraussetzung der Berechnung räumlicher Autokorrelation ist eine Matrix $w$, die die paarweisen Nachbarschaftsverhältnisse / Distanzen der Werte $x$ kodiert:
+
+::::: columns
+::: {.column width="42%"}
+```{r, fig.height=8}
+library(sf)
+library(ggplot2)
+library(dplyr)
+library(eurostat)
+
+europe <- get_eurostat_geospatial(
+    output_class = "sf",
+    resolution = "10",
+    nuts_level = "0",
+    crs = "4326",
+  )
+
+capitals <- data.frame(
+  code = c("FR", "NL", "BE", "LU", "PL", "CZ", "AT", "CH", "DK"),
+  country = c("France", "Netherlands", "Belgium", "Luxembourg", "Poland",
+              "Czech Republic", "Austria", "Switzerland", "Denmark"),
+  capital = c("Paris", "Amsterdam", "Brussels", "Luxembourg City", "Warsaw",
+              "Prague", "Vienna", "Bern", "Copenhagen"),
+  lng = c(2.3522, 4.9041, 4.3517, 6.1319, 21.0122, 14.4378, 16.3738, 7.4474, 12.5683),
+  lat = c(48.8566, 52.3676, 50.8503, 49.6117, 52.2297, 50.0755, 48.2082, 46.9481, 55.6761)
+) # |> st_as_sf(coords=c("lng", "lat"), crs=4326)
+
+neighbors = filter(europe, CNTR_CODE %in% capitals$code)
+germany = filter(europe, CNTR_CODE == "DE")
+
+berlin = c(13.405, 52.520)
+
+ggplot() +
+  geom_sf(
+    data = europe,
+    aes(geometry = geometry),
+    color = "grey70"
+  ) +
+  geom_sf(
+    data = neighbors,
+    aes(geometry = geometry),
+    fill = "cornflower blue",
+    color = "white",
+    linewidth = 0.4
+  ) +
+  geom_sf(
+    data = germany,
+    aes(geometry = geometry),
+    fill = "tomato",
+    color = "white",
+  ) +
+  geom_segment(
+    data = capitals,
+    color = "grey20",
+    aes(x=berlin[1], xend=lng, y=berlin[2], yend=lat)
+  ) +
+  geom_point(
+    data = capitals,
+    color = "grey20",
+    size = 4,
+    aes(lng, lat)
+  ) +
+  annotate(
+    "point",
+    size = 4,
+    color="grey20",
+    x=berlin[1], y=berlin[2]
+  ) +
+  coord_sf(
+    crs=st_crs(4326),
+    xlim=c(-8.6, 25),
+    ylim=c(42, 62)
+  ) +
+  theme_void()
+```
+
+:::
+::: {.column width="58%"}
+```{=latex}
+\[
+\tiny
+\begin{array}{c|cccccccccc}
+ & \text{DE} & \text{FR} & \text{NL} & \text{BE} & \text{LU} & \text{PL} & \text{CZ} & \text{AT} & \text{CH} & \text{DK} \\
+\hline
+\text{DE} & {0} & {1} & {1} & {1} & {1} & {1} & {1} & {1} & {1} & {1} \\
+\text{FR} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} \\
+\text{NL} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{BE} & 1 & \color{gray}{1} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{LU} & 1 & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{PL} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\text{CZ} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} \\
+\text{AT} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} \\
+\text{CH} & 1 & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{1} & \color{gray}{0} & \color{gray}{0} \\
+\text{DK} & 1 & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} & \color{gray}{0} \\
+\end{array}
+\]
+
+```
+:::
+:::::
+
+Das Nachbarschaftsgewicht $w_{ij}$ von Beobachtung $i$ und Beobachtung $j$ steuert den Einfluss von $i$ und $j$ auf die Kovarianz von $x$ mit sich selbst: $w_{ij}(x_i - \bar{x})(x_j - \bar{x})$.
+
+
+## Moran's I
+
+Moran's $I$ misst die räumliche Autokorrelation einer Variable $x$ mit Gewichten $w$ und Summe $s_w = \sum_{i=1}^n \sum_{j=1}^n w_{ij}$ als:
+
+$$
+I = \frac{n}{s_w}
+\frac{\sum_{i=1}^n \sum_{j=1}^n \color{orange}{w_{ij}(x_i - \bar{x})(x_j - \bar{x})}}{\sum_{i=1}^n (x_i-\bar{x})^2}
+$$
+
+Moran's I nimmt Werte im Bereich -1 (perfekte räumliche Antikorrelation) bis 1 (perfekte räumliche Korrelation) an. Neben dem globalen Index gibt es auch lokale Versionen.
+
+
+## Schwermetallbelastung
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Rikken & Van Rijn (1993)](images/autocorr-maas.png){.card height="500px" width="550px"}
+
+:::
+::: {.column width="50%"}
+- Die Abbildung zeigt Messergebnisse der Schwermetallbelastung (Zink) entlang der Maas bei Stein, Niederlande.
+- Folgt die Verteilung der Messwerte einem zufälligen Muster?
+:::
+:::::
+
+
+## Schwermetallbelastung
+
+::::: columns
+::: {.column width="50%"}
+![Quelle: Rikken & Van Rijn (1993)](images/autocorr-maas.png){.card height="500px" width="550px"}
+
+:::
+::: {.column width="50%"}
+- Gewichte $w$: *k nearest neighbors* mit k=4
+- Moran's I: 0.47
+- Es besteht eine positive räumliche Autokorrelation der Messwerte.
+- Nächster Schritt: Lokale Hot-/Cold-Spots
+:::
+:::::
+
+
+## Zeitliche Autokorrelation
+
+Zeitlich angeordnete Daten weisen oft  ein erhebliches Maß an Autokorrelation auf (oft über mehrere Zeitschritte).
+
+```{r, fig.width=11, fig.height=4}
+
+d = tibble(
+  x = 1980:2020,
+  y = cumsum(rnorm(length(x)))
+)
+
+a = acf(d$y, lag.max=5, plot=FALSE)[[1]]
+
+d |>
+  ggplot(aes(x, y)) +
+  geom_line() +
+  labs(
+    title = paste0(
+        "Autokorrelation: ",
+         "| lag 1: ", round(a[2], 2), " ",
+         "| lag 2: ", round(a[3], 2), " ",
+         "| lag 3: ", round(a[4], 2), " ",
+         "| lag 4: ", round(a[5], 2), ""
+    ),
+    x=NULL,
+    y=NULL
+  )
+```
+
+
+## Netzwerkautokorrelation
+
+::::: columns
+::: {.column width="50%"}
+```{r, fig.height=6, fig.width=6}
+library(igraph)
+library(ggraph)
+library(tidygraph)
+
+set.seed(123)
+g <- sample_gnp(50, p = 0.1, directed = FALSE)
+A <- as.matrix(as_adjacency_matrix(g))
+W <- A / rowSums(A)
+
+epsilon <- rnorm(50, mean = 0, sd = 1)
+
+rho <- 0.9
+I <- diag(50)
+y <- solve(I - rho * W) %*% epsilon
+
+as_tbl_graph(g) |>
+  mutate(v=y) |>
+  ggraph() +
+  geom_edge_link(color="grey70") +
+  geom_node_point(aes(color=v), size = 8) +
+  scale_color_viridis() +
+  labs(color=NULL) +
+  theme_graph() +
+  theme(legend.position="none")
+```
+:::
+::: {.column width="50%"}
+- Vernetzte Beobachtungen sind ebenfalls häufig korreliert.
+- Beispiel: Wahlverhalten und Freundschaftsnetzwerke
+- Ignorieren von Autokorrelation kann zu Fehlschlüssen führen.
+:::
+:::::
+
+
+# Statistische Modelle
+
+
+## Statistische Modelle
+
+- *Theoretische Modelle* beschreiben die kausalen Mechanismen, die einem Sachverhalt zugrundeliegen (z.B. Wirtschaftswachstum, Klimaerwärmung).
+
+- *Statistische Modelle* approximieren in stilisierter (mathematischer) Form den *datengenerierenden Prozess (DGP)*, der empirischen Beobachtungen zugrunde liegt.
+
+- Statistische Modelle werden mithilfe von Beobachtungen kalibriert (d.h., sie 'lernen' aus Daten).
+
+## Der datengenerierende Prozess {.smaller}
+
+Der datengenerierende Prozess umfasst systematische Zusammenhänge (kausale Effekte, Störfaktoren oder Effekte der Datenerhebung) und unmodellierte Variation.
+
+![](images/dgp.png)
+
+*Statistische Inferenz* hat das Ziel, auf Basis von Beobachtungen und unter bestimmten Annahmen Rückschlüsse auf den datengenerierenden Prozess (und ein evtl. zugrundeliegendes theoretisches Modell) zu erlauben.
+
+
+## Ist die 1-Euro Münze fair?
+
+<hr>
+
+**Datengenerierender Prozess**: Wiederholter Münzwurf
+
+  - Faktoren: Eigenschaften der Münze, Wurftechnik, chaotischer physikalischer Prozess
+
+<hr>
+
+**Statistisches Modell**: Binomialverteilung
+
+  - Zufallsprozess mit $\textrm{Pr}(K) = \theta$ und $\textrm{Pr}(Z) = 1 - \theta$
+  - Annahmen: Unabhängige Würfe, kein Einfluss von Wurftechnik
+
+
+## Struktur eines statistischen Modells
+Ein statistisches Modell kombiniert beobachtete Variablen ([*Daten*]{style="color: orange"}) und unbeobachtete Variablen ([*Parameter*]{style="color: cornflowerblue"}) in einem mathemat. Modell, das bestimmte *Annahmen* verkörpert:
+
+$$
+\color{orange}{\textrm{# Kopf}} \sim \textrm{Binomial}(\color{orange}{n}, \color{cornflowerblue}{\theta})
+$$
+
+> Wir modellieren die Anzahl Würfe mit Ergebnis 'Kopf' aus insgesamt $n$ Würfen durch eine Binomialverteilung mit unbekanntem Parameter $\theta$. Die Tilde $a \sim b$ liest sich als '$a$ *folgt Verteilung* $b$'.
+
+## Ziel statistischer Inferenz
+
+::::: columns
+::: {.column width="45%"}
+```{r, fig.width=5, fig.height=6}
+size <- 50
+
+df = rbind(
+  tibble(x = 1:50, y = dbinom(x, size, 0.5), g = "Binomial(n = 50, θ = 0,5)"),
+  tibble(x = 1:50, y = dbinom(x, size, 0.7), g = "Binomial(n = 50, θ = 0,7)")
+  )
+
+df |> ggplot(aes(x, y)) +
+  geom_col(color="white", fill="grey30") +
+  geom_hline(yintercept=0) +
+  labs(x = "x", y = "p(x)") +
+  theme(legend.position="none") +
+  facet_wrap(~g, ncol=1)
+
+```
+:::
+
+::: {.column width="55%"}
+- Das Ziel statistischer Inferenz sind Aussagen über den datengenerierenden Prozess und seine Bestandteile.
+- Hier: Die Antwort auf die Frage nach der Fairness der 1-Euro Münze steckt im *unbekannten* Parameter $\theta$: Die Münze ist fair, wenn $\theta = 0.5$.
+:::
+:::::
+
+
+
+## Simulation Münzwurf
+
+![](images/coinflip.gif){.card}
+
+
+## Zwei Quellen von Unsicherheit
+
+- **Aleatorische Unsicherheit** beschreibt systemische Unsicherheit, die nicht durch mehr Beobachtungen aber evtl. durch ein besseres Modell reduziert werden kann (z.B. begrenzte Vorhersagekraft von Wohnungsgröße als einzigem Prädiktor für Mietpreise).
+
+- **Epistemische Unsicherheit** beschreibt Unsicherheit, die aus der begrenzten Verfügbarkeit von Informationen resultiert, und kann durch mehr/bessere Beobachtungen reduziert werden (z.B. Stichprobengröße, Messfehler).
+
+
+# Wahrscheinlichkeit
+Quantifizierung von Unsicherheit
+
+## Wahrscheinlichkeit {.smaller}
+
+::::: columns
+::: {.column width="45%"}
+![](images/verteilung.png)
+:::
+::: {.column width="55%"}
+
+- Eine *Wahrscheinlichkeitsverteilung* verteilt eine auf 1 normierte Quantität über die möglichen Resultate eines Zufallsprozesses.
+
+- Die W'keit eines Ereignisses ist eine Zahl zwischen 0 (unmöglich) und 1 (garantiert).
+
+- **Frequentistische Interpretation:** W'keit ist die relative Häufigkeit in einem unendlich wiederholten Experiment (z.B. Münzwurf).
+
+- **Bayesianische Interpretation:** W'keit ist ein konsistentes Maß für Unsicherheit (z.B. W'keit, dass Bayern gegen Donezk gewinnt).
+
+:::
+:::::
+
+## Wahrscheinlichkeit
+![](images/prob-1.png)
+
+## Wahrscheinlichkeit
+![](images/prob-2.png)
+
+## Wahrscheinlichkeit
+![](images/prob-3.png)
+
+## Wahrscheinlichkeit
+![](images/prob-4.png)
+
+## Wahrscheinlichkeit
+![](images/prob-6.png)
+
+## Wahrscheinlichkeit
+![](images/prob-5.png)
+
+## Zufallsvariablen
+
+Eine *Zufallsvariable* $X(E)$ ordnet jedem Ergebnis $E$ im Ergebnisraum eines Zufallsprozesses eine Zahl zu.
+
+Für das Beispiel des Münzwurfs:
+
+$$
+X(E) = \begin{cases}
+  0, & \text{wenn } E = \textrm{Kopf} \\
+  1, & \text{wenn } E = \textrm{Zahl}
+\end{cases}
+$$
+
+Die Zahlen haben nicht immer eine inheränte Bedeutung. Beim Münzwurf könnte die Zuordung auch andersherum erfolgen.
+
+Statt mit $X(E)$ wird eine Zufallsvariable häufig auch einfach mit $X$ bezeichnet.
+
+
+## Bernoulliverteilung
+
+Eine der bekanntesten W'keitsverteilungen ist die *Bernoulli-verteilung* für eine binäre Zufallsvariable $X$ (Wertebereich 0 oder 1) mit Wahrscheinlichkeitsfunktion:
+
+$$
+\textrm{Ber}(X = \color{cornflowerblue}{x} | \color{orange}{\theta}) =
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{1-\color{cornflowerblue}{x}} \\
+$$
+
+zum Beispiel mit $\theta = 0{,}7$:
+
+$$
+\begin{align}
+\textrm{Ber}(X = \color{cornflowerblue}{1} | \color{orange}{0{,}7}) &=
+\color{orange}{0{,}7}^\color{cornflowerblue}{1} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{1}} = 0{,}7 \\
+\textrm{Ber}(X = \color{cornflowerblue}{0} | \color{orange}{0{,}7}) &=
+\color{orange}{0{,}7}^\color{cornflowerblue}{0} (1 - \color{orange}{0{,}7})^{1-\color{cornflowerblue}{0}} = 1 - 0{,}7
+\end{align}
+$$
+
+## Binomialverteilung
+
+Die *Binomialverteilung* modelliert das Ergebnis einer Reihe von $n$ unabhängigen Bernoulli-Experimenten und hat für eine Zufallsvariable $X$ mit Wertebereich 0 bis $n$ die W'keitsfunktion:
+
+$$
+\textrm{Bin}(X = \color{cornflowerblue}{x} | n, \color{orange}{\theta}) =
+\binom{n}{x}
+\color{orange}{\theta}^\color{cornflowerblue}{x} (1 - \color{orange}{\theta})^{n-\color{cornflowerblue}{x}} \\
+$$
+
+Der Faktor $\binom{n}{x}$ ist der *Binomialkoeffizient* und zählt, wie viele unterschiedliche Möglichkeiten es gibt, aus $n$ Elementen genau $x$ auszuwählen.
